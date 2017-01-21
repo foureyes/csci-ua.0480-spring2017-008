@@ -1,0 +1,17 @@
+	<td markdown="block">
+
+* Previous class on React
+* [Form to submit](https://docs.google.com/a/nyu.edu/forms/d/e/1FAIpQLSdORjpmFxMqgYubKcDUJwRHrIUmh-iyKmviuq41pcVHNo2qCw/viewform)
+
+</td>
+	<td markdown="block">
+<!--
+* Chapter 
+* Chapter 
+-->
+</td>
+	<td markdown="block">
+<!--
+* [](assignments/.html)
+-->
+</td>

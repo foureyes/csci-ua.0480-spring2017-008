@@ -1,0 +1,13 @@
+	<td markdown="block">
+{% comment %}
+{% endcomment %}
+See socket.io from previous class
+</td>
+	<td markdown="block">
+<!--
+* Chapter 
+* Chapter 
+-->
+</td>
+	<td markdown="block">
+</td>

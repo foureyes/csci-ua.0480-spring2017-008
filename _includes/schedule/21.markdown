@@ -1,0 +1,33 @@
+	<td markdown="block">
+
+* [Ajax Part 2](slides/21/ajax-express.html)
+* [Promises](slides/21/promises.html)
+* [Example Code for AJAX Post](https://github.com/nyu-csci-ua-0480-001-fall-2016/examples/blob/master/class24/ajax-chat/public/javascripts/chatTime.js#L51)
+
+	{% comment %}
+* [Selectors, JS and CSS](slides/19/js-css.html)
+* [More About Events](slides/20/events-more.html)
+	{% endcomment %}
+
+	{% comment %}
+* [Flexbox, Grids](slides/20/flexbox.html)
+* [SASS](slides/20/sass.html)
+)
+* [gulp](slides/20/gulp.html)
+	{% endcomment %}
+<!-- 
+* [](slides//.html)
+* [](slides//.html)
+-->
+</td>
+	<td markdown="block">
+<!--
+* Chapter 
+* Chapter 
+-->
+</td>
+	<td markdown="block">
+Due Tuesday, November 22nd
+
+* [Homework #8](homework/08.html) - Last Homework!
+</td>
