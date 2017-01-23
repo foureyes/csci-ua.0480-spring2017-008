@@ -10,12 +10,6 @@ title: Functions
 <p><small></small></p>
 </section>
 
-{% comment %}
-TODO: 
-* arrow
-* default values
-{% endcomment %}
-
 <section markdown="block">
 ## Back to Definitions
 

@@ -34,16 +34,30 @@ Just to make sure you're in the right place:
 <section markdown="block">
 ## What's it About?
 
+<div markdown="block">
 
-### It's about making [websites](http://csszengarden.com/?cssfile=http://www.brucelawson.co.uk/zen/sample.css).
+### It's about making websites (er... web apps?).
 
-### (Or __web apps__ if you want to get fancy)
-{:.fragment}
 
 <div markdown="block" class="img">
-![or bacon pancakes](http://media.giphy.com/media/StYTkwUST4HUQ/giphy.gif)
-{:.fragment}
+(like [endless.horse](http://endless.horse/), [skifree.js](https://basicallydan.github.io/skifree.js/), or [weather is happening](http://weatherishappening.com/)!!!)
 </div>
+
+<div markdown="block" class="img">
+![or bacon pancakes](/resources/img/pancake.gif)
+</div>
+
+
+
+
+</div>
+{:.fragment}
+
+<div markdown="block" style="text-align: center;">
+(p.s. check out [brutalistwebsites.com](http://brutalistwebsites.com/) or the [90's design subreddit](https://www.reddit.com/r/90sdesign/) for more _excellent_ 90's style design)
+</div>
+{:.fragment}
+
 
 </section>
 
@@ -51,15 +65,19 @@ Just to make sure you're in the right place:
 <section markdown="block">
 ## Full Stack Web Development
 
-This course is __a practical introduction__ to creating __modern web applications__. We'll cover (roughly in this order):
+This course is __a practical__, __hands-on__ __introduction__ to creating __modern(ish) web applications__. We'll cover (roughly in this order):
 
-* JavaScript
-* Server Side Programming 
-* Storing Data
-* Client Side _Build-Out_ (HTML and CSS)
-* Client Side Programming
-* A Few _Trendy_ Frameworks / Libraries 
-* Development Tools \*
+1. {:.fragment} JavaScript (just learning the language itself)
+2. {:.fragment} Server Side Programming 
+3. {:.fragment} Storing Data
+4. {:.fragment} Client Side _Build-Out_ (HTML and CSS)
+5. {:.fragment} Client Side Programming
+6. {:.fragment} A Few _Trendy_ Frameworks / Libraries 
+7. {:.fragment} And We'll Pick up Some Development Tools Along the Way \*
+
+<br>
+Let's check out the rough [schedule on the course site](../../schedule.html)
+{:.fragment}
 </section>
 
 <section markdown="block">
@@ -73,12 +91,11 @@ This course is __a practical introduction__ to creating __modern web application
 </section>
 
 <section markdown="block">
-## JavaScript
+## JavaScript Topics
 
 * {:.fragment} Basics (__Types__, __Operators__, __Control Structures__, etc.)
 * {:.fragment} Object Oriented Programming (__Objects__, __Prototypes__)
 * {:.fragment} Functional Programming (__Functions__ as _First Class Objects_)
-* {:.fragment} Patterns (__Encapsulation__, __Namespacing__, __Interfaces__, etc.)
 
 <aside class="notes">
 * Who already knows js?
@@ -88,7 +105,11 @@ This course is __a practical introduction__ to creating __modern web application
 
 <section markdown="block">
 
-## Server Side Programming 
+## Server Side Programming Topics
+
+<div markdown="block" class="img">
+(specific technologies in __bold__)
+</div>
 
 * {:.fragment} Server Side Framework/Language - __Node.js__
 * {:.fragment} HTTP
@@ -107,7 +128,11 @@ This course is __a practical introduction__ to creating __modern web application
 
 <section markdown="block">
 
-## Storing Data
+## Storing Data Topics
+
+<div markdown="block" class="img">
+(specific technologies in __bold__)
+</div>
 
 * {:.fragment} NoSQL Database - __MongoDB__ ([btw, database rankings!](http://db-engines.com/en/ranking))
 * {:.fragment} Database Design
@@ -122,11 +147,15 @@ This course is __a practical introduction__ to creating __modern web application
 </section>
 
 <section markdown="block">
-## Client Side _Build-Out_ 
+## Client Side _Build-Out_ Topics
+
+<div markdown="block" class="img">
+(specific technologies in __bold__)
+</div>
 
 * {:.fragment} Quick Review - __DOM/HTML5/CSS3__
 * {:.fragment} CSS Layout
-* {:.fragment} Flexbox
+* {:.fragment} Flexbox (Maybe)
 * {:.fragment} Using JavaScript to Manipulate Styles (which brings us to...)
 
 {% comment %}
@@ -146,12 +175,15 @@ This course is __a practical introduction__ to creating __modern web application
 </section>
 
 <section markdown="block">
-## Client Side Programming
+## Client Side Programming Topics
 
-* {:.fragment} DOM Manipulation - __Plain JavaScript, ES5 (we're not using JQuery)__
-* {:.fragment} Ajax 
-* {:.fragment} JavaScript Framework - Hm... maybe __React__ for this one
-* {:.fragment} A Quick Look at Some ES6/ES2015 Features
+<div markdown="block" class="img">
+(specific technologies in __bold__)
+</div>
+
+* {:.fragment} DOM Manipulation - __Plain JavaScript, ES5/ES6__ (we're not using JQuery)
+* {:.fragment} AJAX 
+* {:.fragment} JavaScript Framework - __React__  or __vue.js__
 
 <aside class="notes">
 * anyone ever use JQuery
@@ -160,11 +192,16 @@ This course is __a practical introduction__ to creating __modern web application
 </section>
 
 <section markdown="block">
-## Development Tools
+## Development Tools Topics
+
+
+<div markdown="block" class="img">
+(specific technologies in __bold__)
+</div>
 
 * {:.fragment} Version Control - __Git__
 * {:.fragment} Task Runner - one of these: __Grunt__, __Gulp__ ... or __webpack__?
-* {:.fragment} Linter - __JSHint/JSLint__
+* {:.fragment} Linter - __ESLint__
 * {:.fragment} Unit Testing Tools
 * {:.fragment} (Optionally) Debugger - __Node Debugger, Inspector__ and __Chrome Developer Tools__
 
@@ -172,6 +209,26 @@ This course is __a practical introduction__ to creating __modern web application
 * what's version control? why?
 * ever used git?
 </aside>
+</section>
+
+<section markdown="block">
+## Motivation for Technologies
+
+__Why use JavaScript, Node.js and Express over Ruby and Ruby on Rails or Python and Django?__
+
+
+1. {:.fragment} only __one language to learn__ throughout the course for server side development, front end development... and even database queries
+2. {:.fragment} __straightforward to install__ entire stack (node, mongodb) on Windows, Linux and OSX
+3. {:.fragment} seems like a __skill set that's currently sought after__ (former students are working with these technologies professionally!)
+4. {:.fragment} chosen tools are becoming (if not already) __industry standard__ (__git__, __eslint__, etc.)
+5. {:.fragment} a __fun__ stack to learn (really!)
+
+<br> 
+The concepts and theory remain roughly the same across this and other _technology stacks_, though...
+{:.fragment}
+
+Pros and cons for using this stack will be discussed in future classes.
+{:.fragment}
 </section>
 
 <section markdown="block">
@@ -184,14 +241,13 @@ This course is __a practical introduction__ to creating __modern web application
 
 ### Joe Versoza
 
-* {:.fragment} I think I know some of you / you know me (uh-oh ... why would you want take another _class_ with me?)!
+* {:.fragment} I think I know some of you / you know me (uh-oh ... __why__ would you want take another _class_ with me?)!
 * {:.fragment} __Clinical Assistant Professor__ (you can find me at: {{ site.office_hours_room }})
 * {:.fragment} Before teaching...
-	* part-time adjunct at __NYU__ and __City-Tech__
-	* IT Manager at non-profit (wrangling developers / herding cats) 
-        <br>
-        ![herding cats](http://i.imgur.com/Yj9Xe2A.gif)
-* {:.fragment} also worked as software engineer for a looong time mostly with Python ([web.py](http://webpy.org/) and [Django](https://www.djangoproject.com/)), but some [Rails](http://rubyonrails.org/), [PHP](http://en.wikipedia.org/wiki/PHP), [Java/JSP](http://en.wikipedia.org/wiki/JavaServer_Pages), etc.
+	* {:.fragment} part-time adjunct at __NYU__ and __City-Tech__
+	* {:.fragment} while working as an IT Manager at non-profit 
+    * {:.fragment} (turns out that managing programmers is sometimes _not fun_    &#128557; &#128514; &#128528;) 
+    * {:.fragment} also worked as software engineer for a looong time - mostly with &#128013; ([web.py](http://webpy.org/) and [Django](https://www.djangoproject.com/), and even some [flask](http://flask.pocoo.org/)), but with some [Rails](http://rubyonrails.org/), [PHP](http://en.wikipedia.org/wiki/PHP), [Java/JSP](http://en.wikipedia.org/wiki/JavaServer_Pages) too...
 
 <aside class="notes">
 Why would you ever take another class with me?
@@ -213,13 +269,24 @@ Only __minimal__ experience with
 * _modern_ __front-end development__
 {:.fragment}
 
-### If you already know this stuff...
+</section>
+<section markdown="block">
+
+## If You Already Know This Stuff
+
+For example...
+
+* {:.fragment} if __you do this professionally__ (seriously, I've had people who get paid to do this take this class???  &#129300;)
+* {:.fragment} or... if __you've already taken several web minor courses__, including web programming and databases
+
+<br> 
+__What are you doing here? GET OUT!__ &#128073;
 {:.fragment}
 
-* {:.fragment} like... maybe you do this professionally (seriously, I've had people who get paid to do this take this class???)
-* {:.fragment} or... you've already taken several web minor courses, including web programming and databases
-* {:.fragment} __what are you doing here? GET OUT!__
-* {:.fragment} really, though, you won't get much out of the class
+* {:.fragment} Really, though, you probably won't get much out of the class 
+* {:.fragment} And you'll slack off a bit 
+* {:.fragment} <small markdown="block" style="display:inline">(and then get like a B+, and then you'll try to argue with me about your grade, and I'll be like _I told you not to take this class_, and then we'll both be sad. The end.)</small>
+
 </section>
 
 <section markdown="block">
@@ -227,16 +294,16 @@ Only __minimal__ experience with
 
 ### Additionally, I expect that you would:
 
-* be very comfortable using the __commandline__
-* have the ability to install tools, software, etc. ... and troubleshoot installations (basically _know how to use a computer_)
-* be able navigate to navigate your file system
-* have basic/rudimentary knowledge of __HTML__ and __CSS__ (even a [late 90's notion](https://www.google.com/search?q=90%27s+website&espv=2&tbm=isch&tbo=u&source=univ&sa=X&ei=wegEVMjPJcPxgwTA5YDICg&ved=0CCgQsAQ&biw=1307&bih=729) of how this stuff works _may be_ fine)
-* _actually do homework and come to class_
-* low bar, I know...
-{:.fragment}
+1. {:.fragment}  be very __comfortable__ using the __commandline__
+2. {:.fragment} have the ability to install tools, software, etc. ... and troubleshoot installations (<strong>basically _know how to use a computer_ </strong>)
+3. {:.fragment} be able __navigate__ through your __file system__ (both through a file explorer like Finder and through the commandline)
+4. {:.fragment} have basic/rudimentary knowledge of __HTML__ and __CSS__ (even a [late 90's notion](https://www.google.com/search?q=90%27s+website&espv=2&tbm=isch&tbo=u&source=univ&sa=X&ei=wegEVMjPJcPxgwTA5YDICg&ved=0CCgQsAQ&biw=1307&bih=729) of how this stuff works _may be_ fine)
+5. {:.fragment} <strong>_actually do homework and - you know - occasionally come to class_</strong> 
+6. {:.fragment} low bar, I know... but I mean it
 </section>
 
 
+{% comment %}
 <section markdown="block">
 ## Technologies
 
@@ -253,50 +320,114 @@ __If you've been following along, the specific tools, languages and frameworks w
 * etc.
 
 </section>
+{% endcomment %}
 
 <section markdown="block">
-## Motivation for Technologies
+## Workload
 
-__Why use JavaScript, Node.js and Express over Ruby and Ruby on Rails or Python and Django?__
+__Some salient quotes from evaluations/reviews__ &rarr;
 
-The concepts and theory remain roughly the same across all of these _technology stacks_, but here's why I chose what I did:
+* {:.fragment}"__Gives Lots of homework__ and focuses on too many details at exam. He has some sort of weird smartness that he would like to show off."
+* {:.fragment} "Great professor. Gives __a decent amount of homework__, but it's very effective at helping you learn the material." 
 
-1. {:.fragment} we only need to learn one language throughout the course for server side development, front end development... and even for querying the database
-2. {:.fragment} pretty straightforward to install the entire stack (node, mongodb) on Windows, Linux and OSX
-3. {:.fragment} seems like there's a lot of opportunity out there (I've had former students contact me to let me know that they're working with node professionally!)
-4. {:.fragment} work with tools that are either currently or becoming industry standards (__git__, __jshint__, etc.)
-5. {:.fragment} a __fun__ stack to learn (really! ...I'm excited about delving into it too!)
-6. {:.fragment} we'll talk about the technical trade-offs for using this stack next week
+<br>
+So, regardless of whether or not the review was positive or negative, __the common thread is there's kind of _a lot of work_ involved in this course__ ...
+{:.fragment}
+
+__Expect the workload to be on the same level as some your earlier cs courses__ (like Intro to CS, Data Structures) &rarr;
+{:.fragment}
+
 </section>
+<section markdown="block">
+## Workload Continued
+
+__Uh, so... how much work is this _really_?__ &rarr;
+
+* {:.fragment} almost __weekly homework__ (8 total, which is actually less than the number of homeworks for 0002 or 0101) __and a final project__
+* {:.fragment} this course is not challenging in the way that something like _algorithms_ is, but it's challenging because of: 
+    * {:.fragment} the __wide range of topics__ covered
+    * {:.fragment} the __volume of hands-on work__ (again, though, no more than weekly assignments in 101)
+    * {:.fragment} the  __difficult nature of debugging__ web applications that involve integrating several technologies
+* {:.fragment} a lot of homework will be:
+    * write your own library that _does x_
+    * use that library to implement some sort of web application
+    * use an existing library that already _does x_ to re-write above ^
+</section>
+
 
 <section markdown="block">
-## Too Easy or Too Difficult?
+## Too Easy/Difficult, Too Much Work?
 
-* __You may consider choosing a different class if you:__
-	* _are a professional web developer_? 
-	* already know this stuff
-	* think this may be too much work 
-	* not comfortable with the requirements
-* {:.fragment} __(There are some non major courses around as well)__
-	* __CSCI-UA.60__ Database Design & Web Implementation
-	* __CSCI-UA.61__ Web Development & Programming
+__Consider choosing a different course if you:__
+
+1. {:.fragment} _are a __professional__ web developer_ or __already know this stuff__
+3. {:.fragment} think this may be __more work than you accommodate__ this semester
+4. {:.fragment} __not comfortable with the requirements__ (commandline, basic html, css, etc.)
+5. {:.fragment} you're a senior and want an easy C to meet your cs major requirements
+
+<br>
+__If you want a slower pace and are _truly_ interested in the material, there are some non major courses around as well__
+{:.fragment}
+
+* __CSCI-UA.60__ Database Design & Web Implementation
+* __CSCI-UA.61__ Web Development & Programming
+{:.fragment}
 
 </section>
 
+
+{% comment %}
 <section markdown="block">
 ## This is the 4th Run of This Course
 
 * I'm trying to compress the beginning part of the course to make sure I get through all of the topics
 * Some common themes throughout the comments from previous versions of this course were:
-    * {:.fragment} "__Hard class for me (no previous exp to webdev) but is fair. There should be a prereq to this class not to let people like me take the class.__"
-    * {:.fragment} "__General pace was good - could have maybe been a little faster.__"
     * {:.fragment} drawing of a cat (????)
 * {:.fragment} All that is to say - I'm catering to a wide variety of skills/backgrounds, so just let me know if you think I'm going to fast or too slow
 	* come see me during my [office hours](../../index.html)
 	* contact me at __jversoza__ at __cs__ dot __nyu__ dot __edu__
     {:.fragment}
 </section>
+{% endcomment %}
 
+<section markdown="block">
+## How to Make No One Happy
+
+Students coming into the course __have very different backgrounds when it comes to web development__ (from _What's a CSS?_ to _You mean this course doesn't go into using Redux?_) &rarr;
+
+* {:.fragment} Sooo... I try to hit the __middle ground__
+* {:.fragment} which means, for students with no web development experience, it's a: "__Hard class for me (no previous exp to webdev) but is fair. There should be a prereq to this class not to let people like me take the class.__"
+* {:.fragment} and for students with web development experience: "__General pace was good - could have maybe been a little faster.__"
+* {:.fragment} just can't make anyone happy  &#128580; ... though one comment was __(a drawing of a cat)__
+
+<br>
+(this should probably be two courses, and maybe it will eventually be that...)
+{:.fragment}
+
+</section>
+
+<section markdown="block">
+## That Sounds Pretty Harsh/Boring
+
+__If you're concerned about the workload and the material...__ &rarr;
+
+* {:.fragment} I'm __always available to help__, especially on piazza, but also before and after class, during office hours and by appointment
+* {:.fragment} We'll also have a tutor (I'll post a schedule mid-week)
+
+<br>
+__If you think it's going too slowly...__ &rarr;
+
+* {:.fragment} challenge yourself... for example, if the assignment is to make a simple game
+* {:.fragment}  __make your own library/framework__ from scratch (for example, if you use rxjs or immutable.js, try to re-implement parts of it), and use it to write the game
+* {:.fragment} or... __add features__ to make the game _more complete_ - like... adding an undo move feature
+* {:.fragment} or... add support tooling like unit tests, linters, and other build tools
+* {:.fragment} or... or _actually_ deploy it
+
+</section>
+
+
+
+{% comment %}
 
 <section markdown="block">
 ## A Tentative Schedule
@@ -313,18 +444,52 @@ Let's check out the [schedule on the course site](../../schedule.html)
 * {:.fragment} (all this could change based on class progress / existing class experience)
 
 </section>
+{% endcomment %}
 
+{% comment %} 
+
+TODO
+=====
+    * group final project??? maybe??? will not grade
+    * take home quizzes (will drop 1)
+    * in-class simple quizzes based on homework (will drop 2)
+    * ask me on piazza, it actually keeps track of open issues
+    * there will be a tutor
+    * if you know you like to use tutors, let me know
+    * first in-class quiz: fill out this survey, we'll check out the results
+        * github username
+        * paste your github link here
+    * on the waitlist? do the readings and work right away
+{% endcomment %}
+
+
+<section markdown="block">
+## Logistics / Grading / Quizzes / Homework / etc.
+
+* [course info](/#info)
+* [readings (pulled from free online books and documentation)](/#books)
+* [grading (weights for homework, exams, etc.)](/#grading)
+* 2 exams (__no exam during finals week!__... 2nd exam will be given on last day of class)
+* final project
+    * details for final projects for a class of this size still being determined (uh... there's a lot of you?)
+    * due a couple of weeks before the semester ends
+* [quizzes](/#quiz-policy)
+* [homework](/#hw-policy)
+
+</section>
+
+{% comment %}
 <section markdown="block">
 ## Logistics / Course Info / Office Hours
 
 * __Course Site__: [ {{ site.course_site }}]({{ site.course_site }})
-* __Easier Link (Maybe)__: [ {{ site.course_site_alt }}]({{ site.course_site_alt }})
 * __Course Title:__ {{ site.course_name }}
 * __Course Number:__ {{ site.course_number }}-{{ site.course_section }}
 * __Semester:__ {{ site.course_semester }}
 * __Meeting Time:__ {{ site.course_time }}
 * __Room:__ {{ site.course_room }}
 * __Instructor:__ Joe Versoza
+* __Contact:__ <a href="{{ site.contact_link }}"> {{ site.contact_label }} __{{ site.contact_note }}__ </a>
 * __Email:__ jversoza at cs dot nyu dot edu
 * __Office Hours:__ {{ site.office_hours }}
 * __Office Hours Room:__  {{ site.office_hours_room }}
@@ -333,29 +498,31 @@ Let's check out the [schedule on the course site](../../schedule.html)
 <section markdown="block">
 ## Grading
 
-* __5%__ - Quizzes / Class Participation / Activities
 * __25%__ - Homework
-* __25%__ - Midterm Exam
+* __25%__ - Exam #1
+* __25%__ - Exam #2
+* __10%__ - Quizzes / Activities
 * __15%__ - Final Project
-* __30%__ - Final Exam
 </section>
 
 <section markdown="block">
 ## Homework
 
-* about __one homework__ every __week or so__
-* turned in __electronically via GitHub__ and __NYU Classes__
+* again, about __one homework__ every __week or so__
+* turned in __electronically via GitHub__ 
 	* we'll discuss this submission process next class
-* homework assignments are __due about one two week after posting__
+* homework assignments are __due about one week after posting__
 * read the [page on academic integrity](http://www.cs.nyu.edu/webapps/content/academic/undergrad/academic_integrity)
 	* __collaboration__ in terms of help debugging, discussing potential solutions, etc. is ok
 	* __but write your own code!__
 </section>
+{% endcomment %}
 
 <section markdown="block" data-background="#440000">
 ## Oh Yes - Did You Remember the Part About __Writing Your Own Code__?
 
 </section>
+{% comment %}
 <section markdown="block">
 ## Books
 
@@ -365,6 +532,7 @@ Readings will be assigned in the required books.
 	* [{{ site.book_js }}]( {{ site.book_js_link }}) by {{ site.book_js_author }} (available [free, online]({{ site.book_js_link }}))
 	* [{{ site.book_js_2 }}]( {{ site.book_js_2_link }}) by {{ site.book_js_2_author }}
 </section>
+{% endcomment %}
 
 <section markdown="block">
 ## Required Software
@@ -390,4 +558,18 @@ sudo apt-get install npm</code></pre>
 	* use arrow keys to navigate
 	* (or click on arrow buttons)
 * add a <code>?print-pdf</code> to the end of the slide deck's url to see the [one page version of the slides](intro.html?print-pdf)
+</section>
+
+<section markdown="block" data-background="#440000">
+## If You Got Anything Out of These Slides
+
+This &#128071;
+
+* You're going to be writing __a lot of JavaScript__
+* __I'm (maybe too) available for help__! The best way to get in touch with me is in-person (before/after class,  office hours, or scheduled appointment) or... even better, piazza
+* __the 2nd exam is on the last day of class, NOT DURING FINALS WEEK__
+* If you're a __graduating senior__, make sure you do the work; I can't just hand out C's (also, are you _really_ just trying to get a C?)!
+* __Write your own code for assignments!__
+
+
 </section>

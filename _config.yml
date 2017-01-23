@@ -1,5 +1,8 @@
 title: CSCI-UA.0480 Spring 2017, Section 008
 email: jversoza@cs.nyu.edu
+contact_link: https://piazza.com
+contact_label: piazza
+contact_note: (the best way to contact me!) 
 
 course_number: "CSCI-UA.0480"
 course_section: "008"
@@ -11,7 +14,7 @@ course_site: http://foureyes.github.io/csci-ua.0480-spring2017-008/
 course_site_alt: http://cs.nyu.edu/~jversoza
 
 # office hours
-office_hours: "Mondays, Tuesdays and Wednesdays 12:30pm to 1:30pm"
+office_hours: "Mon, Tues, and Wed 12:30pm to 1:30pm"
 office_hours_room: WWH 423
 
 # finals

@@ -18,7 +18,7 @@ nav-state: index
 * __Meeting Time:__ {{ site.course_time }}
 * __Room:__ {{ site.course_room }}
 * __Instructor:__ Joe Versoza
-* __Contact:__ <a href="https://piazza.com">The best way to contact me is via piazza!</a>
+* __Contact:__ <a href="{{ site.contact_link }}">{{ site.contact_label }}{{ site.contact_note }}</a>
 * __Email:__ jversoza at cs dot nyu dot edu
 * __Office Hours:__ {{ site.office_hours }}
 * __Office Hours Room:__  {{ site.office_hours_room }}
@@ -67,11 +67,11 @@ __\*__ Basic knowledge of __HTML__ and __CSS__ and familiarity with using __comm
 <a name="homework"></a>
 <div class="panel-heading">Quizzes</div>
 <div class="panel-body" markdown="block">
-Expect about __one quiz__ every __week__:
+Expect about __one quiz__ every __week__, which can be in one of the following formats:
 
 * Take from home quizzes 
     * Submitted __electronically via NYU Classes__ 
-    * Quizzes will be closed at the due date
+    * Quizzes will be closed at the due date given
 * In-class quizzes
     * Dates for in-class quizzes will be posted one week before quiz is given
     * Will be based on homework
@@ -120,6 +120,7 @@ Expect about __one homework__ every __week or two__:
 __Readings will be sourced from the following books__ (all are free to read online, but a hardcopy or ebook can purchased as well!): 
 
 * [{{ site.book_js }}]( {{ site.book_js_link }}) by {{ site.book_js_author }} 
+* [{{ site.book_js_2 }}]( {{ site.book_js_2_link }}) by {{ site.book_js_2_author }} 
 * [{{ site.book_js_3 }}]( {{ site.book_js_3_link }}) by {{ site.book_js_3_author }} 
 * [{{ site.book_js_4 }}]( {{ site.book_js_4_link }}) by {{ site.book_js_4_author }} 
 * [{{ site.book_js_5 }}]( {{ site.book_js_5_link }}) by {{ site.book_js_5_author }} 

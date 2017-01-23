@@ -28,46 +28,16 @@ nav-state: schedule
 * Functions
 
 {% comment %} 
-TODO
-=====
-* reduce intro
-    * it's not "hard" in the... think of an algo to do this way, but it's hard in that
-        * a lot of work
-        * a lot of conceptual stuff
-        * a lot of getting technologies to work with each other
-        * debugging is terrible
-    * a lot of homework will be:
-        * write your own x
-        * use it to write y
-        * use an existing library that already does x to write y
-    * group final project??? maybe??? will not grade
-    * you may not get a c
-    * academic integrity
-    * take home quizzes (will drop 1)
-    * in-class simple quizzes based on homework (will drop 2)
-    * ask me on piazza, it actually keeps track of open issues
-    * there will be a tutor
-    * if you know you like to use tutors, let me know
-    * first in-class quiz: fill out this survey, we'll check out the results
-        * github username
-        * paste your github link here
-    * on the waitlist? do the readings and work right away
-    * this should _really_ be 2 courses, intro and intermediate
-        * so, if you don't know this stuff, this will be challenging (you might not get a C)
-        * if you have _any_ experience in this stuff, you'll be bored
-* keep
-    * types
+TODO:
+* keep types 
 * add readings for es5
     * coercion
     * var
     * control structures
     * etc.
-* let/const
 * destructuring?
-* functions
-    * arrow
-    * default values
 {% endcomment %}
+
 </td>
 {% include schedule/01.markdown %}
 </tr>

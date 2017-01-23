@@ -72,7 +72,7 @@ comment
 "oh, hello"
 true
 {'name': 'Joe'}
-function() {console.log("in here!")}
+function() {console.log("in here!")};
 undefined
 </code></pre>
 {:.fragment}
@@ -153,52 +153,29 @@ Weelllll.... it behaves [exactly according to what's specified](http://www.ecma-
 <br>
 Seems like <code>null</code> is an object (!? ... [a mistake?](http://javascript.crockford.com/survey.html)). <code>Array</code> is also listed as a generic object. ¯\\_(ツ)_/¯.
 
-</section> 
+</section>
 
 <section markdown="block">
 ## Types Really
 
 ### OK, seriously, stop messing around. TELL ME ABOUT THE TYPES!
 
-* __Undefined__ - `typeof` returns `undefined`
-* __Null__ - `typeof` returns `object` because JavaScript is _terrible_ ([or to maintain backwards compatibility issues previous versions of JavaScript](http://stackoverflow.com/questions/18808226/why-is-typeof-null-object))
-* __Boolean__ - `typeof` returns `boolean`
-* __String__ - `typeof` returns `string`
-* __Number__ - `typeof` returns `number`
-* __Object__ - `typeof` returns `object`
+* Undefined - `typeof` returns `undefined`
+* Null - `typeof` returns `object` because JavaScript is _terrible_ ([or because of backwards compatibility issues with previous versions of the language](http://stackoverflow.com/questions/18808226/why-is-typeof-null-object))
+* Boolean - `typeof` returns `boolean`
+* String - `typeof` returns `string`
+* Number - `typeof` returns `number`
+* Object - `typeof` returns `object`
 
 <br>
-Functions are actually just objects, but `typeof` gives back `function` when its operand is a function. Arrays are objects too, so `typeof` returns `object` for an Array.
+Functions are actually just objects, but `typeof` gives back `function` when its operand is a function object.
 
 
 </section>
-
-<section markdown="block">
-## Primitives vs Objects  
-
-__Hey... those two terms should sound familiar...__ &rarr;
-
-* {:.fragment} booleans, numbers, strings, `null` and `undefined` are __primitive values__:
-    * they're immutable
-    * they're compared by value
-    * note that wrapper objects for primitives _do exist_ (we'll see this later)
-* {:.fragment} __objects__, on the other hand:
-    * are compared by reference
-    <pre><code data-trim contenteditable>
-console.log({} === {}) // false!
-const foo = {};
-const bar = foo;
-console.log(foo === bar); // true (because "aliasing")
-</code></pre>
-    * are mutable (by default, though they can be made immutable-ish)
-
-</section>
-
-
 <section markdown="block">
 ## Numbers
 
-* unsurpsingly, numbers are just _numbers_
+* unurpsingly, numbers are just _numbers_
 	* __all numbers in Javascript are 64bit (8 bytes) floating point numbers__ 
 	* JavaScript does not distinguish between ints, floats, longs, doubles, etc.
 * numbers represent...
@@ -219,7 +196,7 @@ console.log(foo === bar); // true (because "aliasing")
 * __So how many values can 64 bits hold?__ (Um... a lot?) &rarr;
 * {:.fragment} 2 to the power of 64!  About 18 with 18 0's after it. __However, this doesn't exactly indicate what numbers can be stored. Why?__ &rarr;
 * {:.fragment} This just means that number of possible values.  This has to include negative numbers, decimals, etc...
-	* __52 bits__ for the value ([er really](http://www.2ality.com/2012/04/number-encoding.html) [53](http://www.jibbering.com/faq/#FAQ4_7) ... because of the sign)
+	* __52 bits__ for the value ([er really](http://www.2ality.com/2012/04/number-encoding.html) [53](http://www.jibbering.com/faq/#FAQ4_7))
 	* used to represent both integers and real numbers
 	* __11 bits__ for the exponent (for placing the decimal point)
 	* __1 bit__ for the sign
