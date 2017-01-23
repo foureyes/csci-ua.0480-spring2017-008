@@ -116,17 +116,20 @@ This is when things start to get interesting...
 Again, __scope__ is the area or portion of your program where a variable name or identifier is available.
 
 * some languages (C, Java) use blocks to create new scopes
-* JavaScript doesn't do that (of course); instead... it uses functions to create scope!
+* ES6 does that
+* but ES5 doesn't do that (of course); instead... it only uses functions to create scope
 </section>
 
 <section markdown="block" data-background="#440000">
-## In JavaScript, functions are the only constructs that can create a new scope!
+## In ES5, functions are the only constructs that can create a new scope!
+
+(but with ES6, `let` and `const` give you block level scope!)
 
 </section>
 <section markdown="block">
 ## Scope
 
-Variables declared at the "top level" of your program (outside of functions) and variables declared without <code>var</code> (in most cases) are in the __global scope__.
+Variables declared at the "top level" of your program (outside of functions) and variables declared without `const`, `let` or `var` (in most cases) are in the __global scope__.
 
 * __global variables__ are accessible anywhere
 * __global variables__ are considered harmful... __why?__ &rarr;
@@ -141,6 +144,7 @@ Variables declared at the "top level" of your program (outside of functions) and
 
 * __parameters__ in a function __are local__ to that function
 * variables declared __with__ the keyword, <code>var</code> are __local__ to the function
+* variables declared __with__ the keywords, `const` or `let` are __local__ to the block that they're declared in
 * variables declared __without__ the keyword, <code>var</code> are __global__ / affect the global scope... ⊙﹏⊙
     * (actually, the nearest enclosing scope - most of the time this is global, but it could be an outer function!)
 * global variables (again) are accessible throughout your program, even from within you function's body
@@ -176,7 +180,7 @@ from g
 </section>
 
 <section markdown="block" data-background="#440000">
-## Oh yeah. Always use <code>var</code> when declaring variables plz
+## Oh yeah. Always use `let`, `const`, or `var` when declaring variables plz
 
 </section>
 
@@ -203,12 +207,12 @@ from g
 <section markdown="block">
 ## Without Var Revisited
 
-__Variables declared without `var` actually mask the variable in nearest enclosing scope__ (usually global, but a bit tricky for nested functions).
+__Variables declared without `const`, `let`, or `var` actually mask the variable in nearest enclosing scope (if it's not a `const`)__ (usually global, but a bit tricky for nested functions).
 
 <pre><code data-trim contenteditable>
-var x = 1;
+let x = 1;
 function f() {
-  var x = 2;
+  let x = 2;
   function g() {
     x = 3;
     console.log(x);
@@ -236,10 +240,10 @@ console.log(x);
 __What is the output of this code? What would happen if we put <code>console.log(y)</code> right at the end of function, <code>outer</code>'s body?__ &rarr;
 <pre><code data-trim contenteditable>
 var outer = function() {
-	var x = "outside";
-	var inner = function() {
+	let x = "outside";
+	let inner = function() {
 		x += " modified by inside";
-		var y = "inner";
+		let y = "inner";
 	};
 	console.log(x);
 	inner();
@@ -263,7 +267,7 @@ outside modified by inside
 * reassignment works fine!
 
 <pre><code data-trim contenteditable>
-var sayHello = function() {
+let sayHello = function() {
 	console.log("Hola!");
 };
 
@@ -286,14 +290,14 @@ You can even pass functions around, return them as values, etc.
 * __what do you think the output of this code is?__ &rarr;
 
 <pre><code data-trim contenteditable>
-var callTwice = function(f) {
+const callTwice = function(f) {
 	f();
 	f();
 };
 
-var g = function() {
+const g = function() {
 	console.log("nobody's home!");
-}
+};
 callTwice(g);
 </code></pre>
 
@@ -359,7 +363,7 @@ __What happens when you put such a function declaration inside an if statement o
 An __Array__ literal, assignment and the __length__ property
 
 <pre><code data-trim contenteditable>
-var numbers = [1, 2, 3];
+const numbers = [1, 2, 3];
 console.log(numbers[0]);
 console.log(numbers.length);
 // an empty array ... []
