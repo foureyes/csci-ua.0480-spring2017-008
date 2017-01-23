@@ -20,6 +20,7 @@ title: Introducing JavaScript
 
 </section>
 
+{% comment %}
 <section markdown="block">
 
 ## Books (JavaScript Specific)
@@ -33,6 +34,7 @@ title: Introducing JavaScript
 		* the [online version]({{ site.book_js_link }}) is also free
 	
 </section>
+{% endcomment %}
 
 <section markdown="block">
 ## What's JavaScript?
@@ -46,8 +48,7 @@ title: Introducing JavaScript
 
 <section markdown="block">
 ##  Some History
-
-Originally created in 1995 as a way to add interactivity (through programming) to web pages in __Netscape Navigator__!
+Originally created in 1995 (by [Brendan Eich](https://en.wikipedia.org/wiki/Brendan_Eich)) as a way to add interactivity (through programming) to web pages in __Netscape Navigator__!
 
 <div markdown="block" class="img">
 ![Netscape!](../../resources/img/netscape.gif)
@@ -70,18 +71,28 @@ Originally created in 1995 as a way to add interactivity (through programming) t
 <section markdown="block">
 ## Where is it Now?
 
-### Current version is ES5... 
+__It's in transition... (and the naming conventions are confusing)__ &rarr;
 
-* ES6 is mostly [implemented in node and major browsers, though](http://kangax.github.io/compat-table/es6/)
-* (btw, we'll be using ES5 for most of the class; feel free to use ES6, though)
-* ubiquitous on the web
-* __JavaScript__ is an integral part of creating modern, single-page/hybrid web apps
-* it's usage has gone beyond web page interactivity:
-	* server side language (__Node.js__)
-	* database query language (__MongoDB__)
-	* creative programming (__processing.js__)
-	* embedded scripting language (__Max/MSP__)
+* {:.fragment} the previous version, ES5, has been implemented fairly __completely__ in all modern browsers
+* {:.fragment} ES6 (also called ES2015) is "mostly" [implemented in node and major browsers](http://kangax.github.io/compat-table/es6/)
+* {:.fragment} we'll learn ES5 along with some ES6 features 
+* {:.fragment} the standard for ES7 (also called ES2016) was finalized in the summer of 2016, but it's features are only partially implemented by browsers
+* {:.fragment} (we maaaaay go over ES7 stuff)
 
+</section>
+
+<section markdown="block">
+## Aaaand, What's it Used For?
+
+__JavaScript is now...__ &rarr;
+
+* _ubiquitous_ on the web
+* it's an integral part of creating modern, single-page web apps
+* ...but it's usage has gone beyond web page interactivity:
+	* {:.fragment} server side language (__Node.js__)
+	* {:.fragment} database query language (__MongoDB__)
+	* {:.fragment} creative programming (__processing.js__)
+	* {:.fragment} embedded scripting language (__Max/MSP__)
 </section>
 
 {% comment %}
@@ -108,7 +119,7 @@ Originally created in 1995 as a way to add interactivity (through programming) t
 * __multi paradigm__ - __Object Oriented__ (through prototypes), __Functional__, etc.
 * __dynamically typed__ (eh... maybe not a great feature?)
 * __weakly typed__ (also maybe not a great feature?)
-* most implementations are __interpreted__ rather than compiled (shrug)
+* most implementations are __interpreted__ rather than compiled (or at least hide the compilation from you ... shrug)
 * __C-like syntax__ - so you should be pretty familiar with all of the curly braces
 </section>
 
@@ -148,34 +159,36 @@ pines:~ joe$ node
 
 </section>
 
+{% comment %}
 <section markdown="block">
 ## JavaScript Basics
 
 ### OK! Now About the _Actual_ Language
 
-* From the book, {{ site.book_js }}:
-	* [Values](http://eloquentjavascript.net/01_values.html)
-	* [Program Structure](http://eloquentjavascript.net/02_program_structure.html)
+* [Values](http://eloquentjavascript.net/01_values.html)
+* [Program Structure](http://eloquentjavascript.net/02_program_structure.html)
 * ...And the slides (based on the above readings)
-	* [Values, Types, and Operators](values-types-operators.html)
-	* [Variables](variables-control-structures.html)
-	* [Control Structures](conditionals-loops.html)
-* And a valuable reference:
-	* [Mozilla Developer Network, Reintroduction to JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript)
+* [Values, Types, and Operators](values-types-operators.html)
+* [Variables](variables-control-structures.html)
+* [Control Structures](conditionals-loops.html)
 
 
 </section>
+{% endcomment %}
+
 
 <section markdown="block">
 ## A few Notes on How You'll be Writing Programs
 
 * use any text editor you want (I don't care, really)
-* some editors that I've used in the past:
+* some editors that I, as well as other students, have used in the past:
+    * Visual Studio Code (&larr; this one is pretty good!)
+    * Atom
 	* sublimetext
-	* webstorm
+	* WebStorm
 	* vim (&lt;-- I use this mostly, but _probably not a good choice if you don't already know it_)
 * if you don't have node installed yet, you could use
-	* your browser's developer tools
+	* your browser's developer tools (ugh?)
 	* [jsfiddle](jsfiddle.net) (or [codepen](codepoen.io) or jsbin, etc.)
 </section>
 
@@ -184,7 +197,9 @@ pines:~ joe$ node
 
 I'd like to get an idea of what languages / technologies everyone has had experience with. 
 
-* __please fill out__ [this survey](https://docs.google.com/a/nyu.edu/forms/d/e/1FAIpQLScN3qcI_P8BQl6aBbK_-OqIEwdI-qCuwfm_jIrm7IF0o-bi_Q/viewform)
+* __please fill out__ [this survey]({{ site.survey_intro }}) rn 
+* take ~5 minutes to do this in class (you can finish it up outside of class later)
 * (it's also my secret way of taking attendance)
+* (and collecting your GitHub usernames)
 </section>
 

@@ -13,22 +13,35 @@
 {% endcomment %}
 </td>
 	<td markdown="block">
-* [{{ site.book_js }}]({{ site.book_js_link }}) <br> Chapter 1 - Values, Types, and Operators
-* [{{ site.book_js }}]({{ site.book_js_link }}) <br> Chapter 2 - Program Structure
-* [{{ site.book_js }}]({{ site.book_js_link }}) <br> Chapter 3 - Functions
+    
+For an in-depth JavaScript introduction, __skim__ these chapters in [{{ site.book_js }}]({{ site.book_js_5_link }})
+
+* [Chapter 7 - JavaScript's Syntax (the section on "Strict Mode" can be skipped)](http://speakingjs.com/es5/ch07.html) 
+* [Chapter 8 - Values](http://speakingjs.com/es5/ch08.html)
+* [Chapter 9 - Operators ("Comma Operator" and everything after can be skipped)](http://speakingjs.com/es5/ch09.html)
+* [Chapter 10 - Booleans](http://speakingjs.com/es5/ch10.html)
+* [Chapter 11 - Numbers](http://speakingjs.com/es5/ch11.html)
+* [Chapter 12 - Strings](http://speakingjs.com/es5/ch12.html)
+* [Chapter 13 - Statements](http://speakingjs.com/es5/ch13.html)
+* [Chapter 15 - Functions (up to "More Control over Function Calls")](http://speakingjs.com/es5/ch15.html)
+* [Chapter 16 -  Variables: Scopes, Environments, and Closures (up to "Global Variables")](http://speakingjs.com/es5/ch16.html)
+
+For a more gentle introduction to JavaScript, read the first 3 chapters of [{{ site.book_js_5 }}]({{ site.book_js_5_link }}) 
+
+* Chapter 1 - Values, Types, and Operators
+* Chapter 2 - Program Structure
+* Chapter 3 - Functions
 
 {% comment %}
 * [{{ site.book_js_2 }}](http://speakingjs.com/es5/ch13.html) - Chapter 13 - Statements
-* [{{ site.book_js_2 }}](http://speakingjs.com/es5/ch15.html) - Chapter 15 - Functions (up to "More Control over Function Calls")
-* [{{ site.book_js_2 }}](http://speakingjs.com/es5/ch16.html) - Chapter 16 -  Variables: Scopes, Environments, and Closures (up to "Global Variables")
 {% endcomment %}
 </td>
 	<td markdown="block">
-Due Today, 9/06 (during class / immediately after?)
+Due Today, 1/23 (during class / immediately after?)
 
-* [A Survey](https://docs.google.com/a/nyu.edu/forms/d/e/1FAIpQLScN3qcI_P8BQl6aBbK_-OqIEwdI-qCuwfm_jIrm7IF0o-bi_Q/viewform)
+* [A Survey]({{ site.survey_intro }}) / form for GitHub username
 
-Due Thursday, 9/08, before 11pm
+Due Wednesday, 1/25, before 11am
 
-* [Homework #0](homework/00.html) (install node, send me your github username)
+* [Homework #0](homework/00.html) (install node)
 </td>

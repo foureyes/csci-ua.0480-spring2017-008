@@ -246,6 +246,15 @@ console.log(foo === bar); // true (because "aliasing")
 
 <section markdown="block" data-background="#440000">
 ## Floating Point Operations May Yield Unexpected Results!
+
+* sooo... you may have to be careful when comparing them!
+* {:.fragment} for example, if checking two floating point numbers for equality
+    * perhaps take the absolute value of the difference of the values and determine if that's below some threshold
+    * if it is, then the floating point numbers are _equal_
+* {:.fragment} this threshold is the [machine epsilon](http://stackoverflow.com/questions/34611858/machine-epsilon-in-python)
+    * The smallest representable positive number such that 1.0 + eps != 1.0
+    * `0.1 + 0.2 === 0.3 // false!?`
+    * `Math.abs((0.1 + 0.2) - 0.3)  < 0.0000000000000004 // true! ` 
 </section>
 
 <section markdown="block">
@@ -328,8 +337,8 @@ Note that they work on non-number types as well! __These operators can be used t
 __What do you think the following operators do?__ &rarr;
 
 <pre><code data-trim contenteditable>
-2 & 3 // 10 & 11
-7 ^ 3 // 111 ^ 011
+2 & 3 // 10 & 11 = 10 = 2
+7 ^ 3 // 111 ^ 011 = 100 = 4
 </code></pre>
 
 
@@ -352,7 +361,7 @@ __let's try these__ &rarr;
 
 __What do you think the following operators do?__ &rarr;
 <pre><code data-trim contenteditable>
-2 << 3 // 10 << 11
+2 << 3 // 10 << 11 = 10000 = 16
 </code></pre>
 
 * __left shift__ - a __&lt;&lt;__ b - shifts a in binary representation b (< 32) bits to the left, shifting in zeros from the right.
@@ -403,25 +412,37 @@ __Try the following operations...__ &rarr;
 	* __Infinity, -Infintity__ - positive and negative infinities 
 	{:.fragment}
 * {:.fragment} Note that these special values are _actually_ numbers! (really!)
-</section>
-
-<section markdown="block">
-## About NaN and Infinity
-
-__Both Nan and Positive/Negative Infinity are of type number!__ &rarr;
-
-<pre><code data-trim contenteditable>
+    * {:.fragment} that is, __both `NaN` and Positive/Negative `Infinity` are of type `Number`!__ &rarr;
+        <pre><code data-trim contenteditable>
 typeof NaN      // --> number (what??? ok)
 typeof Infinity // --> number
 </code></pre>
+        
+</section>
 
-* __NaN__ stands for _not a number_
-	* <code>NaN</code> is _toxic_ 
-	* using it in any other numeric operations __always results in NaN__ &rarr;
-	* <code>NaN + 1</code> &rarr;
-* __Infinity, -Infinity__
-	* __Infinity__ <code> + 1</code> or __Infinity__ <code>+</code> __Infinity__&rarr; is still <code>Infinity</code>
-	* <code>Infinity</code> represents all values greater than 1.79769313486231570e+308
+<section markdown="block">
+## More About NaN 
+
+
+Again, __NaN__ stands for _not a number_
+
+* <code>NaN</code> is _toxic_ ...
+* using it in any other numeric operations __always results in NaN__ &rarr;
+	* <code>NaN + 1</code> &rarr; <code class="fragment">NaN</code>
+* the only way to check if a value is `NaN` is by using the built-in function `isNaN(val)`
+* oddly, `NaN === NaN` is `false` (!? ... as specified by IEEE
+
+</section>
+<section markdown="block">
+## More About Infinity
+
+So, there's  __Infinity__ and  __-Infinity__
+
+* __Infinity__ <code> + 1</code> or __Infinity__ <code>+</code> __Infinity__&rarr; is still <code>Infinity</code>
+* <code>Infinity</code> represents all values greater than 1.79769313486231570e+308
+* dividing by 0 yields `infinity`
+* equality operators and the global function `isFinite` can be used to determine if a value is `Infinity`
+
 </section>
 
 <section markdown="block">
@@ -486,14 +507,60 @@ __And what about an _actual_ backslash?__ &rarr;
 </section>
 
 
+<section markdown="block">
+## Unicode Escape Sequence
+
+__You can specify characters by using their unicode code point!__
+
+* __start with `\u`__
+* follow it with a __a hexadecimal number__ representing a unicode code point
+
+<br>
+How does that work? Welll.... &rarr;
+
+* {:.fragment} `console.log('\u0041')` - 65 - uppercase A
+* {:.fragment} as an aside, 
+    * [JavaScript stores strings internally as UTF-16](http://airhadoken.github.io/2015/04/22/javascript-string-handling-emoji.html), but the code points for emoji are outside of what UTF-16 can represent
+    * consequently, to represent those higher code points, __2 consecutive UTF-16 characters can be used__
+    * for example, '\uD83D\uDE28' is a fearful face &#128552; (AKA the face I make when I see a hex number or read the word, unicode) 
+
+
+<br>
+
+</section>
 
 <section markdown="block">
 ## String Operators
 
-__string concatenation__, or __+__, is an operator that takes two strings and joins them:
+A few string operators:
+
+* __string concatenation__, or __+__, is an operator that takes two strings and joins them:
+    <pre><code data-trim contenteditable>
+"hello " + "there"
+</code></pre>
+* __indexing__, or []... can be used to retrieve the character at an index, such as `'emoji'[3]` (or use `charAt`)
+* __comparison operators__, you can use `<`, `<=`, etc. ... unicode code points are compared `'B' > 'A' // true`
+</section>
+
+<section markdown="block">
+## Template Literals (ES6)
+
+If you want __multiline strings__ or __string interpolation__, use __template literal__ syntax:
+
+* use backticks to delimit your template literal (instead of quotes)
+* use `${variableName}` to output the value of a variable in a string
 
 <pre><code data-trim contenteditable>
-"hello " + "there"
+const s1 = `such
+lines
+wow`;
+
+const food1 = 'bacon';
+const food2 = 'pancakes';
+const s2 = `Makin' ${food2}, makin' ${food1} ${food2}!`;
+
+console.log(s1)
+console.log(s2);
 </code></pre>
 </section>
 
@@ -612,7 +679,7 @@ goodbye
 </code></pre>
 {:.fragment}
 
-This actually comes in handy for checking if a property exists on an object, and defaulting to a specific value if it doesn't:
+This syntax is actually sometimes used to __assign a default value__ to an object's property only if it doesn't have that property (we'll talk about objects more in depth in a later class):
 {:.fragment}
 
 <pre><code data-trim contenteditable>

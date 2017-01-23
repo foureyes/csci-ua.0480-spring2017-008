@@ -16,6 +16,7 @@
 
 </td>
 	<td markdown="block">
+{% comment %}
 * [{{ site.book_js }}]({{ site.book_js_link }}) <br> Chapter 4 - Data Structures: Data Structures: Objects and Arrays
 * [{{ site.book_js_2 }}](http://speakingjs.com/es5/ch12.html) - Chapter 12 - Strings
 * [{{ site.book_js_2 }}](http://speakingjs.com/es5/ch15.html) - Chapter 15 - Functions (starting from "Handling Missing or Extra Parameters")
@@ -23,14 +24,18 @@
 * [{{ site.book_js_2 }}](http://speakingjs.com/es5/ch17.html) - Chapter 17 - Objects (up to "Converting Any Value to an Object")
 * [{{ site.book_js_2 }}](http://speakingjs.com/es5/ch18.html) - Chapter 18 - Arrays
 
+{% endcomment %}
 
 </td>
 	<td markdown="block">
 
 
+{% comment %}
 Due Thursday, 9/15, by 11pm
 
 * [Homework #1](homework/01.html)
 * Repository should be posted by Thursday, September 8th, at 11PM
+{% endcomment %}
+
 
 </td>

@@ -17,17 +17,21 @@
 </td>
 	<td markdown="block">
 
+{% comment %}
 * [{{ site.book_js }}]({{ site.book_js_link }}) <br> Chapter 20 - node.js
 * [{{ site.book_js }}]({{ site.book_js_link }}) <br> Chapter 5 - Higher Order Functions
 * [Node.js Modules (Official Node Docs)](https://nodejs.org/api/modules.html)
+{% endcomment %}
 
 </td>
 	<td markdown="block">
 
+{% comment %}
 In-class programming activity:
 
 * [forEach, filter, reduce](https://docs.google.com/a/nyu.edu/forms/d/e/1FAIpQLSfvbcstf1-IKNVD-YFK77X_zr4ph3f8dYLlo1jBwdNswTwVaQ/viewform)
 
+{% endcomment %}
 <!--
 * [](assignments/.html)
 -->
