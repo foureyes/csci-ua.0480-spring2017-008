@@ -161,7 +161,7 @@ Seems like <code>null</code> is an object (!? ... [a mistake?](http://javascript
 ### OK, seriously, stop messing around. TELL ME ABOUT THE TYPES!
 
 * __Undefined__ - `typeof` returns `undefined`
-* __Null__ - `typeof` returns `object` because JavaScript is _terrible_ ([or to maintain backwards compatibility issues previous versions of JavaScript](http://stackoverflow.com/questions/18808226/why-is-typeof-null-object))
+* __Null__ - `typeof` returns `object` because JavaScript is _terrible_ ([or to maintain backwards compatibility with previous versions of JavaScript](http://stackoverflow.com/questions/18808226/why-is-typeof-null-object))
 * __Boolean__ - `typeof` returns `boolean`
 * __String__ - `typeof` returns `string`
 * __Number__ - `typeof` returns `number`
@@ -430,7 +430,7 @@ Again, __NaN__ stands for _not a number_
 * using it in any other numeric operations __always results in NaN__ &rarr;
 	* <code>NaN + 1</code> &rarr; <code class="fragment">NaN</code>
 * the only way to check if a value is `NaN` is by using the built-in function `isNaN(val)`
-* oddly, `NaN === NaN` is `false` (!? ... as specified by IEEE
+* oddly, `NaN === NaN` is `false` (!? ... as specified by IEEE)
 
 </section>
 <section markdown="block">
@@ -679,14 +679,14 @@ goodbye
 </code></pre>
 {:.fragment}
 
-This syntax is actually sometimes used to __assign a default value__ to an object's property only if it doesn't have that property (we'll talk about objects more in depth in a later class):
+This syntax is actually sometimes used to __assign a default value__ if a value doesn't exist:
 {:.fragment}
 
 <pre><code data-trim contenteditable>
 // we haven't seen objects yet, but you get the idea
-var obj = {prop1: "a value"}; 
-obj.prop1 || "default value"
-obj.prop2 || "default value"
+const obj = {prop1: "a value"}; 
+const val1 = obj.prop1 || "default value"
+const val2 = obj.prop2 || "default value"
 </code></pre>
 {:.fragment}
 </section>
