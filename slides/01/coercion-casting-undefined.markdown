@@ -169,17 +169,18 @@ __How do we get out of this mess? ...without having to remember a series of obsc
 <section markdown="block">
 ## Casting
 
-We can use __object contructors__ to cast from one type to another: 
+We can use __object contructors__ as functions to cast from one type to another: 
 
 * you can use constructors as functions (without the keyword <code>new</code>) to convert to that particular type
 * however, using <code>new</code>...
     * wraps the primitive type in an object (we'll discuss objects later)
     * when asked for a value, these objects usually yield the value of their primitive type
 
-__To cast, use constructors without new if you want the _primitive_.__ &rarr;
+To cast, use __constructors without new__ if you want the _primitive_. &rarr;
 
 <pre><code data-trim contenteditable>
 // do this
+i = Number("2")
 a = Boolean(false);
 // not this
 b = new Boolean(false);
@@ -208,7 +209,7 @@ Another option is to use some of the __operators__ that we learned to coax JavaS
 	*  <code>5 + ""</code>
 
 <br>
-See [this page](http://bonsaiden.github.io/JavaScript-Garden/#types.casting) on type casting.
+For mind boggling detail, see [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS/blob/master/types%20%26%20grammar/ch4.md) on coercion.
 </section>
 
 <section markdown="block">
@@ -280,7 +281,9 @@ if (some_boolean_expression) { // <-- curly brace here!
 ## Summary
 
 * __automatic type conversion is tricky__; sometimes it's helpful to check the specs, mdn, speaking javascript or even stackoverflow 
-* you can get around automatic type conversion (if that's desirable) by __casting__ - use operators like <code>!!</code>, <code>+</code>, <code>+ ""</code>
+* you can get around automatic type conversion (if that's desirable) by __casting__ 
+    * use object constructors as functions (`Number`, `Boolean`, etc.)
+    * use operators like <code>!!</code>, <code>+</code>, <code>+ ""</code>
 * to __check for undefined__: <code>if(typeof myVar == 'undefined')</code>
 * to __check for NaN__: <code>isNan(myVar)</code>
 </section>

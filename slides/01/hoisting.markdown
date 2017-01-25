@@ -21,17 +21,20 @@ What's a __declaration__ though?
 {:.fragment}
 
 * a __declaration__ is a way of telling the interpreter (or compiler) that a name or identifier exists
-* we learned two ways of declaring names in JavaScript (the 1st is easy, the 2nd, a bit tricky)... __what were they__? &rarr;
-	* {:.fragment} variable declarations (using <code>var</code>)
+* we learned a few ways of declaring names in JavaScript (the 1st is easy, the 2nd, a bit tricky)... __what were they__? &rarr;
+	* {:.fragment} variable declarations (using `const`, `let`, and `var`)
 	* {:.fragment} function declarations (using <code>function f(x) {}</code>)
 {:.fragment}
 
+<br>
 __Hoisting__ basically brings declarations to the __top of the current scope__.  __What does that mean for us?__ &rarr;
 {:.fragment}
 <div class="fragment" markdown="block">
 
 * some declarations do not have to occur before they are used!
 * we already saw this with functions declarations...
+
+<br>
 
 (btw, [this article](http://www.i-programmer.info/programming/javascript/5364-javascript-hoisting-explained.html?start=1) explained a lot, as well as [Chapter 4](http://eloquentjavascript.net/03_functions.html) in {{ site.book_js }})
 {:.fragment}
@@ -103,7 +106,7 @@ inner();
 
 </section>
 <section markdown="block">
-# Great! But What About Variable Declarations?
+# Great! But What About `var` Declarations?
 
 ### (We'll see why <code>var f = function ... </code> behaves the we way it does)
 
@@ -111,7 +114,7 @@ inner();
 
 
 <section markdown="block">
-## Some Variable Declarations
+## `var` Examples
 
 Treating each code example as a completely separate program, __what is the output of the following lines of code?__ &rarr;
 
@@ -145,10 +148,13 @@ var x;
 undefined
 </code></pre>
 {:.fragment}
+
+__Note that the last example would be an error if using `let` (or `const`)__
+{:.fragment}
 </section>
 
 <section markdown="block">
-## Variable Declarations are Hoisted
+## `var` Declarations are Hoisted
 
 
 <pre><code data-trim contenteditable>
@@ -167,7 +173,7 @@ In the above example:
 </section>
 
 <section markdown="block">
-## How About Initializing a Variable Along with Declaration?
+## How About Initializing a Variable Along with `var`?
 
 Let's start simple. __What's the output of this code?__
 <pre><code data-trim contenteditable>
@@ -198,9 +204,9 @@ undefined
 </section>
 
 <section markdown="block">
-## Declaration and Initialization
+## `var` and Initialization
 
-* variable declarations are hoisted
+* `var` declarations are hoisted
 * but the __initialization is executed in the location of the program where the initialization statement is actually placed__
 * soooo... that means:
 
@@ -219,7 +225,7 @@ x = 5;
 
 </section>
 <section markdown="block">
-## Another Note on Variable Hoisting
+## Another Note on `var` and Hoisting
 
 This probably doesn't matter since, we all know that you should __never declare a variable without var__, but: 
 
@@ -235,17 +241,35 @@ x = 5;
 </code></pre>
 
 </section>
+<section markdown="block">
+## What About `let` and `const`?
+
+__As we saw previously, `let` and `const` have a Temporal Dead Zone__ &rarr;
+
+* {:.fragment} __a variable declared with `let` and `const` cannot be accessed...__ 
+    * between the time that the containing scope is entered
+    * and the actual `let` or `var` declaration
+* {:.fragment} however... an identifier _is actually created for it_ at the beginning of the scope! you just can't use it yet!
+* {:.fragment} (so it's _sort of hoisted_; there seems to be some debate on the terminology for this)
+* {:.fragment} consequently, this code gives an error:
+    <pre><code data-trim contenteditable>
+console.log(x);
+let x = 5;
+</code></pre>
+
+</section>
 
 <section markdown="block">
 ## Hoisting Summary
 
 __This is all you need to know about hoisting__:
 
-* variable declarations are brought to the beginning of their enclosing scope
-* declarations can be function declarations or variable declarations
+* {:.fragment} `let` and `const` declared variables cannot be accessed until their declaration (this is _actually_ sane)
+* {:.fragment} `var` declarations and function declarations are brought to the beginning of their enclosing scope
 	* all function declarations are hoisted 
-	* variable declarations are hoisted, but the initialization part occurs where the original statement was located
-* implicit variable declarations are not hoisted (but you always use <code>var</code>, so not relevant, right?)
+	* `var` declarations are hoisted, but the assignment part occurs where the original statement was located
+    * `var` declarations that haven't been assigned a value yet are initialized with `undefined` (just like `let`)
+* {:.fragment} implicit variable declarations (no `const`, `let`, or `var`) are not hoisted (but you always use `let`, `const` or `var`, so not relevant, right?)
 </section>
 
 <section markdown="block">
@@ -321,6 +345,18 @@ console.log(inner);
 </section>
 
 <section markdown="block">
+## Hoisting Example 4
+
+__What's the output of this code?__ &rarr;
+<pre><code data-trim contenteditable>
+console.log(f);
+
+const f = function() {
+    console.log('I am function!');
+}
+</code></pre>
+</section>
+<section markdown="block">
 ## Back to an Earlier Mystery
 
 __And that's why the following gives us <code>undefined is not a function</code>__ &rarr;
@@ -346,21 +382,20 @@ var f = function(x) {
 <section markdown="block">
 ## No Seriously...
 
-Variable hoisting.  __Why?__ &rarr;
+Hoisting.  __Why?__ &rarr;
 
 * generally a top-down approach is taken to programming
 	* so it may make sense for the "main" part of the program to go on top, calling functions elsewhere
 	* those functions are likely to be declared below main
 	* so it's more natural... ¯\\_(ツ)\_/¯ (maybe)
-* as for variables, I don't know if I can excuse that
-	* but perhaps it's to make things easier 
-	* (that is... if you've forgotten to declare something at the top of your program or function)
+* as for `var`, I don't know if I can excuse that!
 {:.fragment}
 
 * according to [this SO](http://stackoverflow.com/questions/15005098/why-does-javascript-hoist-variables) article....
 * it may possibly just be due to the interpreter implementation: scan source for variable and function declarations first, then execute code next
 {:.fragment}
 </section>
+
 <section markdown="block">
 ## Easy, Right?
 
@@ -391,14 +426,11 @@ __How can we get around this ambiguity?__ &rarr;
 
 Always declare your variables at the beginning of your function!
 {:.fragment}
+
+Aaaaand... possibly, avoid using `var`; use `let` and `const` instead!
 </section>
 
-<section markdown="block" data-background="#440000">
-## This Calls for a Red Slide:
-
-## Let's say it again - always declare your variables at the beginning of your function! 
-
-</section>
+{% comment %}
 <section markdown="block">
 ## One Last Thing
 
@@ -427,3 +459,5 @@ var foo = 1,
     baz = 3;
 </code></pre>
 </section>
+
+{% endcomment %}

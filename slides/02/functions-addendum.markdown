@@ -37,8 +37,9 @@ __What's hoisting?__ &rarr;
 
 __What are some hoisting rules?__ &rarr;
 
-* {:.fragment} variable declarations are brought to the top of the scope
-* {:.fragment} variable assignment / initialization is not hoisted (it happens at the original location of that line
+* {:.fragment} `let` and `const` declarations are _sort of hoisted_ (their names are created, but they can't be used until they actually declared)
+* {:.fragment} `var` declarations are brought to the top of the scope
+* {:.fragment} assignment / initialization is not hoisted (it happens at the original location of that line, so these `var` variables are `undefined`)
 * {:.fragment} function declarations are hoisted (including their definition)
 
 </section>
@@ -66,6 +67,31 @@ ReferenceError: x is not defined
 ## What's the Output?
 
 __What is the output of the following code? Error or no output are possible.__ &rarr;
+<pre><code data-trim contenteditable>
+let x;
+console.log(x);
+</code></pre>
+
+<pre><code data-trim contenteditable>
+undefined
+</code></pre>
+{:.fragment}
+
+`let` variables are initialized to `undefined`
+{:.fragment}
+
+<pre><code data-trim contenteditable>
+console.log(x);
+let x;
+</code></pre>
+
+<pre><code data-trim contenteditable>
+ReferenceError
+</code></pre>
+{:.fragment}
+
+Temporal Dead Zone - can't access `let` variable before actual declaration
+{:.fragment}
 
 <pre><code data-trim contenteditable>
 console.log(x);
@@ -77,7 +103,7 @@ undefined
 </code></pre>
 {:.fragment}
 
-the variable declaration for x is hoisted
+the `var` declaration for x is hoisted
 {:.fragment}
 
 </section>
@@ -128,22 +154,22 @@ when using function declaration syntax, both declaration and _actual definition_
 </section>
 
 <section markdown="block">
-## About var 
+## About `var` 
 
 A quick summary on __using var__ &rarr;
 
-* if you drop var, the declaration is not hoisted
-* if you're in a function then var will create a local variable
-* within a function, but without var, __the interpreter will look up the scope chain until it finds that variable or hits the global scope (at which point it will create it)__
+* if you drop `var`, `const`, or `let`, the declaration is not hoisted
+* if you're in a function then `var` will create a local variable ... and the scope of it will be that function
+* within a function, but without `const`, `let` or `var`, __the interpreter will look up the scope chain until it finds that variable or hits the global scope (at which point it will create it)__
 </section>
 
 <section markdown="block">
-## Aaaand... Back to Using Var, Not Using Var
+## Aaaand... Back to Using Not Using `const`, `let` or `var`
 
 __What's the output of this code?__ &rarr;
 
 <pre><code data-trim contenteditable>
-var g = 7;
+let g = 7;
 
 function f() {
 	g = 5;
@@ -167,7 +193,7 @@ console.log(g);
 __What's the output of this code?__ &rarr;
 
 <pre><code data-trim contenteditable>
-var g = 7;
+let g = 7;
 function f() {
     g = 5;
     function g() {}
@@ -187,12 +213,12 @@ console.log(g);
 </section>
 
 <section markdown="block">
-## And From the Previous Class
+## And From the Previous Slides
 
 This illustrates going up the scope chain... __what's the output?__ &rarr;
 
 <pre><code data-trim contenteditable>
-var x = 10;
+let x = 10;
 function f() {
   function g() {
     x = 20; 
@@ -213,14 +239,14 @@ console.log(x);
 </section>
 
 <section markdown="block">
-## No Var, Scope Chain Continued
+## Scope Chain Continued
 
 A minor change in code.... (declaring a local in f). __What's the output this time?__ &rarr;
 
 <pre><code data-trim contenteditable>
-var x = 10;
+let x = 10;
 function f() {
-  var x = 30;
+  let x = 30;
   function g() {
     x = 20; 
   }

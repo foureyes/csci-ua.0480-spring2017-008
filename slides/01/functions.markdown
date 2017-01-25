@@ -32,7 +32,7 @@ TODO:
 __Remember... functions are first class objects in JavaScript!__
 
 <pre><code data-trim contenteditable>
-var doubleTheNumber = function(n) {
+const doubleTheNumber = function(n) {
 	return n + n;
 };
 console.log(doubleTheNumber(5));
@@ -67,8 +67,8 @@ __Let's create a function called <code>myPow</code>. It will (surprisingly) rais
 * yeah, <code>Math.pow</code> exists...
 
 <pre><code data-trim contenteditable>
-var myPow = function(base, exponent) {
-	var result = 1;
+const myPow = function(base, exponent) {
+	let result = 1;
 	for(var i = 0; i < exponent; i++) {
 		result = result * base;
 	}
@@ -145,7 +145,7 @@ Variables declared at the "top level" of your program (outside of functions) and
 * __parameters__ in a function __are local__ to that function
 * variables declared __with__ the keyword, <code>var</code> are __local__ to the function
 * variables declared __with__ the keywords, `const` or `let` are __local__ to the block that they're declared in
-* variables declared __without__ the keyword, <code>var</code> are __global__ / affect the global scope... ⊙﹏⊙
+* variables declared __without__ the `let`, `const` or `var` affect the global scope... ⊙﹏⊙
     * (actually, the nearest enclosing scope - most of the time this is global, but it could be an outer function!)
 * global variables (again) are accessible throughout your program, even from within you function's body
 
@@ -155,13 +155,13 @@ Variables declared at the "top level" of your program (outside of functions) and
 
 __Based on the previous slide, what is the output of the following code?__ &rarr;
 <pre><code data-trim contenteditable>
-var x = "hi!"; // hello... I'm a global variable
+let x = "hi!"; // hello... I'm a global variable
 
-var f = function() {
-	var x = "from f";
+const f = function() {
+	let x = "from f";
 };
 
-var g = function() {
+const g = function() {
 	x = "from g";
 };
 console.log(x)
@@ -205,7 +205,7 @@ from g
 </section>
 
 <section markdown="block">
-## Without Var Revisited
+## Without Const, Let, or Var Revisited
 
 __Variables declared without `const`, `let`, or `var` actually mask the variable in nearest enclosing scope (if it's not a `const`)__ (usually global, but a bit tricky for nested functions).
 
@@ -239,7 +239,7 @@ console.log(x);
 
 __What is the output of this code? What would happen if we put <code>console.log(y)</code> right at the end of function, <code>outer</code>'s body?__ &rarr;
 <pre><code data-trim contenteditable>
-var outer = function() {
+const outer = function() {
 	let x = "outside";
 	let inner = function() {
 		x += " modified by inside";
@@ -267,7 +267,7 @@ outside modified by inside
 * reassignment works fine!
 
 <pre><code data-trim contenteditable>
-let sayHello = function() {
+const sayHello = function() {
 	console.log("Hola!");
 };
 

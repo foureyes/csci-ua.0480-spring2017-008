@@ -130,6 +130,7 @@ We'll be using <code>typeof</code> extensively for the next few slides....
 * <code>String</code>
 * <code>Number</code>
 * <code>Object</code>
+* <code>Symbol</code> (ES6)
 
 <br>
 Wait... what? Then what's <code>typeof</code> doing?
@@ -156,9 +157,9 @@ Seems like <code>null</code> is an object (!? ... [a mistake?](http://javascript
 </section> 
 
 <section markdown="block">
-## Types Really
+## TELL ME ABOUT THE TYPES!
 
-### OK, seriously, stop messing around. TELL ME ABOUT THE TYPES!
+### Seriously, stop messing around. Types Really:
 
 * __Undefined__ - `typeof` returns `undefined`
 * __Null__ - `typeof` returns `object` because JavaScript is _terrible_ ([or to maintain backwards compatibility with previous versions of JavaScript](http://stackoverflow.com/questions/18808226/why-is-typeof-null-object))
@@ -166,10 +167,10 @@ Seems like <code>null</code> is an object (!? ... [a mistake?](http://javascript
 * __String__ - `typeof` returns `string`
 * __Number__ - `typeof` returns `number`
 * __Object__ - `typeof` returns `object`
+* __Symbol__ - `typeof` returns `symbol`
 
 <br>
-Functions are actually just objects, but `typeof` gives back `function` when its operand is a function. Arrays are objects too, so `typeof` returns `object` for an Array.
-
+Functions are actually just objects, but `typeof` gives back `function` when its operand is a function. Arrays are objects too, so `typeof` returns `object` for an Array. 
 
 </section>
 

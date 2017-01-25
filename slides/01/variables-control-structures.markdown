@@ -206,7 +206,7 @@ while with
 Wait, so it looks like there are three ways to declare variables. __What's the difference__? __Let's look at `const` and `let` first__ &rarr;
 
 * {:.fragment} the __scope__ of variables declared with __`const` and `let`__ is the __block that they're contained in__
-* {:.fragment} a __block__ is simply the area contained __between two curly braces__
+* {:.fragment} a __block__ is simply the area __between opening and closing curly braces__
 
 <br>
 <pre><code data-trim contenteditable>
@@ -261,12 +261,29 @@ Variables in an outer scope are visible from an inner scope:
 </section>
 
 <section markdown="block">
+## Temporal Dead Zone
+
+__This may seem obvious, but accessing a variable declared by `let` or `const` before it's declared will give a syntax error.__ &rarr;
+
+* {:.fragment} for example:
+    <pre><code data-trim contenteditable>
+console.log(s);
+let s = 'after!';
+// ReferenceError! s was used before it was declared
+</code></pre>
+* {:.fragment} the "area"/time between the start of a scope and when a variable is actually declared is called the __Temporal Dead Zone__ (really, [it's true](http://exploringjs.com/es6/ch_variables.html))
+* {:.fragment} why does this matter? __`var` does not behave this way!?__ (we'll see this in the slides on hoisting)
+
+
+</section>
+
+<section markdown="block">
 ## const vs let
 
 __OK... so what's the difference between `const` and `let` then?__ &rarr;
 
-* a variable defined with __`const`__ __cannot be reassigned__
-* {:.fragment} if you try to reassign, you'll get a run-time error (`TypeError`)
+* {:.fragment} a variable declared with __`const`__ __can't be assigned a different value after it had been declared__
+* {:.fragment} `const` reassignment will result in a run-time error (`TypeError`)
     <pre><code data-trim contenteditable>
 const dontChangeMe = "I told you so";
 dontChangeMe = "why not?";
@@ -287,11 +304,50 @@ console.log(i);
 </section>
 
 <section markdown="block">
+## const vs let Continued
+
+__Again, a value cannot be assigned to a `const` declared variable after it's been declared. This implies that...__ &rarr;
+
+* {:.fragment} from mdn: "An initializer for a constant is __required__; that is, you must specify its value in the same statement in which it's declared"
+* {:.fragment} or, simply put, __you must assign a value immediately when declaring a variable with `const`__
+* {:.fragment} otherwise, you'll get a syntax error:
+    <pre><code data-trim contenteditable>
+const foo;
+foo = 'bar'
+// SyntaxError: Missing initializer in const declaration
+</code></pre>
+
+</section>
+
+<section markdown="block">
+## Default Initial Value
+
+__When you declare a variable without assigning a value to it, it will be initialized to `undefined`__ (this is really only valid for `let` and `var`, of course). &rarr;
+
+For example, the output of this...
+
+<pre><code data-trim contenteditable>
+let a;
+console.log(a);
+</code></pre>
+
+is
+{:.fragment}
+
+<pre><code data-trim contenteditable>
+undefined
+</code></pre>
+{:.fragment}
+
+
+</section>
+
+<section markdown="block">
 ## Redeclaring Variables with let and const 
 
-__If a variable has already been declared with `let`, `const`, or even `var`__...
+__If a variable has already been declared (with `let`, `const`, or `var`)__... &rarr;
 
-* {:.fragment} redeclaring a variable with the same identifier (name) will result in a `SyntaxError`
+* {:.fragment} redeclaring a variable with the same identifier (name) with __`let` and `const`__ will result in a `SyntaxError`
 * {:.fragment} for example:
     <pre><code data-trim contenteditable>
 let i = 0;
@@ -401,9 +457,31 @@ baz
 </code></pre>
 {:.fragment}
 
-* {:.fragment} even though `bar` is in a block, its scope is the entire function!?
+* {:.fragment} even though `bar` is in a block, its scope is the entire function!
 * {:.fragment} `var` was the only keyword for declaring variables in ES5
-* {:.fragment} behavior is confusing (we'll see more when we look at functions)
+* {:.fragment} behavior may seem unexpected if coming from a language with block scope
+</section>
+
+<section markdown="block">
+## Redeclaring Variables with var
+
+__If a variable has already been declared `var`__... &rarr;
+
+* {:.fragment} redeclaring a variable with `var` again is ok!
+* {:.fragment} for example:
+    <pre><code data-trim contenteditable>
+// no syntax error
+var a = 'bar';
+var a = 'baz';
+</code></pre>
+* {:.fragment} redeclaring with `var` but not assigning a value will have no effect on the original value:
+    <pre><code data-trim contenteditable>
+// no syntax error
+var a = 'bar';
+var a;
+// a is still 'bar'
+</code></pre>
+
 </section>
 
 <section markdown="block" data-background="#440000">
@@ -486,7 +564,7 @@ console.log(ಠ_ಠ);
 Thanks [Stackoverflow](http://stackoverflow.com/questions/1661197/valid-characters-for-javascript-variable-names/9337047#9337047)! Also, here's more [about that look](http://knowyourmeme.com/memes/%E0%B2%A0_%E0%B2%A0-look-of-disapproval).
 {:.fragment}
 
-Oh, and [this is a site that let's you check if a variable name is valie or not.](https://mothereff.in/js-variables)
+Oh, and [this is a site that let's you check if a variable name is valid or not.](https://mothereff.in/js-variables)
 {:.fragment}
 
 <!--_ -->
@@ -520,7 +598,7 @@ __`const` vs `let` vs `var`... There are a few ways to approach this (what do yo
     2. {:.fragment} default to using `let` and use `const` to signify a constant
 
 <br>
-My preference is default to using `const` (2-1), mainly because it seems to be way the community is moving (preventing reassignment may cut down on side effects / bugs).
+My preference is default to using `const` (#2, #1), mainly because it seems to be way the community is moving (preventing reassignment may reduce side effects / bugs).
 {:.fragment}
 
 
