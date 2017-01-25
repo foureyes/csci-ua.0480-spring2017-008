@@ -347,16 +347,16 @@ Functions retain access to their original scope, even when the outer function th
 
 <pre><code data-trim contenteditable>
 
-var gimmeFunction = function() {
+let gimmeFunction = function() {
 
-	var a = "I'm in here!";
+	let a = "I'm in here!";
 
 	return function() {
 		console.log(a);
 	}
 }
 
-var myFunction = gimmeFunction();
+let myFunction = gimmeFunction();
 myFunction();
 </code></pre>
 
@@ -370,13 +370,13 @@ I'm in here!
 
 ([Via MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures))...
 
-* normally, the local variables within a function only exist for the duration of that function's execution
-* once the outer function <code>gimmeFunction</code> finishes executing, you'd expect that its local variable, a, would no longer be accessible
+* normally, the local letiables within a function only exist for the duration of that function's execution
+* once the outer function <code>gimmeFunction</code> finishes executing, you'd expect that its local letiable, a, would no longer be accessible
 * however... a __closure__ is created when it returns a function!
 * a __closure__ is a special kind of __object that combines two things__: 
 	* a function
 	* the environment in which that function was created
-	* the environment consists of any local variables that were in-scope at the time that the closure was created
+	* the environment consists of any local letiables that were in-scope at the time that the closure was created
 
 </section>
 
@@ -394,7 +394,7 @@ __Try writing a function called `makeAdder`:__ &rarr;
 It should look like this:
 
 <pre><code data-trim contenteditable>
-var addTwo = makeAdder(2);
+let addTwo = makeAdder(2);
 console.log(addTwo(5));
 // should print out 7
 </code></pre>
@@ -407,13 +407,13 @@ __Here's a possible solution:__ &rarr;
 
 <pre><code data-trim contenteditable>
 
-var makeAdder = function(x) {
+let makeAdder = function(x) {
 	return function(y) {
 		return y + x;
 	}
 };
 
-var addTwo = makeAdder(2);
+let addTwo = makeAdder(2);
 console.log(addTwo(5));
 </code></pre>
 </section>
