@@ -25,6 +25,7 @@ nav-state: schedule
 <td markdown="block">
 * Introductions
 * JavaScript Basics
+* Variables
 * Functions
 
 {% comment %} 
@@ -46,11 +47,8 @@ TODO:
 <!-- ------------ --><a name="02"></a>
 <tr><td>2</td><td><strong>Jan 25</strong><br>Wed</td>
 <td markdown="block">
-* Objects
-* Node
-* Modules and Require
-* Static Analysis Tools
-* Introduction to Higher Order Functions (Maybe?)
+* Variables
+* Functions
 
 {% comment %} 
 TODO
@@ -81,8 +79,11 @@ TODO
 <!-- ------------ --><a name="03"></a>
 <tr><td>3</td><td><strong>Jan 30</strong><br>Mon</td>
 <td markdown="block">
-* Higher Order Functions
-* Objects and Prototypes
+* Objects
+* Node
+* Modules and Require
+* Static Analysis Tools
+* Introduction to Higher Order Functions (Maybe?)
 
 </td>
 {% include schedule/03.markdown %}
@@ -94,9 +95,7 @@ TODO
 <td markdown="block">
 * Higher Order Functions
 </td>
-<td></td><td></td><td markdown="block"></td>{% comment %}
 {% include schedule/04.markdown %}
-{% endcomment %}
 </tr>
 
 

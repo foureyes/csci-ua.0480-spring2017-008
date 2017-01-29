@@ -1,10 +1,15 @@
 	<td markdown="block">
+{% comment %}
+* [Functions Some More!](slides/02/functions-addendum.html)
+* [Objects](slides/02/objects.html)
+* [Strings, Arrays, Mutability](slides/02/strings-arrays.html)
 * [Previous Slides, Mutability and Arguments Object](slides/02/strings-arrays.html#/18)
 * [Node, NPM, and git](slides/03/node-npm-debug-git.html)
     * process.argv
     * JSON.parse
 * [Higher Order Functions](slides/03/higher-order-functions.html) 
 * [Console.log](slides/03/questions-log.html)
+{% endcomment %}
 
 {% comment %}
 * [Node, NPM, and git](slides/02/node-npm-debug-git.html)
@@ -16,6 +21,16 @@
 
 </td>
 	<td markdown="block">
+
+
+[{{ site.book_js }}]({{ site.book_js_link }})
+
+* [Chapter 17 - Objects (up to "Converting Any Value to an Object")](http://speakingjs.com/es5/ch17.html)
+* [Chapter 18 - Arrays)](http://speakingjs.com/es5/ch18.html)
+
+[{{ site.book_js_6 }}]({{ site.book_js_6_link }})
+
+* [Chapter 3. Building Robust Node Applications](http://chimera.labs.oreilly.com/books/1234000001808/ch03.html) (excluding "Using Multiple Processors")
 
 {% comment %}
 * [{{ site.book_js }}]({{ site.book_js_link }}) <br> Chapter 20 - node.js

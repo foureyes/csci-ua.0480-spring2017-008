@@ -3,10 +3,15 @@
 * [About Class #2](slides/02/meta.html)
 {% endcomment %}
 
+* Finish up [Variables, Built-in Functions](slides/01/variables-control-structures.html) from previous class
+* [Control Structures](slides/01/conditionals-loops.html)
+* [Coercion (Revisited), Casting, Undefined, and Style](slides/01/coercion-casting-undefined.html)
+* [Functions](slides/01/functions.html)
+* [Hoisting](slides/01/hoisting.html)
+
+{% comment %}
 * [Review](slides/02/review.html) (and [a more in depth review on basics if you want it](slides/02/review-basics.html))
-* [Functions Some More!](slides/02/functions-addendum.html)
-* [Objects](slides/02/objects.html)
-* [Strings, Arrays, Mutability](slides/02/strings-arrays.html)
+{% endcomment %}
 
 {% comment %}
 * [Objects and Mutability, Arguments Object](slides/02/objects-addendum.html)
@@ -16,6 +21,18 @@
 
 </td>
 	<td markdown="block">
+[{{ site.book_js }}]({{ site.book_js_link }})
+
+* [Chapter 15 - Functions (up to "More Control over Function Calls")](http://speakingjs.com/es5/ch15.html)
+* [Chapter 16 -  Variables: Scopes, Environments, and Closures (up to "Global Variables")](http://speakingjs.com/es5/ch16.html)
+
+[{{ site.book_js_2 }}]({{ site.book_js_2_link }})
+
+* [Chapter 9 - Variables and scoping](http://exploringjs.com/es6/ch_variables.html)
+
+For a more gentle introduction to functions in JavaScript, check out [{{ site.book_js_5 }}]({{ site.book_js_5_link }}) 
+
+* Chapter 3 - Functions
 {% comment %}
 * [{{ site.book_js }}]({{ site.book_js_link }}) <br> Chapter 4 - Data Structures: Data Structures: Objects and Arrays
 * [{{ site.book_js_2 }}](http://speakingjs.com/es5/ch12.html) - Chapter 12 - Strings
