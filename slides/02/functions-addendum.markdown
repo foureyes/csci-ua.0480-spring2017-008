@@ -29,7 +29,7 @@ __What's hoisting?__ &rarr;
 * {:.fragment} what's a __declaration__?
 * {:.fragment} a __declaration__ is a way of telling the interpreter (or compiler) that a name or identifier exists
 * {:.fragment} Soooo... __Hoisting__ basically brings declarations to the __top of the current scope__
-* {:.fragment} which means declarations do not have to occur before they are used!
+* {:.fragment} which means declarations do not have to occur before they are used depending on how you declare identifiers!
 </section>
 
 <section markdown="block">
@@ -37,7 +37,7 @@ __What's hoisting?__ &rarr;
 
 __What are some hoisting rules?__ &rarr;
 
-* {:.fragment} `let` and `const` declarations are _sort of hoisted_ (their names are created, but they can't be used until they actually declared)
+* {:.fragment} `let` and `const` declarations are _sort of hoisted_ (their names are created, but they can't be used until they're actually declared)
 * {:.fragment} `var` declarations are brought to the top of the scope
 * {:.fragment} assignment / initialization is not hoisted (it happens at the original location of that line, so these `var` variables are `undefined`)
 * {:.fragment} function declarations are hoisted (including their definition)
@@ -158,13 +158,13 @@ when using function declaration syntax, both declaration and _actual definition_
 
 A quick summary on __using var__ &rarr;
 
-* if you drop `var`, `const`, or `let`, the declaration is not hoisted
+* if you drop `var` (and don't have a `const` or `let` either), the declaration is not hoisted
 * if you're in a function then `var` will create a local variable ... and the scope of it will be that function
 * within a function, but without `const`, `let` or `var`, __the interpreter will look up the scope chain until it finds that variable or hits the global scope (at which point it will create it)__
 </section>
 
 <section markdown="block">
-## Aaaand... Back to Using Not Using `const`, `let` or `var`
+## Aaaand... Back to Using / Not Using `const`, `let` or `var`
 
 __What's the output of this code?__ &rarr;
 

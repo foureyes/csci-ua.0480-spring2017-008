@@ -1,11 +1,11 @@
 	<td markdown="block">
 
-{% comment %}
+Draft Slides:
+
 * [Higher Order Functions Continued](slides/04/higher-order-functions-continued.html) 
 * [JSON](slides/02/objects.html#/20)
 * [Objects Revisited](slides/04/objects-prototypes.html)
 * [A Detour: Globals, Methods, and This](slides/04/globals-methods-this.html)
-{% endcomment %}
 
 
 

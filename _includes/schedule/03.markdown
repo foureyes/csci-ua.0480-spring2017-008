@@ -1,14 +1,30 @@
 	<td markdown="block">
-{% comment %}
 * [Functions Some More!](slides/02/functions-addendum.html)
 * [Objects](slides/02/objects.html)
-* [Strings, Arrays, Mutability](slides/02/strings-arrays.html)
-* [Previous Slides, Mutability and Arguments Object](slides/02/strings-arrays.html#/18)
+* [Slides, Mutability and Variable Parameters](slides/02/strings-arrays.html)
 * [Node, NPM, and git](slides/03/node-npm-debug-git.html)
     * process.argv
     * JSON.parse
 * [Higher Order Functions](slides/03/higher-order-functions.html) 
 * [Console.log](slides/03/questions-log.html)
+* for homework
+    * file i/o
+    * readline sync
+    * modules
+    * homework demo
+
+{% comment %}
+	* spread operator
+    * default args using rest operator
+    * node-sh
+    * objects
+    * objects with methods
+    * objects with shorthand
+    * destructuring
+    * rest
+    * spread
+    * slice vs ...arr
+    * concat vs ...arr
 {% endcomment %}
 
 {% comment %}
@@ -40,6 +56,8 @@
 
 </td>
 	<td markdown="block">
+
+Homework to be posted evening of 1/30
 
 {% comment %}
 In-class programming activity:

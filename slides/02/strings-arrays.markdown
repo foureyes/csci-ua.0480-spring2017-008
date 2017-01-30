@@ -18,7 +18,7 @@ First... a quick note.
 
 * __Strings__ are primitives. They just _act_ like objects when they're called upon to do so
     <pre><code data-trim contenteditable>
-var s = "I'm not really an object";
+const s = "I'm not really an object";
 s.message = "prove it!"
 console.log(s.message);
 </code></pre>
@@ -66,7 +66,7 @@ __Also, <code>Arrays</code> are _actually just objects_. This means that their i
 * {:.fragment} indexes don't have to be contiguous!?
 * {:.fragment} you can have _holes_ in your arrays (length counts them as elements, though):
     <pre><code data-trim contenteditable>
-var a = [];
+const a = [];
 a[0] = 'ok'
 a[4] = 'where are the previous elements?'
 console.log(a);
@@ -255,8 +255,8 @@ Remember... <code>Arrays</code> are just objects anyway (so, yeah, they're mutab
 __A common way of duplicating an Array is to use slice.__ &rarr;
 
 <pre><code data-trim contenteditable>
-var a = [1, 2, 3];
-var b = a.slice();
+const a = [1, 2, 3];
+const b = a.slice();
 a.push(4);
 console.log(b);
 </code></pre>
@@ -266,8 +266,8 @@ console.log(b);
 * __what is the output of the code below?__ &rarr;
 
 <pre><code data-trim contenteditable>
-var a = [{}, 2, 3];
-var b = a.slice();
+const a = [{}, 2, 3];
+const b = a.slice();
 b[0].tricky = 'yup, same object';
 console.log(a);
 </code></pre>
@@ -277,7 +277,7 @@ console.log(a);
 </code></pre>
 {:.fragment}
 
-<a href="http://pythontutor.com/javascript.html#code=var+a+%3D+%5B%7B%7D,+2,+3%5D%3B%0Avar+b+%3D+a.slice(%29%3B%0Ab%5B0%5D.tricky+%3D+'yup,+same+object'%3B%0Aconsole.log(a%29%3B&mode=display&origin=opt-frontend.js&cumulative=false&heapPrimitives=false&textReferences=false&py=js&rawInputLstJSON=%5B%5D&curInstr=3)">See the diagram</a>
+<a href="http://pythontutor.com/javascript.html#code=const+a+%3D+%5B%7B%7D,+2,+3%5D%3B%0Aconst+b+%3D+a.slice(%29%3B%0Ab%5B0%5D.tricky+%3D+'yup,+same+object'%3B%0Aconsole.log(a%29%3B&mode=display&origin=opt-frontend.js&cumulative=false&heapPrimitives=false&textReferences=false&py=js&rawInputLstJSON=%5B%5D&curInstr=3)">See the diagram</a>
 {:.fragment}
 
 </section>
@@ -330,10 +330,10 @@ __Create a function called doubleValues.__ &rarr;
 
 __What do you think the following code prints out?__ &rarr;
 <pre><code data-trim contenteditable>
-var numbers = [1, 2, 3];
-var doubleValues = function(arr) {
-	var doubled = [];
-	for(var i = 0; i < arr.length; i++) {
+const numbers = [1, 2, 3];
+const doubleValues = function(arr) {
+	const doubled = [];
+	for(let i = 0; i < arr.length; i++) {
 		doubled.push(arr[i] * 2);
 	}
 	return doubled;
@@ -365,13 +365,13 @@ __Create a function called doubleValuesInPlace.__ &rarr;
 
 __What do you think the following code prints out?__ &rarr;
 <pre><code data-trim contenteditable>
-var numbers = [1, 2, 3];
-var doubleValuesInPlace = function(arr) {
-	for(var i = 0; i < arr.length; i++) {
+const numbers = [1, 2, 3];
+const doubleValuesInPlace = function(arr) {
+	for(let i = 0; i < arr.length; i++) {
 		arr[i] *= 2;
 	}
 };
-result = doubleValuesInPlace(numbers);
+const result = doubleValuesInPlace(numbers);
 console.log(numbers);
 console.log(result);
 </code></pre>
@@ -405,8 +405,8 @@ Um ok. __What does that mean?__ &rarr;
 
 __What is the output of the following code?__ &rarr;
 <pre><code data-trim contenteditable>
-var p = {'x':5, 'y':3}; 
-var changePoint = function(point, distance) {
+const p = {'x':5, 'y':3}; 
+const changePoint = function(point, distance) {
 	point.x = 0;
 	console.log('in function:', point);
 };
@@ -429,8 +429,8 @@ __We can mutate the original object passed in!__
 
 __What is the output of the following code?__ &rarr;
 <pre><code data-trim contenteditable>
-var p = {'x':5, 'y':3}; 
-var changePoint = function(point, distance) {
+const p = {'x':5, 'y':3}; 
+const changePoint = function(point, distance) {
 	point = {};
 	console.log('in function:', point);
 };
@@ -516,7 +516,7 @@ Loop over <code>nums = [1, 2, 3, 4];</code> and print out double the value of ev
 <pre><code data-trim contenteditable>
 
 // with classic for loop and length caching
-for(var i = 0, cachedLength = nums.length; i < cachedLength; i++) {
+for(let i = 0, cachedLength = nums.length; i < cachedLength; i++) {
 	console.log(nums[i] * 2);
 }
 </code></pre>
@@ -528,7 +528,7 @@ for(var i = 0, cachedLength = nums.length; i < cachedLength; i++) {
 
 <pre><code data-trim contenteditable>
 // with forEach (define callback first)
-var doubleIt = function(x) {
+const doubleIt = function(x) {
 	console.log(x * 2);
 }
 nums.forEach(doubleIt); 
@@ -536,7 +536,7 @@ nums.forEach(doubleIt);
 
 <pre><code data-trim contenteditable>
 // with every and simulating break (define callback first)
-var doubleItLessThanThree = function(x) {
+const doubleItLessThanThree = function(x) {
 	if (x >= 3) {
 		return false;
 	}
@@ -595,10 +595,10 @@ When a function is called, it gets an __arguments__ in its context, along with i
 
 
 <pre><code data-trim contenteditable>
-var f = function() {
+const f = function() {
     // btw... ok - I get the funny coercion rules now
     console.log("number of args " + arguments.length);
-    for (var i = 0, j = arguments.length; i < j; i++) {
+    for (let i = 0, j = arguments.length; i < j; i++) {
         console.log(arguments[i]);
     }
 };
@@ -619,6 +619,18 @@ f(1, 2, 3);
 * how might you do required and optional arguments?
 * {:.fragment} loop over arguments, but start at appropriate index
 
+</section>
+
+<section markdown="block">
+## ES6 Features
+
+* rest operator
+    * instead of arguments
+    * for concatenation
+* destructuring
+    * obj
+    * arrays
+* for of
 </section>
 {% comment %}
 <section markdown="block">

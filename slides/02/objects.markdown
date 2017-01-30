@@ -33,6 +33,7 @@ title: Objects
 * <code>String</code>
 * <code>Number</code>
 * <code>Object</code>
+* We didn't talk about this, but also... <code>Symbol</code> (ES6)
 
 </section>
 
@@ -70,6 +71,9 @@ __Can anyone think of analogous types in other languages?__ &rarr;
 * __Hashes__ in Ruby
 {:.fragment}
 
+<br>
+(Note that ES6 introduces a `Map` data structure because objects carry excess baggage, such as inherited properties, with them, making them poor substitutes for _actual_ maps)
+
 </div>
 </section>
 
@@ -79,7 +83,7 @@ __Can anyone think of analogous types in other languages?__ &rarr;
 Here's an example of an object:
 
 <pre><code data-trim contenteditable>
-var course = {name:'AIT', section:10, undergraduate:true};
+const course = {name:'AIT', section:8, undergraduate:true};
 </code></pre>
 
 __Object literals__ consist of:
@@ -103,9 +107,9 @@ __Internal white space and newlines won't cause any syntax issues.__ &rarr;
 * indentation also helps with readability
 
 <pre><code data-trim contenteditable>
-var course = {
+const course = {
     name:'Applied Internet Technology',
-    section:2,
+    section:8,
     undergraduate:true
 };
 </code></pre>
@@ -123,6 +127,25 @@ var course = {
 * which implies that __almost everything in JavaScript is an object__ (or again, _acts like_ an object for some values)!
 </section>
 
+<section markdown="block">
+## ES6 Shorthand Property Names
+
+__There's also a shortcut to creating properties and values if you already have variables defined.__  &rarr;
+
+* In ES6...
+* creating an object that consists of only variable names
+* will initialize an object with those variable names as properties
+
+<br>
+
+<pre><code data-trim contenteditable>
+const a = 'foo';
+const b = 'baz';
+const obj = { a, b};
+console.log(obj)
+</code></pre>
+
+</section>
 
 <section markdown="block">
 ## Accessing Properties
@@ -130,9 +153,9 @@ var course = {
 Sooo... how do we access properties? Using our previous object:
 
 <pre><code data-trim contenteditable>
-var course = {
+const course = {
     name:'Applied Internet Technology',
-    section:2,
+    section:8,
     undergraduate:true
 };
 </code></pre>
@@ -141,13 +164,13 @@ There are two ways to access properties:
 
 * the __dot operator__ 
 <pre><code data-trim contenteditable>
-// gives us 2
+// gives us 8
 console.log(course.section);
 </code></pre>
 {:.fragment}
 * __square brackets__
 <pre><code data-trim contenteditable>
-// gives us 2
+// gives us 8
 console.log(course["section"]);
 </code></pre>
 {:.fragment}
@@ -170,6 +193,33 @@ course["section"];
 * when using __square brackets__, the part within the brackets is evaluated and is used as the property name
 	* this allows for _dynamically_ created property names
 	* also allows property names that are not valid variable names <code>obj["I'm ok"] = true</code> (oof, maybe avoid that))
+</section>
+
+<section markdown="block">
+## Dynamic Properties
+
+__To clarify the use of brackets for property access, let's examine this scenario. The code below...__ &rarr;
+
+1. asks for user input, specifying a key / property name
+2. and _should_ output the value at the key
+
+<pre><code data-trim contenteditable>
+// using the same object from previous slides...
+const course = { name:'Applied Internet Technology', section:8, undergraduate:true };
+</code></pre>
+
+<pre><code data-trim contenteditable>
+// setting up user input
+const readline = require('readline');
+const p = readline.createInterface({ input: process.stdin, output: process.stdout });
+p.question('Type in an object key\n>', function (resp) {
+	// TODO: print value at key
+    p.close();
+});
+</code></pre>
+
+Here, we have to use bracket notation: `console.log(course[resp])`.
+{:.fragment}
 </section>
 
 <section markdown="block">
@@ -196,34 +246,64 @@ console.log("here's one!")
 
 It's worthwhile to repeat that __an object property can be a function__. 
 
-* when an object's property is a function, it's sometimes called a __method__
-* let's use what we know about functions and objects to create methods
-
+* if object's property is a function, it's sometimes called a __method__
+* let's try creating some methods...
 
 <pre><code data-trim contenteditable>
-var obj = {};
+const obj = {};
 function f() {
     console.log("Hi, I'm a method!");
 }
 obj.doStuff = f;
 </code></pre>
+{:.fragment}
 
 <pre><code data-trim contenteditable>
-var obj = {
+const obj = {
     doStuff: function() {
         console.log("Hi, I'm a method!");    
     },
 };
 </code></pre>
+{:.fragment}
 
 <pre><code data-trim contenteditable>
-var obj = {};
+const obj = {};
 obj.doStuff = function() {
     console.log("Hi, I'm a method!");    
 };
 </code></pre>
+{:.fragment}
 
 </section>
+
+<section markdown="block">
+## ES6 Shorthand Methods
+
+It's pretty __common to create methods on objects__, so __ES6 introduces a shortcut for creating methods on objects__ simply by setting properties equal to function expressions: &rarr;
+
+<pre><code data-trim contenteditable>
+const obj = {
+    f() {console.log('fffff!');},
+    g() {console.log('ggggg!');},
+};
+obj.f();
+obj.g();
+</code></pre>
+{:.fragment}
+
+Contrast this with the ES5 way of creating methods:
+{:.fragment}
+
+<pre><code data-trim contenteditable>
+const obj = {
+  f: function() {console.log('fffff!');},
+  g: function() {console.log('ggggg!');},
+};
+</code></pre>
+{:.fragment}
+</section>
+
 <section markdown="block">
 ## Whew. Back to Objects. The Math One
 
@@ -241,7 +321,7 @@ There's also the built-in <code>Math</code> object. It provides a bunch of misce
 <section markdown="block">
 ## Reading, Modifying and Deleting
 
-* if the property doesn't exist, we'll get back <code>undefined</code>:
+* __if the property doesn't exist__, we'll get back <code>undefined</code>:
 <pre><code data-trim contenteditable>
 // &rarr; gives us undefined
 console.log(course.nothingToSeeHere);
@@ -267,16 +347,17 @@ __Uh... so what's the implication here regarding objects and mutability?__ &rarr
 * {:.fragment} clearly __objects are mutable__
     * functions are objects; they're mutable too!
     * arrays are objects; they're mutable too (we'll see this again later)!
-* {:.fragment} numbers, strings and booleans are not, though! 
+* {:.fragment} primitives (such as numbers, strings, booleans, null, and undefined) are not, though! 
 </section>
 
 <section markdown="block">
 ## Mutability and References
 
 __What will this print out?__ &rarr;
+
 <pre><code data-trim contenteditable>
-a = {'foo':1, 'bar':2};
-b = a;
+const a = {'foo':1, 'bar':2};
+const b = a;
 b['baz'] = 3;
 b.qux = 4;
 console.log(a);
@@ -304,46 +385,43 @@ How can we distinguish between a property that actually exists, but is intention
 <section markdown="block">
 ## Detecting Properties Continued
 
-There are two ways to determine if a property actually exists (rather than being undefined by default). Using the previously defined <code>course</code> object:
+There are two ways to determine if a property actually exists (rather than being undefined by default). Using the <code>course</code> object from before:
 
-__hasOwnProperty__ - method on all objects that tests if argument is property of object that hasOwnProperty is called on
-
-<pre><code data-trim contenteditable>
-// true
-course.hasOwnProperty('name');
-
-// false
-course.hasOwnProperty('oh no, not here');
+* {:.fragment} __hasOwnProperty__ - method on all objects that tests if argument is property of object that hasOwnProperty is called on
+* {:.fragment} <pre><code data-trim contenteditable>
+course.hasOwnProperty('name'); // true
+course.hasOwnProperty('oh no, not here'); // false
+</code></pre>
+* {:.fragment} __in__ - an operator that tests if left operand (a string or number) is property of object in right operand... picks up "inherited" properties
+* {:.fragment} <pre><code data-trim contenteditable>
+'name' in course; // true
+'oh no, not here' in course; // false
 </code></pre>
 
-__in__ - an operator that tests if left operand (a string or number) is property of object in right operand... picks up "inherited" properties
-
-<pre><code data-trim contenteditable>
-// true
-'name' in course;
-
-// false
-'oh no, not here' in course;
-</code></pre>
+<br>
 
 __Use hasOwnProperty for now... so you won't have to worry about "inherited" properties.__
+{:.fragment}
 </section>
 
 <section markdown="block">
 ## Looping Over Properties
 
-Use a <code>for (prop in obj)</code> loop:
+__Use a <code>for (const prop in obj)</code> loop:__ &rarr;
 
-* make sure that you use __hasOwnProperty__ in loop to exclude _inherited_ properties
-* avoid using this kind of loop for <code>Arrays</code>
+* {:.fragment} note that prop can be `const` declared
+* {:.fragment} make sure that you use `obj`.__hasOwnProperty__ in loop to exclude _inherited_ properties
+* {:.fragment} avoid using this kind of loop for <code>Arrays</code>
 	* does not preserve order
+
 <pre><code data-trim contenteditable>
-for (property in course) {
+for (const property in course) {
 	if (course.hasOwnProperty(property)) {
 		console.log(property +  " is " + course[property]);
 	}
 }
 </code></pre>
+{:.fragment}
 </section>
 <section markdown="block">
 ## Some Behind the Scenes
@@ -365,22 +443,29 @@ However, as soon as you perform an _object-like_ operation on them, such as a me
 ## And Finally... JSON
 
 
-JSON or _JavaScript Object Notation_ is a data storage and communication format based off of JavaScript object literals... but with a few modifications:
+__JSON or _JavaScript Object Notation_ is a data storage and communication format__ based off of JavaScript object literals... but with a few modifications:
 
-* all property names are surrounded by double quotes
-* values are restricted to simple data: no function calls, variables, comments or computations
+* {:.fragment} all property names are surrounded by __double quotes__
+* {:.fragment} values are restricted to __simple data__: no function calls, variables, comments or computations
 
 
 <br>
 Conversion to-and-from JSON can be done using the following methods on the built-in JSON object:
+{:.fragment}
 
-* [stringify(value)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) - returns a JSON string representation of the value passed in
-* [parse(text)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse) - returns an object created from the supplied JSON text
+* [`stringify(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) - returns a JSON string representation of the value passed in
+* [`parse(text)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse) - returns an object created from the supplied JSON text
+* for example: `JSON.parse("[1, 2, 3]")`
+{:.fragment}
 
 </section>
 
 
 {% comment %}
+* for-of
+* shorthand properties
+* shorthand methods
+
 <section markdown="block">
 ## Topics
 
