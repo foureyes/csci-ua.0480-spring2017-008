@@ -26,18 +26,13 @@ Draft Slides:
 
 </td>
 	<td markdown="block">
-{% comment %}
-Due Saturday, 9/24, by 11pm
+Due Wednesday, 2/8, by 11pm
 
-* [Homework #2](homework/02.html) 
+* [Homework #1](homework/01.html) 
 
-Due Thursday, 9/22, by 11pm
+Due Date TBD
 
-* Quiz #01 - Hoisting and Higher Order Functions (find it in NYU Classes)
+* Quiz #04 and #05
 
-Practice / Optional (not graded)
-
-* Quiz #00 - JavaScript Basics 
-{% endcomment %}
 
 </td>

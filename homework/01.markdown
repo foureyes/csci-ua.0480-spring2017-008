@@ -7,45 +7,58 @@ title: CSCI-UA.0480 - Homework #1
 	<div class="panel-heading">Homework #1</div>
 	<div class="panel-body" markdown="block">
 
-# Tic Tac Toe and Scrabble Pal
+# DRAFT VERSION (full version posted 11pm, 2/1)
 
-## Due __Sep 15th, by 11PM__
+<hr>
 
-<div markdown="block" class="img">
-![tic tac toe from wargames](../resources/img/hw01-t3-wargames.gif)
-</div>
+# Reversi / Othello
+
+## Due __Feb 8th, by 11PM__
+
+<pre>     A   B   C   D   E   F   G   H
+   +---+---+---+---+---+---+---+---+
+ 1 |   |   |   |   |   |   | O |   |
+   +---+---+---+---+---+---+---+---+
+ 2 |   |   |   |   |   | O |   |   |
+   +---+---+---+---+---+---+---+---+
+ 3 |   |   |   | O | O | X |   |   |
+   +---+---+---+---+---+---+---+---+
+ 4 |   |   | X | O | X | X |   |   |
+   +---+---+---+---+---+---+---+---+
+ 5 |   |   |   | X | X |   |   |   |
+   +---+---+---+---+---+---+---+---+
+ 6 |   |   | X |   | X |   |   |   |
+   +---+---+---+---+---+---+---+---+
+ 7 |   | X |   |   |   |   |   |   |
+   +---+---+---+---+---+---+---+---+
+ 8 |   |   |   |   |   |   |   |   |
+   +---+---+---+---+---+---+---+---+
+</pre>
 
 ## Overview
 
 ### Description
 
-__There are multiple parts to this homework:__
+Create an interactive 2-player (computer vs human player) Reversi/Othello game.
 
-__Parts 1 and 2__ - Tic Tac Toe
+* check out [the rules on wikipedia](https://en.wikipedia.org/wiki/Reversi)
+* you can check out this strategy guide if you're interested in [Reversi strategy](http://www.samsoft.org.uk/reversi/strategy.htm)
+* you'll write this game in two parts...
 
-Create an interactive 2-player (computer vs human player) Tic Tac Toe game.
 
-* check out [the rules on wikipedia](https://en.wikipedia.org/wiki/Tic-tac-toe)
-* xkcd has a map that describes the [optimal tic-tac-toe moves](https://xkcd.com/832/)
-* some people take tic-tac-toe [really seriously](https://www.reddit.com/r/TrueTicTacToe/)
-* the gif above comes from a [youtube clip from the 1983 movie, Wargames](http://www.imdb.com/title/tt0086567/)
+1. create several helper functions for your game
+2. implement the game using some of the helper functions you made for part 1
+	* it'll be a bit over-engineered
+	* but don't worry - you don't have to use all of the functions you create
 
-You'll create this game in 2 parts. The first part will guide you through creating several helper functions for your game. The second part deals with implementing the game using the helper functions you made for part 1. It'll be a bit over-engineered, but don't worry - you don't have to use all of the functions you create.
+See the [example game](#hw01-reversi-sample) shown at the end of these instructions.
 
-See the [example game](#hw01-tic-tac-toe-sample) shown at the end of these instructions.
-
-__Part 3__  - Scrabble Pal
-
-Create a scrabble solver. It will allow you to enter a string of letters... and it will output the 5 highest scoring words that can be constructed from those letters. The scores for each word are on these [rules](https://en.wikibooks.org/wiki/Scrabble/Rules#Scoring), using the following [letter values](http://www.wordfind.com/scrabble-letter-values/). 
-
-See the [sample output](#hw01-scrabble-pal-sample) at the end of these instructions.
 
 ### Objectives
 
-1. Write some JavaScript (specifically ES5)!
+1. Write some JavaScript!
     * control structures
     * functions
-    * higher order functions
     * Array and string manipulation
 2. Learn how to run node programs
 3. Learn about node built-ins:
@@ -54,16 +67,17 @@ See the [sample output](#hw01-scrabble-pal-sample) at the end of these instructi
     * `require`
 4. Install and use modules, create your own
 5. Run unit tests to check your work
-6. Use a static analysis tool (JSHint) to help prevent bugs / errors
+6. Use a static analysis tool (ESLint) to help prevent bugs / errors
+7. Use the fs module to read a file / handle asynchronous I/O
+8. Parse JSON
 
 ### Submission Process
 
 The final version of your assignment should be in GitHub.
 
 * __push__ your changes to the homework repository on GitHub
-* all repositories will be cloned on the due date 
-* after the due date, no further commits will be seen by the graders (even if you continue to commit your work)
-
+* repositories will be closed on the due date and time so that no more commits can be pushed!
+* after the due date, no further commits will be seen by the graders 
 
 ## Preparation
 
@@ -73,7 +87,7 @@ Ensure that node and npm are installed (this should have been done for _homework
 1. use git / clone the repository
 2. install development modules
     * mocha and chai for running the supplied unit tests
-    * jshint for cleaning up your JavaScript / spotting common sources of bugs and errors in your code
+    * eshint for cleaning up your JavaScript / spotting common sources of bugs and errors in your code
 3. install modules required by your game
 
 ### (4 points) Use Git / Clone the repository
@@ -84,43 +98,49 @@ Make sure you have git / a git client!
 * [SourceTree](https://www.sourcetreeapp.com/)
 * [GitKraken](https://www.gitkraken.com/) 
 
-Then go through the following steps to clone your repository and commit your first changes.
 
-1. use this [form to send me your github username](https://docs.google.com/a/nyu.edu/forms/d/e/1FAIpQLSc5nfsSm27DyBWOb-_mfCNMS0fyWxvsuX_moK6EOaruVGqWlg/viewform)
-2. wait for a notification that states that you've been added to the class's github _organization_
-3. I'll create a repository for you 
-4. ...go to the [class github page](https://github.com/nyu-csci-ua-0480-001-fall-2016)
-5. find the repository that starts with your NYU NetID and ends with homework01 (for example, jjv222-homework01) 
-6. on the repository's page, use the green "Clone or download" button on the right side of the screen to copy the HTTPS clone URL to __clone__ the homework. To use the commandline client (with GITHUB_REPOSITORY_URL being the url you copied from the green button):
+Assuming that you've already:
+
+* submitted your github username via the form/survey
+* accepted the invitation that adds you to the github organization for this course
+
+You can then go through the following steps to clone your repository and commit your first changes:
+
+1. ...go to the [class github page](https://github.com/nyu-csci-ua-0480-008-spring-2017)
+2. find the repository that starts with your NYU NetID and ends with homework01 (for example, jjv222-homework01) 
+3. on the repository's page, use the green "Clone or download" button on the right side of the screen to copy the HTTPS clone URL to __clone__ the homework. To use the commandline client (with GITHUB_REPOSITORY_URL being the url you copied from the green button):
     <pre><code data-trim contenteditable> git clone GITHUB_REPOSITORY_URL
 </code></pre>
-7. create a file called <code>.gitignore</code> in the same directory
-8. add the following line to the file so that git ignores any locally installed node modules: <code> node_modules </code>
-9. in the same project directory, run <code>git add README.md</code> to let git know that we're ready to "save"
-10. save your work locally by running <code>git commit -m "first commit"</code>... everything within the quotes after <code>-m</code> is any commit message you'd like
-11. finally, send your work to github by running <code>git push</code> (or <code>git push origin master</code>)
+4. create a file called <code>.gitignore</code> in the same directory
+5. add the following line to the file so that git ignores any locally installed node modules: <code> node_modules </code>
+6. in the same project directory, create a file called README.md, and edit it so that it includes:
+	* your name and net id
+	* the title of your project: Homework #01 - Reversi
+7. again, in the same project directory, run <code>git add README.md</code> to let git know that we're ready to "save"
+8. save your work locally by running <code>git commit -m "first commit"</code>... everything within the quotes after <code>-m</code> is any commit message you'd like
+0. finally, send your work to github by running <code>git push</code> (or <code>git push origin master</code>)
 
 ### (1 point) Install Development Modules
 
 You'll have to install a couple of node modules to help you run tests and use static analysis tools on your code. These tools won't be required for your program to run, but they will be useful while you're writing your programs. 
 
-You'll be installing the following modules globally:
+You'll be installing the following module globally:
 
 * `mocha` - for running unit tests
-* `jshint` - for catching potential errors in your code
 
-You'll also install the following module locally in your project directory:
+You'll also install the following modules locally in your project directory:
 
 * `chai` - supplies assertions for unit tests
+* `eslint` - for catching potential errors in your code
 
 Go into the directory of your cloned repository (`cd username-homework01`), and run the following commands:
 
 <pre><code data-trim contenteditable>npm install -g mocha
-npm install -g jshint
+npm install --save-dev eslint
 npm install --save-dev chai
 </code></pre>
 
-Note that the last command installs a module _locally_ to your project directory. It will do two things:
+Note that the last commands install modules _locally_ to your project directory. It will do two things:
 
 * It will make a modification to an existing file, `package.json`, within your project folder
 * It will create a `node_modules` folder where your downloaded modules are stored (this folder is included in your `.gitignore` file because these external libraries are not meant to be in your project's version control
@@ -136,14 +156,18 @@ You'll also need a module to help you ask the user for input.
 	* this is very different from how node.js apps usually operate
 	* however, for our purposes, using sync prompt is fine (for now), and it mimics the browser's prompt functionality well
 * check out the example usage on [readline-sync's npm page](https://www.npmjs.com/package/readline-sync)
-    * essentially just `var readlineSync = require('readline-sync');`
+    * essentially: `var readlineSync = require('readline-sync');`
     * which imports the function <code>question</code> from the <code>readline-sync</code> module into your program
-* note that installing `readline-sync` will make a modification to `package.json`. This modification be committed these changes.
-* you'll use this module in both your Tic Tac Toe game and your scrabble solver
+* note that installing `readline-sync` will make a modification to `package.json` as well. This modification be committed these changes.
 
 ### (4 points) Minimum Number of Commits
 
-As you write your code, make sure that you make at least four commits total  (more commits are better; if you can, try to commit per feature added).
+As you write your code, make sure that you make at least four commits total (more commits are better; if you can, try to commit per feature added). 
+
+* the commits should be meaningful (that is, do not just add a newline, commit and push to make up the requirements for commits).
+* make sure your commit messages describe the changes in the commit; for example:
+	* `add config file reader and set board based on config file`
+	* `fix bug that prevented vertical lines of tiles from being flipped`
 
 <pre><code data-trim contenteditable>git add --all
 git commit -m 'your commit message'
@@ -156,19 +180,27 @@ git commit -m 'your commit message'
 
 To run your programs, use the commandline (Terminal.app, DOS, etc.):
 
-<code>node myfile.js</code>
+<pre><code data-trim contenteditable># in your project directory
+# change directory to src folder
+cd src
+node myfile.js
 
-## Part 1 - Tic Tac Toe Functions and Running Unit Tests
+# or, without changing directory
+node src/myfile.js
+</code></pre>
+
+
+## Part 1 - Reversi Functions and Running Unit Tests
 
 ### Background 
 
-For your implementation of Tic Tac Toe, you'll break down the game into several functions. These helper functions will be written in a _module_ (a file separate from the file that actually runs your game), which you'll use in part 3: `src/tic-tac-toe.js`
+For your implementation of Reversi, you'll break down the game into several functions. These helper functions will be written in a _module_ (a file separate from the file that actually runs your game), which you'll use in part 3: `src/reversi.js`
 
-The helper functions you'll be implementing are described below. Unit tests have been included in your repository in the file, `test/tic-tac-toe-test.js`. 
+The helper functions you'll be implementing are described below. Unit tests have been included in your repository in the file, `test/reversi-test.js`. 
 
 ### Creating a Module / Exporting Functions 
 
-You'll be creating a module that contains a bunch of helper functions. The file that you'll be writing your module in is already included in your repository in `src/tic-tac-toe.js`. Both your _actual_ interactive Tic Tac Toe game (in Part 2) and the supplied unit tests will use this module. 
+You'll be creating a module that contains a bunch of helper functions. The file that you'll be writing your module in is already included in your repository in `src/reversi.js`. Both your _actual_ interactive Reversi game (in Part 2) and the supplied unit tests will use this module. 
 
 To make the functions you write available when your module is brought into another program (that is, required or _imported_), you'll have to _export_ your functions. See [this sitepoint tutorial](https://www.sitepoint.com/understanding-module-exports-exports-node-js/) or this [article](http://openmymind.net/2012/2/3/Node-Require-and-Exports/) to get a primer on modules, `exports` and using `require`. There are a few ways to do export your functions (all of the examples use `module.exports`, but they should work with just `exports` as well):
 
@@ -226,7 +258,7 @@ __You should make sure your exports are up to date as you implement your functio
 		
 ### Unit Tests
 
-You can use the supplied unit tests (in `test/tic-tac-toe-test.js`) to check that your functions are:
+You can use the supplied unit tests (in `test/reversi-test.js`) to check that your functions are:
 
 * are named correctly
 * have the required parameters
@@ -237,7 +269,7 @@ The given unit tests use Mocha as a testing framework and Chai for assertions. W
 
 You can __run the included unit tests by using this command__ in your project directory:
 
-`mocha test/tic-tac-toe-test.js`
+`mocha test/reversi-test.js`
 
 If you run these tests before starting, you'll get a bunch of reference errors. This is because you have no functions implemented yet. Additionally, you'll have to export the functions you create so that the tests have access to them.
 
@@ -245,63 +277,78 @@ __Please try continually running the unit tests as you develop your program.__ T
 
 ### Assumptions
 
-The functions make some assumptions about how you'll be representing a Tic Tac Toe board.
+The functions make some assumptions about how you'll be representing a Reversi  board.
 
 1. although some functions allow for arbitrary rows and columns...
-    * you can assume that a board will always have at least 1 square, but no more than 26 squares
+    * you can assume that a board will always have at least 16 squares (4 x 4), but no more than 26 x 26 squares
     * you can also assume that a board's rows and columns will always be equal
 2. we can name a cell / square based on its row number and column number 
     * rows start from the top with row number 0
     * cols start from the left with column number 0
-    * the diagram below shows a board with row and column labels
-        <pre><code data-trim contenteditable>          columns
-               0   1   2
-             +---+---+---+
-  r  0 | 0 | 1 | 2 |
-  o    +---+---+---+
-  w  1 | 3 | 4 | 5 |
-  s    +---+---+---+
-           2 | 6 | 7 | 8 |
-             +---+---+---+
+    * the diagram below shows a 4 X 4 board with row and column labels
+        <pre><code data-trim contenteditable>           columns
+              0   1   2   3
+            +---+---+---+---+
+          0 | 0 | 1 | 2 | 3 |
+            +---+---+---+---+
+ r  1 | 4 | 5 | 6 | 7 |
+ o    +---+---+---+---+
+ w  2 | 8 | 9 | 10| 11|
+ s    +---+---+---+---+
+          3 | 12| 13| 14| 15|
+            +---+---+---+---+
 </code></pre>
-    * in this example, the middle cell (containing 4) is at row 1, column 1
-    * the cell containing 2 (the last column of the first row) is at row 0, column 2
+    * in this example, the lower right most square (containing 15) is at row 3, column 3
+    * the cell containing 9 is at row 2, column 1
 3. Alternatively, we can reference a cell using a format borrowed from [chess algebraic notation](https://en.wikipedia.org/wiki/Algebraic_notation_(chess))
-    * the rows are uppercase letters starting with A from the top
-    * ... while the columns are numbers __starting at 1 from the left__
+    * the columns are uppercase __letters starting with A from the left__
+    * ... while the rows are __numbers starting at 1 from the top__
+    * in this notation the column (letter) is first, followed by the row (number)
     * using this notation, the board with labels would like like this:
         <pre><code data-trim contenteditable>          columns
-               1   2   3
-             +---+---+---+
-  r  A | 0 | 1 | 2 |
-  o    +---+---+---+
-  w  B | 3 | 4 | 5 |
-  s    +---+---+---+
-           C | 6 | 7 | 8 |
-             +---+---+---+
+              A   B   C   D
+            +---+---+---+---+
+          1 | 0 | 1 | 2 | 3 |
+            +---+---+---+---+
+ r  2 | 4 | 5 | 6 | 7 |
+ o    +---+---+---+---+
+ w  3 | 8 | 9 | 10| 11|
+ s    +---+---+---+---+
+          4 | 12| 13| 14| 15|
+            +---+---+---+---+
 </code></pre>
-    * the middle cell (containing 4) is at B2
-    * the cell containing 2 (the last column of the first row) is at A3
-4. Although a 2-dimensional Array is a natural fit for representing a Tic Tac Toe board, __your implementation of Tic Tac Toe will use a one dimensional `Array` to represent the board__
+    * the lower right most square, containing 15, is at D4
+    * the cell containing 9 is B3
+4. Although a 2-dimensional Array is a natural fit for representing a Reversi board, __your implementation of Reversi will use a one dimensional `Array` to represent the board__
     * in this representation, imagine all of the rows of the board placed adjacent to each other 
-        <pre><code data-trim contenteditable>           +-----+-----+-----+-----+-----+-----+-----+-----+-----+
-row, col   | 0,0 | 0,1 | 0,2 | 1,0 | 1,1 | 1,2 | 2,0 | 2,1 | 2,2 |
-                 +-----+-----+-----+-----+-----+-----+-----+-----+-----+
-algebraic  | A1  | A2  | A3  | B1  | B2  | B3  | C1  | C2  | C3  |
-                 +-----+-----+-----+-----+-----+-----+-----+-----+-----+
-index      |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |
-                 +-----+-----+-----+-----+-----+-----+-----+-----+-----+
+        <pre><code style="font-size:11px;" data-trim contenteditable>           +-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+row, col   | 0,0 | 0,1 | 0,2 | 0,3 | 1,0 | 1,1 | 1,2 | 1,3 | 2,0 | 2,1 | 2,2 | 2,3 | 3,0 | 3,1 | 3,2 | 3,3 |
+                 +-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+algebraic  | A1  | B1  | C1  | D1  | A2  | B2  | C2  | D2  | A3  | B3  | C3  | D3  | A4  | B4  | C4  | D4  |
+                 +-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
+index      |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  | 10  | 11  | 12  | 13  | 14  | 15  |
+                 +-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+
 </code></pre>
-    * the upper left corner would be at index 0 (or row 0, column 0)
-    * the upper left corner would be at index 2 (or row 0, column 2)
-    * the center square would be at index 4 (or row 1, column 1)
+    * the lower right most square, D4 (row 3, col 3) is at index 15
+    * B3 (row 2, col 1) is index 9 
 5. The space character, `" "`, will be used to mark an empty square
-6. You can assume that all of the code examples below use `tic` as the name of the imported module of your Tic Tac Toe functions
+6. __Reversi uses black and white pieces (discs)__ ... these pieces will be represented by:
+    * the letter `X` for black pieces
+    * the letter `O` for a white piece
+7. You can assume that all of the code examples below use `rev` as the name of the imported module of your Reversi functions
 
 
 <br>
 
 ### Functions to Implement
+
+Note that:
+
+* most functions will return values (to make it easier to test)
+* the tests are meant to ensure that your functions are named correctly and work for a few simple cases
+    * they don't cover all of the corner cases / requirements
+    * so check out the tests before running to see what else you may need to check for
+    * feel free to augment the tests with your own additional tests
 
 <hr>
 
@@ -320,12 +367,12 @@ __Description:__
 
 `repeat` creates an `Array` that contains `value` as each element for `n` elements. If the `value` is a reference type, it's ok if the reference is copied (that is, you don't have to worry about deep copying `value` if it's an `Object`.
 
-Hint: The `Array` methods, [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) and/or [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) may be helpful here.
+Hint: The `Array` methods, [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) and/or [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator)/[concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) may be helpful here.
 
 
 __Example:__
 
-    var arr = tic.repeat("hello", 3);
+    const arr = rev.repeat("hello", 3);
     // arr is ["hello", "hello", "hello"];
 
 <hr>
@@ -337,6 +384,7 @@ __Parameters:__
 * `rows` - the number of rows in the board
 * `columns` - the number of columns in the board
 * `initialCellValue` - the initial value contained in each square
+    * default value should be space (`" "`)
 
 __Returns:__
 
@@ -344,16 +392,16 @@ __Returns:__
 
 __Description:__
 
-Creates a single dimensional `Array` representation of a Tic Tac Toe board. The number of elements in the `Array` is the same as the number of squares in the board based on the supplied number of `rows` and `columns`. The initial value in each cell is the `initialCellValue` passed in
+Creates a single dimensional `Array` representation of a Reversi board. The number of elements in the `Array` is the same as the number of squares in the board based on the supplied number of `rows` and `columns`. The initial value in each cell is the `initialCellValue` passed in
 
 Use the `repeat` function that you created above to implement this function.
 
 __Example:__
 
-    // creates a board with 9 squares
-    var board = tic.generateBoard(3, 3, " ");
+    // creates a board with 16 squares
+    const board = rev.generateBoard(4, 4);
     // board is = [" ", " ", " ", " ", " ", " ", " ", " ", " ", ];
-    // (each empty cell is a space)
+    // (each empty cell is a space because the default value is space)
 
 <hr>
 
@@ -371,16 +419,16 @@ __Returns:__
 
 __Description:__
 
-A cell in a Tic Tac Toe board can be specified by a row number and a column number. However, our board implementation uses a one dimensional `Array`, so a cell must be specified by a single index. This function translates a row and a column into an index in the one dimensional `Array` representation of a Tic Tac Toe board. 
+A cell in a Reversi board can be specified by a row number and a column number. However, our board implementation uses a one dimensional `Array`, so a cell must be specified by a single index. This function translates a row and a column into an index in the one dimensional `Array` representation of a Reversi board. 
 
 Hint: [Math.sqrt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sqrt) can be used to help determine the original width and height of the board even though `board` comes in as a one dimensional `Array`.
 
 __Example:__
 
     // translates a row and col to a single index
-    var board = tic.generateBoard(3, 3, " ");
-    var i = tic.rowColToIndex(board, 1, 1);
-    var j = tic.rowColToIndex(board, 0, 2);
+    const board = rev.generateBoard(3, 3, " ");
+    const i = rev.rowColToIndex(board, 1, 1);
+    const j = rev.rowColToIndex(board, 0, 2);
     // i is 4 (column 1, row 1 is the same as the element at index 4)
     // j is 2
 
@@ -406,9 +454,9 @@ Hint: Again, [Math.sqrt](https://developer.mozilla.org/en-US/docs/Web/JavaScript
 __Example:__
 
     // translates an index into a row and column...
-    var board = tic.generateBoard(3, 3, " ");
-    var rowCol1 = tic.indexToRowCol(board, 4);
-    var rowCol2 = tic.indexToRowCol(board, 2);
+    const board = rev.generateBoard(3, 3, " ");
+    const rowCol1 = rev.indexToRowCol(board, 4);
+    const rowCol2 = rev.indexToRowCol(board, 2);
     // rowCol1 is: {"row": 1, "col": 1};
     // rowCol2 is {"row": 0, "col": 2};
 
@@ -431,14 +479,14 @@ __Description:__
 
 Sets the value of the cell at the specified row and column numbers on the board, `board`, to the value, `letter`.
 
-You can either set the cell in the `board` argument passed in... and return it, or you can shallow copy `board` and mutate and return the copy. To shallow copy an `Array`, use the [slice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) method.
+You can either set the cell in the `board` argument passed in... and return it, or you can shallow copy `board` and mutate and return the copy. To shallow copy an `Array`, use the [spread operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator#Copy_an_array) or the [slice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) method.
 
 __Example:__
 
     // sets two squares, one X and one O
-    var board = tic.generateBoard(3, 3, " ");
-    var b1 = tic.setBoardCell(board, "X", 1, 1);
-    var b2 = tic.setBoardCell(b1, "O", 0, 2);
+    const board = rev.generateBoard(3, 3, " ");
+    const b1 = rev.setBoardCell(board, "X", 1, 1);
+    const b2 = rev.setBoardCell(b1, "O", 0, 2);
     // b1 is [" ", " ", " ", " ", "X", " ", " ", " ", " "];
     // b2 is [" ", " ", "O", " ", "X", " ", " ", " ", " "];
 
@@ -453,16 +501,15 @@ __Parameters:__
 __Returns:__
 
 * an object containing two properties, `row` and `col`, representing the row and column numbers that the `algebraicNotation` maps to (for example, `{"row": 1, "col": 1}`)
-
 * `undefined` if the algebraic notation passed in is not valid.
 
 __Description:__
 
 Translates algebraic notation specifying a cell into a row and column specifying the same cell. If the notation passed in is not valid, then return `undefined`. 
 
-The algebraic notation format we'll use will be a single string with the row letter first, immediately followed by the column number (with nothing separating the row and column). The __column number starts at index 1!__ (which is different from row and column notation above where numbers start at 0). You can __assume that there are no more than 26 rows and columns__. Some examples of valid formats: `A1` and `C20`. Some invalid formats include: `1A`, `1`, `A`, `A:1`, `***`.
+The algebraic notation format we'll use will be a single string with the column letter first, immediately followed by the row number (with nothing separating the row and column). The column letter starts at letter A and __the row number starts at index 1__  (which is different from row and column notation above where numbers start at 0). You can __assume that there are no more than 26 rows and columns__. Some examples of valid formats: `A1` and `C20`. Some invalid formats include: `1A`, `1`, `A`, `A:1`, `***`.
 
-Hint: There are many ways you can implement this. If you want to loop through every character, you can use a simple for loop, the string's [length](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/length), and the string's [charAt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charAt) method. Note that there's no actual character type, you just get a `String` composed of a single character. 
+Hint: There are many ways you can implement this. If you want to loop through every character, you can use a simple for loop, the string's [length](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/length), and the string's index operator (`[]`) or [charAt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charAt) method. Note that there's no actual character type, you just get a `String` composed of a single character. 
 
 Alternatively, you can create an `Array` containing every character of the original `String` by using [split](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split) with an empty string as an argument.
 
@@ -472,18 +519,18 @@ Finally if you feel like wrangling regular expressions, you can try using the [m
 
 __Example:__
 
-    // valid 
-    tic.algebraicToRowCol("B2") // {"row": 1, "col": 1}
-    tic.algebraicToRowCol("A3") // {"row": 0, "col": 2}
+    // valid
+    rev.algrbraicToRowCol("B3") // for a 4 x 4 board, {"row": 2, "col": 1}
+    rev.algebraicToRowCol("D4") // for a 4 x 4 board, {"row": 3, "col": 3}
 
-    // not valid
-    tic.algebraicToRowCol("A")) // undefined
-    tic.algebraicToRowCol("2")) // undefined
-    tic.algebraicToRowCol("2A")) // undefined
-    tic.algebraicToRowCol(" ")) // undefined
-    tic.algebraicToRowCol("A 2")) // undefined
-    tic.algebraicToRowCol("A:2")) // undefined
-    tic.algebraicToRowCol("**")) // undefined
+    // not valid:
+    rev.algebraicToRowCol("A")) // undefined
+    rev.algebraicToRowCol("2")) // undefined
+    rev.algebraicToRowCol("2A")) // undefined
+    rev.algebraicToRowCol(" ")) // undefined
+    rev.algebraicToRowCol("A 2")) // undefined
+    rev.algebraicToRowCol("A:2")) // undefined
+    rev.algebraicToRowCol("**")) // undefined
 
 <hr> 
 
@@ -508,10 +555,37 @@ Use the `setBoardCell` function you created above to implement this.
 __Example:__
 
     // X and O are placed on the board
-    var board = tic.generateBoard(3, 3, " ");
-    board = tic.placeLetter(board, 'X', "B2");
-    board = tic.placeLetter(board, 'O', "A3");
-    // board is [" ", " ", "O", " ", "X", " ", " ", " ", " "]
+    let board = rev.generateBoard(4, 4, " ");
+    board = rev.placeLetter(board, 'X', "B3");
+    board = rev.placeLetter(board, 'O', "D4");
+    // board is [" ", " ", " ", " ", " ", " ", " ", " ", " ", "X", " ", " ", " ", " ", " ", "O"]
+    // index      0    1    2    3    4    5    6    7    8    9   10   11   12   13   14   15
+
+<hr>
+
+### `placeLetters(board, letter, algebraicNotation)`
+
+__Parameters:__
+
+* `board` - the board where a cell will be set to `letter`
+* `letter` - the string to set the cell to
+* one or more: `algebraicNotation` - a `String` that specifies the position of a cell using algebraic notation 
+
+__Returns:__
+
+* a single dimensional `Array` representing the board where the cell at `row` and `col` is set to the value of `letter`
+
+__Description:__
+
+Same as `placeLetter`, but can accept multiple cells
+
+__Example:__
+
+    // X and O are placed on the board
+    let board = rev.generateBoard(4, 4, " ");
+    board = rev.placeLetter(board, 'X', "B3", "D4");
+    // board is [" ", " ", " ", " ", " ", " ", " ", " ", " ", "X", " ", " ", " ", " ", " ", "X"]
+    // index      0    1    2    3    4    5    6    7    8    9   10   11   12   13   14   15
 
 <hr>
 
@@ -536,35 +610,39 @@ Creates a _text drawing_ representation of the Tic Tac Toe `board` passed in. Th
 Printing out an example result would yield:
 
 <pre><code data-trim contenteditable>
-     1   2   3
-   +---+---+---+
- A | X |   |   |
-   +---+---+---+
- B |   | O |   |
-   +---+---+---+
- C |   |   |   |
-   +---+---+---+
+     A   B   C   D
+   +---+---+---+---+
+ 1 |   |   |   |   |
+   +---+---+---+---+
+ 2 |   | O | X |   |
+   +---+---+---+---+
+ 3 |   | X | O |   |
+   +---+---+---+---+
+ 4 |   |   |   |   |
+   +---+---+---+---+
+
 </code></pre>
 
 It should work for boards of any size! Here's an example of a 7 x 7 board!
 
-<pre><code data-trim contenteditable>
-     1   2   3   4   5   6   7
-   +---+---+---+---+---+---+---+
- A | X |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+
- B |   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+
- C |   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+
- D |   |   | O |   |   |   |   |
-   +---+---+---+---+---+---+---+
- E |   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+
- F |   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+
- G |   |   |   |   |   |   |   |
-   +---+---+---+---+---+---+---+
+<pre><code data-trim contenteditable>     A   B   C   D   E   F   G   H
+   +---+---+---+---+---+---+---+---+
+ 1 |   |   |   |   |   |   | O |   |
+   +---+---+---+---+---+---+---+---+
+ 2 |   |   |   |   |   | O |   |   |
+   +---+---+---+---+---+---+---+---+
+ 3 |   |   |   | O | O | X |   |   |
+   +---+---+---+---+---+---+---+---+
+ 4 |   |   | X | O | X | X |   |   |
+   +---+---+---+---+---+---+---+---+
+ 5 |   |   |   | X | X |   |   |   |
+   +---+---+---+---+---+---+---+---+
+ 6 |   |   | X |   | X |   |   |   |
+   +---+---+---+---+---+---+---+---+
+ 7 |   | X |   |   |   |   |   |   |
+   +---+---+---+---+---+---+---+---+
+ 8 |   |   |   |   |   |   |   |   |
+   +---+---+---+---+---+---+---+---+
 </code></pre>
 
 This one is actually quite challenging (and tedious) to get exactly right, so there won't be any penalties for minor spacing inconsistencies... and if there are other issues (for example, not adding labels), there will only be small point penalties.
@@ -576,135 +654,14 @@ Hint: One way of dealing with the row label is to use [String.fromCodePoint](htt
 __Example:__
 
     // a string representation of a board with two moves
-    var board = tic.generateBoard(3, 3, " ");
-    board = tic.placeLetter(board, 'X', "B2");
-    board = tic.placeLetter(board, 'O', "A3");
+    let board = rev.generateBoard(3, 3, " ");
+    board = rev.placeLetter(board, 'X', "B2");
+    board = rev.placeLetter(board, 'O', "C1");
     // board will be equal to the following string:
-    // "     1   2   3  \n   +---+---+---+\n A |   |   | O |\n   +---+---+---+\n B |   | X |   |\n   +---+---+---+\n C |   |   |   |\n   +---+---+---+\n"
+    "     A   B   C  \n   +---+---+---+\n 1 |   |   | O |\n   +---+---+---+\n 2 |   | X |   |\n   +---+---+---+\n 3 |   |   |   |\n   +---+---+---+\n";
 
 <hr>
 
-### `getWinnerRows(board)`
-
-__Parameters:__
-
-* `board` - the board to examine for a winner
-
-__Returns:__
-
-* the letter of the winning player or `undefined` if there is no winner yet (based on rows)
-
-__Description:__
-
-Examines the `board` passed in to see if any row is completely filled by a single letter (and consequently is "won" by that player). You can assume that there is exactly one winner or neither player has won (you do not have to deal with the case where both letters fill different rows).
-
-Hint: There are many possible implementations. One space inefficient way is to extract each row into its own `Array` and check if all of the `Array` elements are the same (or if you want to get fancy / sophisticated, you can use an Array's [every](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every) method). Alternatively, you can check the value of the first element in a row and make sure any subsequent elements don't deviate from that first element.
-
-Additionally... your previous implementation of `rowColToIndex` may be helpful here if you end up using nested loops to iterate through rows and columns.
-
-__Example:__
-
-    // row B is filled with X, X wins
-    var board = tic.generateBoard(3, 3, " ");
-    board = tic.placeLetter(board, 'X', "B1");
-    board = tic.placeLetter(board, 'X', "B2");
-    board = tic.placeLetter(board, 'X', "B3");
-    console.log(tic.getWinnerRows(board)); // --> 'X'
-
-    // row B is partially filled, no winner
-    var board = tic.generateBoard(3, 3, " ");
-    board = tic.placeLetter(board, 'X', "B1");
-    board = tic.placeLetter(board, 'X', "B2");
-    console.log(tic.getWinnerRows(board)); // --> undefined
-
-    // row B is partially filled, no winner
-    var board = tic.generateBoard(3, 3, " ");
-    board = tic.placeLetter(board, 'X', "B2");
-    board = tic.placeLetter(board, 'X', "B3");
-    console.log(tic.getWinnerRows(board)); // --> undefined
-
-<hr>
-
-### `getWinnerCols(board)`
-
-__Parameters:__
-
-* `board` - the board to examine for a winner
-
-__Returns:__
-
-* the letter of the winning player or `undefined` if there is no winner yet (based on columns)
-
-__Description:__
-
-Examines the `board` passed in to see if any column is completely filled by a single letter (and consequently is "won" by that player). You can assume that there is exactly one winner or neither player has won (you do not have to deal with the case where both letters fill different rows).
-
-See the hints for `getWinnerRows`.
-
-__Example:__
-
-    // Column 2 is filled with X, X wins
-    var board = tic.generateBoard(3, 3, " ");
-    board = tic.placeLetter(board, 'X', "A2");
-    board = tic.placeLetter(board, 'X', "B2");
-    board = tic.placeLetter(board, 'X', "C2");
-    console.log(tic.getWinnerCols(board)); // --> 'X'
-
-    // Column 2 is partially filled, no winner
-    var board = tic.generateBoard(3, 3, " ");
-    board = tic.placeLetter(board, 'X', "A2");
-    board = tic.placeLetter(board, 'X', "B2");
-    console.log(tic.getWinnerCols(board)); // --> undefined
-
-    // Column 2 is partially filled, no winner
-    var board = tic.generateBoard(3, 3, " ");
-    board = tic.placeLetter(board, 'X', "B2");
-    board = tic.placeLetter(board, 'X', "C2");
-    console.log(tic.getWinnerCols(board)); // --> undefined
-
-<hr>
-
-### `getWinnerDiagonals(board)`
-
-__Parameters:__
-
-* `board` - the board to examine for a winner
-
-__Returns:__
-
-* the letter of the winning player or `undefined` if there is no winner yet (based on diagonals)
-
-__Description:__
-
-Examines the `board` passed in to see if either diagonal (major or minor .... or upper left to lower right and upper right to lower left)  is completely filled by a single letter (and consequently is "won" by that player). You can assume that there is exactly one winner or neither player has won (you do not have to deal with the case where both letters fill different rows).
-
-See the hints for `getWinnerRows`.
-
-__Example:__
-
-    // a diagonal is filled with X, X wins
-    var board = tic.generateBoard(3, 3, " ");
-    board = tic.placeLetter(board, 'X', "A1");
-    board = tic.placeLetter(board, 'X', "B2");
-    board = tic.placeLetter(board, 'X', "C3");
-    console.log(tic.getWinnerDiagonals(board)); // --> 'X'
-
-    // a diagonal is filled with X, X wins
-    var board = tic.generateBoard(3, 3, " ");
-    board = tic.placeLetter(board, 'X', "A3");
-    board = tic.placeLetter(board, 'X', "B2");
-    board = tic.placeLetter(board, 'X', "C1");
-    console.log(tic.getWinnerDiagonals(board)); // --> 'X'
-
-    // a diagonal is partially filled with X, no winner
-    var board = tic.generateBoard(3, 3, " ");
-    board = tic.placeLetter(board, 'X', "A3");
-    board = tic.placeLetter(board, 'O', "B2");
-    board = tic.placeLetter(board, 'X', "C1");
-    console.log(tic.getWinnerDiagonals(board)); // --> undefined
-
-
-<hr>
 
 ### `isBoardFull(board)`
 
@@ -725,34 +682,149 @@ Hint: The solution to this is pretty straightforward with a simple for loop, but
 __Example:__
 
     // board is empty
-    var board = tic.generateBoard(3, 3, " ");
-    console.log(tic.isBoardFull(board)); // --> false
+    let board = rev.generateBoard(3, 3, " ");
+    console.log(rev.isBoardFull(board)); // --> false
 
     // board is completely full
-    var board = tic.generateBoard(3, 3, " ");
-    board = tic.placeLetter(board, 'X', "A1");
-    board = tic.placeLetter(board, 'X', "A2");
-    board = tic.placeLetter(board, 'X', "A3");
-    board = tic.placeLetter(board, 'X', "B1");
-    board = tic.placeLetter(board, 'X', "B2");
-    board = tic.placeLetter(board, 'X', "B3");
-    board = tic.placeLetter(board, 'X', "C1");
-    board = tic.placeLetter(board, 'X', "C2");
-    board = tic.placeLetter(board, 'X', "C3");
-    console.log(tic.isBoardFull(board)); // --> true
+    board = rev.generateBoard(3, 3, " ");
+    board = rev.placeLetter(board, 'X', "A1");
+    board = rev.placeLetter(board, 'X', "A2");
+    board = rev.placeLetter(board, 'X', "A3");
+    board = rev.placeLetter(board, 'X', "B1");
+    board = rev.placeLetter(board, 'X', "B2");
+    board = rev.placeLetter(board, 'X', "B3");
+    board = rev.placeLetter(board, 'X', "C1");
+    board = rev.placeLetter(board, 'X', "C2");
+    board = rev.placeLetter(board, 'X', "C3");
+    console.log(rev.isBoardFull(board)); // --> true
 
     // board has one square empty...
-    board = tic.placeLetter(board, 'X', "A2");
-    board = tic.placeLetter(board, 'X', "A3");
-    board = tic.placeLetter(board, 'X', "B1");
-    board = tic.placeLetter(board, 'X', "B2");
-    board = tic.placeLetter(board, 'X', "B3");
-    board = tic.placeLetter(board, 'X', "C1");
-    board = tic.placeLetter(board, 'X', "C2");
-    board = tic.placeLetter(board, 'X', "C3");
-    console.log(tic.isBoardFull(board)); // --> false
+    board = rev.generateBoard(3, 3, " ");
+    board = rev.placeLetter(board, 'X', "A2");
+    board = rev.placeLetter(board, 'X', "A3");
+    board = rev.placeLetter(board, 'X', "B1");
+    board = rev.placeLetter(board, 'X', "B2");
+    board = rev.placeLetter(board, 'X', "B3");
+    board = rev.placeLetter(board, 'X', "C1");
+    board = rev.placeLetter(board, 'X', "C2");
+    board = rev.placeLetter(board, 'X', "C3");
+    console.log(rev.isBoardFull(board)); // --> false
 
 <hr>
+
+### `flip(board, row, col)`
+
+__Parameters:__
+
+* `board` - the board the move is performed on
+* `row` - the row number of piece/letter to flip
+* `col` - the column number of piece/letter to flip
+
+__Returns:__
+
+* a single dimensional `Array` representing the board where the letter at `row` and `col` is changed to the opposite letter - from `X` to `O` or `O` to `X` (that is, the piece is changed to the opposite color)
+
+__Description:__
+
+Using the `board` passed in, flip the piece at the specified `row` and `col` so that it is the opposite color by changing `X` to `O` or `O` to `X`. If no letter is present, do not change the contents of the cell.
+
+
+__Example:__
+
+    board = rev.generateBoard(4, 4, " ");
+    board = rev.placeLetter(board, 'X', "A1");
+    board = rev.flip(board, 0, 0);
+    // board[0] is now 'O'!
+
+### `flipCells(board, cellsToFlip)`
+
+__Parameters:__
+
+* `board` - the board the move is performed on
+* `cellsToFlip` - a 3D `Array` representing groups of rows and columns
+
+__Returns:__
+
+* a single dimensional `Array` representing the board where the letters specified in `cellsToFlip`are changed to the opposite letter - from `X` to `O` or `O` to `X` (that is, the pieces are changed to the opposite color)
+
+__Description:__
+
+Using the `board` passed in, flip the pieces in the cells specified by `cellsToFlip`.
+
+`cellsToFlip` is a 3 dimensional array:
+
+* the inner most `Array` has 2 elements, a row and a column
+* groups of rows and columns are wrapped in an `Array` (these groupings are meant to represent lines of consecutive tiles)
+* finally, these groups are also wrapped in an `Array`
+
+For example:
+
+    [[[0, 0], [0, 1]], [[1, 1]]]
+    |_______________|  |_____|
+            |             |
+    group 1 (2 cells)     group 2 (1 cell)
+
+Each group represents a line of consecutive cells. Note, though, that these lines have no relevance to how the tiles are flipped - only that in order to get to the cell location, you'll have to descend through nested `Arrays`.
+
+
+__Example:__
+
+    board = rev.generateBoard(4, 4, " ");
+    board = rev.placeLetters(board, 'X', "A1", "B1", "B2");
+    board = rev.flipCells(board, [[[0, 0], [0, 1]], [[1, 1]]]);
+    // the letters at index 0, 1 and 5 are all set to 'O'!
+
+
+### `getCellsToFlip(board, lastRow, lastCol)`
+
+__Parameters:__
+
+* `board` - the board the move is performed on
+* `lastRow` - the row of the last move on the board
+* `lastCol` - the column of the last move on the board
+
+__Returns:__
+
+* `Array` representing groups of rows and columns pairs that contain pieces that should be flipped to the opposite color/letter because of the last move played
+
+__Description:__
+
+From wikipedia: 
+
+> (Assuming the player is X/Black/Dark) Dark must place a piece with the dark side up on the board, in such a position that there exists at least one straight (horizontal, vertical, or diagonal) occupied line between the new piece and another dark piece, with one or more contiguous light pieces between them.
+
+> After placing the piece, dark turns over (flips, captures) all light pieces lying on a straight line between the new piece and any anchoring dark pieces. All reversed pieces now show the dark side, and dark can use them in later moves—unless light has reversed them back in the meantime. In other words, a valid move is one where at least one piece is reversed.
+
+Using the `board` passed in determine which cells contain pieces to flip based on the last move. For example, if the last move was the `X` played at `D3`, then all of the `O`'s on the board would be flipped (`D2`, `B3` and `C3`.
+
+<pre>
+     A   B   C   D
+   +---+---+---+---+
+ 1 |   |   |   | X |
+   +---+---+---+---+
+ 2 |   |   |   | O |
+   +---+---+---+---+
+ 3 | X | O | O | X |
+   +---+---+---+---+
+ 4 |   |   |   |   |
+   +---+---+---+---+
+</pre>
+
+Consequently, for the board above, this function will return the row and column pairs representing the cells where pieces need to be flipped. These pairs are grouped by "lines". `B3` and `C3` are grouped together because they are in the same line. These groups are collected in an `Array`.... and the returned `Array` should look like:
+
+    [[[2, 1], [2, 2]], [1, 3]]
+
+__Ordering does not matter!__ (This will depend on the algorithm that you use for this, so a specific ordering is not required.)
+
+
+__Example:__
+
+    let board = rev.generateBoard(4, 4, " ");
+    board = rev.placeLetters(board, 'O', 'B3', 'C3', 'D2');
+    board = rev.placeLetters(board, 'X', 'A3', 'D1', 'D3');
+    const res = rev.getCellsToFlip(board, 0, 3);
+    // res will look something like: [[[2, 1], [2, 2]], [1, 3]]
+
 
 ### `isValidMove(board, row, col)`
 
@@ -772,24 +844,27 @@ Using the `board` passed in, determines whether or not a move to `row` and `col`
 
 * targets an empty square
 * is within the boundaries of the board
+* adheres to the rules of Reversi... that is, the piece played must flip at least one of the other player's pieces
 
 Use a previous function that you created, `rowColToIndex` in the implementation of this function. Again, you can __assume that the space character, `" "`, represents empty__.
 
 __Example:__
 
 	// a valid move
-    var board = tic.generateBoard(3, 3, " ");
-    console.log(tic.isValidMove(board, 1, 1)); // --> true
+    let board = rev.generateBoard(3, 3, " ");
+    board = rev.placeLetter(board, 'X', "A1");
+    board = rev.placeLetter(board, 'O', "A2");
+    rev.isValidMove(board, 'X', 2, 0); // true!
 
-	// move is out of bounds, not valid
-    var board = tic.generateBoard(3, 3, " ");
-    console.log(tic.isValidMove(board, 3, 3)); // --> false
+	// not a valid move
+    let board = rev.generateBoard(3, 3, " ");
+    board = rev.placeLetter(board, 'X', "B1"); // notice that this does not form a line!
+    board = rev.placeLetter(board, 'O', "A2");
+    rev.isValidMove(board, 'X', 2, 0); // false
 
-	// move into square that's already occupied, not valid
-    var board = tic.generateBoard(3, 3, " ");
-    board = tic.placeLetter(board, 'O', "B2");
-    console.log(tic.isValidMove(board, 1, 1)); // --> false
-
+    // remember to check for:
+    // 1. out of bounds
+    // 2. a piece that already exists
 <hr>
 
 ### `isValidMoveAlgebraicNotation(board, algebraicNotation)`
@@ -809,96 +884,35 @@ Using the `board` passed in, determines whether or not a move to `algebraicNotat
 
 __Example:__
 
-    var board = tic.generateBoard(3, 3, " ");
-    // a valid move
-    console.log(tic.isValidMoveAlgebraicNotation(board, 'B2')) // --> true
-    // row is out of bounds
-    console.log(tic.isValidMoveAlgebraicNotation(board, 'D2')) // --> false
+    // valid move
+    let board = rev.generateBoard(3, 3, " ");
+    board = rev.placeLetter(board, 'X', "A1");
+    board = rev.placeLetter(board, 'O', "A2");
+    rev.isValidMoveAlgebraicNotation(board, 'X', 'A3'); // true
 
-    // target square is not empty, not a valid move
-    var board = tic.generateBoard(3, 3, " ");
-    board = tic.placeLetter(board, 'X', "A3");
-    console.log(tic.isValidMoveAlgebraicNotation(board, 'A3')) // --> false
+### `getLetterCounts(board)` 
+### `getValidMoves(board, letter)` 
+### `getValidMoves(board, letter)` 
+### `areValidMovesAvailable(board, letter)` 
 
 <hr>
 
-### `getRandomEmptyCellIndex(board)`
-
-__Parameters:__
-
-* `board` - the board to get an empty cell from
-
-__Returns:__
-
-* index of an empty square on the board, `undefined` if the board is full
-
-__Description:__
-
-Finds the index of an empty square on the board. If there are many empty squares, return the index of a randomly selected empty square.
-
-__Example:__
-
-    // there's only one empty cell... the middle square (index 4)
-    var board = tic.generateBoard(3, 3, " ");
-    board = tic.placeLetter(board, 'X', "A1");
-    board = tic.placeLetter(board, 'X', "A2");
-    board = tic.placeLetter(board, 'X', "A3");
-    board = tic.placeLetter(board, 'X', "B1");
-    board = tic.placeLetter(board, 'X', "B3");
-    board = tic.placeLetter(board, 'X', "C1");
-    board = tic.placeLetter(board, 'X', "C2");
-    board = tic.placeLetter(board, 'X', "C3");
-    var i = tic.getRandomEmptyCellIndex(board);
-    // i is 4
-
-    // the entire second row is empty (index 3, 4, or 5)
-    var board = tic.generateBoard(3, 3, " ");
-    board = tic.placeLetter(board, 'X', "A1");
-    board = tic.placeLetter(board, 'X', "A2");
-    board = tic.placeLetter(board, 'X', "A3");
-    board = tic.placeLetter(board, 'X', "C1");
-    board = tic.placeLetter(board, 'X', "C2");
-    board = tic.placeLetter(board, 'X', "C3");
-    var i = tic.getRandomEmptyCellIndex(board);
-    // i is 3, 4, or 5
-
-    var board = tic.generateBoard(3, 3, " ");
-    board = tic.placeLetter(board, 'X', "A1");
-    board = tic.placeLetter(board, 'X', "A2");
-    board = tic.placeLetter(board, 'X', "A3");
-    board = tic.placeLetter(board, 'X', "B1");
-    board = tic.placeLetter(board, 'X', "B2");
-    board = tic.placeLetter(board, 'X', "B3");
-    board = tic.placeLetter(board, 'X', "C1");
-    board = tic.placeLetter(board, 'X', "C2");
-    board = tic.placeLetter(board, 'X', "C3");
-    var i = tic.getRandomEmptyCellIndex(board);
-    // i is undefined
 
 ### Checking Your Code, Pushing Your Changes
 
-1. JavaScript (ES5) is kind of crazy (read: has some really _bad_, but valid parts), so it's useful to use a static analysis tool, like `jshint` to check your code
+1. JavaScript is kind of crazy (read: has some really _bad_, but valid parts), so it's useful to use a static analysis tool, like `jshint` to check your code
     * ideally, you'd be doing this periodically while you develop
-    * the commandline usage is described here, but there are jshint integrations for some editors (see the plugins section in the [jshint installation guide](http://jshint.com/install/))
-    * from your project directory run: `jshint src/*` to check all of the code in the `src` directory
-    * (you _did install_ `jshint` globally in the preparation section, right?)
+    * the commandline usage is described here, but there are eshint integrations for some editors (see the plugins section in the [jshint installation guide](https://www.npmjs.com/package/eslint)
+    * from your project directory run: `./node_modules/.bin/eslint src/*` to check all of the code in the `src` directory
+    * (you _did install_ `eslint` locally in the preparation section, right?)
     * check the output; __make sure you fix all warnings / errors__
 2. Run your tests one last time to make sure that they're all (or... _mostly_) passing.
-    * `mocha test.tic-tac-toe-test.js`
+    * `mocha test/reversi-test.js`
 3. Fix unit test errors 
     * if you have test failure, examine the output of each failure...
     * it'll describe what was expected vs what was actually given back by your function... 
-    * in the example below, +/green shows expected, while -/red shows the incorrect output
-        <br>
-        ![observed / expected](../resources/img/hw01-tests-01.png)
-    * in the following example, the diff of expected and observed shows a very subtle difference in spacing!
-        <br>
-        ![spaces!](../resources/img/hw01-tests-02.png)
-    * if you get `TypeError ... is not a function`
-        <br>
-        ![reference error](../resources/img/hw01-tests-03.png)
-        <br>
-        ...you may have:
+    * +/green shows expected, while -/red shows the incorrect output
+    * if you get `TypeError ... is not a function`, you may have:
         * not implemented the function (!)
         * named the function differently than what was specified in the instructions
         * did not export the function from your module
@@ -906,29 +920,36 @@ __Example:__
     * __use git to add and commit__ to continually save changes
     * push your changes so that they're available on the remote repository (github)
 
+{% comment %}
+    * the diff of expected and observed shows a very subtle difference in spacing!
+        <br>
+        ![spaces!](../resources/img/hw01-tests-02.png)
+{% endcomment %}
 
-## Part 2 - Tic Tac Toe Game
 
-Whew. That was a lot of work. But, ummmm... there's no Tic Tac Toe game yet. What?
-__Let's use the module / helper functions you created in part 1 to ll implement an interactive Tic Tac Toe game that supports the following features:__
+## Part 2 - Reversi
+
+Whew. That was a lot of work. But, ummmm... there's no Reversi game yet. What?
+__Let's use the module / helper functions you created in part 1 to implement an interactive Reversi game that supports the following features:__
 
 1. User controlled game settings
 2. An interactive game
-3. Scripted moves for the computer opponent
+3. A game configuration to automate settings, start the board with a predefined setup, and allow scripted moves for both the player and the opponent
 
-You don't have to use _all_ of the function you created in your `tic-tac-toe.js` module. However, you'll likely end up doing a lot of redundant work.
+You don't have to use _all_ of the function you created in your `reversi.js` module. However, you'll likely end up doing a lot of redundant work.
 
 ### Prep
 
-You'll write your Tic Tac Toe game in the file called `src/game.js`. Your first step is to bring in some required modules. Open up `src/game.js` and...
+You'll write your Reversi game in the file called `src/app.js`. Your first step is to bring in some required modules. Open up `src/app.js` and...
 
 1. bring in the module you created by using `require`
     <pre><code data-trim contenteditable>// you can name the object whatever you like
-// "tic" is used below...
-var tic = require('./tic-tac-toe.js');
+// "rev" is used below...
+var rev = require('./reversi.js');
 </code></pre>
 2. bring in the module, `readline-sync`, which you installed in the preparation portion of the homework
     <pre><code data-trim contenteditable>var readlineSync = require('readline-sync');
+3. also bring in the `fs` module for reading files
 </code></pre>
 
 ### User Controlled Game Settings
@@ -944,65 +965,74 @@ var answer = readlineSync.question('What is the meaning of life?');
 console.log(answer);
 </code></pre>
 
-0. greet the user by saying something like: `Shall we play a game of TIC TAC TOE?`
+0. greet the user by saying something like: `REVERSI?`
 1. ask the user for the width of the game board
-    * the width must be at least 1 square wide
+    * the width must be at least 4 squares wide
     * the width cannot be more than 26 squares wide
-    * if the width does not fall within the above range or if the width entered is not numeric (remember, you can use `isNaN` for this), then ask the user for the width again
+    * the width must be even
+    * if the width does not fall within the above range or if the width entered is not numeric (remember, you can use `isNaN` for this) or not even, then ask the user for the width again
     * see the example interaction below (note that the first 3 answers are not valid widths, but the 4th valid answer allows the user to progress to the next question)
-        <pre><code data-trim contenteditable>How wide should the board be? (1 - 26)
-> -5
-How wide should the board be? (1 - 26)
-> 28
-How wide should the board be? (1 - 26)
-> really large
-How wide should the board be? (1 - 26)
+        <pre><code data-trim contenteditable>How wide should the board be? (even numbers between 4 and 26, inclusive)
+> blah
+How wide should the board be? (even numbers between 4 and 26, inclusive)
 > 3
-Pick your letter: X or O
+How wide should the board be? (even numbers between 4 and 26, inclusive)
+> -12
+How wide should the board be? (even numbers between 4 and 26, inclusive)
+> 4
+Pick your letter: X (black) or O (white)
 </code></pre>
-2. ask the user what letter they'd like to use ('X' or 'O') 
+2. ask the user what color they'd like to be; 'X' for black or 'O' for white) 
     * uppercase 'X' and uppercase 'O' are the only valid inputs
     * if the user does not enter a valid letter, continually ask the user for a letter until a valid letter is given
+	* once the player has chosen a letter, output `Player is (color/letter chosen)`
     * see the example interaction below (the first 2 inputs are not valid - the first x is lowercase):
-        <pre><code data-trim contenteditable>Pick your letter: X or O
-> WHAT?
-Pick your letter: X or O
+        <pre><code data-trim contenteditable>
 > x
-Pick your letter: X or O
+Pick your letter: X (black) or O (white)
+> asdf
+Pick your letter: X (black) or O (white)
 > X
 Player is X
 </code></pre>
-3. use the data collected to construct a board (use on of the functions that you created!) and show the letter that the player chose along with the empty board
+3. use the data collected to construct a board (use on of the functions that you created!) and show the letter that the player chose along with the empty board ... initialize the board with 4 pieces in the center 4 squares as specified by the [Reversi/Othello rules](https://en.wikipedia.org/wiki/Reversi#Rules)
     <pre><code data-trim contenteditable>Player is X
-        1   2   3
-      +---+---+---+
- A |   |   |   |
-      +---+---+---+
- B |   |   |   |
-      +---+---+---+
- C |   |   |   |
-      +---+---+---+
+        A   B   C   D
+      +---+---+---+---+
+ 1 |   |   |   |   |
+      +---+---+---+---+
+ 2 |   | O | X |   |
+      +---+---+---+---+
+ 3 |   | X | O |   |
+      +---+---+---+---+
+ 4 |   |   |   |   |
+      +---+---+---+---+
+What's your move?
 </code></pre>
 
 <br>
 __An entire _happy path_ (that is, all valid input) interaction would look like this:__
 
-<pre><code data-trim contenteditable>Shall we play a game? TIC-TAC-TOE!
+<pre><code data-trim contenteditable>
 
-How wide should the board be? (1 - 26)
-> 3
-Pick your letter: X or O
+How wide should the board be? (even numbers between 4 and 26, inclusive)
+> 4
+Pick your letter: X (black) or O (white)
 > X
 Player is X
-     1   2   3
-   +---+---+---+
- A |   |   |   |
-   +---+---+---+
- B |   |   |   |
-   +---+---+---+
- C |   |   |   |
-   +---+---+---+
+     A   B   C   D
+   +---+---+---+---+
+ 1 |   |   |   |   |
+   +---+---+---+---+
+ 2 |   | O | X |   |
+   +---+---+---+---+
+ 3 |   | X | O |   |
+   +---+---+---+---+
+ 4 |   |   |   |   |
+   +---+---+---+---+
 
+What's your move?
+>
 </code></pre>
 
 
@@ -1010,49 +1040,72 @@ Player is X
 
 Now... for the actual game. The user will be playing against the computer
 
-1. 'X' goes first (so if the user chose 'O', the computer will make the first move)
-2. As long as the board isn't full and neither player has won, alternate computer and user turns 
+1. Black (`X`) goes first (so if the user chose 'O', the computer will make the first move)
+2. As long as the board isn't full and there hasn't been 2 consecutive passes.... 
     * for the player's move, ask the player for a move in algebraic notation
     * if the move is not valid (use one of the functions you wrote to determine this!), notify the user and ask for another move
-        <pre><code data-trim contenteditable>     1   2   3
-         +---+---+---+
- A | X |   |   |
-         +---+---+---+
- B |   |   | O |
-         +---+---+---+
- C |   |   |   |
-         +---+---+---+
+        <pre><code data-trim contenteditable>Player is X
+           A   B   C   D
+         +---+---+---+---+
+ 1 |   |   |   |   |
+         +---+---+---+---+
+ 2 |   | O | X |   |
+         +---+---+---+---+
+ 3 |   | X | O |   |
+         +---+---+---+---+
+ 4 |   |   |   |   |
+         +---+---+---+---+
 What's your move?
-> B3
-Your move must be in a <row><column> format, and it must specify an existing empty cell!
+> A1
+INVALID MOVE. Your move should:
+\* be in a <column letter><row number> format
+\* specify an existing empty cell
+\* flip at elast one of your oponent's pieces
 What's your move?
-> ARGH!
-Your move must be in a <row><column> format, and it must specify an existing empty cell!
-What's your move?
-> C2
+> A2
+           A   B   C   D
+         +---+---+---+---+
+ 1 |   |   |   |   |
+         +---+---+---+---+
+ 2 | X | X | X |   |
+         +---+---+---+---+
+ 3 |   | X | O |   |
+         +---+---+---+---+
+ 4 |   |   |   |   |
+         +---+---+---+---+
+Score
+=====
+X: 4
+O: 1
 </code></pre>
-    * after a player moves, ask the player to press enter (simply ask for any input again using something like `readlineSync.question('Press <ENTER> to show computer\'s move...');`... without storing the input in a variable
-        <pre><code data-trim contenteditable>What's your move?
-> C2
-     1   2   3
-         +---+---+---+
- A | X |   |   |
-         +---+---+---+
- B |   |   | O |
-         +---+---+---+
- C |   | X |   |
-         +---+---+---+
-Press <ENTER> to show computer's move...
+    * after a player moves, show the total counts for the player and computer
+	* then ask the player to press enter (simply ask for any input again using something like `readlineSync.question('Press <ENTER> to show computer\'s move...');`... without storing the input in a variable
+        <pre><code data-trim contenteditable>
+           A   B   C   D
+         +---+---+---+---+
+ 1 |   |   |   |   |
+         +---+---+---+---+
+ 2 | X | X | X |   |
+         +---+---+---+---+
+ 3 |   | X | O |   |
+         +---+---+---+---+
+ 4 |   |   |   |   |
+         +---+---+---+---+
+Score
+=====
+X: 4
+O: 1
+Press ENTER to show computer's move...
 </code></pre>
     * for the computer's move, you can use any algorithm you want to generate a valid move
-    * the easiest way is to get a random empty cell (hey, conveniently, you have a function for this in your module!)
+{% comment %}
 3. If there's a winner, display who won... for example `Computer won!` or `Player won!`
 4. If the board is full, announce that it's a draw: `It's a draw!`
 
 <br>
 __Here's an example game:__
 
-<div markdown="block" class="img">
+<div markdown="block" class="img" name="hw01-reversi-sample">
 ![example game](../resources/img/hw01-example-game.gif)
 </div>
 
@@ -1230,7 +1283,7 @@ var move;
 if(computerMoves && computerMoves.length > 0) {
     var arr = computerMoves.splice(0, 1)[0];
     // make sure it's a valid move!
-    if(tic.isValidMove(board, arr[0], arr[1])) {
+    if(rev.isValidMove(board, arr[0], arr[1])) {
         move = {'row':arr[0], 'col':arr[1]};
     }
 	// if it's not valid, move remains undefined
@@ -1238,157 +1291,12 @@ if(computerMoves && computerMoves.length > 0) {
 
 // if we still don't have a valid move, just get a random empty square
 if(move === undefined) {
-    move = tic.indexToRowCol(board, tic.getRandomEmptyCellIndex(board));
+    move = rev.indexToRowCol(board, rev.getRandomEmptyCellIndex(board));
 }
 
 </code></pre>
 
-## Part 3 - Scrabble Pal
-
-
-Create a program that asks the user for a series of letters. It will output the 5 highest scoring words in Scrabble that can be formed from the letters entered (not all of the letters have to be used to form a word). Here's an example interaction:
-
-<pre><code data-trim contenteditable>Please enter some letters:
->axdvree
-
-The top scoring words are:
-16 - vexed
-15 - vexer
-14 - exedra
-13 - raxed
-13 - vex
-</code></pre>
-
-### Preparation
-
-1. Find `enable1.txt` in your `data` folder - this is your word list
-2. Find `scrabble.js` in your `src` folder - this is where you'll write your program
-3. In `scrabble.js`, require the built-in `readline` and `fs` modules:
-    <pre><code data-trim contenteditable>var readline = require('readline');
-var fs = require('fs');
-</code></pre>	
-
-### Background Material and Callbacks
-
-To write this program, you'll use a word list called `enable1.txt`. Your program will read in this file to determine if the letters entered can construct any of those words.
-
-In your implementation, you'll be using a lot of functions that required callback functions to be passed in as arguments! So it'll be good to read up on functions as objects in the readings and slides.
-
-Instead of using `readline-sync` to ask for user for input, use the built-in `readline` module. The regular `readline` module will allow you to read input from the user, and it can also be used to read a file line-by-line if used in conjunction with the file system, `fs` module. 
-
-`readline` does the same thing as `readline-sync`, but it's asynchronous. That is, it's non-blocking, so it may not finish before your next line of code is executed. Try the sample programs below (you'll need a file called test.txt with a few lines in it to try the second example) to get a feel for programming with callbacks. Pay close attention to when `last line of program` is printed out.
-
-__Input from the user__ 
-
-When `question` is called, a callback function, `handleUserInput` is passed in. This callback function isn't called immediately! Instead, it's called after the program receives input from the user. Consequently, the line printing `last line of program` is called before `'Hi ' + response` could be printed out.
-
-<pre><code data-trim contenteditable>var readline = require('readline');
-
-// set up a readline object that can be used for gathering user input
-var userPrompt = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-// ask a question
-userPrompt.question('What\'s your name?', handleUserInput);
-
-// the callback function that's run when the readline object receives input
-function handleUserInput(response) {
-    console.log('Hi ' + response);
-    userPrompt.close();
-}
-
-console.log('last line of program!');
-</code></pre>
-
-__Line by line input from a file__ 
-
-<pre><code data-trim contenteditable>var readline = require('readline');
-var fs = require('fs');
-var fileName = 'test.txt';
-var n = 0;
-
-// set up a readline object that can be used for reading data from a file
-// line by line
-fileInput = readline.createInterface({ 
-    input: fs.createReadStream(fileName)
-});
-
-// specify what functions to call when the readline object:
-// 1. reads a single line from the file
-// 2. finishes reading the file
-fileInput.on('line', handleLine);
-fileInput.on('close', handleClose);
-
-function handleLine(line) {
-    console.log('line ' + n + ': ' + line);
-
-    // mutating a global
-    n += 1;
-}
-
-function handleClose() {
-    console.log('done');
-}
-
-console.log('last line of program!');
-</code></pre>
-
-
-### Handle Scores
-
-The score for a word is calculated by summing the point values of each letter in the word. You can use the following object to associate letters with point values:
-
-<pre><code data-trim contenteditable>var letterValues = { 
-        "E": 1, "A": 1, "I": 1, "O": 1, "N": 1, "R": 1, "T": 1, "L": 1, "S": 1, "U": 1, 
-        "D": 2, "G": 2, "B": 3, "C": 3, "M": 3, "P": 3, "F": 4, "H": 4, "V": 4, "W": 4, 
-        "Y": 4, "K": 5, "J": 8, "X": 8, "Q": 10, "Z": 10 
-};
-</code></pre>
-
-You'll likely want to represent each word as an object... with the actual word as one property and the word's score as a second property. You can then sort an `Array` of these "word/score" objects using the [sort method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) on your `Array`.
-
-The `sort` method also requires a callback function... which is used to compare the values in the `Array`. Check out the following example where the `Array`, `numbers` is sorted from highest to lowest:
-
-<pre><code data-trim contenteditable>var numbers = [1, 3, 2, 7, 5, 4, 6];
-
-// sort numbers from highest to lowest
-numbers.sort(function(a, b) {
-    // if a is less than b, then a should be after b 
-    if(a < b) {
-        return 1;
-    } else if(a > b) {
-        return -1;
-    } else {
-        return 0;
-    }
-});
-console.log(numbers);
-
-// for ascending, swap the 1 and -1 (or really, just omit the callback / compare function)!
-</code></pre>
-
-Note that the compare / callback function is an anonymous function that returns a positive, negative or zero value. If a positive value is returned, it means that the first argument passed in is greater, and should occur after the second element in the sorted `Array`.
-
-### Implementation
-
-So... this is a pretty short program, and may seem easy on the surface. However, there are some really tricky parts! You'll have to put together the examples from the background material above along with a novel algorithm for determining all of the valid words that a set of letters can create. You should approach this program incrementally, testing as you go along. Unlike the previous 2 parts, it's up to you to determine how to break up your program into functions.
-
-__A potential algorithm for finding all words that can be formed from a series of letters__
-
-* go through every word in the word list
-    * make a copy of the user input
-    * go through every letter in the word from the word list
-    * if the letter exists in the copy of the user input, remove it from the copy of the user input 
-    * if the letter doesn't exist, then you know the word from the word list cannot be formed by the letters in the user input
-    * if all of the letters in the word from the word list have been iterated over, then you know the word can be formed by the letters in the user input!
-* some methods that may be useful for doing this are:
-    * a String's [split](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split) method - to break up a string into an `Array` of characters
-    * an Array's [indexOf](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf) method - to determine if an element exists in an `Array`
-    * an Array's [splice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) method - to remove an element or elements from an `Array`
-
-__Dealing with scope and callbacks__
+### dealing with scope and callbacks
 
 Because you'll be writing a lot of callback functions, you may find that you don't have access to certain variables because they're within the local scope of another function. Here's an example:
 
@@ -1509,6 +1417,7 @@ __Reading a file after user input is not working__
 
 * make sure you create your readline interface for reading a file __after__ you've received user input
 * so you should create the `readline` interface for reading a file within the callback of the `readline` interface that prompts the user for input
+{% endcomment %}
 </div>
 
 </div>
