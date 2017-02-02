@@ -891,9 +891,62 @@ __Example:__
     rev.isValidMoveAlgebraicNotation(board, 'X', 'A3'); // true
 
 ### `getLetterCounts(board)` 
+
+__Parameters:__
+
+* `board` - the board 
+* 
+
+__Returns:__
+
+* 
+
+__Description:__
+
+__Example:__
+
 ### `getValidMoves(board, letter)` 
+
+* `board` - the board 
+* 
+
+__Returns:__
+
+* 
+
+__Description:__
+
+__Example:__
+
+
+
 ### `getValidMoves(board, letter)` 
+
+* `board` - the board 
+* 
+
+__Returns:__
+
+* 
+
+__Description:__
+
+__Example:__
+
+
+
 ### `areValidMovesAvailable(board, letter)` 
+
+* `board` - the board 
+* 
+
+__Returns:__
+
+* 
+
+__Description:__
+
+__Example:__
 
 <hr>
 
@@ -920,11 +973,6 @@ __Example:__
     * __use git to add and commit__ to continually save changes
     * push your changes so that they're available on the remote repository (github)
 
-{% comment %}
-    * the diff of expected and observed shows a very subtle difference in spacing!
-        <br>
-        ![spaces!](../resources/img/hw01-tests-02.png)
-{% endcomment %}
 
 
 ## Part 2 - Reversi
@@ -1098,6 +1146,7 @@ O: 1
 Press ENTER to show computer's move...
 </code></pre>
     * for the computer's move, you can use any algorithm you want to generate a valid move
+
 {% comment %}
 3. If there's a winner, display who won... for example `Computer won!` or `Player won!`
 4. If the board is full, announce that it's a draw: `It's a draw!`
@@ -1417,6 +1466,12 @@ __Reading a file after user input is not working__
 
 * make sure you create your readline interface for reading a file __after__ you've received user input
 * so you should create the `readline` interface for reading a file within the callback of the `readline` interface that prompts the user for input
+{% endcomment %}
+
+{% comment %}
+    * the diff of expected and observed shows a very subtle difference in spacing!
+        <br>
+        ![spaces!](../resources/img/hw01-tests-02.png)
 {% endcomment %}
 </div>
 
