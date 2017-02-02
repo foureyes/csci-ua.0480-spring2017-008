@@ -168,7 +168,22 @@ Significant material will be pulled from the following sites:
 <a name="Tutoring"></a>
 <div class="panel-heading">Tutoring</div>
 <div class="panel-body" markdown="block">
-There is a __tutor available__ for the course. Tutoring schedule TBD.
+There is a __tutor available__ for the course.
+
+* Location
+    * __WWH 412__
+* Hours
+    * __Wednesday__  - 5pm - 7pm
+    * __Thursday__ - TBD {% comment %} 1pm - 3pm {% endcomment %}
+    * __Friday__  - 1pm - 3pm
+
+Additionally, the tutor will hold workshops based on student demand. Some workshops may include:
+
+* commandline
+* git
+* http
+* html
+* css
 
 </div>
     </div>
