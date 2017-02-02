@@ -905,20 +905,12 @@ __Description:__
 
 __Example:__
 
-### `getValidMoves(board, letter)` 
-
-* `board` - the board 
-* 
-
-__Returns:__
-
-* 
-
-__Description:__
-
-__Example:__
-
-
+    let board = rev.generateBoard(3, 3, " ");
+    board = rev.placeLetter(board, 'X', "A1");
+    board = rev.placeLetter(board, 'X', "A3");
+    board = rev.placeLetter(board, 'O', "A2");
+    const counts = rev.getLetterCounts(board);
+    // counts is {X: 2, O: 1}
 
 ### `getValidMoves(board, letter)` 
 
@@ -935,7 +927,7 @@ __Example:__
 
 
 
-### `areValidMovesAvailable(board, letter)` 
+### `getValidMoves(board, letter)` 
 
 * `board` - the board 
 * 
@@ -947,6 +939,28 @@ __Returns:__
 __Description:__
 
 __Example:__
+
+    let board = rev.generateBoard(3, 3, " ");
+    board = rev.placeLetter(board, 'X', "A1");
+    board = rev.placeLetter(board, 'O', "A2");
+    const res = rev.getValidMoves(board, 'X');
+    // expect(res).to.deep.equal([[2, 0]]);
+    expect(res).to.deep.equal([[2, 0]]);
+
+    let board = rev.generateBoard(3, 3, " ");
+    board = rev.placeLetter(board, 'X', "A1");
+    board = rev.placeLetter(board, 'O', "A3");
+    const res = rev.getValidMoves(board, 'X');
+    // expect(res).to.deep.equal([[2, 0]]);
+    expect(res).to.deep.equal([]);
+
+    let board = rev.generateBoard(4, 4, " ");
+    board = rev.placeLetters(board, 'X', 'A1');
+    board = rev.placeLetters(board, 'O', 'B2');
+    board = rev.placeLetters(board, 'X', 'A2');
+    board = rev.placeLetters(board, 'O', 'C3');
+    const res = rev.getValidMoves(board, 'X');
+    expect(res).to.deep.include.members([[3, 3], [1, 2]]);
 
 <hr>
 
