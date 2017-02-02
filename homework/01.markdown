@@ -7,10 +7,6 @@ title: CSCI-UA.0480 - Homework #1
 	<div class="panel-heading">Homework #1</div>
 	<div class="panel-body" markdown="block">
 
-# DRAFT VERSION (full version posted 11pm, 2/1)
-
-<hr>
-
 # Reversi / Othello
 
 ## Due __Feb 8th, by 11PM__
@@ -222,7 +218,7 @@ To make the functions you write available when your module is brought into anoth
    }
 </code></pre>
 2. create all of your functions in an object and assign that object to `module.exports`:
-	<pre><code data-trim contenteditable>var tic = { 
+	<pre><code data-trim contenteditable>const rev = { 
        repeat: function(value, n) {
            // implementation
        },
@@ -234,7 +230,7 @@ To make the functions you write available when your module is brought into anoth
        // ...
    }
     
-   module.exports = tic;
+   module.exports = rev;
 </code></pre>
 3. Create functions as properties on `module.exports`
 	<pre><code data-trim contenteditable>module.exports.repeat = function(value, n) {
@@ -894,14 +890,15 @@ __Example:__
 
 __Parameters:__
 
-* `board` - the board 
-* 
+* `board` - the board that contains the pieces/letters to count
 
 __Returns:__
 
-* 
+* `object` with property names as letters and values as counts of those letters 
 
 __Description:__
+
+Returns the counts of each of the letters on the supplied `board`. The counts are stored in an object where the count is the value and the letter is the property name. For example, if the board has 2 X's and 1 O, then the object return would be: `{ X: 2, O: 1 }`
 
 __Example:__
 
@@ -914,69 +911,59 @@ __Example:__
 
 ### `getValidMoves(board, letter)` 
 
-* `board` - the board 
-* 
+* `board` - the board used for determining valid moves
+* `letter` - the piece/letter that valid moves will be determined for
 
 __Returns:__
 
-* 
+* `Array` - a 2-dimensional `Array` representing a list of row and column pairs, with each pair a valid move for the `letter` provided
 
 __Description:__
+
+Gives back a list of valid moves that the `letter` can make on the `board`. These moves are returned as a list of row and column pairs - an `Array` containing 2-element `Array`s
 
 __Example:__
 
 
-
-### `getValidMoves(board, letter)` 
-
-* `board` - the board 
-* 
-
-__Returns:__
-
-* 
-
-__Description:__
-
-__Example:__
-
+    // 1 valid move can be made for X on this board
     let board = rev.generateBoard(3, 3, " ");
     board = rev.placeLetter(board, 'X', "A1");
     board = rev.placeLetter(board, 'O', "A2");
     const res = rev.getValidMoves(board, 'X');
-    // expect(res).to.deep.equal([[2, 0]]);
-    expect(res).to.deep.equal([[2, 0]]);
+    // [[2, 0]]
 
+    // no valid moves for X can be made on this board
     let board = rev.generateBoard(3, 3, " ");
     board = rev.placeLetter(board, 'X', "A1");
     board = rev.placeLetter(board, 'O', "A3");
     const res = rev.getValidMoves(board, 'X');
-    // expect(res).to.deep.equal([[2, 0]]);
-    expect(res).to.deep.equal([]);
+    // []
 
+    // 2 possible valid moves can be made for X on this board
     let board = rev.generateBoard(4, 4, " ");
     board = rev.placeLetters(board, 'X', 'A1');
     board = rev.placeLetters(board, 'O', 'B2');
     board = rev.placeLetters(board, 'X', 'A2');
     board = rev.placeLetters(board, 'O', 'C3');
     const res = rev.getValidMoves(board, 'X');
-    expect(res).to.deep.include.members([[3, 3], [1, 2]]);
+    // [[3, 3], [1, 2]]
+
 
 <hr>
 
 
 ### Checking Your Code, Pushing Your Changes
 
-1. JavaScript is kind of crazy (read: has some really _bad_, but valid parts), so it's useful to use a static analysis tool, like `jshint` to check your code
-    * ideally, you'd be doing this periodically while you develop
-    * the commandline usage is described here, but there are eshint integrations for some editors (see the plugins section in the [jshint installation guide](https://www.npmjs.com/package/eslint)
+1. JavaScript is kind of crazy (read: has some really _bad_, but syntactically valid parts), so it's useful to use a static analysis tool, like `eslint` to check your code
+    * ideally, you'd be doing this periodically while you write your program
+    * the commandline usage is described here, but there are eslint integrations for some editors (see the plugins section in the [eslint installation guide](https://www.npmjs.com/package/eslint)
     * from your project directory run: `./node_modules/.bin/eslint src/*` to check all of the code in the `src` directory
     * (you _did install_ `eslint` locally in the preparation section, right?)
     * check the output; __make sure you fix all warnings / errors__
 2. Run your tests one last time to make sure that they're all (or... _mostly_) passing.
     * `mocha test/reversi-test.js`
 3. Fix unit test errors 
-    * if you have test failure, examine the output of each failure...
+    * if you have test failures, examine the output of each failure...
     * it'll describe what was expected vs what was actually given back by your function... 
     * +/green shows expected, while -/red shows the incorrect output
     * if you get `TypeError ... is not a function`, you may have:
@@ -989,16 +976,15 @@ __Example:__
 
 
 
-## Part 2 - Reversi
+## Part 2 - Reversi / Othello
 
-Whew. That was a lot of work. But, ummmm... there's no Reversi game yet. What?
-__Let's use the module / helper functions you created in part 1 to implement an interactive Reversi game that supports the following features:__
+Whew. That was a lot of work. But, ummmm... there's no Reversi game yet. What?  __Let's use the module / helper functions you created in part 1 to implement an interactive Reversi game that supports the following features:__
 
 1. User controlled game settings
 2. An interactive game
 3. A game configuration to automate settings, start the board with a predefined setup, and allow scripted moves for both the player and the opponent
 
-You don't have to use _all_ of the function you created in your `reversi.js` module. However, you'll likely end up doing a lot of redundant work.
+You don't have to use _all_ of the functions you created in your `reversi.js` module. However, you'll likely end up doing a lot of redundant work if you don't!
 
 ### Prep
 
@@ -1014,16 +1000,86 @@ var rev = require('./reversi.js');
 3. also bring in the `fs` module for reading files
 </code></pre>
 
+### Read in a Config File / Commandline Arguments
+
+Before starting the game, a few settings have to be configured. This can be done via a config file (which will also allow you to start with a board with pieces already on it) or by asking the player to specify values explicitly. The settings to configure are:
+
+1. width of the board 
+2. the letter/color for the player (`X` is black, `O` is white, `X` goes first)
+
+This section describes how a config file could be used to initialize a game. (Asking the player for settings will be covered in the next section).
+
+1. the config file will be specified as a commandline argument that's passed in to your program when running it through the commandline
+2. to access commandline arguments, use the built-in `process.argv`. It's an `Array` that contains the data passed in to your program through the commandline.
+    * [see the official documentation](https://nodejs.org/docs/latest/api/process.html#process_process_argv)
+    * the filename of the optional config file will be first and only argument that can be passed in
+    * ... consequently, check for the existence of `process.argv[2]`
+    * for example, if you run your file as `node src/app.js /Users/joe/Desktop/myconfig.json`
+    * ... then the string, `/Users/joe/Desktop/myconfig.json`, will be stored in `process.argv[2]`
+3. if a config file is passed in, read it!
+    * use the [`fs` module's readFile function](https://nodejs.org/api/fs.html#fs_fs_readfile_file_options_callback) to do this
+    * example usage of the `fs` module:
+        <pre><code data-trim contenteditable>
+fs.readFile('/path/to/myFile.txt', 'utf8', function(err, data) {
+    if (err) {
+        console.log('uh oh', err); 
+    } else {
+        console.log(data);
+    }
+});
+</code></pre>
+    * note that the 1st argument is a path to a file (can be relative or absolute)
+    * the 2nd argument is an optional encoding (in this case utf8), 
+    * ... and the 3rd argument is a function to call when the file is finished being read
+        * this _callback_ function has 2 parameters:
+        * an `error` object that is `undefined` if there's no error, or an object containing information on the error if there is an error
+        * and the `data` contained in the file
+3. you can assume that the config file will be in JSON format
+    * use [`JSON.parse`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse) to take a string of JSON data and convert it into actual JavaScript objects
+    * expect that the JSON file contains the following data:
+    * data for configuring the game
+        * a `String` representing the letter assigned to the player
+        * an `Array` representing the board (optionally with pieces placed)
+    * optionally, data to script the moves for the player and computer to aid in testing
+        * an `Array` of scripted moves in algebraic notation for the computer to use for moves
+        * an `Array` of scripted moves in algebraic notation for the player to use for moves
+        * if the above arrays of scripted moves are empty, then the player and computer can move freely
+    * here's a sample config file:
+        <pre><code data-trim contenteditable>{
+	"boardPreset": {
+		"playerLetter": "X",
+		"board": [ 
+					" ", " ", "X", " ", " ", " ", " ", " ", 
+					" ", " ", "O", " ", " ", " ", " ", " ", 
+					" ", " ", "O", " ", " ", " ", " ", " ", 
+					"X", "O", " ", "O", "X", "O", "O", "X", 
+					" ", " ", "O", "X", "O", " ", " ", " ", 
+					" ", " ", "O", " ", " ", " ", " ", " ", 
+					" ", " ", "X", " ", " ", " ", " ", " ", 
+					" ", " ", " ", " ", " ", " ", " ", " " 
+		]
+	},
+	"scriptedMoves": {
+		"player": ["C4", "F3"],
+		"computer": ["E3", "F2", "B6"]
+	}
+}
+</code></pre>
+4. use the data in the JSON file to initialize your game (for example, use it to generate a board, set the player letter, etc.)
+5. from here you can start the interactive game
+
+__Of course, if no config file is specified, then ask the user for the game settings...__ (see below)
+
+
 ### User Controlled Game Settings
 
-Start the game by prompting the user to set up some game options. Use `readline-sync` to ask the user for input synchronously (again, very different from how node usually works, but more in line with how we're accustomed to seeing how programs flow). Check out the [documentation on `readline-sync` on npm](https://www.npmjs.com/package/readline-sync).
+If no config file is specified (or if the config file is not found) prompt the user to set up some game options. Use `readline-sync` to ask the user for input synchronously (again, very different from how node usually works, but more in line with how we're accustomed to seeing how programs flow). Check out the [documentation on `readline-sync` on npm](https://www.npmjs.com/package/readline-sync).
 
 Here's some example usage:
 
-<pre><code data-trim contenteditable>
-var readlineSync = require('readline-sync');
+<pre><code data-trim contenteditable>const readlineSync = require('readline-sync');
  
-var answer = readlineSync.question('What is the meaning of life?');
+const answer = readlineSync.question('What is the meaning of life?');
 console.log(answer);
 </code></pre>
 
@@ -1049,7 +1105,7 @@ Pick your letter: X (black) or O (white)
     * if the user does not enter a valid letter, continually ask the user for a letter until a valid letter is given
 	* once the player has chosen a letter, output `Player is (color/letter chosen)`
     * see the example interaction below (the first 2 inputs are not valid - the first x is lowercase):
-        <pre><code data-trim contenteditable>
+        <pre><code data-trim contenteditable>Pick your letter: X (black) or O (white)
 > x
 Pick your letter: X (black) or O (white)
 > asdf
@@ -1069,15 +1125,14 @@ Player is X
       +---+---+---+---+
  4 |   |   |   |   |
       +---+---+---+---+
+&nbsp;
 What's your move?
 </code></pre>
 
 <br>
 __An entire _happy path_ (that is, all valid input) interaction would look like this:__
 
-<pre><code data-trim contenteditable>
-
-How wide should the board be? (even numbers between 4 and 26, inclusive)
+<pre><code data-trim contenteditable>How wide should the board be? (even numbers between 4 and 26, inclusive)
 > 4
 Pick your letter: X (black) or O (white)
 > X
@@ -1100,7 +1155,10 @@ What's your move?
 
 ### An Interactive Game
 
-Now... for the actual game. The user will be playing against the computer
+Now... for the actual game. The user will be playing against the computer.
+
+
+__If the moves aren't scripted (that is, a config file was not used OR the config file contained empty arrays for computer and player moves)__....
 
 1. Black (`X`) goes first (so if the user chose 'O', the computer will make the first move)
 2. As long as the board isn't full and there hasn't been 2 consecutive passes.... 
@@ -1117,12 +1175,15 @@ Now... for the actual game. The user will be playing against the computer
          +---+---+---+---+
  4 |   |   |   |   |
          +---+---+---+---+
+&nbsp;
 What's your move?
 > A1
+&nbsp;
 INVALID MOVE. Your move should:
-\* be in a <column letter><row number> format
-\* specify an existing empty cell
-\* flip at elast one of your oponent's pieces
+&ast; be in a <column letter><row number> format
+&ast; specify an existing empty cell
+&ast; flip at elast one of your oponent's pieces
+&nbsp;
 What's your move?
 > A2
            A   B   C   D
@@ -1135,15 +1196,38 @@ What's your move?
          +---+---+---+---+
  4 |   |   |   |   |
          +---+---+---+---+
+&nbsp;
 Score
 =====
 X: 4
 O: 1
 </code></pre>
     * after a player moves, show the total counts for the player and computer
-	* then ask the player to press enter (simply ask for any input again using something like `readlineSync.question('Press <ENTER> to show computer\'s move...');`... without storing the input in a variable
-        <pre><code data-trim contenteditable>
-           A   B   C   D
+    * if a player cannot make a valid move, tell the player to press <ENTER> to pass instead of allowing the player to enter a move
+        <pre><code data-trim contenteditable>     A   B   C   D   E   F   G   H
+         +---+---+---+---+---+---+---+---+
+ 1 |   |   |   |   |   |   |   |   |
+         +---+---+---+---+---+---+---+---+
+ 2 |   |   |   |   |   |   |   |   |
+         +---+---+---+---+---+---+---+---+
+ 3 |   |   |   | X |   |   |   |   |
+         +---+---+---+---+---+---+---+---+
+ 4 | O | O | X | X | X | O | O | X |
+         +---+---+---+---+---+---+---+---+
+ 5 |   |   |   |   |   |   |   |   |
+         +---+---+---+---+---+---+---+---+
+ 6 |   |   |   |   |   |   |   |   |
+         +---+---+---+---+---+---+---+---+
+ 7 |   |   |   |   |   |   |   |   |
+         +---+---+---+---+---+---+---+---+
+ 8 |   |   |   |   |   |   |   |   |
+         +---+---+---+---+---+---+---+---+
+&nbsp;
+No valid moves available for you.
+Press &lt;ENTER&gt; to pass.        
+</code></pre>
+	* however if a player is able to move, once they complete their move, ask the player to press <ENTER> to allow the computer move (ask for any input again using something like `readlineSync.question('Press <ENTER> to show computer\'s move...');`... without storing the input in a variable
+        <pre><code data-trim contenteditable>     A   B   C   D
          +---+---+---+---+
  1 |   |   |   |   |
          +---+---+---+---+
@@ -1153,24 +1237,384 @@ O: 1
          +---+---+---+---+
  4 |   |   |   |   |
          +---+---+---+---+
+&nbsp;
 Score
 =====
 X: 4
 O: 1
-Press ENTER to show computer's move...
+&nbsp;
+Press &lt;ENTER&gt; to show computer's move...
 </code></pre>
     * for the computer's move, you can use any algorithm you want to generate a valid move
+    * note that the computer can pass as well if it does not have any valid moves
+3. Once there are 2 consecutive passes from the player to computer or vice versa, the game ends
+4. Display who won based on the counts of the pieces/letters on the board (ties are possible)
+    <pre><code data-trim contenteditable>Score
+=====
+X: 11
+O: 5
+&nbsp;
+You won! 👍
+</code></pre>
+5. See the example game at the end of these instructions
+
+### Handling Scripted Moves
+
+If there were scripted moves defined in the config file, allow the game to proceed by pulling the moves for the computer and player from these Arrays... and using them to make a move:
+
+1. if the move pulled from the Array is not valid, then ignore it and allow the computer or player to make their move manually
+2. otherwise, if the move _is_ valid, then prompt the player to press <ENTER> to see their next move
+3. if there are no more moves to pull from the array of scripted moves, allow the computer or player to choose their move like usual
+4. for example using this configuration:
+    <pre><code data-trim contenteditable>{
+	"boardPreset": {
+		"playerLetter": "X",
+		"board": [ 
+					" ", " ", " ", " ",  
+					"x", "O", "X", " ",  
+					" ", "X", "O", " ",  
+					" ", " ", " ", " "
+		]
+	},
+	"scriptedMoves": {
+		"player": ["A2", "D3"],
+		"computer": ["C1", "A3"]
+	}
+}
+</code></pre>	
+5. the game would proceed as follows:
+    <pre><code data-trim contenteditable>REVERSI
+&nbsp;
+Computer will make the following moves: [ 'C1', 'A3' ]
+The player will make the following moves: [ 'A2', 'D3' ]
+Player is X
+        A   B   C   D
+      +---+---+---+---+
+ 1 |   |   |   |   |
+      +---+---+---+---+
+ 2 |   | O | X |   |
+      +---+---+---+---+
+ 3 |   | X | O |   |
+      +---+---+---+---+
+ 4 |   |   |   |   |
+      +---+---+---+---+
+&nbsp;
+Player move to A2 is scripted.
+Press &lt;ENTER&gt; to continue.
+</code></pre>
+    <pre><code data-trim contenteditable>     A   B   C   D
+      +---+---+---+---+
+ 1 |   |   |   |   |
+      +---+---+---+---+
+ 2 | X | X | X |   |
+      +---+---+---+---+
+ 3 |   | X | O |   |
+      +---+---+---+---+
+ 4 |   |   |   |   |
+      +---+---+---+---+
+&nbsp;
+Score
+=====
+X: 4
+O: 1
+&nbsp;
+Press &lt;ENTER&gt; to show computer's move...
+</code></pre>
+    <pre><code data-trim contenteditable>Computer move to C1 was scripted.
+        A   B   C   D
+      +---+---+---+---+
+ 1 |   |   | O |   |
+      +---+---+---+---+
+ 2 | X | X | O |   |
+      +---+---+---+---+
+ 3 |   | X | O |   |
+      +---+---+---+---+
+ 4 |   |   |   |   |
+      +---+---+---+---+
+&nbsp;
+Score
+=====
+X: 3
+O: 3
+&nbsp;
+Player move to D3 is scripted.
+Press &lt;ENTER&gt; to continue.    
+</code></pre>
+    <pre><code data-trim contenteditable>     A   B   C   D
+      +---+---+---+---+
+ 1 |   |   | O |   |
+      +---+---+---+---+
+ 2 | X | X | O |   |
+      +---+---+---+---+
+ 3 |   | X | X | X |
+      +---+---+---+---+
+ 4 |   |   |   |   |
+      +---+---+---+---+
+&nbsp;
+Score
+=====
+X: 5
+O: 2
+&nbsp;
+Press &lt;ENTER&gt; to show computer's move...
+</code></pre>
+
+
+### Example Game
+
+__Animated gif of Reversi/Othello__
+
+<div markdown="block" class="img" name="hw01-reversi-sample">
+![example game](../resources/img/hw01-example-game.gif)
+</div>
+
+__Text Example__
+
+<pre><code data-trim contenteditable>
+How wide should the board be? (even numbers between 4 and 26, inclusive)
+> 4
+Pick your letter: X (black) or O (white)
+> X
+Player is X
+     A   B   C   D
+   +---+---+---+---+
+ 1 |   |   |   |   |
+   +---+---+---+---+
+ 2 |   | O | X |   |
+   +---+---+---+---+
+ 3 |   | X | O |   |
+   +---+---+---+---+
+ 4 |   |   |   |   |
+   +---+---+---+---+
+
+What's your move?
+> B1
+
+     A   B   C   D
+   +---+---+---+---+
+ 1 |   | X |   |   |
+   +---+---+---+---+
+ 2 |   | X | X |   |
+   +---+---+---+---+
+ 3 |   | X | O |   |
+   +---+---+---+---+
+ 4 |   |   |   |   |
+   +---+---+---+---+
+
+Score
+=====
+X: 4
+O: 1
+
+Press <ENTER> to show computer's move...
+     A   B   C   D
+   +---+---+---+---+
+ 1 |   | X |   |   |
+   +---+---+---+---+
+ 2 |   | X | X |   |
+   +---+---+---+---+
+ 3 | O | O | O |   |
+   +---+---+---+---+
+ 4 |   |   |   |   |
+   +---+---+---+---+
+
+Score
+=====
+X: 3
+O: 3
+
+What's your move?
+> B4
+     A   B   C   D
+   +---+---+---+---+
+ 1 |   | X |   |   |
+   +---+---+---+---+
+ 2 |   | X | X |   |
+   +---+---+---+---+
+ 3 | O | X | O |   |
+   +---+---+---+---+
+ 4 |   | X |   |   |
+   +---+---+---+---+
+
+Score
+=====
+X: 5
+O: 2
+
+Press <ENTER> to show computer's move...
+     A   B   C   D
+   +---+---+---+---+
+ 1 | O | X |   |   |
+   +---+---+---+---+
+ 2 |   | O | X |   |
+   +---+---+---+---+
+ 3 | O | X | O |   |
+   +---+---+---+---+
+ 4 |   | X |   |   |
+   +---+---+---+---+
+
+Score
+=====
+X: 4
+O: 4
+
+What's your move?
+> A2
+     A   B   C   D
+   +---+---+---+---+
+ 1 | O | X |   |   |
+   +---+---+---+---+
+ 2 | X | X | X |   |
+   +---+---+---+---+
+ 3 | O | X | O |   |
+   +---+---+---+---+
+ 4 |   | X |   |   |
+   +---+---+---+---+
+
+Score
+=====
+X: 6
+O: 3
+
+Press <ENTER> to show computer's move...
+     A   B   C   D
+   +---+---+---+---+
+ 1 | O | O | O |   |
+   +---+---+---+---+
+ 2 | X | O | O |   |
+   +---+---+---+---+
+ 3 | O | X | O |   |
+   +---+---+---+---+
+ 4 |   | X |   |   |
+   +---+---+---+---+
+
+Score
+=====
+X: 3
+O: 7
+
+What's your move?
+> A4
+     A   B   C   D
+   +---+---+---+---+
+ 1 | O | O | O |   |
+   +---+---+---+---+
+ 2 | X | O | O |   |
+   +---+---+---+---+
+ 3 | X | X | O |   |
+   +---+---+---+---+
+ 4 | X | X |   |   |
+   +---+---+---+---+
+
+Score
+=====
+X: 5
+O: 6
+
+Press <ENTER> to show computer's move...
+Computer has no valid moves. Press <ENTER> to continue
+Score
+=====
+X: 5
+O: 6
+
+What's your move?
+> D2
+     A   B   C   D
+   +---+---+---+---+
+ 1 | O | O | O |   |
+   +---+---+---+---+
+ 2 | X | X | X | X |
+   +---+---+---+---+
+ 3 | X | X | X |   |
+   +---+---+---+---+
+ 4 | X | X |   |   |
+   +---+---+---+---+
+
+Score
+=====
+X: 9
+O: 3
+
+Press <ENTER> to show computer's move...
+     A   B   C   D
+   +---+---+---+---+
+ 1 | O | O | O |   |
+   +---+---+---+---+
+ 2 | X | X | O | X |
+   +---+---+---+---+
+ 3 | X | X | X | O |
+   +---+---+---+---+
+ 4 | X | X |   |   |
+   +---+---+---+---+
+
+Score
+=====
+X: 8
+O: 5
+
+What's your move?
+> D4
+     A   B   C   D
+   +---+---+---+---+
+ 1 | O | O | O |   |
+   +---+---+---+---+
+ 2 | X | X | O | X |
+   +---+---+---+---+
+ 3 | X | X | X | X |
+   +---+---+---+---+
+ 4 | X | X |   | X |
+   +---+---+---+---+
+
+Score
+=====
+X: 10
+O: 4
+
+Press <ENTER> to show computer's move...
+     A   B   C   D
+   +---+---+---+---+
+ 1 | O | O | O |   |
+   +---+---+---+---+
+ 2 | X | X | O | X |
+   +---+---+---+---+
+ 3 | X | X | O | X |
+   +---+---+---+---+
+ 4 | X | X | O | X |
+   +---+---+---+---+
+
+Score
+=====
+X: 9
+O: 6
+
+What's your move?
+> D1
+     A   B   C   D
+   +---+---+---+---+
+ 1 | O | O | O | X |
+   +---+---+---+---+
+ 2 | X | X | X | X |
+   +---+---+---+---+
+ 3 | X | X | O | X |
+   +---+---+---+---+
+ 4 | X | X | O | X |
+   +---+---+---+---+
+
+Score
+=====
+X: 11
+O: 5
+
+You won! 👍
+</code></pre>
 
 {% comment %}
-3. If there's a winner, display who won... for example `Computer won!` or `Player won!`
 4. If the board is full, announce that it's a draw: `It's a draw!`
 
 <br>
 __Here's an example game:__
 
-<div markdown="block" class="img" name="hw01-reversi-sample">
-![example game](../resources/img/hw01-example-game.gif)
-</div>
 
 <br>
 __And the text-only version of the game above:__
