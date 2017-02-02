@@ -47,8 +47,6 @@ For a more gentle introduction to functions in JavaScript, check out [{{ site.bo
 	<td markdown="block">
 
 
-Reading and Quiz to be Posted 1/26
-
 {% comment %}
 Due Thursday, 9/15, by 11pm
 
