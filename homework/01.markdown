@@ -822,13 +822,14 @@ __Example:__
     // res will look something like: [[[2, 1], [2, 2]], [1, 3]]
 
 
-### `isValidMove(board, row, col)`
+### `isValidMove(board, letter, row, col)`
 
 __Parameters:__
 
 * `board` - the board the move is performed on
-* `row` - the row number of the move
-* `col` - the column number of the move
+* `letter` - the letter used for the intended move
+* `row` - the row number of the intended move
+* `col` - the column number of the intended move
 
 __Returns:__
 
@@ -836,7 +837,7 @@ __Returns:__
 
 __Description:__
 
-Using the `board` passed in, determines whether or not a move to `row` and `col` is valid. A valid move:
+Using the `board` passed in, determines whether or not a move with `letter` to `row` and `col` is valid. A valid move:
 
 * targets an empty square
 * is within the boundaries of the board
@@ -863,20 +864,21 @@ __Example:__
     // 2. a piece that already exists
 <hr>
 
-### `isValidMoveAlgebraicNotation(board, algebraicNotation)`
+### `isValidMoveAlgebraicNotation(board, letter, algebraicNotation)`
 
 __Parameters:__
 
 * `board` - the board the move is performed on
-* `algebraicNotation` - algebraic notation representing a move on the `board`
+* `letter` - the letter to be placed
+* `algebraicNotation` - algebraic notation representing the __intended move__ on the `board`
 
 __Returns:__
 
-* `true` if the move is valid, `false` otherwise
+* `true` if the intended move is valid, `false` otherwise
 
 __Description:__
 
-Using the `board` passed in, determines whether or not a move to `algebraicNotation` is valid. Use the functions your previously created, `isValidMove` and `algebraicToRowCol` to implement this function.
+Using the `board` passed in, determines whether or not a move with `letter` to `algebraicNotation` is valid. Use the functions you previously created, `isValidMove` and `algebraicToRowCol` to implement this function.
 
 __Example:__
 
