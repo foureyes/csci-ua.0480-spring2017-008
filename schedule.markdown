@@ -108,9 +108,7 @@ TODO
 * Network Programming
 * Streams / Buffers / IO
 </td>
-<td></td><td></td><td markdown="block"></td>{% comment %}
 {% include schedule/05.markdown %}
-{% endcomment %}
 </tr>
 
 
@@ -122,9 +120,7 @@ TODO
 * A Simple Web Server
 
 </td>
-<td></td><td></td><td markdown="block"></td>{% comment %}
 {% include schedule/06.markdown %}
-{% endcomment %}
 </tr>
 
 

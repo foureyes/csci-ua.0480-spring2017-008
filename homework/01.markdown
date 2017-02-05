@@ -192,7 +192,7 @@ node src/myfile.js
 
 For your implementation of Reversi, you'll break down the game into several functions. These helper functions will be written in a _module_ (a file separate from the file that actually runs your game), which you'll use in part 3: `src/reversi.js`
 
-The helper functions you'll be implementing are described below. Unit tests have been included in your repository in the file, `test/reversi-test.js`. 
+The helper functions you'll be implementing are described below. Unit tests have been included in your repository in the file, `tests/reversi-test.js`. 
 
 ### Creating a Module / Exporting Functions 
 
@@ -254,7 +254,7 @@ __You should make sure your exports are up to date as you implement your functio
 		
 ### Unit Tests
 
-You can use the supplied unit tests (in `test/reversi-test.js`) to check that your functions are:
+You can use the supplied unit tests (in `tests/reversi-test.js`) to check that your functions are:
 
 * are named correctly
 * have the required parameters
@@ -265,7 +265,7 @@ The given unit tests use Mocha as a testing framework and Chai for assertions. W
 
 You can __run the included unit tests by using this command__ in your project directory:
 
-`mocha test/reversi-test.js`
+`mocha tests/reversi-test.js`
 
 If you run these tests before starting, you'll get a bunch of reference errors. This is because you have no functions implemented yet. Additionally, you'll have to export the functions you create so that the tests have access to them.
 
@@ -963,7 +963,7 @@ __Example:__
     * (you _did install_ `eslint` locally in the preparation section, right?)
     * check the output; __make sure you fix all warnings / errors__
 2. Run your tests one last time to make sure that they're all (or... _mostly_) passing.
-    * `mocha test/reversi-test.js`
+    * `mocha tests/reversi-test.js`
 3. Fix unit test errors 
     * if you have test failures, examine the output of each failure...
     * it'll describe what was expected vs what was actually given back by your function... 
