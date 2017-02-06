@@ -69,7 +69,7 @@ An array's __forEach__ method executes a callback on every array element.
 
 <pre><code data-trim contenteditable>
 // log double the value of every element in the array
-var numbers = [3, 4, 5];
+const numbers = [3, 4, 5];
 numbers.forEach(function(element) {
 	console.log(element);
 });
@@ -80,7 +80,7 @@ Also, our homegrown implementation as a standalone function.
 
 <pre><code data-trim contenteditable>
 function forEach(arr, action) {
-	for (var i = 0; i < arr.length; i++) {
+	for (let i = 0; i < arr.length; i++) {
 		action(arr[i]); 
 	}
 }
@@ -100,8 +100,8 @@ An array's __filter__ method returns a new array of elements that each pass some
 <pre><code data-trim contenteditable>
 // only give back the strings that start with 'ba'
 
-var words = ['foo', 'bar', 'baz', 'qux'];
-var filtered_words = words.filter(function(word) {
+const words = ['foo', 'bar', 'baz', 'qux'];
+const filtered_words = words.filter(function(word) {
 	return word.indexOf('ba') !== -1;
 });
 console.log(filtered_words);
@@ -126,7 +126,7 @@ __And the implementation...__ &rarr;
 
 <pre><code data-trim contenteditable>
 function filter(arr, test) {
-	var filtered = [];
+	const filtered = [];
 	arr.forEach(function(element) {
 		if(test(element)) {
 			filtered.push(element)
@@ -170,13 +170,13 @@ __Here's a potential implementation, along with example usage, of our own <code>
 
 <pre><code data-trim contenteditable>
 function map(arr, transform) {
-	var transformed = [];
+	const transformed = [];
 	arr.forEach(function(element) {
 		transformed.push(transform(element));
 	});
 	return transformed;
 }
-var result = map(['hello', 'hey', 'hi'], function(greeting) {return greeting + '!!'});
+const result = map(['hello', 'hey', 'hi'], function(greeting) {return greeting + '!!'});
 console.log(result);
 </code></pre>
 </section>
@@ -196,7 +196,7 @@ __Try using it to change every word in the list <code>['hey','yo','sup']</code> 
 
 <pre><code data-trim contenteditable>
 words = ['hey', 'yo', 'sup']
-var shoutedWords = words.map(function(word) {
+const shoutedWords = words.map(function(word) {
 	return word.toUpperCase() + '!';
 });
 console.log(shoutedWords);
@@ -246,7 +246,7 @@ __What do you think the algorithm for reduce would look like?__ &rarr;
 
 <pre><code data-trim contenteditable>
 function reduce(arr, combine, start) {
-  var accum = start;
+  const accum = start;
   arr.forEach(function(ele){
     accum = combine(accum, ele); 
   }); 
@@ -267,7 +267,7 @@ console.log(reduce([4, 12, 5], function(accum, ele) {
 Here's an example of finding the minimum (uses first element as initial min) with reduce:
 
 <pre><code data-trim contenteditable>
-var numbers = [-5, -2, -1, -10, -3];
+const numbers = [-5, -2, -1, -10, -3];
 
 console.log(reduce(numbers, function(accum, ele) {
   if(accum < ele) {
@@ -307,7 +307,7 @@ __Try using it to calculate the product of all of the elements in <code>[2, 5, 4
 Using <code>forEach</code>, <code>filter</code>, <code>map</code>, and/or <code>reduce</code>, __can you try to count all of the face cards in the following array?__ &rarr;
 
 <pre><code data-trim contenteditable>
-var cards = [{'suit':'♦', 'face':'4'},
+const cards = [{'suit':'♦', 'face':'4'},
              {'suit':'♠', 'face':'J'},
              {'suit':'♠', 'face':'Q'},
              {'suit':'♣', 'face':'Q'},
@@ -323,10 +323,14 @@ var cards = [{'suit':'♦', 'face':'4'},
 <section markdown="block">
 ## Counting Face Cards
 
-__Let's try the most convential way... together__. (also, add it to your [in-class programming activity form](https://docs.google.com/a/nyu.edu/forms/d/e/1FAIpQLSfvbcstf1-IKNVD-YFK77X_zr4ph3f8dYLlo1jBwdNswTwVaQ/viewform)). &rarr;
+__Let's try the most convential way... together__. 
+
+{% comment %}
+(also, add it to your [in-class programming activity form](https://docs.google.com/a/nyu.edu/forms/d/e/1FAIpQLSfvbcstf1-IKNVD-YFK77X_zr4ph3f8dYLlo1jBwdNswTwVaQ/viewform)). &rarr;
+{% endcomment %}
 
 <pre><code data-trim contenteditable>
-var count = 0;
+let count = 0;
 cards.forEach(function(card) {
 	if (['K', 'Q', 'J'].indexOf(card.face) !== -1) {
 		count += 1;
@@ -376,7 +380,7 @@ __Try using all 3 methods to run an analysis on some stats from game 5 of the 20
 * shooting percentage is field goals made (<code>"FGM"</code>) divided by field goals attempted (<code>"FGA"</code>)
 
 <pre><code data-trim contenteditable>
-var players = [
+const players = [
 {"lastName":"Duncan", "team":"Spurs", "FGM":5, "FGA":10},
 {"lastName":"Parker", "team":"Spurs", "FGM":7, "FGA":18},
 {"lastName":"Ginobili", "team":"Spurs", "FGM":6, "FGA":11},
@@ -451,6 +455,7 @@ A quick side note: that guy __Ginobili__ is an Argentinian basketball player tha
 * [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) - reduces original array to single value based on callback
 </section>
 
+
 <section markdown="block">
 ## Performance
 
@@ -464,6 +469,71 @@ __We make that trade-off all the time__, which is why we're not writing with sup
 </section>
 
 <section markdown="block">
+## Arrow Functions
+
+I've been holding out on you! There's another way to create functions in JavaScript, using this expression:
+
+
+<pre><code data-trim contenteditable> (arg1, arg2) => { /* body goes here */}
+</code></pre>
+
+This is an __arrow function__
+{:.fragment}
+
+* {:.fragment} it's a shorthand / more convenient way of writing a function expression
+* {:.fragment} but it doesn't have a built in `arguments` or `this` (we'll talk about `this` in a bit!)
+* {:.fragment} consequently, its behavior is subtly different from regular function expressions
+
+</section>
+
+<section markdown="block">
+## Arrow Function Syntax
+
+There are a few ways to write arrow functions. __Let's start off with this:__ &rarr;
+
+<pre><code data-trim contenteditable>
+(p1, p2, ..., pN) => { statements }
+</code></pre>
+
+You can drop the curly braces if you have a single expression. The value of that expression will be __implicitly returned__ if you drop curly braces:
+
+<pre><code data-trim contenteditable>
+(p1, p2, ..., pN) => expression // same as { return expression; }
+</code></pre>
+
+If there's only one parameter, you could also drop the parentheses:
+<pre><code data-trim contenteditable>
+singleParam => { statements }
+</code></pre>
+
+If you have no parameters, use empty parentheses:
+
+<pre><code data-trim contenteditable>
+() => { statements }
+</code></pre>
+
+</section>
+
+<section markdown="block">
+## Arrow Function Usage
+
+For now, we'll use arrow functions as a quick way of creating anonymous callback functions:
+
+<pre><code data-trim contenteditable>const nums = [1, 2, 3, 4, 5];
+console.log(nums.filter(x => x % 2 === 0));
+</code></pre>
+
+Or... occasionally, we can use them to define _regular_ functions as well:
+
+<pre><code data-trim contenteditable>
+const isEven = (x) => {return x % 2 === 0;};
+</code></pre>
+
+
+
+</section>
+
+<section markdown="block">
 ## Functions as Objects
 
 __Continuing on with the notion that functions are just values or objects... do you think functions also have properties and methods?__
@@ -472,7 +542,7 @@ Why yes - functions have both [properties](https://developer.mozilla.org/en-US/d
 {:.fragment}
 
 <pre><code data-trim contenteditable>
-var f = function(x, y, z) {
+const f = function(x, y, z) {
 	return x - y + z;
 }
 console.log(f.length);
@@ -513,9 +583,9 @@ function areaTriangle(base, height) {
 	return (1 / 2 ) * base * height;
 }
 
-var result1 = areaTriangle.call(null, 10, 20);
+const result1 = areaTriangle.call(null, 10, 20);
 console.log(result1);
-var result2 = areaTriangle.apply(null, [10, 20]);
+const result2 = areaTriangle.apply(null, [10, 20]);
 console.log(result2);
 </code></pre>
 
@@ -543,7 +613,7 @@ It's actually an implementation of __partial application__...
 __Fixing the first parameter, called <code>base</code>, of our function.__
 
 <pre><code data-trim contenteditable>
-var areaTriangleBase100 = areaTriangle.bind(null, 100);
+const areaTriangleBase100 = areaTriangle.bind(null, 100);
 
 // call with only one argument now
 console.log(areaTriangleBase100(3));
@@ -554,13 +624,104 @@ Note that you'll also see <code>bind</code> used to fix/set a function or method
 </section>
 
 <section markdown="block">
-## Of Course, We Can Make Our Own Higher Order Functions
+## ES6 Spread and Rest
+
+Hey... so remember the rest operator, `...args`? __What was it?__ &rarr;
+
+* {:.fragment} if the last named argument of a function has `...` before it (the `rest` operator) 
+* {:.fragment} then the arguments passed in at that position are condensed into a single `Array`
+* {:.fragment} for example: 
+    <pre><code data-trim contenteditable>
+function f(a, b, ...args) { console.log(args); }
+f('foo', 'bar', 'baz', 'qux'); // prints out ['baz', 'qux']
+* {:.fragment} notice that every value after and including the 3rd argument are collected into an Array
+* {:.fragment} again, this allows for an arbitrary number of trailing arguments to be passed in to a function
+* {:.fragment} (this is called a __variadic__ function, a function that can have and indefinite number of arguments / arity!)
+</code></pre>
+
+</section>
+
+<section markdown="block">
+## ES6 Spread and Rest Continued
+
+An operator that shares the same syntax but __does the opposite of the rest operator__ is the __spread operator__. 
+
+* {:.fragment} the spread operator takes an Array and breaks it up into parts!
+* {:.fragment} this can be used in function calls: `f(...someArray)`
+* {:.fragment} as well as in `Array` literals: `[1, 2, ...someArray]`
+
+</section>
+
+<section markdown="block">
+## Spread Operator in Function Calls
+
+The parameters for res are value and radix... and in this case, we're able to expand the incoming Array to fit the arguments by using the __spread operator__:
+
+<pre><code data-trim contenteditable>
+const stuff = ['101', 2];
+const res = parseInt(...stuff);
+console.log(res);
+</code></pre>
+
+* {:.fragment} the first element of stuff becomes the first argument to `parseInt`, the second becomes the last argument 
+* {:.fragment} if there are too few or too many elements in the `Array`, JavaScript will behave as if there were too few or too many arguments
+* {:.fragment} which is to say... _fine_ excess arguments are ignored and arguments not given a value are undefined... 
+
+
+</section>
+
+<section markdown="block">
+## Spread Operator in Function Calls Continued
+    
+__What does the following code print out?__ &rarr;
+
+<pre><code data-trim contenteditable>
+const words = ['foo', 'bar', 'baz'];
+function logThreeThings(a, b, c) {
+    console.log(a, b, c); 
+}
+logThreeThings(...words); 
+</code></pre>
+{:.fragment}
+
+`foo bar undefined`
+{:.fragment}
+</section>
+
+<section markdown="block">
+## Spread Operator in Array Literals
+
+The __spread operator__ can also be used to expand Arrays within Array literals:
+
+<pre><code data-trim contenteditable>
+const words = ['foo', 'bar', 'baz'];
+const moreWords = ['start', ...words, 'end']
+console.log(moreWords);
+// [ 'start', 'foo', 'bar', 'baz', 'end']
+</code></pre>
+
+You can also use the spread operator to make a shallow copy of an Array:
+
+<pre><code data-trim contenteditable>
+const arrs = [[1, 2], [3, 4]];
+const newArrs = [...arrs];
+console.log(newArrs); // yay copied!
+
+arrs[0].push('surprise!');
+console.log(newArrs); // beware, shallow!
+</code></pre>
+</section>
+
+<section markdown="block">
+## Now Back to Higher Order Functions; We Can Make Our Own!
 
 ### (As we saw with our own implementations of some array methods)
 
 * create functions that return entirely new functions (we've done this)
 * create functions that wrap or _decorate_ other functions
 </section>
+
+
 
 <section markdown="block">
 ## Let's Try Creating a Wrapping Function
@@ -587,13 +748,13 @@ __Here's one possible way to do it.__ &rarr;
 function logExecutionTime(f) {
 	return function(arg) {
 		console.time('function timing');
-		var val = f(arg);
+		const val = f(arg);
 		console.timeEnd('function timing');
 		return val; 
 	};
 }
 
-function wasteTime(limit) { for(var i=0;i < limit; i++) { }}
+function wasteTime(limit) { for(let i=0;i < limit; i++) { }}
 wasteTime = logExecutionTime(wasteTime);
 wasteTime(5000000);
 </code></pre>
@@ -611,7 +772,7 @@ __Hint__: __How would it handle the following function?__ &rarr;
 
 <pre><code data-trim contenteditable>
 function wasteTime2(start, limit) { 
-	for(var i = start; i < limit; i++) { } 
+	for(let i = start; i < limit; i++) { } 
 }
 </code></pre>
 {:.fragment}
@@ -622,9 +783,13 @@ __What if the timed function needs more than one argument?__ &rarr;
 
 <pre><code data-trim contenteditable>
 function logExecutionTime(f) {
-	return function() {
+	return function(...args) {
 		console.time('function timing');
-		var val = f.apply(null, arguments);
+        // use spread and rest
+        val = f(...args);
+
+        // old way with es5, with apply
+		// const val = f.apply(null, arguments);
 		console.timeEnd('function timing');
 		return val; 
 	};

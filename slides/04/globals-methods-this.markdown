@@ -44,7 +44,7 @@ And let's try (inadvertently, of course. oops!) adding something to the global o
 
 <pre><code data-trim contenteditable>
 function makeMessage() {
-	// oops, forgot var... I'm a global!
+	// oops, forgot var/let/const... I'm a global!
 	message = 'hello there';
 }
 makeMessage();
@@ -91,7 +91,7 @@ __What's a method?__ &rarr;
 {:.fragment}
 
 <pre><code data-trim contenteditable>
-var person = {};
+const person = {};
 person.emote = function() {
 	console.log('(っ˘̩╭╮˘̩)っ'); 
 };
@@ -122,11 +122,14 @@ When a function is invoked, it has access to its declared parameters. It also ha
 __What's the <code>arguments</code> object?__ &rarr;
 {:.fragment}
 
-__arguments__ is an array like object that contains all of the arguments (surprise!) passed in to a function.
+__arguments__ is an array like object that contains all of the arguments (surprise!) passed in to a function. __What is the preferred way of declaring an arbiratry number of parameters for a function in ES6, though__ &rarr;
+{:.fragment}
+
+use the __rest operator__: `...args`
 {:.fragment}
 
 <br>
-__With <code>arguments</code> out of the way, let's talk about <code>this</code>__ (but before we do, a detour)&rarr;
+__With <code>arguments/...args</code> out of the way, let's talk about <code>this</code>__ (but before we do, a detour)&rarr;
 {:.fragment}
 </section>
 
@@ -163,8 +166,8 @@ function showEmotion() {
 	console.log(this.emotion);
 }
 
-var person1 = {emotion:"(• ε •)", emote: showEmotion};
-var person2 = {emotion:"(╯°□°）╯︵ ┻━┻", emote: showEmotion};
+const person1 = {emotion:"(• ε •)", emote: showEmotion};
+const person2 = {emotion:"(╯°□°）╯︵ ┻━┻", emote: showEmotion};
 
 person1.emote(); // (• ε •)
 person2.emote(); // (╯°□°）╯︵ ┻━┻
@@ -200,7 +203,17 @@ Is global the same as function? true
 </section>
 
 <section markdown="block">
-## A Funny Thing About Node
+## `let`, `const` and the global object
+
+Note that __`let` and `const` declared variables__ in the _top level_ of a file (outside of functions, in the _global_ scope) __actually do not properties to the global object.__ 
+
+* {:.fragment} they just create variables in the global scope
+* {:.fragment} but, of course, `var` behaves differently
+* {:.fragment} (and it depends on whether you're using node or browser based JavaScript!)
+
+</section>
+<section markdown="block">
+## `var` and the global object
 
 In node, when a variable is declared with <code>var</code> outside of a function, __it is placed in the module (or file level) scope__. Check out the following example:
 
@@ -256,7 +269,7 @@ function showEmotion() {
 In our previous slides, we invoked this function as a method on an object.
 
 <pre><code data-trim contenteditable>
-var whyYouNo = {emotion:"ლ(ಠ益ಠლ)", emote: showEmotion};
+const whyYouNo = {emotion:"ლ(ಠ益ಠლ)", emote: showEmotion};
 whyYouNo.emote(); // y u no - ლ(ಠ益ಠლ)
 </code></pre>
 
@@ -330,7 +343,7 @@ __What will this code print out?__ &rarr;
 function showEmotion() {
 	console.log(this.emotion);
 }
-var justAnotherObject = {emotion:'(=^ェ^=)'};
+const justAnotherObject = {emotion:'(=^ェ^=)'};
 showEmotion.call(justAnotherObject);
 </code></pre>
 <pre><code data-trim contenteditable>
@@ -349,9 +362,9 @@ function showEmotion() {
 	console.log(this.emotion);
 }
 
-var justAnotherObject = {emotion:'(=^ェ^=)'};
+const justAnotherObject = {emotion:'(=^ェ^=)'};
 
-var boundShowEmotion = showEmotion.bind(justAnotherObject);
+const boundShowEmotion = showEmotion.bind(justAnotherObject);
 
 boundShowEmotion();
 </code></pre>
