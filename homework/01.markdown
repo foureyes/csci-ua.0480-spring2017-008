@@ -819,7 +819,7 @@ __Example:__
     board = rev.placeLetters(board, 'O', 'B3', 'C3', 'D2');
     board = rev.placeLetters(board, 'X', 'A3', 'D1', 'D3');
     const res = rev.getCellsToFlip(board, 0, 3);
-    // res will look something like: [[[2, 1], [2, 2]], [1, 3]]
+    // res will look something like: [[[2, 1], [2, 2]], [[1, 3]]]
 
 
 ### `isValidMove(board, letter, row, col)`
