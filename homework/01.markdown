@@ -257,7 +257,7 @@ __You should make sure your exports are up to date as you implement your functio
 You can use the supplied unit tests (in `tests/reversi-test.js`) to check that your functions are:
 
 * are named correctly
-* have the required parameters
+    * have the required parameters
 * return the appropriate value(s) 
 * meet the minimum requirements according to the specifications 
 
@@ -396,7 +396,7 @@ __Example:__
 
     // creates a board with 16 squares
     const board = rev.generateBoard(4, 4);
-    // board is = [" ", " ", " ", " ", " ", " ", " ", " ", " ", ];
+    // board is = [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "];
     // (each empty cell is a space because the default value is space)
 
 <hr>
