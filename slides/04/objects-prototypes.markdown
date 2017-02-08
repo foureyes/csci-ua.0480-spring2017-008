@@ -85,10 +85,10 @@ First off, in both Node and browser-based JavaScript implementations a __global 
 __Let's see what this looks like by__: &rarr;
 
 * checking out global in the interactive shell
-* inadvertently creating a global variable within a function definition (dropping var)
+* inadvertently creating a global variable within a function definition (dropping `const`, `let`, and `var`)
 
 <pre><code data-trim contenteditable>
-console.log(global)
+console.log(global.mistake);
 function oopsGlobal() {
 	mistake = "yup";
 }
@@ -105,7 +105,7 @@ console.log(global.mistake);
 __Methods__ are object properties that are functions (a function within the context of an object).
 
 <pre><code data-trim contenteditable>
-var cat = {};
+const cat = {};
 cat.speak = function() {
 	console.log("meow"); 
 };
@@ -118,7 +118,7 @@ Notice that you can attach methods to any arbitrary object instance! (???)
 <section markdown="block">
 ## This
 
-"When a function is called as a method—looked up as a property and immediately called, as in object.method()—the special variable __<code>this</code>__ in its body will point to the object that it was called on". __What will be printed out in the code below?.__ &rarr;
+"When a function is called as a method—looked up as a property and immediately called, as in object.method()—the special constiable __<code>this</code>__ in its body will point to the object that it was called on". __What will be printed out in the code below?.__ &rarr;
 
 <pre><code data-trim contenteditable>
 function speak() {
@@ -132,8 +132,8 @@ function speak() {
 }
 </code></pre>
 <pre><code data-trim contenteditable>
-var japaneseCat = {nationality:"Japanese", speak:speak};
-var americanCat = {nationality:"American", speak:speak};
+const japaneseCat = {nationality:"Japanese", speak:speak};
+const americanCat = {nationality:"American", speak:speak};
 </code></pre>
 <pre><code data-trim contenteditable>
 japaneseCat.speak();
@@ -156,8 +156,8 @@ meow
 A standalone function's __<code>this</code>__ refers to the global object. __What will the following code print out?__ &rarr;
 
 <pre><code data-trim contenteditable>
-var outside = 5;
-var f = function() {
+global.outside = 5;
+const f = function() {
 	console.log(this.outside);
 }
 f();
@@ -207,7 +207,158 @@ default cat noise
 <section markdown="block" data-background="#440000">
 ## In standalone functions, <code>this</code> refers to the global object 
 </section>
+<section markdown="block">
+## Another Way(s)
 
+Besides __method__ invocation and __regular function invocation__, __what are two other ways of executing a function?__ &rarr;
+
+* {:.fragment} `call` - invoke function that call was called on with specified `this` and positional arguments
+* {:.fragment} `apply` - invoke function that apply was called on with specified `this` and an `Array` containing positional arguments
+
+<br>
+When invoking a function with __`call` or `apply`__: 
+{:.fragment}
+
+* {:.fragment} __`this` will be bound to the value passed in as the first argument.__
+* {:.fragment} __What's the output of the following code?__ &rarr;
+
+<pre><code data-trim contenteditable>
+function greet(person) { console.log(this.greeting, person); }
+const obj = { greeting: 'hi' };
+greet.call(obj, 'joe');
+</code></pre>
+{:.fragment}
+
+<pre><code data-trim contenteditable>
+hi joe
+</code></pre>
+{:.fragment}
+
+
+</section>
+
+<section markdown="block">
+## Call and Apply Continued
+
+__Aaaand... of course, call and apply with our cat example (modified a bit). What is the output of this code?__ &rarr;
+
+<pre><code data-trim contenteditable>
+function speak(how, toWho) {
+    const d = {Japanese: "nyans", American: "meows"};
+    const noise = d[this.nationality] || "default cat noise";
+    console.log(noise, how, 'at', toWho);
+}
+const cat = {nationality: "American"}
+
+speak.apply(cat, ['loudly', 'you']);
+speak.apply({}, ['softly', 'me']);
+</code></pre>
+
+<pre><code data-trim contenteditable>
+meows loudly at you
+default cat noise softly at me
+</code></pre>
+{:.fragment}
+
+
+</section>
+
+<section markdown="block" data-background="#440000">
+## When executing a function with the methods `call` or `apply`, <code>this</code> refers to the object passed in as the first argument to either method
+</section>
+
+<section markdown="block">
+## Another Mystery?
+
+__What is the output of this code and why?__ &rarr;
+
+<pre><code data-trim contenteditable>
+const counter = {numbers: [1, 2, 3, 4], animal:'owl'};
+
+counter.count = function() {
+    this.numbers.forEach(function(n) {
+        console.log(n, this.animal + (n > 1 ? 's' : ''));
+    });
+};
+counter.count();
+</code></pre>
+<pre><code data-trim contenteditable>
+1 'undefined'
+2 'undefineds'
+3 'undefineds'
+4 'undefineds'
+</code></pre>
+{:.fragment}
+
+The anonymous function is being invoked as a __regular function__ for every element in the `Array`, `counter.numbers`. __`this` refers to global object__, which does not have the property, `animal`, resulting in `undefined`.
+{:.fragment}
+</section>
+
+<section markdown="block">
+## Arrow Functions
+
+In previous slides, we said that the `this` value in __arrow functions__ is the `this` in the scope that the arrow function was created in (that is, it doesn't have it's _own_ `this`, it just uses the one that's already there!
+
+__Let's see how this works:__ &rarr;
+
+<pre><code data-trim contenteditable>
+const counter = {numbers: [1, 2, 3, 4], animal:'owl'};
+
+counter.count = function() {
+    this.numbers.forEach((n) => {
+        console.log(n, this.animal + (n > 1 ? 's' : ''));
+    });
+};
+counter.count();
+</code></pre>
+
+<pre><code data-trim contenteditable>
+1 'owl'
+2 'owls'
+3 'owls'
+4 'owls'
+</code></pre>
+{:.fragment}
+
+Better! `this` is whatever `this` refers to in the count method, and because `count` was invoked as a method, `this` is the object that `count` was called on.
+{:.fragment}
+</section>
+<section markdown="block">
+## Arrow Functions Continued
+
+Of course, that means if we use the following code, what will `this` refer to? __What is the output of the following code?__ &rarr;
+
+<pre><code data-trim contenteditable>
+function foo() {
+    const bar = (x) => { console.log(this.qux); };
+    bar();
+}
+foo();
+</code></pre>
+
+<pre><code data-trim contenteditable>
+undefined
+</code></pre>
+{:.fragment}
+
+`this` references `this` in the function, `foo`, which was invoked as a regular function. Consequently, `this` is the global object.
+{:.fragment}
+</section>
+<section markdown="block">
+## Summary
+
+_What is this?????_
+
+1. {:.fragment} __regular function invocation__ 
+    * {:.fragment} `this` is the global object
+2. {:.fragment} __method call__
+    * {:.fragment} `this` is the object the method was called on
+3. {:.fragment} __invoked with call or apply__
+    * {:.fragment} `this` is the first argument passed in to call or apply
+4. {:.fragment} __arrow function__
+    * {:.fragment} `this` is `this` from the enclosing context 
+
+</section>
 <section markdown="block">
 ## A Magic Trick
 
@@ -217,7 +368,7 @@ __Let's try running this code...__ &rarr;
 * will this produce output or give us an error?
 
 <pre><code data-trim contenteditable>
-var empty = {}; 
+const empty = {}; 
 console.log(empty.toString);
 console.log(empty.toString());
 </code></pre>

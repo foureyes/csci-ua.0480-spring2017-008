@@ -85,7 +85,7 @@ First off, in both Node and browser-based JavaScript implementations a __global 
 __Let's see what this looks like by__: &rarr;
 
 * checking out global in the interactive shell
-* inadvertently creating a global variable within a function definition (dropping var)
+* inadvertently creating a global variable within a function definition (dropping `var`, `let` and `const`)
 
 <pre><code data-trim contenteditable>
 console.log(global)
@@ -105,7 +105,7 @@ console.log(global.mistake);
 __Methods__ are object properties that are functions (a function within the context of an object).
 
 <pre><code data-trim contenteditable>
-var cat = {};
+const cat = {};
 cat.speak = function() {
 	console.log("meow"); 
 };
@@ -132,8 +132,8 @@ function speak() {
 }
 </code></pre>
 <pre><code data-trim contenteditable>
-var japaneseCat = {nationality:"Japanese", speak:speak};
-var americanCat = {nationality:"American", speak:speak};
+const japaneseCat = {nationality:"Japanese", speak:speak};
+const americanCat = {nationality:"American", speak:speak};
 </code></pre>
 <pre><code data-trim contenteditable>
 japaneseCat.speak();
@@ -156,8 +156,8 @@ meow
 A standalone function's __<code>this</code>__ refers to the global object. __What will the following code print out?__ &rarr;
 
 <pre><code data-trim contenteditable>
-var outside = 5;
-var f = function() {
+global.outside = 5;
+const f = function() {
 	console.log(this.outside);
 }
 f();
@@ -217,7 +217,7 @@ __Let's try running this code...__ &rarr;
 * will this produce output or give us an error?
 
 <pre><code data-trim contenteditable>
-var empty = {}; 
+const empty = {}; 
 console.log(empty.toString);
 console.log(empty.toString());
 </code></pre>

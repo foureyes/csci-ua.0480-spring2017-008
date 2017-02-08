@@ -480,8 +480,8 @@ I've been holding out on you! There's another way to create functions in JavaScr
 This is an __arrow function__
 {:.fragment}
 
-* {:.fragment} it's a shorthand / more convenient way of writing a function expression
-* {:.fragment} but it doesn't have a built in `arguments` or `this` (we'll talk about `this` in a bit!)
+* {:.fragment} it's a __shorthand / more convenient__ way of writing a function expression
+* {:.fragment} but it __doesn't have__ a built in __`arguments` or `this`__ (we'll talk about `this` in a bit!)
 * {:.fragment} consequently, its behavior is subtly different from regular function expressions
 
 </section>
@@ -489,26 +489,22 @@ This is an __arrow function__
 <section markdown="block">
 ## Arrow Function Syntax
 
-There are a few ways to write arrow functions. __Let's start off with this:__ &rarr;
+__There are a few ways to write arrow functions.__ &rarr; 
 
-<pre><code data-trim contenteditable>
+* {:.fragment} Parentheses around parameters, curly braces around body:
+    <pre><code data-trim contenteditable>
 (p1, p2, ..., pN) => { statements }
 </code></pre>
-
-You can drop the curly braces if you have a single expression. The value of that expression will be __implicitly returned__ if you drop curly braces:
-
-<pre><code data-trim contenteditable>
+* {:.fragment} You can drop the curly braces if you have a single expression. The value of that expression will be __implicitly returned__ if you drop curly braces:
+    <pre><code data-trim contenteditable>
 (p1, p2, ..., pN) => expression // same as { return expression; }
 </code></pre>
-
-If there's only one parameter, you could also drop the parentheses:
-<pre><code data-trim contenteditable>
+* {:.fragment} If there's only one parameter, you could also drop the parentheses:
+    <pre><code data-trim contenteditable>
 singleParam => { statements }
 </code></pre>
-
-If you have no parameters, use empty parentheses:
-
-<pre><code data-trim contenteditable>
+* {:.fragment} If you have no parameters, use empty parentheses:
+    <pre><code data-trim contenteditable>
 () => { statements }
 </code></pre>
 
@@ -517,17 +513,18 @@ If you have no parameters, use empty parentheses:
 <section markdown="block">
 ## Arrow Function Usage
 
-For now, we'll use arrow functions as a quick way of creating anonymous callback functions:
+For now, __we'll use arrow functions as:__ &rarr; 
 
-<pre><code data-trim contenteditable>const nums = [1, 2, 3, 4, 5];
+* {:.fragment} a quick way of creating anonymous callback functions...
+* {:.fragment} for example, if we need to pass a one-time use function as an argument to a higher order function (like map):
+    <pre><code data-trim contenteditable>const nums = [1, 2, 3, 4, 5];
 console.log(nums.filter(x => x % 2 === 0));
 </code></pre>
-
-Or... occasionally, we can use them to define _regular_ functions as well:
-
-<pre><code data-trim contenteditable>
+* {:.fragment} or... occasionally, we can use them to define _regular_ functions as well:
+    <pre><code data-trim contenteditable>
 const isEven = (x) => {return x % 2 === 0;};
 </code></pre>
+* {:.fragment} we'll see later that arrow functions are sometimes useful because the `this` value within its body is the same as `this` in the scope that it was created in (this will make more sense when we discuss `this`!)
 
 
 
@@ -637,7 +634,6 @@ f('foo', 'bar', 'baz', 'qux'); // prints out ['baz', 'qux']
 * {:.fragment} notice that every value after and including the 3rd argument are collected into an Array
 * {:.fragment} again, this allows for an arbitrary number of trailing arguments to be passed in to a function
 * {:.fragment} (this is called a __variadic__ function, a function that can have and indefinite number of arguments / arity!)
-</code></pre>
 
 </section>
 
@@ -665,7 +661,7 @@ console.log(res);
 
 * {:.fragment} the first element of stuff becomes the first argument to `parseInt`, the second becomes the last argument 
 * {:.fragment} if there are too few or too many elements in the `Array`, JavaScript will behave as if there were too few or too many arguments
-* {:.fragment} which is to say... _fine_ excess arguments are ignored and arguments not given a value are undefined... 
+* {:.fragment} which is to say... _fine_ - excess arguments are ignored and arguments not given a value are undefined... 
 
 
 </section>

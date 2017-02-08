@@ -28,7 +28,7 @@ __Let's check out this code.__ &rarr;
 
 <pre><code data-trim contenteditable>
 // an empty object
-var hat = {}; 
+const hat = {}; 
 
 // printing out a properties
 console.log(hat.toString);
@@ -37,7 +37,7 @@ console.log(hat.toString);
 console.log(hat.toString());
 </code></pre>
 
-* __Have we defined any properties on the object, <code>hat</code>, yet?__ &arr;
+* __Have we defined any properties on the object, <code>hat</code>, yet?__ &rarr;
 * __What do we expect the output to be?__ &rarr;
 
 <pre><code data-trim contenteditable>
@@ -52,7 +52,7 @@ console.log(hat.toString());
 ## So Where Did Those Properties Come From?
 
 <pre><code data-trim contenteditable>
-var hat = {}; 
+const hat = {}; 
 console.log(hat.toString); // a function
 console.log(hat.toString()); // returns object
 </code></pre>
@@ -63,16 +63,17 @@ console.log(hat.toString()); // returns object
 </section>
 
 <section markdown="block">
-## Inherited Properties
+## "Inherited" Properties
 
-__All objects have a link to another object that's called its <code>prototype</code>__.
+__All objects have a link to another object that's called its <code>[[prototype]]</code>__.
 
-* objects are basically just a collection of properties
-* when an objects gets a request for a property that it doesn't have, the object's prototype is searched for that property
-* <code>prototype</code> objects have prototypes as well!
-* the search for a property goes on up the chain of prototypes until
-	* the property is found
-	* an object with a <code>null</code> prototype is reached / the last object in the chain: <code>Object.prototype</code>
+* note that `[[prototype]]` means the concept, _prototype_ not the actual syntax (confusingly, there are properties and objects in JavaScript that are named `prototype` but are not exactly the concept `[[prototype]]`)
+* __objects__ are basically just a __collection of properties__
+* when an objects gets a request for a __property that it doesn't have, the object's prototype is searched for that property__
+* <code>[[prototype]]</code> objects have [[prototype]]s as well!
+* searching goes on __up the chain of prototypes until__
+	* {:.fragment} the property is found
+	* {:.fragment} an object with a <code>null</code> prototype is reached / the last object in the chain: <code>Object.prototype</code>
 </section>
 
 <section markdown="block">
@@ -82,13 +83,13 @@ The top level prototype is [Object.prototype](https://developer.mozilla.org/en-U
 
 * all objects in JavaScript are descended from <code>Object</code>
 * all objects inherit methods and properties from <code>Object.prototype</code>
-* __<code>Object.prototype</code>'s prototype is <code>null</code>__
+* __<code>Object.prototype</code>'s [[prototype]] is <code>null</code>__
 
 <br>
 __Let's do some exploring.__ &rarr;
 
 * use <code>Object.getPrototypeOf(obj)</code> 
-* this gives back the prototype of the passed in object <code>obj</code>... 
+* this gives back the [[prototype]] of the passed in object <code>obj</code>... 
 
 <pre><code data-trim contenteditable>
 console.log(
@@ -104,13 +105,13 @@ console.log(
 <section markdown="block">
 ## Object.prototype Continued
 
-<code>Object.prototype</code> isn't always an object's direct prototype; instead, most objects have a prototype of another object
+<code>Object.prototype</code> isn't always an object's direct [[prototype]]; instead, most objects have a [[prototype]] of another object
 
 * __functions__ derive from <code>Function.prototype</code>
 * __arrays__ derive from <code>Array.prototype</code>
 
 <br>
-__Let's see what happens when we call <code>getPRototypeOf</code>.__ &rarr;
+__Let's see what happens when we call <code>getPrototypeOf</code>.__ &rarr;
 
 <pre><code data-trim contenteditable>
 function f(x) { return x;}
@@ -126,9 +127,9 @@ console.log(
 </section>
 
 <section markdown="block">
-## Object.protoype Continued Some More
+## Object.prototype Continued Some More
 
-__What do you think the prototype of Array.prototype is?__&rarr;
+__What do you think the [[prototype]] of Array.prototype is?__&rarr;
 
 <pre><code data-trim contenteditable>
 console.log(
@@ -146,11 +147,11 @@ console.log(
 <section markdown="block">
 ## Using <code>Object.create</code>
 
-__<code>Object.create</code>__ - creates a new object with the specified prototype object and properties
+__<code>Object.create</code>__ - creates a new object with the specified [[prototype]] object and properties
 
 <pre><code data-trim contenteditable>
 // our "template" object
-var protoWerewolf = { 
+const protoWerewolf = { 
 	description: 'hairy', 
 	howl: function(thing) {
 		console.log('The werewolf howls at the ' + thing + '.');
@@ -158,7 +159,7 @@ var protoWerewolf = {
 };
 
 // make a new werewolf with Object.create
-var sadWerewolf = Object.create(protoWerewolf);
+const sadWerewolf = Object.create(protoWerewolf);
 sadWerewolf.mood = 'sullen';
 sadWerewolf.howl('moon');
 </code></pre>
@@ -192,8 +193,8 @@ function Werewolf(mood) {
 	this.mood = mood;
 }
 
-var sadWerewolf = new Werewolf('sad'); 
-var partyWerewolf = new Werewolf('partying'); 
+const sadWerewolf = new Werewolf('sad'); 
+const partyWerewolf = new Werewolf('partying'); 
 console.log(partyWerewolf.mood);
 </code></pre>
 
@@ -385,7 +386,7 @@ __In the previous implementation, there's actually some stuff missing when we cr
 
 <br>
 <pre><code data-trim contenteditable>
-var w = new SpaceWerewolf();
+const w = new SpaceWerewolf();
 console.log(mood)
 </code></pre>
 {:.fragment}
@@ -415,7 +416,7 @@ function SpaceWerewolf(mood) {
 All object's have a property named <code>constructor</code>. __<code>constructor</code>__ is the function that was used to create the instance's prototype.
 
 <pre><code data-trim contenteditable>
-var a = [];
+const a = [];
 console.log(a.constructor); // [Function: Array] 
 </code></pre>
 
@@ -446,7 +447,7 @@ function SpaceWerewolf(mood) {
 SpaceWerewolf.prototype = Object.create(Werewolf.prototype);
 SpaceWerewolf.prototype.constructor = SpaceWerewolf;
 
-var w = new SpaceWerewolf('in space');
+const w = new SpaceWerewolf('in space');
 console.log(w.mood);
 console.log(w.constructor);
 </code></pre>
@@ -488,8 +489,8 @@ Werewolf.prototype.howl = function(thing) {
 __What would the output be if the following code were run...__ &rarr;
 
 <pre><code data-trim contenteditable>
-var sadWerewolf = new Werewolf('sad');
-var partyWerewolf = new Werewolf('partying');
+const sadWerewolf = new Werewolf('sad');
+const partyWerewolf = new Werewolf('partying');
 partyWerewolf.scary = false;
 
 console.log(sadWerewolf.scary);
@@ -510,7 +511,7 @@ Some notes on the example:
 * {:.fragment} to inherit properties from Monster...
     * {:.fragment} we set our Werewolf constructor's prototype to a fresh object with <code>Monster.prototype</code> as the prototype
     * {:.fragment} we called the "super" constructor
-* {:.fragment} <code>var sadWerewolf = new Werewolf('sad'); </code>
+* {:.fragment} <code>const sadWerewolf = new Werewolf('sad'); </code>
 * {:.fragment} ...which is why scary was found in the prototype chain for <code>sadWerewolf</code>
 </section>
 
@@ -556,8 +557,8 @@ Bike.prototype.honk = function() {
 </code></pre>
 
 <pre><code data-trim contenteditable>
-var myCar = new Car();
-var myBike = new Bike();
+const myCar = new Car();
+const myBike = new Bike();
 myBike.honk();
 console.log(myCar.wheels);
 console.log(myBike.wheels);
@@ -572,7 +573,7 @@ console.log(myBike.wheels);
 __How do we list every property in an object?__ &rarr;
 
 <pre><code data-trim contenteditable>
-for (var prop in obj) {
+for (const prop in obj) {
 	console.log(prop)
 }
 </code></pre>
@@ -582,10 +583,10 @@ __Let's list every property and value in <code>partyWerewolf</code> and <code>sa
 {:.fragment}
 
 <pre><code data-trim contenteditable>
-for (var p in partyWerewolf) {
+for (const p in partyWerewolf) {
 	console.log(p + ': ' + partyWerewolf[p]);
 }
-for (var p in sadWerewolf) {
+for (const p in sadWerewolf) {
 	console.log(p + ': ' + sadWerewolf[p]);
 }
 </code></pre>
@@ -602,7 +603,7 @@ We could use the <code>hasOwnProperty</code> method that every object inherits f
 
 <pre><code data-trim contenteditable>
 console.log('party\n-----');
-for (var p in partyWerewolf) {
+for (const p in partyWerewolf) {
 	if (partyWerewolf.hasOwnProperty(p)) {
 		console.log(p + ': ' + partyWerewolf[p]);
 	}
@@ -610,7 +611,7 @@ for (var p in partyWerewolf) {
 console.log('\n');
 
 console.log('sad\n-----');
-for (var p in sadWerewolf) {
+for (const p in sadWerewolf) {
 	if (sadWerewolf.hasOwnProperty(p)) {
 		console.log(p + ': ' + sadWerewolf[p]);
 	}
@@ -638,6 +639,9 @@ console.log(myCar instanceof Bike);
 true
 false
 </code></pre>
+{:.fragment}
+
+(in _actuality_ instance of checks if an object has in its prototype chain the prototype property of a constructor)
 {:.fragment}
 </section>
 
@@ -707,4 +711,187 @@ __What does the <code>instanceof</code> operator do?__ &rarr;
 
 It determines whether the operand on the left is an instance of the operand on the right.
 {:.fragment}
+</section>
+
+<section markdown="block">
+## ES6 Classes
+
+In ES6, there's yet another way to create a prototype chain of objects, and that's using a _familiar_ construct, __classes__.
+
+* they're syntactic sugar for creating constructor functions and a prototype object with methods
+* (in actuality, everything is still prototypes and constructor functions)
+</section>
+
+<section markdown="block">
+## Example ES6 Class
+
+__These two bits of code both produce a function called `HttpRequest`!__ &rarr;
+
+ES6 class:
+
+<pre><code data-trim contenteditable>
+class HttpRequest {
+}
+</code></pre>
+
+ES5 constructor:
+
+<pre><code data-trim contenteditable>
+function HttpRequest() {
+}
+</code></pre>
+
+Both result in the same output when used in the following manner:
+
+<pre><code data-trim contenteditable>
+const req = new HttpRequest();
+console.log(HttpRequest);
+console.log(typeof req.constructor);
+console.log(req.constructor.name);
+</code></pre>
+
+</section>
+
+<section markdown="block">
+## Constructors
+
+ES6 style classes allow for a constructor to be defined as follows:
+
+* within the class definition, create a function called constructor
+* no function keyword is required
+* the constructor has access to `this` which represents the instance that is created
+
+<br>
+<pre><code data-trim contenteditable>
+class HttpRequest {
+    constructor(method, url) {
+        this.method = method;
+        this.url = url;
+    }
+}
+</code></pre>
+
+The above code is _mostly_ the same as this ES5 function that can be used as a constructor:
+
+<pre><code data-trim contenteditable>
+function HttpRequest(method, url) {
+   this.method = method;
+   this.url = url;
+}
+</code></pre>
+
+We'll see later that subclass constructors must call super before using `this`.
+</section>
+
+<section markdown="block">
+## Methods in ES5
+
+__In ES5, to add a method to the prototype, we'd have to do something like this:__&rarr;
+
+<pre><code data-trim contenteditable>
+function HttpRequest(method, url) {
+   this.method = method;
+   this.url = url;
+}
+</code></pre>
+
+<pre><code data-trim contenteditable>
+HttpRequest.prototype.makeRequest = function() {
+    return this.method + ' ' + this.url + ' HTTP/1.1';
+}
+</code></pre>
+
+</section>
+
+<section markdown="block">
+## Methods in ES6
+
+__In ES6, we can define methods directly in the class definition, and they will show up in the instances' prototype__ &rarr;
+
+<pre><code data-trim contenteditable>
+class HttpRequest {
+  constructor(method, url) {
+    this.method = method;
+    this.url = url;
+  }
+
+  makeRequest() {
+    return this.method + ' ' + this.url + ' HTTP/1.1';
+  }
+}
+</code></pre>
+
+* note that there are no commas between method and constructor definitions
+* again, you do not have to use the keyword, `function`
+* methods, of course, can reference `this`, and if the method is called within the context of an instance, then `this` refers to the instance
+
+</section>
+
+<section markdown="block">
+## ES6 Methods Continued
+
+__Note that creating these methods in ES6 style classes is _actually_ just adding to the prototype!__ &rarr;
+
+<pre><code data-trim contenteditable>
+const req = new HttpRequest('GET', 'http://foo.bar/baz');
+console.log(req.makeRequest());
+console.log(Object.getPrototypeOf(req).makeRequest);
+</code></pre>
+
+</section>
+
+<section markdown="block">
+## Inheritance
+
+__Use `extends` to inherit from a class!__ (read: set up a prototype chain)
+
+<pre><code data-trim contenteditable>
+class Element {
+    constructor(name) {
+        this.name = name; 
+    }
+}
+</code></pre>
+
+<pre><code data-trim contenteditable>
+class ImgElement extends Element {
+    // make sure to call super before using this
+    // within subclass
+    constructor(url) {
+        super('img');
+        this.url = url;
+    }
+}
+</code></pre>
+
+<pre><code data-trim contenteditable>
+const img = new ImgElement('http://foo.bar/baz.gif');
+console.log(img.name);
+console.log(img.url);
+</code></pre>
+</section>
+
+<section markdown="block">
+## Calling Super Constructor
+
+__In the previous example, `super` was used to call the base class constructor.__ &rarr;
+
+* {:.fragment} `super` must be called in your subclass constructor if...
+* {:.fragment} you use `this` within your constructor
+* {:.fragment} (it's essentially initializing `this` properties the way that the superclass would
+* {:.fragment} __`super` must be called before using this within a subclass__
+
+</section>
+
+<section markdown="block">
+## High Level Summary 
+
+__Every object in JavaScript links to another object called its [[prototype]].__ &rarr; 
+
+* when a property cannot be found in the original object, it goes up the prototype chain
+* objects can be given prototypes in 3 ways:
+    1. {:.fragment} `Object.create`
+    2. {:.fragment} constructor functions
+    3. {:.fragment} ES6 Classes
+    4. {:.fragment} (there's also something called `__proto__` that allows direct access to a [[prototype]], but its use is discouraged)
 </section>
