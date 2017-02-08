@@ -90,7 +90,7 @@ __How do you retrieve an object's original prototype?__ &rarr;
 * {:.fragment} Use <code>Object.getPrototypeOf</code> 	
 * {:.fragment} (note that attempting to access a property named <code>.prototype</code> on your object does not _actually_ return your object's prototype!)
 	* {:.fragment} for example...
-	* {:.fragment} <code>var obj = {};</code>
+	* {:.fragment} <code>const obj = {};</code>
 	* {:.fragment} <code>console.log(Object.getPrototypeOf(obj));</code>
 	* {:.fragment} <code>console.log(obj.prototype); // <-- don't do this, you'll get undefined</code>
 </section>
@@ -98,11 +98,12 @@ __How do you retrieve an object's original prototype?__ &rarr;
 <section markdown="block">
 ## Creating Objects
 
-__Name 3 ways to create objects.__ &rarr;
+__Name 4 ways to create objects.__ &rarr;
 
 * {:.fragment} object literals
 * {:.fragment} <code>Object.create</code>
 * {:.fragment} constructors
+* {:.fragment} ES6 classes
 
 </section>
 
@@ -133,8 +134,8 @@ You use <code>Object.create(someOtherObject)</code> to create objects with a spe
 {:.fragment}
 
 <pre><code data-trim contenteditable>
-var cat = {cute: 'very'};
-var kitten = Object.create(cat);
+const cat = {cute: 'very'};
+const kitten = Object.create(cat);
 console.log(kitten.cute); // <-- kitten inherits cute from cat! 
 </code></pre>
 {:.fragment}
@@ -151,7 +152,7 @@ A __constructor__ is a regular function called with <code>new</code> in front of
 
 <pre><code data-trim contenteditable>
 function Cat() { }
-var c = new Cat();
+const c = new Cat();
 </code></pre>
 {:.fragment}
 
@@ -167,8 +168,8 @@ Use __this__ to refer to a fresh empty object that's returned by the constructor
 
 <pre><code data-trim contenteditable>
 function Cat() { this.cute = 'very'; }
-var c = new Cat();
-var d = new Cat();
+const c = new Cat();
+const d = new Cat();
 console.log(c.cute, d.cute); // <-- properties on new objects are set!
 </code></pre>
 {:.fragment}
@@ -182,8 +183,8 @@ Using __this__ creates a property name and value for every new object instantiat
 
 <pre><code data-trim contenteditable>
 function Cat() { this.nicknames = ['katy furry', 'kitty wap']; }
-var c = new Cat();
-var d = new Cat();
+const c = new Cat();
+const d = new Cat();
 d.nicknames.push('tail-fur swift');
 console.log(c.nicknames, d.nicknames); // <-- properties are different!
 console.log(c.hasOwnProperty('nicknames')); // <-- yup, bar is an 'own' property
@@ -198,7 +199,7 @@ You can also use the constructor's (the _actual_ function object) own __prototyp
 
 <pre><code data-trim contenteditable>
 function Cat() { }
-var c = new Cat();
+const c = new Cat();
 Cat.prototype.cute = 'very';
 console.log(c.cute); 
 // ^-- such wow! c gained a new prop even though
@@ -215,7 +216,7 @@ Note that since we're setting properties on the prototype object, __these proper
 
 <pre><code data-trim contenteditable>
 function Cat() { }
-var c = new Cat();
+const c = new Cat();
 Cat.prototype.cute = 'very';
 console.log(c.cute); // <-- cute exists
 console.log(c.hasOwnProperty(c.cute)); // <-- but it's inherited (not an own prop)
@@ -231,8 +232,72 @@ You can also just assign an entire object to the prototype property... but this 
 function Cat() { this.cute = 'very' }
 function Kitten() { }
 Kitten.prototype = new Cat();
-var k = new Kitten(); // <-- instantiated *after* setting prototype!
+const k = new Kitten(); // <-- instantiated *after* setting prototype!
 console.log(k.cute); // <-- cute exists!
 </code></pre>
+
+</section>
+
+<section markdown="block">
+## An ES6 Class Example
+
+A base class:
+
+<pre><code data-trim contenteditable>
+class Monster {
+    constructor(name) {
+        this.name = name;
+    }
+
+    scare(thing) {
+        console.log(this.name, ' scares ', thing); 
+    }
+}
+</code></pre>
+
+A subclass:
+
+<pre><code data-trim contenteditable>
+class Werewolf extends Monster {
+    constructor(name, type) {
+        super(name);
+        this.type = type; 
+    }
+
+    howl() {
+        console.log(this.name, this.type, 'werewolf howls at the moon');
+    }
+}
+const w = new Werewolf('wally', 'party');
+</code></pre>
+
+
+</section>
+
+<section markdown="block">
+## Classes and Prototypes
+
+So... classes essentially set up a prototype chain and constructor function. __What's the output of this code?__ &rarr;
+
+<pre><code data-trim contenteditable>
+console.log(typeof Werewolf);
+console.log(Object.getPrototypeOf(w) === Werewolf.prototype);
+console.log(Object.getPrototypeOf(w).hasOwnProperty('howl'));
+console.log(Object.getPrototypeOf(w).hasOwnProperty('scare'));
+console.log(Object.getPrototypeOf(Object.getPrototypeOf(w)) === Monster.prototype);
+console.log(w instanceof Werewolf);
+console.log(w instanceof Monster);
+</code></pre>
+
+<pre><code data-trim contenteditable>
+Function
+true
+true
+false
+true
+true
+true
+</code></pre>
+{:.fragment}
 
 </section>

@@ -31,8 +31,8 @@ MDN Documentation on HTTP
 
 [{{ site.book_js_5 }}]({{ site.book_js_5_link }}) (Optional, same content as above)
 
-* [{{ site.book_js }}]({{ site.books_js_link }}) <br> Chapter 13 - JavaScript and the Browser
-* [{{ site.book_js }}]({{ site.books_js_link }}) <br> Chapter 17 - HTTP (up to browsers and http)
+* Chapter 13 - JavaScript and the Browser
+* Chapter 17 - HTTP (up to browsers and http)
 
 {% comment %}
 Online Articles on HTTP and Cookies
