@@ -404,8 +404,14 @@ Once you're finished with your functions, remember to:
 
 The original data for this game was sourced from [http://stats.nba.com/game/#!/0021600681/](http://stats.nba.com/game/#!/0021600681/). I've restructured it and made the data available through the course site and your repository. You'll be using this data to extract some information from the game.
 
+You'll be using two files for this:
+
+1. `basketfunc.js` to create a function called `processGameData`
+2. `report.js` to read in JSON data and use the `processGameData` above to create a report
+
 ### Importing Data
 
+* Create a file called `src/report.js`
 * Start by reading in the file `tests/0021600681_gamedetail.json` using `fs.readFile` (of course, require the module first, then call the function)
 * See the docs on [fs.readFile](https://nodejs.org/api/fs.html#fs_fs_readfile_file_options_callback) (hint: make sure you specify `utf8` as the second argument)
 * The file that you read in contains game data in JSON format
