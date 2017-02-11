@@ -96,7 +96,7 @@ npm install --save-dev chai
 
 __Parameters:__
 
-* `num1`, `num2`, up through ... `numN` - the values to be summed
+* `num1`, `num2`, up through ... `numN` - the values to be multiplied
 
 __Returns:__
 
@@ -111,12 +111,12 @@ This function demonstrates the use of the rest operator (ES6) or using the built
 __Example:__
 
     // returns the product of all arguments passed in
-    sum(1, 2, 3, 4) // --> 24
-    sum(1, 1, 1, 1, 1, 1, 1, 1, 1, 1) // --> 1
-    sum(1) // --> 1
+    prod(1, 2, 3, 4) // --> 24
+    prod(1, 1, 1, 1, 1, 1, 1, 1, 1, 1) // --> 1
+    prod(1) // --> 1
 
     // returns 0 if there are no arguments passed in
-    sum() // --> undefined
+    prod() // --> undefined
 
 <hr>
 
