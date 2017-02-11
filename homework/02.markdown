@@ -436,6 +436,7 @@ The original data for this game was sourced from [http://stats.nba.com/game/#!/0
 	    * <code>tpa</code>:  the number of three point field goals that a player attempted
 	    * <code>tov</code>:  the number of turnovers a player made (loss of possession of ball)
 	    * <code>ast</code>:  the number of assists that a player made (the number of passes that led to a score)
+	    * <code>blk</code>:  the number of blocks that a player made (for a player on defense, the number of shots that the player blocked or tipped)
 
 ## Calculations
 
