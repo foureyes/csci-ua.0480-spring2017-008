@@ -360,7 +360,8 @@ The steps for `readFileWith` are:
     * set the encoding when calling `readFile` to `utf8`
     * the callback supplied to `readFile` should:
         * parse the data resulting from a file read using the original parsing function, `fn` passed into `readFileWith` if there's no error
-        * call the callback passed into the new function with the err object (regardless of wheteher or not it's null/undefined) and the parsedData (again, regardless of whether or not it has a valud or is `undefined`)
+        * call the callback passed into the new function with the err object (regardless of wheteher or not it's null/undefined) and the parsed data (again, regardless of whether or not it has a value or is `undefined`)
+        * if there is an error, the parsed data should be `undefined`
 
 This is essentially a function that creates functions that reads and parses files.
 
