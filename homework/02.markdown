@@ -600,7 +600,7 @@ Instead of reading a local file, __modify your program__ so that it requests JSO
 
 * Use the requests library to retrieve the URL that contains the game data for the [game shown on this page](http://stats.nba.com/game/#!/0021600680/)
 * The URL for the JSON data associated with this game is at:
-    * [http://foureyes.github.io/csci-ua.0480-spring2017-008/homework/02/0021600680_gamedetail.json](http://foureyes.github.io/csci-ua.0480-fall2016-001/homework/02/0021600680_gamedetail.json')
+    * [http://foureyes.github.io/csci-ua.0480-spring2017-008/homework/02/0021600680_gamedetail.json](http://foureyes.github.io/csci-ua.0480-spring2017-008/homework/02/0021600680_gamedetail.json)
 * [Read the documentation](https://github.com/mikeal/request) to see how to use the requests module (or see the [slides](http://foureyes.github.io/csci-ua.0480-fall2016-001/slides/03/node-npm-debug-git.html#/6))
 * Notice that the data is only available within the callback that you pass in to calling <code>request</code> (much like using `readFile`
 * Again, a __callback__ is a function passed as an argument to another function... the callback will be invoked / executed at a later time, when some event is triggered
