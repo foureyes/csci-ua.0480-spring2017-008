@@ -63,7 +63,7 @@ Implement 8 functions that use JavaScript features such as:
 
 Go through the functions in order; the concepts explored build off one-another, and the functions become more and more challenging to implement as you go on.
 
-Do not use a regular `for`, `for ... in`, `for ... of`, or `forEach` loop. __There will a small (-2) penalty every time one is used__.
+Do not use a regular `while`, `for`, `for ... in`, `for ... of`, or `forEach` loop. __There will a small (-2) penalty every time one is used__.
 
 
 ### Steps
@@ -88,7 +88,7 @@ npm install --save-dev chai
 
 ### (40 points) Functions to Implement
 
-### (-2 per for, forEach, for of, or for in loop used)
+### (-2 per while, for, forEach, for of, or for in loop used)
 
 <hr>
 
@@ -252,7 +252,7 @@ __Example:__
 
 <hr>
 
-### `mapWith(fn, n)`
+### `mapWith(fn)`
 
 __Parameters:__
 
