@@ -132,9 +132,7 @@ TODO
 * Node HTTP Module
 
 </td>
-<td></td><td></td><td markdown="block"></td>{% comment %}
 {% include schedule/07.markdown %}
-{% endcomment %}
 </tr>
 
 
@@ -145,9 +143,7 @@ TODO
 * Web Framework
 * Project Layout
 </td>
-<td></td><td></td><td markdown="block"></td>{% comment %}
 {% include schedule/08.markdown %}
-{% endcomment %}
 </tr>
 
 <tr class="success"><td></td><td><strong>Feb 20</strong><br>Mon</td> <td markdown="block"> __No class (Presidents' Day)__ 

@@ -72,7 +72,7 @@ For computers and communication between them, these rules may define:
 <section markdown="block">
 ## A Protocol Example
 
-Our book described a __simple chat protocol__. For two computers to communicate with this protocol:
+Eloquent JavaSccript describes a __simple chat protocol__. For two computers to communicate with this protocol:
 
 1. one computer sends bits that represent the text, '__CHAT?__', to another computer
 2. the other computer responds with '__OK!__' to show that it accepts and understands the protocol
@@ -109,6 +109,72 @@ Server: 221 Bye
 <section markdown="block">
 ## A Slightly Closer Look at TCP/IP
 
+The previous slides described __Application__ _protocols_ ... (chat, mail, _specific_ applications). __However, these protocols don't define how data/messages _actually_ gets from one computer to another in a networked environment__ &rarr;
+
+* {:.fragment} how does a message get translated from (for example) plain text to electronic signals... and how is sent over the Internet, and translated back to plain text?
+* {:.fragment} welp! there are other protocols - __a _stack_ of protocols__ that describe how this communication works
+* {:.fragment} this stack is of protocols is often referred to as the TCP/IP stack 
+    * {:.fragment} (mainly because TCP and IP are two of the major protocols involved)
+</section>
+
+<section markdown="block">
+## TCP/IP Continued
+
+The __TCP/IP stack__ __consists of 4 layers__:
+
+1. {:.fragment} __Application Layer__ - application level protocols such as HTTP, SMTP, etc.
+2. {:.fragment} __Transport Layer__ - protocols involved in communication (connection establishment, flow-control) between __applications__ (either on the same host/computer or different host), such as TCP or UDP
+3. {:.fragment} __Internet Layer__ - the protocol responsible for exchanging __packets of data__ across network boundaries - directs data to a specific __computer / host__, which is IP or Internet Protocop
+4. {:.fragment} __Physical (hardware) Layer / Link Layer__ - converts data to network signals and back (wi-fi, ethernet)
+
+</section>
+
+<section markdown="block">
+## Sending a Message Over the Internet
+
+Check out [this diagram](https://web.stanford.edu/class/msande91si/www-spr04/readings/week1/InternetWhitepaper_files/ruswp_diag2.gif) from this [whitepaper](https://web.stanford.edu/class/msande91si/www-spr04/readings/week1/InternetWhitepaper.htm) on how the internet works (!). The whitepaper describes __sending data from one _host_ (computer) to another through the internet__ &rarr;
+
+1. {:.fragment} messages start at the top of the stack and work __downward__
+2. {:.fragment} each layer that the message passes through may break the message up into smaller chunks of more manageable data called __packets__
+3. {:.fragment} packets go through the Application Layer and continue to the TCP layer where each packet is assigned a __port number__ (loosely speaking a number that specifies which program on the destination computer needs to receive the message) 
+4. {:.fragment} packets then proceed to the IP layer, where each packet receives its destination __IP address__ (number that identifies a computer on the network)
+
+</section>
+
+<section markdown="block">
+## Sending a Message Over the Internet Continued
+
+__Starting from the hardware layer of [this diagram](https://web.stanford.edu/class/msande91si/www-spr04/readings/week1/InternetWhitepaper_files/ruswp_diag2.gif), our message continues its journey!__ &rarr; 
+
+1. {:.fragment} with a port number and an IP address, the __hardware layer turns packets of data into electronic signals and transmits them__
+2. {:.fragment} these packets eventually arrive at the other host (often going through intermediary _routers_ in the process), and work their way back up the stack
+3. {:.fragment} as the packets go upwards through the stack, all routing data that the sending computer's stack added (such as IP address and port number) is stripped from the packets
+4. {:.fragment} when the data reaches the top of the stack, the __packets have been re-assembled into their original form__
+
+<br>
+Again, all of this comes from this [whitepaper](https://web.stanford.edu/class/msande91si/www-spr04/readings/week1/InternetWhitepaper.htm). Although it's nearly a couple of decades old, the networking aspects are still very relevant.
+{:.fragment}
+
+
+</section>
+
+<section markdown="block">
+## TCP/IP is the Underlying Protocol of the Internet
+
+* don't worry, that's about as in-depth as we'll get on TCP/IP
+* however, just know that __other _application_ layer protocols are built on top of TCP/IP__ 
+* __we're mostly interested in the web, and makin' web pages__ ...
+    * so we should take a look at __application layer protocols__
+    * specifically __HTTP__
+    
+</section>
+
+{% comment %} 
+
+<section markdown="block">
+## 
+Two of those protocols are TCP/IP.
+
 __A simplified description of communication over TCP/IP (Transmission Control Protocol/Internet Protocol):__
 
 1. a computer (the _server_) must be listening on a particular port (a number assigned to a listener, to allow for multiple listeners on a single computer)
@@ -119,15 +185,9 @@ __A simplified description of communication over TCP/IP (Transmission Control Pr
 4. if the server can be reached and is listening, a connection is created
 5. the connection serves as a two-way pipe so that data can flow in both directions
 6. once the data is successfully transmitted, it can be read and used by the machine it was sent to
-</section>
 
-<section markdown="block">
-# TCP/IP is the underlying protocol of the internet; other protocols are built on top of it
 </section>
-
-<section markdown="block">
-# We're Interested in the Web, and Makin' Web Pages
-</section>
+ {% endcomment %}
 
 <section markdown="block">
 ## The Web
@@ -138,6 +198,7 @@ A collection of interconnected documents (web pages) and other resources (images
 {:.fragment}
 
 </section>
+
 <section markdown="block">
 ## It All Starts With a URL
 
@@ -157,6 +218,7 @@ Each document or resource on the web is retrievable by a name, a __URL__ (Univer
 <code>http://pizzaforyou.com:80/search?type=vegan#top_result</code>
 {:.fragment}
 </section>
+
 <section markdown="block">
 ## Domains and IP Addresses
 
@@ -186,6 +248,7 @@ __HTTP is a request-response protocol, a very basic communication method between
 * the second computer responds to the request
 
 </section>
+
 <section markdown="block">
 ## HTTP Continued
 
@@ -196,6 +259,7 @@ The interaction between your browser and a web server goes something like this:
 * the browser sends a request message
 * on the same connection, the web server gives back a response message
 </section>
+
 <section markdown="block">
 ## A Request Message
 

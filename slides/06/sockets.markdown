@@ -17,7 +17,7 @@ Before we start, we should probably get a few definitions out of the way!
 
 * __ip address__ - number given to a computer / device on a network
 * __port__ - a number given to a communication end point that usually represents some specific service... allowing multiple services to be run on the same device... an analogy from this [guide to network programming](http://beej.us/guide/bgnet/output/html/singlepage/bgnet.html) compares an ip address to a street address of a building, and a port to an apartment number in that building
-* __socket__ - an endpoint to a connection... so there two sockets per connection, but in network programming apis, a socket object is typically the object that mediates communication (reads/writes) to a connected client or server... [this SO article goes deep on sockets vs ports](http://stackoverflow.com/questions/152457/what-is-the-difference-between-a-port-and-a-socket)
+* __socket__ - an endpoint to a connection... so there are two sockets per connection, but in network programming apis, a socket object is typically the object that mediates communication (reads/writes) to a connected client or server... [this SO article goes deep on sockets vs ports](http://stackoverflow.com/questions/152457/what-is-the-difference-between-a-port-and-a-socket)
 * __localhost__ - 127.0.0.1 ... or your _local_ computer... when used as the domain name in `nc`, your browser, etc. ... the connection is made from your computer to a service running on itself
 
 </section>
@@ -31,12 +31,12 @@ The following creates a server that listens on port `8080`. It will log out the 
 (Details in following slide)
 
 <pre><code data-trim contenteditable>
-var net = require('net');
-var HOST = '127.0.0.1';
-var PORT = 8080;
+const net = require('net');
+const HOST = '127.0.0.1';
+const PORT = 8080;
 
-var server = net.createServer(function(sock) {
-    console.log('Got connection from (addr, port):', sock.remoteAddress, sock.remotePort); 
+const server = net.createServer((sock) => {
+    console.log(`got connection from ${sock.remoteAddress}:${sock.remotePort}`);
 });
 
 server.listen(PORT, HOST);
@@ -109,17 +109,17 @@ Here's an example of logging out when a socket receives data... and when a socke
 
 <pre><code data-trim contenteditable>
 // setup above
-var server = net.createServer(function(sock) {
+const server = net.createServer((sock) => {
 
-    sock.on('data', function(binaryData) {
-        console.log('got data\n=====\n' + binaryData); 
+    sock.on('data', (binaryData) => {
+        console.log(`got data\n=====\n${binaryData}`);
     });
 
-    sock.on('close', function(data) {
-        console.log('closed', sock.remoteAddress, sock.remotePort); 
+    sock.on('close', (data) => {
+        console.log(`closed - ${sock.remoteAddress}:${sock.remotePort}`);
     });
-
 });
+
 // listen below
 </code></pre>
 

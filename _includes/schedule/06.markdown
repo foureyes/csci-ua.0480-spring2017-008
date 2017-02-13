@@ -1,8 +1,7 @@
 	<td markdown="block">
 
-DRAFT SLIDES:
-
-* From Previous Class: [Intro to Web Development](slides/05/web.html) 
+* Finish up Prototypes / Classes from Previous Class
+* [Intro to Web Development](slides/05/web.html)  
 * [Networking and Sockets](slides/06/sockets.html)
 * [A Webserver](slides/06/webserver.html)
 
@@ -58,9 +57,6 @@ In-Class Programming Activity
 
 
 
-Due Thursday, 9/29, by 11pm
-
-* Quiz #02 and #03 - Objects Basics and Objects and Prototypes
 {% endcomment %}
 
 <!--
