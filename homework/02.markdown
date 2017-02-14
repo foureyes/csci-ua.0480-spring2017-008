@@ -279,7 +279,7 @@ __Example:__
     // now square can work on Arrays of Numbers!
     console.log(mapWithSquare([1, 2, 3])); // [1, 4, 9]    
     
-    mapWithParseInt = mapWith(parseInt);
+    mapWithParseInt = mapWith((n) => parseInt(n));
     console.log(mapWithParseInt([' 123', '45', '67 '])); // [123, 45, 67]
 
 <hr>
