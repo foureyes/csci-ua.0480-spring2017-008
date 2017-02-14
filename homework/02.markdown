@@ -115,7 +115,6 @@ __Example:__
     prod(1, 1, 1, 1, 1, 1, 1, 1, 1, 1) // --> 1
     prod(1) // --> 1
 
-    // returns 0 if there are no arguments passed in
     prod() // --> undefined
 
 <hr>
@@ -247,7 +246,8 @@ __Example:__
 
     const = limitedParseInt = limitCallsDecorator(parseInt, 3);
     limitedParseInt("423") // --> 423
-    limitedParseInt("423") // --> 423 limitedParseInt("423") // --> 423
+    limitedParseInt("423") // --> 423 
+    limitedParseInt("423") // --> 423
     limitedParseInt("423") // --> undefined
 
 <hr>
