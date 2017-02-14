@@ -439,7 +439,7 @@ You'll be using two files for this:
 	    * <code>fta</code>:  the number of free throws that a player attempted 
 	    * <code>oreb</code>:  the player's number of defensive rebounds
 	    * <code>dreb</code>:  the player's number of offensive rebounds
-	    * <code>tpa</code>:  the number of three point field goals that a player made
+	    * <code>tpm</code>:  the number of three point field goals that a player made
 	    * <code>tpa</code>:  the number of three point field goals that a player attempted
 	    * <code>tov</code>:  the number of turnovers a player made (loss of possession of ball)
 	    * <code>ast</code>:  the number of assists that a player made (the number of passes that led to a score)
