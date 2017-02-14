@@ -521,7 +521,7 @@ Houston Rockets - 109
 * Use the following format: <code> * There were total_number_of_players_with_min_blocks players that had at least one block
 </code>.
 * Example string:
-    <pre><code data-trim contenteditable> * There were 8 players that had at least one block
+    <pre><code data-trim contenteditable> * There were 6 players that had at least one block
 </code></pre>
 
 ### Players With More Turnovers Than Assists
