@@ -36,8 +36,8 @@ So, how do we __create a server?__ &rarr;
 * {:.fragment} here's a simple example:
 
 <pre><code data-trim contenteditable>
-var net = require('net');
-var server = net.createServer(function(sock) {
+const net = require('net');
+const server = net.createServer(function(sock) {
     console.log('Got connection from (addr, port):', sock.remoteAddress, sock.remotePort); 
 });
 server.listen(8080, '127.0.0.1');
@@ -95,11 +95,11 @@ Aaand... we did just that! During our live coding demo, __we came up with this c
 First, some setup:
 
 <pre><code data-trim contenteditable>
-var net = require('net');
+const net = require('net');
 
 // Request object goes here...
 
-var server = net.createServer(function(sock) {
+const server = net.createServer(function(sock) {
     // "routing" goes here
 });
 server.listen(8080, '127.0.0.1');
@@ -112,10 +112,12 @@ server.listen(8080, '127.0.0.1');
 __Then, a `Request` object to parse out the path:__ &rarr;
 
 <pre><code data-trim contenteditable>
-function Request(s) {
-    var requestParts = s.split(' ');
-    var path = requestParts[1];
-    this.path = path;
+class Request {
+    constructor(s) {
+        const requestParts = s.split(' ');
+        const path = requestParts[1];
+        this.path = path;
+    }
 }
 </code></pre>
 </section>
@@ -128,9 +130,9 @@ __Now let's do routing and serving content all in one shot!__ &rarr;
 On connection ...
 <pre><code data-trim contenteditable>
     console.log('connected', sock.remoteAddress, sock.remotePort);
-    sock.on('data', function(binaryData) {
-        var reqString = '' + binaryData; 
-        var req = new Request(reqString);
+    sock.on('data', (binaryData) => {
+        const reqString = '' + binaryData; 
+        const req = new Request(reqString);
         if(req.path === '/about') {
             sock.write('HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<h2>hello</h2>');
         } else  if(req.path === '/test') {

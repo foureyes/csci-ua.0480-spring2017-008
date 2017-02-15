@@ -3,6 +3,11 @@
 * [About Class #8](slides/08/meta.html)
 {% endcomment %}
 
+See previous class for material 
+
+* (we're still one class behind)
+* note that homework 3 is posted, though!
+
 DRAFT SLIDES 
 
 * Quick Review of HTTP Module
@@ -20,6 +25,10 @@ DRAFT SLIDES
     {% endcomment %}
 </td>
 	<td markdown="block">
+
+Due Thursday, 2/23, by 11PM
+
+* [Homework #03](homework/03.html)
 
 {% comment %}
 Due Wednesday, 2/29, by 11AM (Before Class)
