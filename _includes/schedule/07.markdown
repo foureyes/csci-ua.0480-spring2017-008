@@ -7,7 +7,7 @@
 * [HTTP Summary](slides/07/http-summary.html)
 * [Sockets Review](slides/07/sockets-review.html)
 * Coding Demo: Routing / Dispatching
-* Coding Demo: Arrow Functions / Binding Methods Revisisted
+* Coding Demo: Arrow Functions / Binding Methods Revisited
 
 {% comment %}
 * [Node's HTTP Module](slides/07/node-http.html)
