@@ -186,7 +186,7 @@ Note that our `Request` object will assume HTTP/1.1, so it's not required to kee
 
 #### Methods
 
-1. `toString` - returns a string representation of the request object as a valid http request (essentially taking its properties and creating a request)
+1. `toString` - returns a string representation of the request object as a valid http request (essentially taking its properties and creating a request - or another way of looking at it is recreating the original string passed in to the constructor)
 
 You can add additional properties and methods as needed.
 
@@ -299,9 +299,11 @@ Most of the methods in the `Response` either act as a proxy for `socket` methods
 2. `write(data)` - sends data to the client by calling the `write` method on this `Response` object's internal socket object (essentially a pass-through / proxy method to call the same method on `this.sock`)
     * `data` - a `String` or `Buffer` (binary data) to be sent to the client
     * no return value
+    * note that _all it does_ is write `data` to the socket, nothing else (it doesn't close the connection or add additional data to `data` )
     * example usage:
         <pre><code data-trim contenteditable>res.write("&lt;h2&gt;A bit o' HTML&lt;/h2&gt;"); </code></pre>
 3. `end(s)` - sends data and ends the connection by callings the `end` method on this `Response` object's internal socket object (essentially a pass-through / proxy method to call the same method on `this.sock`)
+    * note that you will not be able to send any more data on a closed socket (this also implies that you cannot call end more than once for a single request/response cycle)
     * `s` - a `String` or `Buffer` (binary data) to be sent to the client
     * no return value
     * example usage:
@@ -323,6 +325,7 @@ res.send(200, 'Hi there!');
 // (then closes the connection)
 </code></pre>
 5. `writeHead(statusCode)` - sets the statusCode, and writes everything but the body, and leaves the connection open; this is simply a combination of setting the `statusCode` property and calling `this.write`
+    *  another way to think about it is that: it writes out all of the headers (including the status line), and after you call writeHead, you can continue writing more data, such as the body of the response with something like `write`
     * `statusCode` - the status code of the http response 
     * no return value
     * example usage:
@@ -346,6 +349,10 @@ res.end('');
 // response is immediately sent and connection is closed
 // (essentially ... set statusCode and header, then this.write and this.end or just this.end)
 </code></pre>
+    * troubleshooting: 
+        * some browsers, such as Chrome, will cache redirects ... so you'll have to...
+        * check with curl first to see that you're getting the right status code and headers
+        * check with your browser next, making sure to clear your browser cache before trying again (and perhaps use "incognito" mode)
 7. `toString()` - returns a string representation of this response object that can serve as a valid http response
     * no arguments
     * returns a string, a valid http response
@@ -428,6 +435,14 @@ res.sendFile('/css/base.css');
 //
 // note that the url does not have to match the name/path of the file being read!
 </code></pre>
+* troubleshooting:
+    * if you receive `Error: This socket has been ended by the other party`, it likely means that `sock.end` was called more than once
+    * if an image is broken: 
+        * it's likely an issue with content type or reading the image as binary data - make sure that the head is written first, then the data of the body sent afterwards
+        * or perhaps not having two \r\n's between the headers and the body
+        * or it could be inadvertently converting the body into a string by writing the headers and the body all at once
+        * or inadvertently adding extra data into the body 
+
 
 #### Background 
 
@@ -583,7 +598,7 @@ Now... we have an issue, because the callback that should be supplied to `readFi
 Now that we know how to use `readFile` and its callback within the context of an object, we'll turn our attention back to  `sendFile`. `sendFile` will read the contents of the `fileName` supplied to it, and it'll read the file relative to the `public` folder in the repository. Here's how you'll implement `sendFile`:
 
 
-1. Determine the absolute path to the file that's passed in as its argument by using `\_\_dirname` to find the directory of the module... and go up one so that public can be accessed.
+1. Determine the absolute path to the file that's passed in as its argument by using `__dirname` to find the directory of the module... and go up one so that public can be accessed.
     <pre><code data-trim contenteditable>const publicRoot = __dirname + '/../public';
 const filePath =  publicRoot + fileName;
 </code></pre>
