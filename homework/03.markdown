@@ -304,6 +304,7 @@ Most of the methods in the `Response` either act as a proxy for `socket` methods
         <pre><code data-trim contenteditable>res.write("&lt;h2&gt;A bit o' HTML&lt;/h2&gt;"); </code></pre>
 3. `end(s)` - sends data and ends the connection by callings the `end` method on this `Response` object's internal socket object (essentially a pass-through / proxy method to call the same method on `this.sock`)
     * note that you will not be able to send any more data on a closed socket (this also implies that you cannot call end more than once for a single request/response cycle)
+    * also note that you should not call `sock.write` at all in this method; again, just make the same call to `sock.end` (which can take an argument if you want it to write data to the socket _and_ end the connection)
     * `s` - a `String` or `Buffer` (binary data) to be sent to the client
     * no return value
     * example usage:
@@ -400,7 +401,7 @@ __Now let's test your new `Response` object in your original application!__
 
 ### Wait, One More Method: Sending back files
 
-There's one last method that we'll implement on `Request`:
+There's one last method that we'll implement on `Response`:
 
 `sendFile(fileName)` - sends file specified by fileName (which will be searched for in `$PROJECT_ROOT/public`) to client by specifying appropriate content type, writing the data from the file... and immediately closing the connection after the data is sent
 
@@ -598,7 +599,7 @@ Now... we have an issue, because the callback that should be supplied to `readFi
 Now that we know how to use `readFile` and its callback within the context of an object, we'll turn our attention back to  `sendFile`. `sendFile` will read the contents of the `fileName` supplied to it, and it'll read the file relative to the `public` folder in the repository. Here's how you'll implement `sendFile`:
 
 
-1. Determine the absolute path to the file that's passed in as its argument by using `__dirname` to find the directory of the module... and go up one so that public can be accessed.
+1. Determine the absolute path to the file that's passed in as its argument by using `_\_dirname` to find the directory of the module... and go up one so that public can be accessed.
     <pre><code data-trim contenteditable>const publicRoot = __dirname + '/../public';
 const filePath =  publicRoot + fileName;
 </code></pre>
