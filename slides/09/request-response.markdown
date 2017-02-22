@@ -366,11 +366,11 @@ __We'll also learn about <code>req.route</code> and <code>req.params</code> late
 Our usual setup, with an extra bit for dealing with request bodies.
 
 <pre><code data-trim contenteditable>
-var express = require('express');
-var bodyParser = require('body-parser');
+const express = require('express');
+const bodyParser = require('body-parser');
 
-var port = 3000;
-var app = express();
+const port = 3000;
+const app = express();
 
 app.set('view engine', 'hbs');
 </code></pre>

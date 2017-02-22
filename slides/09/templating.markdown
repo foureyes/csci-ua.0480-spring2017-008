@@ -157,6 +157,19 @@ __In your view:__ &rarr;
 
 </section>
 
+
+<section markdown="block">
+## Arrays with Named Elements
+
+__Handlebars allows _named block parameters_, which allows you to give each element a name while iterating:__ &rarr;
+
+<pre><code data-trim contenteditable>
+&#123;&#123;#each words as |word|&#125;&#125;
+&lt;p&gt;word again: &#123;&#123;word&#125;&#125;&lt;/p&gt;
+&#123;&#123;/each&#125;&#125;
+</code></pre>
+
+</section>
 <section markdown="block">
 ## Also Works With Objects
 

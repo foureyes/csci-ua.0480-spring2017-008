@@ -45,7 +45,7 @@ To create a Server object that
 
 <pre><code data-trim contenteditable>
 // bring in the http module
-var http = require('http')
+const http = require('http')
 
 // create a server object that listens on port 3000
 // ...and bind the handleRequest function to a requeset event
@@ -107,7 +107,7 @@ res.end('hello');
 __So, all together__ ...
 
 <pre><code data-trim contenteditable>
-var http = require('http');
+const http = require('http');
 
 http.createServer(handleRequest).listen(3000);
 console.log('starting server on port 3000';
@@ -344,8 +344,8 @@ npm install express --save
 
 Hello World
 <pre><code data-trim contenteditable>
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 
 app.get('/', function(req, res){
 	res.send('hello');
@@ -395,10 +395,10 @@ __What are some differences with our previous implementation using only node's h
 
 <pre><code data-trim contenteditable>
 // require the express module
-var express = require('express');
+const express = require('express');
 
 // create our express app
-var app = express();
+const app = express();
 </code></pre>
 <pre><code data-trim contenteditable>
 // use a router to bind a callback, a request handler
@@ -454,9 +454,9 @@ __res.set()__ - set a response header
 This code will allow __any__ file found in the public directory in your project to be served as a static file!
 
 <pre><code data-trim contenteditable>
-var path = require("path");
+const path = require("path");
 
-var publicPath = path.resolve(__dirname, "public");
+const publicPath = path.resolve(__dirname, "public");
 app.use(express.static(publicPath));
 </code></pre>
 <!--__ -->
@@ -470,10 +470,10 @@ Use the path module to create a path that specifies where your static files are 
 
 <pre><code data-trim contenteditable>
 // bring in the path module
-var path = require("path");
+const path = require("path");
 
 // create a cross-platform compatible path name (don't just use public)
-var publicPath = path.resolve(__dirname, "public");
+const publicPath = path.resolve(__dirname, "public");
 </code></pre>
 <!--__ -->
 

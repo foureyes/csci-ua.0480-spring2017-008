@@ -266,33 +266,29 @@ __Of course, linters are no longer just for C.__ There are linters for other lan
 <section markdown="block">
 ## JavaScript Linters
 
-__There are a actually a bunch of linters for JavaScript, not just JSHint__:
+__There are a actually a bunch of linters for JavaScript, not just ESLint__:
 
 * [ESLint](http://eslint.org/) - highly configurable linter for ES5 and ES6, reports on both potential code issues as well as adherance to stylistic conventions
 * [JSHint](http://jshint.com/) - community driven fork of JSLint, pretty relaxed default configuration, reports on cyclomatic complexity, shifting away from style suggestions
 * __JSLint__ - oldest, _most opinionated_, and non-configurable (but created by the author of the classic JS book, _JavaScript the Good Parts_, Douglas Crockford)
 
 <br>
-__Again, we're using JSHint...__ but the _trend_ seems to be [shifting towards ESLint](http://www.npmtrends.com/jshint-vs-eslint-vs-jslint-vs-babel-eslint-vs-jscs) in the last 6 months (argh, [JavaScript fatigue](http://thefullstack.xyz/javascript-fatigue/)).
+__The _trend_ seems to be [shifting towards ESLint](http://www.npmtrends.com/jshint-vs-eslint-vs-jslint-vs-babel-eslint-vs-jscs) in the last year (argh, [JavaScript fatigue](http://thefullstack.xyz/javascript-fatigue/) is _real_)__.
 
 </section>
 <section markdown="block">
-## JSHint
+## ESLint
 
-__You can install JSHint through npm (of course).__
+__You can install ESLint through npm (of course).__
 
 <pre><code data-trim contenteditable>
-npm install jshint
-
-# or globally
-npm install jshint -g
-
-# want to keep track of it in dev dependencies instead?
-npm install jshint --save-dev
+npm install eslint --save-dev
 </code></pre>
 
-* [For integration with various editors, check out JSHint's install page](http://www.jshint.com/install/)
-* __For example, it works on the commandline, with [vim](https://github.com/wookiehangover/jshint.vim), with [atom](https://atom.io/packages/atom-jshint), with [SublimeText](http://www.jshint.com/install/)__ &rarr;
+
+* [See the full installation instructions](http://eslint.org/docs/user-guide/getting-started)
+* [For integration with various editors, check out ESLint's install page](http://eslint.org/docs/user-guide/integrations)
+* __For example, it works on the commandline, with [vim](https://github.com/scrooloose/syntastic/tree/master/syntax_checkers/javascript), with [atom](https://atom.io/packages/linter-eslint), with [SublimeText](https://github.com/roadhump/SublimeLinter-eslint)__ &rarr;
 </section>
 
 <section markdown="block">

@@ -645,8 +645,8 @@ To do this:
 
 Now you'll start writing your module, `miniWeb.js`. 
 
-1. Copy everything from `evenWarmer.js` to `miniWeb.js`
-2. Use the [specifications for the `App` object below](#app)
+1. Copy your `Request` and `Response` classes from `evenWarmer.js` to `miniWeb.js`
+2. In `minWeb.js`, add one more class, `App`. Use the [specifications for the `App` object below](#app)
 3. Go through your code and check for places that may cause 500 errors (for example, if the `err` object exists when handling a file read, send back a 500 as a response... or if the framework user tries to send a file that has an extension that is not recognized, that should also be a 500)
 4. Export `App` along with `Require` and `Response`
 
@@ -749,7 +749,7 @@ this.server = net.createServer(this.handleConnection.bind(this));
     * hints:
         * note that the callback for `sock.on(data, ...)` typically only takes a single argument
         * however, we want access to a socket object so that we can create our `Response` object using that socket
-        * so... to fix the arguments, when we set `handleRequestData` as a callback in `handleConnection`, we'll have to use bind again:
+        * so... to fix the arguments, when we set `handleRequestData` as a callback in `handleConnection`, we'll have to use bind again (or arrow functions):
     * example usage:
             <pre><code data-trim contenteditable>// within handleConnection...
 sock.on('data', this.handleRequestData.bind(this, sock));
@@ -766,6 +766,7 @@ sock.on('data', this.handleRequestData.bind(this, sock));
         <pre><code data-trim contenteditable>// when a request / response cycle is finished, then log out some info
 // note that we'll need to bind req and res assuming that they're available (which they should be...
 // ...since this goes in handleRequestData, which creates both objects)
+// (arrow functions will also work)
 sock.on('close', this.logResponse.bind(this, req, res));
 </code></pre> 
 

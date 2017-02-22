@@ -76,7 +76,7 @@ Use the <code>require</code> function.
 // http is a core node module 
 // it's compiled in to the node binary
 
-var http = require('http');
+const http = require('http');
 </code></pre>
 {:.fragment}
 </section>
@@ -90,7 +90,7 @@ Just try importing it in the interactive shell, and typing out http:
 {:.fragment}
 
 <pre><code data-trim contenteditable>
-var http = require('http');
+const http = require('http');
 http
 </code></pre>
 {:.fragment}
@@ -289,8 +289,8 @@ __Let's try writing our own web server, with help from the http module!__ &rarr;
 ## A Web Server in Node, Implemented
 
 <pre><code data-trim contenteditable>
-var http = require('http');
-var port = 3000;
+const http = require('http');
+const port = 3000;
 
 http.createServer(handleRequest).listen(port);
 console.log('starting server on ' + port);
@@ -299,7 +299,7 @@ console.log('starting server on ' + port);
 
 <pre><code data-trim contenteditable>
 function handleRequest(req, res) {
-	var responseStatusCode = 200;
+	const responseStatusCode = 200;
 	res.writeHead(responseStatusCode, {'Content-Type':'text/plain'});
 	res.end('hello');
 }
@@ -418,7 +418,7 @@ Great. So, _usually_ there's more than one page on a site, so __let's figure out
 __In <code>handleResponse:</code>__ &rarr;
 
 <pre><code data-trim contenteditable>
-  var resCode,
+  const resCode,
     body,
     headers = {'Content-Type':'text/html'},
     path = req.url.toLowerCase();
@@ -457,7 +457,7 @@ The code node module, __fs__, [allows general file I/O](http://nodejs.org/api/fs
 As usual, bring it in to your program by using <code>require</code>.
 
 <pre><code data-trim contenteditable>
-var fs = require('fs');
+const fs = require('fs');
 </code></pre>
 
 </section>
@@ -496,7 +496,7 @@ __Let's try printing out the contents of a file...__ &rarr;
 ## Using fs.readFile Example
 
 <pre><code data-trim contenteditable>
-var fs = require('fs');
+const fs = require('fs');
 
 fs.readFile('./public/index.html', {'encoding':'utf-8'}, function(err, data) {
 	if (err) {
@@ -584,9 +584,9 @@ __Let's modify our handleRequest so that it uses serveStatic.__ &rarr;
 <section markdown="block">
 ## Using serveStatic Continued
 <pre><code data-trim contenteditable>
-var http = require('http'),
+const http = require('http'),
 	fs = require('fs');
-var port = 3000;
+const port = 3000;
 http.createServer(handleRequest).listen(3000);
 console.log('Started server on port', port);
 </code></pre>

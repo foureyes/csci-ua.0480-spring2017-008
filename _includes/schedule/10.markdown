@@ -1,6 +1,10 @@
 	<td markdown="block">
 
+{% comment %}
 * Review Middleware
+{% endcomment %}
+
+* [Middleware](slides/09/middleware.html)
 * Review [Response and Request Objects / Along with Templating](slides/09/request-response.html#7)
 * [More About Get](slides/10/review-get.html)
 * [Forms](slides/10/forms.html)
@@ -17,16 +21,11 @@
 </td>
 	<td markdown="block">
 
-
-<!--
-* Chapter 
-* Chapter 
--->
+https://expressjs.com/en/guide/writing-middleware.html
+* [MDN on Cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies)
+* nczonline articles on [Cookies](https://www.nczonline.net/blog/2009/05/05/http-cookies-explained/) and [Cokies and Security](https://www.nczonline.net/blog/2009/05/12/cookies-and-security/)
 </td>
 	<td markdown="block">
 
-Due  October 13th, 11PM
-
-* [Homework #4](homework/04.html)
 
 </td>

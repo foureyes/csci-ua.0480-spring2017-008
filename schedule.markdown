@@ -166,9 +166,7 @@ introduce nodemon!
 -->
 
 </td>
-<td></td><td></td><td markdown="block"></td>{% comment %}
 {% include schedule/09.markdown %}
-{% endcomment %}
 <!--<td></td><td></td><td></td>-->
 </tr>
 
