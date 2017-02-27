@@ -8,10 +8,10 @@ nav-state: assignments
 * [Homework #0](homework/00.html) 
 * [Homework #1](homework/01.html) 
 * [Homework #2](homework/02.html) 
-
-{% comment %}
 * [Homework #3](homework/03.html) 
 * [Homework #4](homework/04.html) 
+
+{% comment %}
 * [Homework #5](homework/05.html) 
 * [Homework #6](homework/06.html) 
 * [Homework #7](homework/07.html) 

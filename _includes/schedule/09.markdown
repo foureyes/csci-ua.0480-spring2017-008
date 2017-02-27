@@ -28,10 +28,13 @@
 -->
 </td>
 	<td markdown="block">
-Due Thursday 3/2, 11PM
+
+{% comment %}
+(Depending on what we get through today!)
+
+Due Thursday 3/2, 11PM (Maybe ^^^)
 
 Homework #4 To be Posted Thursday Evening, 2/23
-{% comment %}
 * [Homework #4](homework/04.html)
 {% endcomment %}
 </td>
