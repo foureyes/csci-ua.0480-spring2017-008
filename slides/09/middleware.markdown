@@ -201,8 +201,8 @@ Security through obscurity!
 ## All Together (If You Were Curious)
 
 <pre><code data-trim contenteditable>
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 </code></pre>
 <pre><code data-trim contenteditable>
 app.use(function(req, res, next) {
@@ -272,8 +272,8 @@ app.use(express.static('public'));
 {:.fragment}
 
 <pre><code data-trim contenteditable>
-var path = require('path');
-var publicPath = path.resolve(__dirname, 'public');
+const path = require('path');
+const publicPath = path.resolve(__dirname, 'public');
 app.use(express.static('public'));
 </code></pre>
 {:.fragment}

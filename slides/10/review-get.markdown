@@ -56,13 +56,13 @@ Just check out the req.query property. __Let's take a look. What's the simplest 
 {:.fragment}
 
 <pre><code data-trim contenteditable>
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 
 app.get('/', function(req, res) {
 	console.log(req.query);
 });
-app.listen(3000);
+app.listen(8080);
 
 </code></pre>
 {:.fragment}
@@ -78,77 +78,6 @@ In order to access the data passed along in the data string, just look at __<cod
 
 </section>
 
-{% comment %}
-<section markdown="block">
-## Let's Try Some Handlebars Again.
-
-__What were the steps to use handlebars templates.__ &rarr;
-
-* install <code>express-handlebars</code>
-* create directories using the following naming convention (your app will automatically look here for emplates and layouts):
-	* views go in <code>views/\*.hbs</code>
-	* layout goes in <code>views/layout.hbs</code>
-* require the module
-* some setup (specifying handlebars as the view engine)
-* create your route and use res.render 
-* create your view and layout
-{:.fragment}
-</section>
-
-<section markdown="block">
-## Installation, Directory Setup
-
-__Install handlebars (note that you can actually drop the version number):__ &rarr;
-
-<pre><code data-trim contenteditable>
-npm install express-handlebars --save
-</code></pre>
-{:.fragment}
-
-__Create some directories (use the <code>-p</code> flag to create parent directories):__ &rarr;
-{:.fragment}
-
-<pre><code data-trim contenteditable>
-
-mkdir -p views/layouts
-
-# the convention is
-# ├── app.js
-# └── views
-#     ├── index.handlebars
-#     └── layouts
-#         └── main.handlebars
-</code></pre>
-{:.fragment}
-</section>
-<section markdown="block">
-## The Actual Application Code...
-
-
-__Bring in the module, make 'main' the default layout file:__ &rarr;
-<pre><code data-trim contenteditable>
-var handlebars = require('express-handlebars').create({'defaultLayout':'main'});
-</code></pre>
-{:.fragment}
-
-__Register a template engine callback function called 'handlebars' (more about this setup [at this SO article](http://stackoverflow.com/questions/22954561/app-set-and-app-engine-in-express):__ &rarr;
-{:.fragment}
-
-<pre><code data-trim contenteditable>
-app.engine('handlebars', handlebars.engine);
-</code></pre>
-{:.fragment}
-
-__Tell express to use that as the default view engine:__ &rarr;
-{:.fragment}
-
-<pre><code data-trim contenteditable>
-app.set('view engine', 'handlebars');
-</code></pre>
-{:.fragment}
-
-</section>
-{% endcomment %}
 
 <section markdown="block">
 ## A Quick Application
@@ -198,15 +127,15 @@ __And of course, a template. Here, we're iterating over the value <code>items</c
 __Can we use query string params to filter the numbers we're seeing in the list?__ &rarr;
 
 <pre><code data-trim contenteditable>
-http://localhost:3000/?greaterThan=4
+http://localhost:8080/?greaterThan=4
 
 # show only numbers greater than 4 in the template!
 </code></pre>
 
 <pre><code data-trim contenteditable>
 // in your callback for / ...
-var numbers = [1, 2, 3, 4, 5, 6];
-var context = numbers;
+const numbers = [1, 2, 3, 4, 5, 6];
+const context = numbers;
 if (req.query.greaterThan !== undefined) {
 	context = numbers.filter(function(num) {
 		return num > +req.query.greaterThan;
@@ -223,7 +152,7 @@ res.render('index', {'items':context});
 __Create a global stats variable (_don't really do this_, we'll find better data stores later) using data from the higher order functions slides.__ &rarr;
 
 <pre><code data-trim contenteditable>
-var stats = [
+const stats = [
 {"lastName":"Duncan", "team":"Spurs", "FGM":5, "FGA":10},
 {"lastName":"Parker", "team":"Spurs", "FGM":7, "FGA":18},
 {"lastName":"Ginobili", "team":"Spurs", "FGM":6, "FGA":11},
@@ -240,8 +169,8 @@ var stats = [
 __In your route's callback function, create a similar filter, but for minimum field goals made:__ &rarr;
 
 <pre><code data-trim contenteditable>
-var minFgm = req.query.minFgm || 0;
-var filteredPlayers = stats.filter(function(player) {
+const minFgm = req.query.minFgm || 0;
+const filteredPlayers = stats.filter(function(player) {
 	return player.fgm >= +minFgm;
 });
 res.render('index', {'players':filteredPlayers});

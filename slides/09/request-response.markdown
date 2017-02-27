@@ -128,7 +128,7 @@ So, your browser is making a request. __What does it actually send to the server
 	* {:.fragment} the __http version__ being used 
 	* {:.fragment} for example: <code>GET /about HTTP/1.1</code>
 * {:.fragment} some __request headers__ - or additional information about your request (_user-agent_ or browser, language, etc.)
-	* {:.fragment} for example: <code>Host: localhost:3000</code>
+	* {:.fragment} for example: <code>Host: localhost:8080</code>
 * {:.fragment} __an empty line__
 * {:.fragment} __an optional body__ (perhaps data you're ending over via _POST_)
 </section>
@@ -159,8 +159,8 @@ More about __GET__:
 * __query strings__ are URL encoded (also known as [percent encoded](http://en.wikipedia.org/wiki/Percent-encoding).
 * any characters that have special meaning in a URL are replaced with a numeric reference prefixed by %
 * [it's slightly more complicated than that](http://stackoverflow.com/questions/1634271/url-encoding-the-space-character-or-20), with form submissions causing spaces to be substituted by +
-* spaces in a url: <code>http://localhost:3000/this%20is%20url%20encoded</code>
-* spaces in a query string after form submission: <code>http://localhost:3000/?value=also+url+encoded</code>
+* spaces in a url: <code>http://localhost:8080/this%20is%20url%20encoded</code>
+* spaces in a query string after form submission: <code>http://localhost:8080/?value=also+url+encoded</code>
 
 </section>
 
@@ -187,7 +187,7 @@ Below is a request sent from my browser to a sample node.js web app:
 
 <pre><code data-trim contenteditable>
 GET /about HTTP/1.1
-Host: localhost:3000
+Host: localhost:8080
 Connection: keep-alive
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.124 Safari/537.36
@@ -369,7 +369,7 @@ Our usual setup, with an extra bit for dealing with request bodies.
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const port = 3000;
+const port = 8080;
 const app = express();
 
 app.set('view engine', 'hbs');
@@ -489,7 +489,7 @@ req.query: {}
 </code></pre>
 {:.fragment}
 <pre><code data-trim contenteditable>
-req.headers: { host: 'localhost:3000',
+req.headers: { host: 'localhost:8080',
   connection: 'keep-alive',
   .
   .
@@ -539,7 +539,7 @@ req.query: { description: 'this is a query string' }
 {:.fragment}
 
 <pre><code data-trim contenteditable>
-req.headers: { host: 'localhost:3000',
+req.headers: { host: 'localhost:8080',
   connection: 'keep-alive',
   .
   .
@@ -569,13 +569,13 @@ req.query: {}
 {:.fragment}
 
 <pre><code data-trim contenteditable>
-req.headers: { host: 'localhost:3000',
+req.headers: { host: 'localhost:8080',
   connection: 'keep-alive',
   .
   .
   .
   'content-type': 'application/x-www-form-urlencoded',
-  referer: 'http://localhost:3000/post-demo',
+  referer: 'http://localhost:8080/post-demo',
   'accept-encoding': 'gzip,deflate',
   'accept-language': 'en-US,en;q=0.8' }
 </code></pre>
@@ -597,7 +597,7 @@ req.url: /success
 req.method: GET
 req.path: /success
 req.query: {}
-req.headers: { host: 'localhost:3000',
+req.headers: { host: 'localhost:8080',
 .
 .
 .

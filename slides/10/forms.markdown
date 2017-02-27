@@ -92,7 +92,7 @@ To handle data in the request body, you'll need to:
 Again, the body of a POST is likely to be encoded and compressed, so to parse out the data and add it to the <code>request</code> object, use the body-parser middleware:
 
 <pre><code data-trim contenteditable>
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 
 // only handle urlencoded data...
 // extended: false specifies that incoming values will be treated as strings
@@ -109,16 +109,16 @@ Here's an example that takes a name entered by the user... and displays it on th
 (some setup)
 
 <pre><code data-trim contenteditable>
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var handlebars = require('express-handlebars').create({'defaultLayout':'main'});
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
 
-app.engine('handlebars', handlebars.engine);
-app.set('view engine', 'handlebars');
+app.set('view engine', 'hbs');
 </code></pre>
 <pre><code data-trim contenteditable>
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// this is middleware to log method and path
 
 app.use(function(req, res, next) {
 	console.log(req.method, req.path);
@@ -134,7 +134,7 @@ We'll create a global variable to _store_ our data. Definitely not conventional;
 
 <pre><code data-trim contenteditable>
 // oops, a global... ok for now...
-var myName = '';
+const myName = '';
 </code></pre>
 <pre><code data-trim contenteditable>
 app.get('/', function(req, res) {
@@ -150,7 +150,7 @@ app.post('/', function(req, res) {
 });
 </code></pre>
 <pre><code data-trim contenteditable>
-app.listen(3000);
+app.listen(8080);
 </code></pre>
 
 </section>
