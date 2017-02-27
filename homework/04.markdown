@@ -9,8 +9,6 @@ title: CSCI-UA.0480 - Homework #4
 
 # Express - Static Files, Forms, and Templating __Due  March 2nd__, by 11PM
 
-<h2 style="color:red">DRAFT. Parts 1 and 2 should be usable, but part 3 needs a little more detail</h2>
-
 ## Overview
 
 ### Description
@@ -262,6 +260,11 @@ First, lets make sure we can serve up static content, like css and images.
 
 You'll need to forms for this site: one to filter the meal recommendations, the other to add a meal recommendation
 
+For a quick refresher on forms, check out:
+
+* [these slide](../slides/10/forms.html)
+* [the form element documentation on mdn](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/How_to_structure_an_HTML_form#The_<form>_element), and a [lengthy article on using forms](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/My_first_HTML_form)
+
 1. create a `GET` form that has a blank `action` (so that submissions request the same path); this is the __filter form__:
     * use radio buttons to allow the user to choose which category to filter by
     * __name the radio buttons `filterCategory`__
@@ -308,18 +311,50 @@ Here's what the page should look like after going to `/`:
 ![paths](../resources/img/hw04-foodz-01-paths.gif)
 
 
-### Filter Form
+### Filter Meal Recommendations Form
 
-In your `get` route, filter the bojects passed to render by using the values passed through the filter form (these will be in `req.query`). The interaction should look like this:
+In your `get` route, filter the objects passed to render by using the values passed through the filter form (these will be in `req.query`). 
+
+* in your route handler for <code>GET</code> requests on <code>/</code>...
+* double check the template - make sure that your __filter / GET__ form has:
+    * __radio buttons, each with a `name` of `filterCategory`__
+    * the values of the radio buttons should be `breakfast`, `lunch`, `dinner`, and `anytime`
+    * a submit button
+    * the form's method should be <code>GET</code>
+    * the action should be empty string (which means it just goes back to <code>"/"</code>) 
+* use the values from the query string that results in submitting the form by accessing `req.query`
+* these values should be used to filter the meals that are displayed to the user
+
+The interaction should look like this:
 
 ![filter](../resources/img/hw04-foodz-02-filter.gif)
 
-### Add Form
+### Create a Meal Recommendation Form
 
-Create a new `route` that accepts posts.
+* require the <code>body-parser</code> middleware and use it; this will allow you to access the content of the request's body
+    * `const bodyParser = require('body-parser');`
+    * `app.use(bodyParser.urlencoded({extended: false}));`
+* in your route handler for <code>GET</code> requests on <code>/</code>...
+* double check the template - make sure that your __second form, the POST form to create meal recommendations__  has:
+    * two text inputs, one with `name` of `name` and the other with a `name` of description
+    * __radio buttons, each with a `name` of `category`__
+    * the values of the radio buttons should be `breakfast`, `lunch`, `dinner`, and `anytime`
+    * a submit button
+    * the form's method should be <code>POST</code>
+    * the action should be empty string (which means it send a POST request to the current path, <code>"/"</code>) 
+* to handle the resulting POST request, new `route` that accepts posts
+	* in your callback function for this route...
+	* use the data in `req.body` to create a new meal recommendation
+	* ...after that, redirect back to <code>/</code> with a <code>GET</code> request
+* the interaction on Chrome's web developer tools' networking tab should look something like this:
+
+1. <code>GET / </code> to display the form initially
+2. `POST` the form
+3. `GET` the original form again
+
+(2 and 3 happen right after you press the submit button). The entire interaction should look like this:
 
 ![add](../resources/img/hw04-foodz-03-add.gif)
-
 
 
 {% comment %}
@@ -339,45 +374,6 @@ First, get some logging together so that you can troubleshoot. Log out the reque
 
 __Once it's working, create a form...__
 
-* for a quick refresher on forms, check out:
-    * [these slide](../slides/10/forms.html)
-    * [the form element documentation on mdn](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/How_to_structure_an_HTML_form#The_<form>_element), and a [lengthy article on using forms](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms/My_first_HTML_form)
-* add a form beneath the list of birds
-	* it should have a text <code>input</code>(name it appropriately... you'll see that name in the request body!)
-	* ...as well as a submit <code>input</code>
-* the form's method should be <code>POST</code>
-* the action should be empty string <code>""</code> or <code>birds</code> (it's <code>POST</code>ing to itself)
-* modify __app.js__... add a route so that it accepts <code>POST</code> requests on <code>/birds</code> 
-	* in your callback function for this route...
-	* use the bird name that was passed in from the form (it should be in the request's body)...
-	* to search the current list of birds for an entry with the same name as what is the request's body
-	* if it exists, add one to it
-	* if it doesn't, create an object for it, with quantity one, and add it to the list
-	* ...after that, redirect back to <code>/birds</code> with a <code>GET</code> request
-* the log should look something like this:
-
-<code>GET</code> the list page.
-
-<pre><code data-trim contenteditable>GET /birds
-=====
-req.body: {}
-</code></pre>
-
-<code>POST</code> the form (notice the body).
-
-<pre><code data-trim contenteditable>POST /birds
-=====
-req.body: { name: 'Ostrich', add: 'Add Another Bird' }
-</code></pre>
-
-<code>GET</code> the list page again.
-
-<pre><code data-trim contenteditable>GET /birds
-=====
-req.body: {}
-</code></pre>
-
-
 ## Part 5 - Settings Page, Filtering With GET
 
 
@@ -393,15 +389,6 @@ This feature will allow users to filter the birds on the homepage based on numbe
 
 __Create a form to set the minumum value.__
 
-* the settings page should field <code>GET</code> requests on the path, <code>/settings</code>
-* add a link to a _list_ page (birds)
-* add an <code>h3</code> header with text indicating that this is the _settings_ page
-* add a form to your settings page
-	* it should have a text <code>input</code>(name it appropriately... you'll see that name in the request body!)
-	* ...as well as a submit <code>input</code>
-* the form's method should be <code>GET</code>
-* the action should be empty string <code>"/birds"</code> (it's sending you back to the list of birds)
-* the page should look like:
 
 <div markdown="block" class="img">
 ![settings](../resources/img/hw4-settings.png)
