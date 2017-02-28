@@ -275,7 +275,7 @@ Here's an example of displaying cookies using __client side JavaScript, using `d
 <pre><code data-trim contenteditable>
 app.get('/peek', function(req, res) {
     // uncomment this: 
-    // var s = "alert(document.cookie);";
+    // const s = "alert(document.cookie);";
     res.send('<script>' + s + '</script>' + 'check out yr cookies!');
 });
 </code></pre>
@@ -293,18 +293,18 @@ __For "production", instead of using a custom solution , you can use the `expres
 
 __Boilerplate setup.__
 <pre><code data-trim contenteditable>
-var express = require('express');
-var bodyParser = require('body-parser');
+const express = require('express');
+const bodyParser = require('body-parser');
 </code></pre>
 
 __Include the express-session module...__
 
 <pre><code data-trim contenteditable>
-var session = require('express-session');
+const session = require('express-session');
 </code></pre>
 
 <pre><code data-trim contenteditable>
-var app = express();
+const app = express();
 
 app.set('view engine', 'hbs');
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -318,7 +318,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 __Set up some session options (the secret should really be externalized and not in version control, but we'll keep it here for convenience).__
 
 <pre><code data-trim contenteditable>
-var sessionOptions = { 
+const sessionOptions = { 
 	secret: 'secret for signing session id', 
 	saveUninitialized: false, 
 	resave: false 
@@ -368,7 +368,7 @@ __Our usual routes, but note the use of <code>req.session.</code>__
 <pre><code data-trim contenteditable>
 
 app.get('/', function(req, res) {
-    var name = req.session.myName || '';
+    const name = req.session.myName || '';
     res.render('index', {'myName':name});
 });
 

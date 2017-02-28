@@ -200,9 +200,7 @@ introduce nodemon!
 * Database Design
 
 </td>
-<td></td><td></td><td markdown="block"></td>{% comment %}
 {% include schedule/11.markdown %}
-{% endcomment %}
 </tr>
 
 
