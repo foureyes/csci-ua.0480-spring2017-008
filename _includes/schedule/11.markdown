@@ -9,6 +9,11 @@ And some new-ish material:
 
 * [Forms Revisited](slides/11/forms-revisited.html)
 
+__Midterm Practice__
+
+* [midterm practice](resources/handouts/midterm/midterm_1_practice.pdf)
+* [midterm practice solutions](resources/handouts/midterm/midterm_1_practice_solutions.pdf)
+
 Unlikely that we'll get to this:
 
 * [Project Layout and Scaffolding](slides/11/scaffolding.html)
