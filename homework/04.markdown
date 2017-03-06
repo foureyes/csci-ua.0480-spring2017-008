@@ -66,14 +66,14 @@ Because we're creating two express apps in a single repository, the directory la
     * `.eslintrc`
     * `/src`
         * `/dicey`
-            * `app.js`
+            * `dicey.js`
             * `public`
                 * `img` (optional)
                 * `css`
             * `views`
                 * `layout.hbs`
         * `/foodz`
-            * `app.js`
+            * `foodz.js`
             * `public`
                 * `img` (optional)
                 * `css`
@@ -100,7 +100,7 @@ Because we're creating two express apps in a single repository, the directory la
 
 ## Part 2 - dicey
 
-In `/src/dicey/app.js`, create an Express application that generates a passphrase by randomly choosing words from a word list. However, instead of simply choosing a random index to pick a word, use the Diceware methodology described here:
+In `/src/dicey/dicey.js`, create an Express application that generates a passphrase by randomly choosing words from a word list. However, instead of simply choosing a random index to pick a word, use the Diceware methodology described here:
 
 [http://world.std.com/~reinhold/diceware.html](http://world.std.com/~reinhold/diceware.html)
 
@@ -236,7 +236,7 @@ First, lets make sure we can serve up static content, like css and images.
 	* <code>public/css</code>
 	* <code>public/img</code> (optional)
 * add a blank css file in <code>public/css/base.css</code>
-* create a basic express application called <code>app.js</code>; you don't have to define any routes yet...
+* create a basic express application called <code>foodz.js</code>; you don't have to define any routes yet...
 * just add the appropriate requires and middleware to enable static file serving:
 	* check out the [slides on serving static files with Express](../slides/08/express.html#/29)
 * test that both the css files and image work
