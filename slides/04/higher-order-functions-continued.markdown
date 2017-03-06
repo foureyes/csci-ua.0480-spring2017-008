@@ -672,7 +672,7 @@ console.log(res);
 __What does the following code print out?__ &rarr;
 
 <pre><code data-trim contenteditable>
-const words = ['foo', 'bar', 'baz'];
+const words = ['foo', 'bar'];
 function logThreeThings(a, b, c) {
     console.log(a, b, c); 
 }
