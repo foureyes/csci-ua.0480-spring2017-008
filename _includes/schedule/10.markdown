@@ -29,7 +29,7 @@ https://expressjs.com/en/guide/writing-middleware.html
 </td>
 	<td markdown="block">
 
-Due Thursday 3/9, 11PM 
+Due <strike>Thursday 3/9</strike> Friday 3/10, 11PM 
 
 (__but you should probably try to get most of it down BEFORE the midterm on 3/8__)
 
