@@ -57,8 +57,8 @@ __Let's see an actual example__ ...
 The top level express object has a <code>Router()</code> function ([see the docs](http://expressjs.com/4x/api.html#router))... that __creates a new router object__. (Note that it's not a constructor, so don't invoke it with <code>new</code>).
 
 <pre><code data-trim contenteditable>
-var express = require('express')
-var router = express.Router();
+const express = require('express')
+const router = express.Router();
 </code></pre>
 </section>
 
@@ -90,7 +90,7 @@ Then, just require it in <code>app.js</code>:
 <pre><code data-trim contenteditable>
 // the router object you defined in myrouter.js
 // is now referenced by myRouter
-var myRouter = require('./routes/myrouter');
+const myRouter = require('./routes/myrouter');
 </code></pre>
 </section>
 

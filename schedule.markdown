@@ -240,10 +240,9 @@ __EXAM #1 (Midterm Exam)__
 * Authentication
 
 </td>
-<td></td><td></td><td markdown="block"></td>{% comment %}
-<!--was {% include schedule/12.markdown %}-->
+
 {% include schedule/14.markdown %}
-{% endcomment %}
+
 </tr>
 
 

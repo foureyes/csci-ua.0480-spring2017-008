@@ -1,17 +1,38 @@
 	<td markdown="block">
-<!-- 
-* [](slides//.html)
-* [](slides//.html)
--->
+
+* Exams returned on Wednesday, but Results Are...
+* Cookies, Sessions!
+* [Project Layout and Scaffolding](slides/11/scaffolding.html) (from class before midterm review)
+* [Parameters from URLs](slides/14/params.html)
+* [Mongo DB  and Mongoose](slides/14/mongo.html)
+* [Mongoose](slides/14/mongoose.html)
+* [Routers, Project/Directory Layout, nodemon](slides/14/layout.html)
+* [Validation](slides/14/validation.html)
+
+{% comment %}
+* [Final Project](final-project.html)
+{% endcomment %}
+
 </td>
 	<td markdown="block">
-<!--
-* Chapter 
-* Chapter 
--->
+
+MongoDB
+
+* [MongoDB Documentation](http://docs.mongodb.org/manual/)
+* [Install](http://docs.mongodb.org/manual/installation/)
+* [Create, Read, Update and Delete](http://docs.mongodb.org/manual/crud/)
+* [Data Modeling](http://docs.mongodb.org/manual/core/data-modeling-introduction)
+
+Mongoose
+
+* [Mongoose Documentation](http://mongoosejs.com/)
+* [Quick Start](http://mongoosejs.com/docs/index.html)
+
 </td>
 	<td markdown="block">
-<!--
-* [](assignments/.html)
--->
+
+* Quiz on databases and authentication to be posted this evening
+* Homework #05 most likely to be posted Wednesday
+* Final project discussion on Wednesday!
+
 </td>

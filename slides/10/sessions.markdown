@@ -415,7 +415,7 @@ Session data will be unique to each browser session (so you can have foo for one
 
 1. chrome://settings/cookies
 2. find localhost:3000
-3. check out the values of names __connect.sid__ and __session__ - both of those together identify the session
+3. check out the of __connect.sid__
 
 </section>
 

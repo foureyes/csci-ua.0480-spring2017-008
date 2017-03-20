@@ -178,7 +178,7 @@ __npm install__ (in package directory, no arguments):
 __Does anyone remember what a module is?__ &rarr;
 
 * it's just a __JavaScript file__
-* its contents can be brought in to another file by using the __<code>require</code>__ statement (like <code>var express = require('express')</code>
+* its contents can be brought in to another file by using the __<code>require</code>__ statement (like <code>const express = require('express')</code>
 * you can name a specific path in <code>require</code> (<code>require('./somemodule')</code>)
 * you can also drop the .js extension 
 * __for variables to be usable by (exposed to) the file that's including the module...__ &rarr;
@@ -253,6 +253,7 @@ Notice that the route modules are used just like middleware.
 	* {:.fragment} for our simple projects, separating this stuff out may seem a bit like over-engineering, but it's handy to know for larger projects...
 </section>
 
+{% comment %}
 <section markdown="block">
 ## Handlebars
 
@@ -267,6 +268,7 @@ One last thing. __Notice the handlebars setup?__ &rarr;
 	* not quite as well documented (compare their explanations on layouts)
 * either one will work for our purposes, though <code>hbs</code> will be easier going forward as it is generated as part of the scaffolding
 </section>
+{% endcomment %}
 
 
 <section markdown="block">

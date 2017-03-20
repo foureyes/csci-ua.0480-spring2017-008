@@ -463,7 +463,7 @@ In <code>db.js</code>:
 
 <pre><code data-trim contenteditable>
 // as always, require the module
-var mongoose = require('mongoose'); 
+const mongoose = require('mongoose'); 
 
 // some extra stuff goes here...
 
@@ -484,7 +484,7 @@ Between your require and connect... create a __schema__. A schema represents a M
 <br>
 <pre><code data-trim contenteditable>
 // define the data in our collection
-var Cat = new mongoose.Schema({
+const Cat = new mongoose.Schema({
 	name: String,
 	updated_at: Date
 });
@@ -516,8 +516,8 @@ require( './db' );
 Ostensibly, we would want to create, update, read or delete data based on what page (path/url/etc.) we're on. __Let's start by adding some setup to our <code>index.js</code> routes.__ &rarr;
 
 <pre><code data-trim contenteditable>
-var mongoose = require('mongoose');
-var Cat = mongoose.model('Cat');
+const mongoose = require('mongoose');
+const Cat = mongoose.model('Cat');
 </code></pre>
 </section>
 

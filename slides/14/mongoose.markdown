@@ -62,6 +62,8 @@ In MongoDB
 __What's a schema, model... and object?__ &rarr;
 {:.fragment}
 
+<br>
+
 In Mongoose...
 {:.fragment}
 
@@ -73,9 +75,38 @@ In Mongoose...
 </section>
 
 <section markdown="block">
-## Schemas
+## Designing a Data Model
 
-A schemas is analogous to a collection. We create a schema with the <code>mongoose.Schema</code> constructor.
+Let's try designing movies. __What are some properties that a `Movie` should have?__ &rarr;
+
+* {:.fragment} title
+* {:.fragment} year
+* {:.fragment} director
+    * {:.fragment} maybe first name
+    * {:.fragment} maybe last name
+</section>
+
+<section markdown="block">
+## Embedded vs Reference
+
+So the director can be:
+
+* just a first name and last name in your movie document
+* a separate document embedded in your movie document
+* a separate document referenced by your movie document
+
+See [mongodb's docs](https://docs.mongodb.com/manual/core/data-modeling-introduction/) on data modeling.
+
+<br>
+
+__What are the advantages / disadvantages of each?__ 
+
+</section>
+
+<section markdown="block">
+## Back to Mongoose - Schemas
+
+A schema is analogous to a collection. We create a schema with the <code>mongoose.Schema</code> constructor.
 
 * the convention is that your schema's name will match a lowercase, plural colleciton in your database
 * the Schema constructor takes an object with keys as names of keys that the documents created from this schema will have
@@ -91,6 +122,8 @@ Instance Methods
 
 * <code>save</code> (create a new document)
 
+<br>
+
 Static Methods
 
 * <code>find</code>
@@ -104,7 +137,10 @@ Static Methods
 
 To add extra features to your schemas, you can use plug-ins.
 
-One plug-in, mongoose-url-slugs... can be used to generate a __slug__ (human readable string that's unique for each document) for all of your objects.
+One plug-in, mongoose-url-slugs... 
+
+* can be used to generate a __slug__ (human readable string that's unique for each document) for all of your objects
+* __without having to manually specify slug in the schema!__
 </section>
 
 <section markdown="block">
@@ -125,7 +161,9 @@ __Let's try creating a schema for a pizza and toppings.__ &rarr;
 	toppings: [{name:'mushroom', extra:true}, {name:'peppers'}]
 }
 </code></pre>
+{:.fragment}
 </section>
+
 
 <section markdown="block">
 ## Let's Start With Some Setup
@@ -137,12 +175,13 @@ Make sure that you have the required modules for connecting to the database... a
 
 <br>
 <pre><code data-trim contenteditable>
-// npm install --save mongoose mongoose-url-slugs
+npm install --save mongoose mongoose-url-slugs
 </code></pre>
 
 Require and connect...
+
 <pre><code data-trim contenteditable>
-var mongoose = require('mongoose'),
+const mongoose = require('mongoose'),
 	URLSlugs = require('mongoose-url-slugs');
 
 // more stuff goes here
@@ -154,23 +193,41 @@ mongoose.connect('mongodb://localhost/pizzadb');
 </section>
 
 <section markdown="block">
+## Types / Embedded Documents
+
+* one way to define relationships is to __embed__ one document in another... 
+    * for example, this specifies that field Foo contains an Array / list of Bar objects
+    * Foo: [Bar]
+* additionally, instead of specifying the type outright, you can use an object that defines some field specifications:
+    * type
+    * max
+    * min
+    * required
+    * default (for default value)
+</section>
+<section markdown="block">
 ## Your Schema
 
 Schemas represent collections (tables). Notice the different ways of specifying the type of a field:
 
+
 <pre><code data-trim contenteditable>
-var Topping = new mongoose.Schema({
+const Topping = new mongoose.Schema({
 	name: String,
 	extra: {type: Boolean, default:false}
 });
 
-var Pizza = new mongoose.Schema({
+const Pizza = new mongoose.Schema({
 	size: {type: String, enum: ['small', 'medium', 'large']},
 	crust: String,
 	toppings: [Topping]
 });
+</code></pre>
 
-// before registering model!
+<pre><code data-trim contenteditable>
+// note that we left out slug from the schema... 
+// (the plugin will add it for you!)
+// this should go before registering model!
 Pizza.plugin(URLSlugs('size crust'));
 </code></pre>
 </section>
@@ -194,7 +251,7 @@ Pizza = mongoose.model('Pizza');
 ## Creating and Saving
 
 <pre><code data-trim contenteditable>
-var pizza1 = new Pizza({
+const pizza1 = new Pizza({
 	size: 'small',
 	crust: 'thin'
 });
@@ -211,16 +268,21 @@ pizza1.save(function(err, pizza, count) {
 <section markdown="block">
 ## Finding / Retrieving
 
+Ok... just like the commandline client, we can use __find__:
+
 <pre><code data-trim contenteditable>
 // find all (try with query/criteria)
 Pizza.find(function(err, pizzas, count) {
 	console.log(err, pizzas, count);
 });
 </code></pre>
+
+Notice that we get back an Array!
 </section>
 <section markdown="block">
 ## Finding Only One!
 
+__But I only want one!__ Sometimes it's annoying to have to index into an Array if you only want one of something, so there's also __findOne__ &rarr;
 <pre><code data-trim contenteditable>
 // find only one (returns first)
 Pizza.findOne({slug: 'small-2' }, function(err, pizza, count) {
@@ -232,9 +294,11 @@ Pizza.findOne({slug: 'small-2' }, function(err, pizza, count) {
 <section markdown="block">
 ## Finding Then Updating
 
+In Mongoose... instead of using the push operator (like in the commandline client), we have a method, __push__, that can be called on a property if it represents a list / Array of embedded values:
 <pre><code data-trim contenteditable>
 // update one after finding (hello callbacks!)
 Pizza.findOne({slug: 'small-2' }, function(err, pizza, count) {
+    // we can call push on toppings!
 	pizza.toppings.push({name: 'mushroom'});
 	pizza.save(function(saveErr, savePizza, saveCount) {
 		console.log(savePizza);	
@@ -245,6 +309,8 @@ Pizza.findOne({slug: 'small-2' }, function(err, pizza, count) {
 
 <section markdown="block">
 ## Finding Then Updating Take Two
+
+But of course... we can _actually_ use push in an update query. In this case, we're using __findOneAndUpdate__ to do the find and update all at once!
 
 <pre><code data-trim contenteditable>
 // find one and update it; maybe better than previous?
@@ -257,6 +323,8 @@ Pizza.findOneAndUpdate({slug:'small-2'}, {$push: {toppings: {name:'peppers'}}}, 
 <section markdown="block">
 ## Finding by Embedded Documents
 
+We can also adjust our query to find by an embedded document. In this case, we use the property of the list of embedded documents... and use another object that describes the embedded document that we'd like to match.
+
 <pre><code data-trim contenteditable>
 Pizza.find({toppings: {name:'mushroom'}}, function(err, pizzas, count) {
 	console.log(pizzas);
@@ -266,10 +334,11 @@ Pizza.find({toppings: {name:'mushroom'}}, function(err, pizzas, count) {
 <section markdown="block">
 ## Finding and Updating Multiple Embedded Documents
 
-(whew!)
+Notice that when we update an embedded document, before we save the parent, we have to let mongoose know that we made changes to embedded documents. (shrug)
+
 <pre><code data-trim contenteditable>
 Pizza.findOne({slug:'small-2'}, function(err, pizza, count) {
-	for (var i = 0; i < pizza.toppings.length; i++) {
+	for (let i = 0; i < pizza.toppings.length; i++) {
 		pizza.toppings[i].extra = true;
 	}
 	pizza.markModified('toppings');
@@ -277,6 +346,7 @@ Pizza.findOne({slug:'small-2'}, function(err, pizza, count) {
 		console.log(err, modifiedPizza);
 	});
 });
-
 </code></pre>
+
+(whew!) 
 </section>
