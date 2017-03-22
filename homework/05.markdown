@@ -8,7 +8,7 @@ title: CSCI-UA.0480 - Homework #5
 	<div class="panel-body" markdown="block">
 
 
-# <span style="color:red">Draft</span> Link Aggregator Site with Comments - __Due Thursday, March 30th, by 11PM__
+# Link Aggregator Site with Comments - __Due Thursday, March 30th, by 11PM__
 
 ## Overview
 
@@ -61,11 +61,10 @@ Aaaand, if you do the extra credit...
     * displays the last link that the user has entered for their _session_ (there's no login, so we'll rely on sessions to keep track of repeat users)
 
 
-{% comment %}
 #### Example Interaction
 
+![Example](../resources/img/hw05-news-03-all.gif)
 
-{% endcomment %}
 
 ### Submission Process
 
@@ -93,19 +92,28 @@ Specifically, we'll be using the following tools to help with our development pr
 Install both globally:
 
 * <code>npm install -g nodemon</code>
-* <code>npm install -g express-generator</code>
+* (optional) <code>npm install -g express-generator</code> 
 
-Generate scaffolding (this will create a folder called image-board, along with app.js, a views directory, a public directory, etc.). Remember to use the <code>--hbs</code> flag to tell the generator that we'll be using handlebars:
+Set up an express project that serves static files (with `express.static`), is able to handle forms that POST (with `body-parser`), uses templating (`hbs`) and has session handling (`express-session`). Put all of this in a folder called `ait-news`. __Use dynamically generated paths for your views and static files by using a special built in variable, `__dirname`:__ &rarr;
+
+```
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+```
+Or....
+
+Alternatively (optional), [generate scaffolding](../slides/11/scaffolding.html#/) that does all of the above (the following command will create a folder called `ait-news`, along with app.js, a views directory, a public directory, etc.). Remember to use the <code>--hbs</code> flag to tell the generator that we'll be using handlebars:
+
+(again, this is optional - only do this if you are using express generator)
 
 * <code>express --hbs ait-news</code>
-
-Install the dependencies that are required by the generated code:
-
 * <code>cd image-board && npm install</code>
 
-Within the image-board directory, we'll be using a couple of tools to help with database access and creating _url slugs_:
+Regardless of whether or not you use express generator... within the ait-news directory, we'll be using a couple of tools to help with database access and creating _url slugs_:
 
-* <code>npm install --save mongoose</code>
+* `npm install --save mongoose`
 * `npm install --save mongoose-url-slugs`
 
 Of course, add your eslint configuration file:
@@ -114,9 +122,11 @@ Of course, add your eslint configuration file:
 
 Lastly, start your server in a different terminal window using __nodemon__ to automatically restart whenever a file changes:
 
-* <code>nodemon bin/www</code>
-* to explicity set extensions that nodemon will watch for:
-* `nodemon -e js,hbs bin/www`
+* `nodemon app.js`
+
+Or... if using express generator:
+
+* `nodemon bin/www`
 
 
 ## Part 2 - Installing MongoDB, Creating a Schema, Connecting to the Database
@@ -144,7 +154,7 @@ Create a file called <code>db.js</code> within the root of your project director
 Add the required modules:
 
 <pre><code data-trim contenteditable>var mongoose = require('mongoose'),
-	URLSlugs = require('mongoose-url-slugs');
+	const URLSlugs = require('mongoose-url-slugs');
 </code></pre>
 
 Leave a placeholder for your schema...
@@ -156,36 +166,40 @@ Here's the connection string... we'll connect to the local instance of MongoDB, 
 <pre><code data-trim contenteditable>mongoose.connect('mongodb://localhost/hw05');
 </code></pre>
 
-{% comment %}
 ### (3 points) Schema 
 
 For larger projects, there is usually one file per schema, all located in a separate folder called models. For now, however, define the following Schema within <code>db.js</code>. Check out the slides on:
 
-* [check out the docs!](http://mongoosejs.com/docs/guide.html)
-* [the MongoDB Demo](../slides/11/mongo.html) 
-* [and/or the Mongoose API](../slides/15/mongoose.html) 
+* [the MongoDB Demo](../slides/14/mongo.html) 
+* [and/or the Mongoose API](../slides/14/mongoose.html) 
+* [lastly, you can check look over the mongoose documentation!](http://mongoosejs.com/docs/guide.html)
 
 Your model should accommodate the following requirements:
 
-* for a single image in your image-post, <code>Image</code>, you'll need the following fields:
-	* <code>caption</code> - a caption for the image
-	* <code>url</code> - the url to the image
-* for an image-post (a group of images), <code>ImagePost</code>, you'll need the following fields:
-	* <code>title</code>
-	* <code>images</code> (an Array of embedded documents... you can use the following syntax): <code>images: [Image]</code>
-* outside of the <code>ImagePost</code> schema, use the <code>mongoose-url-slugs</code> plugin to automatically generate a <code>slug</code> property:
+* for a comment, `Comment` , you'll need the following fields:
+	* `text` - the text of a comment
+	* `user` - the name associated with a comment
+* for a single link, `Link`, you'll need the following fields:
+	* `url` - the link's url 
+	* `title` - the title for the link that's being posted
+	* `comments` (an Array of embedded documents... you can use the following syntax): `comments: [Comment]`
+    * note that there will be another property, `slug`, that will be added automatically by using the plugin below
+        * (remember, a slug is a unique, human readable identifier that's based on one or more of a document's existing fields)
+        * for more info on slugs, check out [the general definition via wikipedia](https://en.wikipedia.org/wiki/Semantic_URL#Slug) and [the docs from the module that we're using to generate slugs](https://www.npmjs.com/package/mongoose-url-slugs#what-is-a-slug)
+
+* outside of the `Link` schema, but before you "register" your schemas as models, use the `mongoose-url-slugs` plugin to automatically generate a `slug` property:
 	* <code>&lt;your schema name&gt;plugin(URLSlugs('&lt;what properties your slug should consist of&gt;'));</code>
 	* (don't include the angle brackets, come up with your own schema name, etc.)
 
-Drop this under your <code>// my schema goes here!</code> comment.
+Make sure all of this goes under your <code>// my schema goes here!</code> comment.
 
 Then, use your schemas to define your models... these will be used as constructors later on in our project. You can place this code after your schema and before the connection (assuming that you're schema looks something like this):
 
-<pre><code data-trim contenteditable>mongoose.model('Image', Image);
-mongoose.model('ImagePost', ImagePost);
+<pre><code data-trim contenteditable>mongoose.model('Comment', Comment);
+mongoose.model('Link', Link);
 </code></pre>
 
-## Part 3 - Adding an ImagePost with Images and Displaying All ImagePosts and Their Images
+## Part 3 - Adding a Link Displaying All Links
 
 ### Overview
 
@@ -196,83 +210,73 @@ Consequently, in a file that contains your router (one of the files in the route
 * require mongoose
 * retrieve a model (to be used as a constructor later)
 
-<pre><code data-trim contenteditable>var mongoose = require('mongoose'),
-var ImagePost = mongoose.model('ImagePost');
+<pre><code data-trim contenteditable>const mongoose = require('mongoose'),
+const Link = mongoose.model('Link');
 </code></pre>
 
-* you'll have to create route, <code>/image-posts</code>; it'll contain:
-    * a form to add an image-post
-    * a list of all of the image-posts, along with their images
-* you'll also need to create another route to handle a <code>POST</code> request from the form to add an image-post; __you can make the path whatever you like__ 
+* you'll have to create route, <code>/</code>; it'll contain:
+    * a form to add a link
+    * a list of all of the links added so far
+* you'll also need to create another route to handle a <code>POST</code> request from the form to add a link ; __you can make the path whatever you like__ 
 
-The flow of the image-post create form should follow the conventional POST, redirect, GET workflow:
+The flow of the link creation form should follow the conventional POST, redirect, GET workflow:
 
-* <code>GET /image-posts</code> (to display all image-posts and the form)
+* <code>GET /</code> (to display all image-posts and the form)
 * <code>POST /some/path/you/choose</code> (to actually process the submitted form)
-* <code>redirect to GET /image-posts</code> (to go back to the listing of all image-posts)
+* <code>redirect to GET /</code> (to go back to the listing of all image-posts)
 
-### (6 points) Form to Create an ImagePost with Images 
+### (6 points) Form to Create a Link
 
 
-In this route handler, <code>GET /image-posts</code>: 
+In this route handler, <code>GET /</code>: 
 
-1. render a template that displays a form (it'll also display all image posts... but we'll get to that later)
-2. add the fields necessary to create an image post along with 3 images
-    * it should have the title of the post
-    * and 3 fields, each with a url (a link to an image) and a caption
-        ![form](../resources/img/hw06-00-form.png) 
+1. render a template that displays a form (it'll also display all links... but we'll get to that later)
+2. add the fields necessary to satisfy the schema that you created earlier
+    * it should have the title
+    * as well as a url
+        ![form](../resources/img/hw05-news-01-link.gif) 
 3. have the form post to a path of your choosing (you'll define this route handler later in the next part)
-4. __test that your form renders by going to__ <code>/image-posts</code>
+4. __test that your form renders by going to__ <code>/</code>
 
-### (10 points) Handling the Image-Post Form
+### (10 points) Handling the Link Creation Form
 
 
 In this route handler, <code>POST /path/of/your/choosing</code>: 
 
-* use your mongoose model for an image-post to create a new <code>ImagePost</code> instance
-    * create a new <code>ImagePost</code> first, and just populate the title
-    * then... you can use <code>.push</code> to add each image to the `images` property on your newly created `ImagePost` object
-    * the initial form allows up to 3 images to be initially included in the <code>ImagePost</code>
-    * if a url for an image is blank, don't add it to the list of images
-    * since an <code>ImagePost</code> can have up to 3 images, it's a pain to check each url individually...
-    * instead, you can use a loop - remember that you can dynamically access object properties using bracket (<code>obj[prop]</code>) notation instead of dot (<code>obj.prop</code>notation
-    * for example, if your form names for each image url is: <code>image-url-1, image-url-2, ... image-url-n</code>: 
-        <pre><code data-trim contenteditable>
-// you can use a loop, and reference each property on body as:
-req.body['image-url-' + n]
-</code></pre>
-* ... and, of course, save it ([here's an example from our pizza demo](../slides/15/mongoose.html#/14))
-* this should create a single <code>ImagePost</code> with up to 3 embedded <code>Image</code>s in it
-* within your callback for save, redirect to <code>/image-posts</code> (only redirect page when we're sure the new list has been saved - that is, within the callback, if there are no errors)
+* use your mongoose model for a link to create a new <code>Link</code> instance
+    * create a new <code>Link</code> first, and just populate the title
+* ... and, of course, save it ([here's an example from our pizza demo](../slides/14/mongoose.html#/14))
+* this should create a single <code>Link</code> 
+* within your callback for save, redirect to <code>/</code> (only redirect page when we're sure the new link has been saved - that is, within the callback, if there are no errors)
 
-
-### Testing Out ImagePost Creation
+### Testing Out Link Creation
 
 Testing Process
 
-1. got to <code>/image-posts</code>
+1. got to <code>/</code>
 2. fill in:
     * title
-    * two images - both url and caption
+    * url
 3. submit
-4. verify that you're redirected back to image-posts
+4. verify that you're redirected back to `/`
     * in the network tab in Chrome...
     * you should have:
-        * <code>GET /image-posts</code> - <code>200</code>
-        * <code>POST /image-posts</code> - <code>302</code> or <code>303</code>
-        * <code>GET /image-posts</code> - <code>200</code> again
-5. verify that a new <code>ImagePost</code> object is created in your database
+        * <code>GET /</code> - <code>200</code>
+        * <code>POST /path/of/your/choosing</code> - <code>302</code> or <code>303</code>
+        * <code>GET /</code> - <code>200</code> again
+5. verify that a new <code>Link</code> object is created in your database
     * run <code>mongo</code> to start a commandline database client
     * use <code>.find</code> to search for any created documents:
-    * (the collection name should be all lowercase, plural: <code>db.imageposts.find()</code>)
+    * (the collection name should be all lowercase, plural: <code>db.links.find()</code>)
 
 Troubleshooting if No Documents Are Found
 
-1. verify that your collection name and schema name match (remember, the collection name is the lowercase, plural version of your schema name: <code>ImagePost</code> &rarr; <code>imageposts</code>)
+1. verify that your collection name and schema name match (remember, the collection name is the lowercase, plural version of your schema name: <code>Link</code> &rarr; <code>links</code>)
 2. in the route handler that deals with your POST, either log out the error from your save callback or send it back as a response:
     * <code>console.log(err)</code>
     * <code>res.send(err)</code>
 
+{% comment %}
 ### (10 Points) Displaying All Image Posts
 
 The list of all <code>ImagePost</code>s should appear underneath your form. Retrieve all of the image-posts from the database (see [the slides on the mongoose API](../slides/15/mongoose.html)), and for every image-post:
