@@ -6,19 +6,19 @@ title: CSCI-UA.0480 - Homework #5
 <div class="panel panel-default">
 	<div class="panel-heading">Homework #5</div>
 	<div class="panel-body" markdown="block">
-<h1 style="color:red">Draft</h1>
 
-# Image Posting Board - __Due Thursday, November 30th, by 11PM__
+
+# <span style="color:red">Draft</span> Link Aggregator Site with Comments - __Due Thursday, March 30th, by 11PM__
 
 ## Overview
 
 ### Description
 
-#### Create an image posting site called "480chan"
+#### Create an image posting site called "480 News"
 
-Image posting boards are kind of the worst and best part of the web (mostly worst). For example, a well known image board was the origin of lolcats (text on cat pictures), as well as the birthplace of the _hacker group_, Anonymous. 
+[Hacker News](news.ycombinator.com) is a popular link aggregator site for technology, science and start-up related news. Looking to waste a bunch of time? Want to procrastinate on your next homework assignment? Check it out!
 
-We're going to implement an image board where anyone visiting the site can create a post containing several images (via url, not by upload). Any user can then add an image to a post or remove images from a post.
+We're going to implement a crude version of Hacker News where anyone visiting the site can post a link, and anyone visiting the site can comment on a posted link.
 
 To implement the features above, we'll use the following techniques:
 
@@ -28,43 +28,44 @@ To implement the features above, we'll use the following techniques:
 * creating and reading data from MongoDB
 * extracting parameters from a URL path
 * adding and removing embedded documents with Mongoose
+* using express sessions
 
 And, as extra credit:
 
 * user input validation
 * using references to other documents instead of embedded
-* user authentication
+* upvoting
+* writing your own session management
 
 #### In this application, any user will be able to:
 
-* view all image posts
-* create image posts (with 0 to 3 images initially, but more can be added later)
-* add additional images to an image post
-* remove images from a post
+* view all posted links
+* post a link
+* comment on an existing link
 
 Aaaand, if you do the extra credit...
 
 * validation
-* authentication
+* upvoting
 
 
-#### You'll only have 2 pages and 3 forms:
+#### You'll only have 2 pages and 2 forms:
 
-* __/image-posts__ 
-    * a list of image posts as well as all of the images contained in each post
-    * contains a form to add another image post (with at most 3 images)
-    * links to an __individual__ image-post page... that allows you to add images or remove images from that image-post
-* __/image-post/&lt;slug&gt;__ 
-    * displays the images in a single image-post
-    * contains a form to add an image to the image-post
-    * contains a form to remove images by checking checkboxes
+* __/__ 
+    * a list of all links posted
+    * contains a form to post another link
+    * links to an __individual__ link's page... that allows you to add comments
+* __/&lt;slug&gt;__ 
+    * displays the comments for a single link
+    * contains a form to add a comment
+    * displays the last link that the user has entered for their _session_ (there's no login, so we'll rely on sessions to keep track of repeat users)
 
 
+{% comment %}
 #### Example Interaction
 
-Here's an example of adding an image post that has 1 image in it:
 
-![add post with multiple images](../resources/img/hw06-01-add-one-post.gif)
+{% endcomment %}
 
 ### Submission Process
 
@@ -87,7 +88,7 @@ The final version of your assignment should be in GitHub
 Specifically, we'll be using the following tools to help with our development process:
 
 * __nodemon__ to automatically restart your server
-* __express-generator__ to create a bare-bones application
+* __express-generator__ to create a bare-bones application (optional, you can always write everything from scratch!)
 
 Install both globally:
 
@@ -96,7 +97,7 @@ Install both globally:
 
 Generate scaffolding (this will create a folder called image-board, along with app.js, a views directory, a public directory, etc.). Remember to use the <code>--hbs</code> flag to tell the generator that we'll be using handlebars:
 
-* <code>express --hbs image-board</code>
+* <code>express --hbs ait-news</code>
 
 Install the dependencies that are required by the generated code:
 
@@ -107,9 +108,9 @@ Within the image-board directory, we'll be using a couple of tools to help with 
 * <code>npm install --save mongoose</code>
 * `npm install --save mongoose-url-slugs`
 
-Of course, add your jshint configuration file:
+Of course, add your eslint configuration file:
 
-* `.jshintrc`
+* `.eslintrc`
 
 Lastly, start your server in a different terminal window using __nodemon__ to automatically restart whenever a file changes:
 
@@ -122,7 +123,7 @@ Lastly, start your server in a different terminal window using __nodemon__ to au
 
 ###  Install MongoDB
 
-* if you haven't already installed it, follow the [install instructions](http://docs.mongodb.org/manual/installation/) for your operating system
+* follow the [install instructions](http://docs.mongodb.org/manual/installation/) for your operating system
 * ensure that it is up and running by connecting to it using a commandline client:
 	* connect to the test database by typing in <code>mongo</code> (in any directory)
 	* you should be given a message with the version number of the Mongo shell
@@ -155,6 +156,7 @@ Here's the connection string... we'll connect to the local instance of MongoDB, 
 <pre><code data-trim contenteditable>mongoose.connect('mongodb://localhost/hw05');
 </code></pre>
 
+{% comment %}
 ### (3 points) Schema 
 
 For larger projects, there is usually one file per schema, all located in a separate folder called models. For now, however, define the following Schema within <code>db.js</code>. Check out the slides on:
@@ -243,9 +245,6 @@ req.body['image-url-' + n]
 * this should create a single <code>ImagePost</code> with up to 3 embedded <code>Image</code>s in it
 * within your callback for save, redirect to <code>/image-posts</code> (only redirect page when we're sure the new list has been saved - that is, within the callback, if there are no errors)
 
-{% comment %}
-to the actual single list page that contains the list items... so the url it goes to would be similar to the links above: <code>/list/[slug-name]</code>
-{% endcomment %}
 
 ### Testing Out ImagePost Creation
 
@@ -419,6 +418,7 @@ __If you're doing extra credit, add a REAMDE.md file that specifies which extra 
 Instead of embedding <code>Image</code>s in <code>ImagePost</code>s, make them separate documents linked together by some id field. Check out [the mongoose docs](http://mongoosejs.com/docs/populate.html).
 
 This is more difficult than just changing the schema, as you'll have to change all of your route handlers that modify or add data.
+{% endcomment %}
 
 {% comment %}
 ### Authentication

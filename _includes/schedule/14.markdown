@@ -17,8 +17,7 @@ MongoDB
 
 * [MongoDB Documentation](http://docs.mongodb.org/manual/)
 * [Install](http://docs.mongodb.org/manual/installation/)
-* [Create, Read, Update and Delete](http://docs.mongodb.org/manual/crud/)
-* [Data Modeling](http://docs.mongodb.org/manual/core/data-modeling-introduction)
+* [MongoDB Intro](https://docs.mongodb.com/manual/introduction/)
 
 Mongoose
 
@@ -31,5 +30,6 @@ Mongoose
 Due Monday, March 27th 11PM
 
 * Quiz in NYU Classes on MongoDB 
+* (Based on readings from class 14 and 15)
 
 </td>

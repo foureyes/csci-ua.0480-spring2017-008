@@ -47,7 +47,7 @@ Create a __small__ web application using Express and MongoDB. Build the applicat
 __Completing the milestones leading up to the due date is required!__ Milestones 1 - 3 are worth over half of your final project grade.
 
 * (15 points) Milestone #1 - requirements, draft data model, and a skeleton application
-* (20 points) Milestone #2 - deployment attempt and a single working form
+* (20 points) Milestone #2 - deployment attempt and a single working form (__You cannot change _your idea_ for your final project after this__)
 * (20 points) Milestone #3 - two working forms and proof of work on research topics
 * (45 points total) Completed project
     * (15 points) minimum 3 x forms or ajax interactions (__excluding login__)
