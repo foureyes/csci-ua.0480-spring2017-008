@@ -5,9 +5,6 @@
 * [Project Layout and Scaffolding](slides/11/scaffolding.html) (from class before midterm review)
 * [Parameters from URLs](slides/14/params.html)
 * [Mongo DB  and Mongoose](slides/14/mongo.html)
-* [Mongoose](slides/14/mongoose.html)
-* [Routers, Project/Directory Layout, nodemon](slides/14/layout.html)
-* [Validation](slides/14/validation.html)
 
 {% comment %}
 * [Final Project](final-project.html)
@@ -31,8 +28,8 @@ Mongoose
 </td>
 	<td markdown="block">
 
-* Quiz on databases and authentication to be posted this evening
-* Homework #05 most likely to be posted Wednesday
-* Final project discussion on Wednesday!
+Due Monday, March 27th 11PM
+
+* Quiz in NYU Classes on MongoDB 
 
 </td>

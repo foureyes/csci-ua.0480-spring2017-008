@@ -259,9 +259,7 @@ __EXAM #1 (Midterm Exam)__
 * validation comes from next class?
 {% endcomment %}
 </td>
-<td></td><td></td><td markdown="block"></td>{% comment %}
 {% include schedule/15.markdown %}
-{% endcomment %}
 </tr>
 
 

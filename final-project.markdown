@@ -27,11 +27,11 @@ pre {
 	<div class="panel-heading">Final Project</div>
 	<div class="panel-body" markdown="block">
 
-# __Final Project, Due__ <strike>Friday, Dec 2nd at 11pm</strike> __Monday, Dec 12th at 11pm__
+# Final Project, Due __Thursday, April 27th at 11pm__
 
 ## Overview 
 
-Create a web application using Express and MongoDB.
+Create a __small__ web application using Express and MongoDB. Build the application incrementally over the course of 4 weeks.
 
 <a name="requirements">
 
@@ -42,29 +42,31 @@ Create a web application using Express and MongoDB.
 * You must use Express and MongoDB (or other server-side framework and database with permission)
 * You must write your own code, with annotations/references added for any code sourced from books, online tutorials, etc.
 
-### Scoring Rubric
+### Grading Rubric
 
-* (30 points) minimum 3 x forms or ajax interactions (__excluding login__)
-* (9 points) minimum 3 x any of the following (can be the same): 
-    * original Constructors (that is, a constructor you've written yourself), including methods added to prototype
-    * Object.create (where prototype matters)
-    * es6 classes 
-    * original higher order functions or these built-in higher order functions on the Array object: map, reduce, filter
-* (8 points) minimum 2 x mongoose schemas
-* (10 points) stability / security
-    * simple validation on user input to prevent application from crashing
-    * doesn't allow user input to be displayed unescaped directly on page
-    * pages that require authentication cannot be accessed without authentication
-    * data specified as private to a user cannot be viewed by another user
-    * etc.
-* (5 points) _originality_ 
-    * is not mostly based on existing homework
-    * majority of code is not from online tutorial
-* (30 points) 3 x milestones: 
-    * requirements and model
-    * deploy and partial implementation
-    * nearly finished
-* (8 points) worth of research topics; see below
+__Completing the milestones leading up to the due date is required!__ Milestones 1 - 3 are worth over half of your final project grade.
+
+* (15 points) Milestone #1 - requirements, draft data model, and a skeleton application
+* (20 points) Milestone #2 - deployment attempt and a single working form
+* (20 points) Milestone #3 - two working forms and proof of work on research topics
+* (45 points total) Completed project
+    * (15 points) minimum 3 x forms or ajax interactions (__excluding login__)
+    * (6 points) minimum 3 x any of the following (can be the same): 
+        * original Constructors (that is, a constructor you've written yourself), including methods added to prototype
+        * Object.create (where prototype matters)
+        * es6 classes 
+        * original higher order functions or these built-in higher order functions on the Array object: map, reduce, filter
+    * (2 points) minimum 2 x mongoose schemas
+    * (9 points) stability / security
+        * simple validation on user input to prevent application from crashing
+        * doesn't allow user input to be displayed unescaped directly on page
+        * pages that require authentication cannot be accessed without authentication
+        * data specified as private to a user cannot be viewed by another user
+        * etc.
+    * (5 points) _originality_ 
+        * is not mostly based on existing homework
+        * majority of code is not from online tutorial
+    * (8 points) worth of research topics; see below
 
 
 {% comment %}
@@ -77,41 +79,43 @@ Create a web application using Express and MongoDB.
 
 Choose at least __8 points__ worth of these following topics (research and implementation). __This list may change slightly (added items, adjustments to points) as project ideas come in.__ 
 
-* (4 points) Unit testing with JavaScript
+* (3 points) Unit testing with JavaScript
 	* [Jasmine](http://jasmine.github.io/)
 	* [Mocha](https://github.com/mochajs/mocha)
 	* Any others found through research
     * Minimally 4 tests
     * You'll have to link to testing code in repository
-    * ... And either specify how to run tests or show screen capture of tests)
-* (6 points) Automated functional testing for all of your routes using any of the following:
+    * ... and show a screen capture of tests
+* (5 points) Automated functional testing for all of your routes using any of the following:
 	* [PhantomJS](http://phantomjs.org/) - headless browser testing
 	* [Selenium](http://www.seleniumhq.org/)
     * Minimally 4 tests
-    * You'll have to linke to testing code in repository
-	* Any others found through research
     * You'll have to link to testing code in repository
-    * ... And either specify how to run tests or show screen capture of tests)
-* (4 points) Configuration management
+    * ... and show a screen capture of tests
+* (3 points) Configuration management
 	* [nconf](https://github.com/flatiron/nconf)
 	* [Node convict](https://github.com/mozilla/node-convict)
 	* Any others found through research
-* (4 points) Use [grunt](http://gruntjs.com/), [gulp](http://gulpjs.com/), webpack or even make (!) to automate any of the following ... must be used in combination with one or more of the other requirements, such as:
-    * (2 points) Integrate JSHint / JSLint into your workflow
+* (3 points) Use [grunt](http://gruntjs.com/), [gulp](http://gulpjs.com/), webpack or even make (!) to automate any of the following ... must be used in combination with one or more of the other requirements, such as:
+    * (2 points) Integrate ESLint / JSHint / JSLint into your workflow
         * Must be used __with build tool__ (see above requirement on Grunt or Gulp
-        * Must have have .jshint configuration file
+        * Must have have configuration file in repository
         * Must run on entire codebase __outside of <code>node_modules</code>
+        * Must link to relevant lines in build configuration and lint configuration 
     * (2 points) Concatenation and minification of CSS  and JavaScript files
         * Must be used __with build tool__ (see above requirement on Grunt or Gulp
         * (Only client side files!)
+        * Only minify and concatenate client side JavaScript
+        * Must link to relevant lines in build configuration and mark-up (to show included css) 
     * (2 points) Use a CSS preprocesser
 	    * [Sass](http://sass-lang.com/)
 	    * [Less](http://lesscss.org/)
 	    * [Myth](http://www.myth.io/)
-* (6 points) Integrate user authentication
+        * Must link to relevant lines in build configuration and directory of _unprocessed_ CSS source
+* (5 points) Integrate user authentication
 	* Minimally, implement sign up and registration
 	* Or implement sign in with provider, such as FB Connect, Google, etc. (which could be worth more points)
-* (4 points) Perform client side form validation using custom JavaScript or JavaScript __library__
+* (3 points) Perform client side form validation using custom JavaScript or JavaScript __library__
     * errors must be integrated into the DOM 
     * the following will not receive full credit:
         * using form elements with attributes as constraints 
@@ -121,12 +125,15 @@ Choose at least __8 points__ worth of these following topics (research and imple
 	* [Foundation](http://foundation.zurb.com/)
 * (1 - 6 points) Use a __server-side__ JavaScript library or module that we did not cover in class (not including any from other requirements) 
     * assign a point value to the library or module that you're using based on amount of effort and/or code required for integration
+    * Must link to source code relevant to implementation and evidence of working implementation on site
 * (1 - 6 points) Use a __client-side__ JavaScript library or module that we did not cover in class (not including any from other requirements)
     * assign a point value to the library or module that you're using based on amount of effort and/or code required for integration
     * for example, angular 2 or d3 might be 6 points, while google maps might be 1 point
+    * Must link to source code relevant to implementation and evidence of working implementation on site
 * (1 - 6 points) Per external API used 
     * assign a point value to the library or module that you're using based on amount of effort and/or code required for integration
     * for example, angular 2 might be 6 points, while google maps might be 1 point
+    * Must link to source code relevant to implementation and API documentation
 
 <a name="milestone1"></a>
 
@@ -134,9 +141,9 @@ Choose at least __8 points__ worth of these following topics (research and imple
 
 <a name="proposal"></a>
 
-### __11/3__ - Milestone 1 - Requirements / Specifications and Data Model (10 points)
+### __3/30__ - Milestone 1 - Requirements / Specifications, Draft Data Model, Skeleton Application (15 points)
 
-[Check out sample documentation](https://github.com/nyu-csci-ua-0480-001-fall-2016/final-project-example)
+[Check out sample documentation](https://github.com/nyu-csci-ua-0480-008-spring-2017/final-project-example)
 
 * Documentation
 	* Submit electronically through a supplied GitHub repository
@@ -180,8 +187,9 @@ Choose at least __8 points__ worth of these following topics (research and imple
 <br>
 <br>
 
-### <strike>11/15</strike> 11/17 - Milestone 2 - Initial Deployment and First Form (10 points)
+### 04/06 - Milestone 2 - Initial Deployment and First Form (0 points)
 
+{% comment %}
 1. attempt to deploy your code to i6 by following [these instructions](homework/deploy.html)
 2. use [this form to submit urls to your deployed site](https://docs.google.com/a/nyu.edu/forms/d/e/1FAIpQLSfgOqmYrFq_XE1P9On8RCrCzVBBlcISpEk7iTdDmkTOBOE5zQ/viewform)
 3. your deployed site should contain the following progress:
@@ -191,6 +199,7 @@ Choose at least __8 points__ worth of these following topics (research and imple
     * show progress on at least 1 of your research topics; the url that shows you've implemented what you've researched can be:
         * a page on your site that's deployed to i6
         * a link to the github repository / line no
+{% endcomment %}
 
 <a name="milestone3">
 
@@ -198,8 +207,9 @@ Choose at least __8 points__ worth of these following topics (research and imple
 <br>
 <br>
 
-### 12/2 - Milestone 3 - 2nd Form and More Progress on Research(10 points)
+### 4/13 - Milestone 3 - 2nd Form and More Progress on Research (20 points)
 
+{% comment %}
 1. make at least 3 additional commits to add:
     * your 2nd form / ajax interaction
     * make more progress on your research topics
@@ -216,8 +226,11 @@ Choose at least __8 points__ worth of these following topics (research and imple
         * start with the url to your repository: `https://github.com/nyu-csci-ua-0480-001-fall-2016/NETID-final-project/`
         * and append the following to the url: `compare/master@%7B11-18-16%7D...master`
         * for example: `https://github.com/nyu-csci-ua-0480-001-fall-2016/NETID-final-project/compare/master@%7B11-18-16%7D...master`
+{% endcomment %}
+
 
 {% comment %}
+OLD
 Prototype With Some Implemented Functionality (10 points total)
 
 1. (4 points) create at least 1 form that can add data to your database
@@ -236,6 +249,7 @@ Prototype With Some Implemented Functionality (10 points total)
 {% endcomment %}
 
 {% comment %} 
+OLD
 * 1 or more forms and their corresponding route handlers
 * Demonstrate that at least 2 route handlers can read and write from MongoDB
 * Proof of concepts for some of your research topics (for example, if you wanted to use sass, I'd expect that you've made some progress integrating it into your project)
@@ -281,8 +295,9 @@ Prototype With Some Implemented Functionality (10 points total)
 <br>
 <br>
 
-### __12/12 11PM__ - Final Project Complete and Code is fully  _Deployed_ 
+### __4/27 11PM__ - Final Project Complete and Code is fully  _Deployed_ 
 
+{% comment %}
 * __all commits must be in by Monday, December 12th__
 * any late commits will result in point deductions: 10% off of grade
 * __project must be deployed__ on i6 (or other platform, such as Heroku, gomix, zeit, etc.)
@@ -290,16 +305,11 @@ Prototype With Some Implemented Functionality (10 points total)
     * you will not receive a penalty for restarting after the due date
 * __the [final project form submission](https://docs.google.com/a/nyu.edu/forms/d/e/1FAIpQLScLCi2BBlzIbrlIh31cQ02gBs8BWeWpmQxlRNAmD8eLWHc9Ww/viewform) must be filled out__ (if a form is not submitted, you will receive a 0 for your project)
     * late project form submission will also result in a small point deduction
-
-
-
-
-{% comment %}
-* __(extended from Fri, 5/6 to Sun, 5/8)__ to allow some time over the weekend to finish up project
-* late submissions accepted within __24 (Mon, 5/9) hours with 10% penalty__ applied to this last milestone (regardless of previous lates)
-* day after final exam submissions accepted with significant penalty (-25% of total possible points) upon email request
-* after that, no submissions will be accepted
 {% endcomment %}
+
+
+
+
 
 <br>
 <br>
