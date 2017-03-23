@@ -201,13 +201,13 @@ Then, use your schemas to define your models... these will be used as constructo
 mongoose.model('Link', Link);
 </code></pre>
 
-## Part 3 - Adding a Link Displaying All Links
+## Part 3 - Adding a Link and Displaying All Links
 
 ### Overview
 
 We'll be using mongoose to create, read and modify data from MongoDB, and we'll be doing this in the functions that handle our routes.
 
-Consequently, in a file that contains your router (one of the files in the routes directory, your choice!):
+Consequently, in a file that contains your route handlers (likely `app.js`):
 
 * require mongoose
 * retrieve a model (to be used as a constructor later)
@@ -223,9 +223,9 @@ const Link = mongoose.model('Link');
 
 The flow of the link creation form should follow the conventional POST, redirect, GET workflow:
 
-* <code>GET /</code> (to display all image-posts and the form)
+* <code>GET /</code> (to display all links and the form)
 * <code>POST /some/path/you/choose</code> (to actually process the submitted form)
-* <code>redirect to GET /</code> (to go back to the listing of all image-posts)
+* <code>redirect to GET /</code> (to go back to the listing of all links)
 
 ### (6 points) Form to Create a Link
 
@@ -246,7 +246,7 @@ In this route handler, <code>GET /</code>:
 In this route handler, <code>POST /path/of/your/choosing</code>: 
 
 * use your mongoose model for a link to create a new <code>Link</code> instance
-    * create a new <code>Link</code> first, and just populate the title
+    * create a new <code>Link</code> first, and just populate the title and url
 * ... and, of course, save it ([here's an example from our pizza demo](../slides/14/mongoose.html#/14))
 * this should create a single <code>Link</code> 
 * within your callback for save
@@ -326,15 +326,13 @@ In this route handler, <code>GET /[slug-name]</code>:
 
 ### (10 points) Adding Comments
 
-Instead of creating a separate page for adding items to your list, embed your form directly underneath your link's title and url in the link comments page
-
-The flow of the __comment creation form__ should be:
+Add your comment creation form directly underneath your link's title and url in the link comments page. The flow of the __comment creation form__ should be:
 
 * <code>GET /[slug-name]</code>
 * <code>POST /path/of/your/choosing</code>
 * <code>redirect to GET /[slug-name]</code> (go back to page that you came from)
 
-__Add a form to create a new comment to the Link object :__
+__Add a form to add a new comment to the Link object:__
 
 * create a form that posts to <code>/path/of/your/choosing</code>
 * your form will have the following fields
@@ -379,6 +377,10 @@ var sessionOptions = {
 * modify your route for handling comment creation by adding the last comment's text to `req.session` after a new comment has been created (for example: `req.session.lastComment = comment.text`)
 * when displaying the link's comments page, pass the last comment stored in the session to the frontend
 
+
+## Part 6 - Style Your Site!
+
+Add a public folder, add a css file, include your css file and style your site. You can style your site any way that you like; you will get credit for this as long as your css is served as a static file and the styles are visible in your working application.
 
 ## Extra Credit
 
