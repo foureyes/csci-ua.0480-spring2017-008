@@ -8,7 +8,7 @@ title: CSCI-UA.0480 - Homework #5
 	<div class="panel-body" markdown="block">
 
 
-# Link Aggregator Site with Comments - __Due Thursday, March 30th, by 11PM__
+# <span style="color: red">Draft</span>Link Aggregator Site with Comments - __Due Thursday, March 30th, by 11PM__
 
 ## Overview
 
@@ -234,7 +234,7 @@ In this route handler, <code>GET /</code>:
 2. add the fields necessary to satisfy the schema that you created earlier
     * it should have the title
     * as well as a url
-        ![form](../resources/img/hw05-news-01-link.gif) 
+        ![form](../resources/img/hw05-news-01-add.gif) 
 3. have the form post to a path of your choosing (you'll define this route handler later in the next part)
 4. __test that your form renders by going to__ <code>/</code>
 
@@ -247,7 +247,10 @@ In this route handler, <code>POST /path/of/your/choosing</code>:
     * create a new <code>Link</code> first, and just populate the title
 * ... and, of course, save it ([here's an example from our pizza demo](../slides/14/mongoose.html#/14))
 * this should create a single <code>Link</code> 
-* within your callback for save, redirect to <code>/</code> (only redirect page when we're sure the new link has been saved - that is, within the callback, if there are no errors)
+* within your callback for save
+    * check if there's an error! ...if there is an error, just send back an error to the frontend (`res.send(err)` ... or better yet, render a template with a generic error message)
+    * redirect to <code>/</code> (only redirect page when we're sure the new link has been saved - that is, within the callback, if there are no errors)
+    
 
 ### Testing Out Link Creation
 
@@ -276,128 +279,84 @@ Troubleshooting if No Documents Are Found
     * <code>console.log(err)</code>
     * <code>res.send(err)</code>
 
-{% comment %}
-### (10 Points) Displaying All Image Posts
+### (10 Points) Displaying All Links
 
-The list of all <code>ImagePost</code>s should appear underneath your form. Retrieve all of the image-posts from the database (see [the slides on the mongoose API](../slides/15/mongoose.html)), and for every image-post:
+The list of all <code>Links</code>s should appear above your form. Retrieve all of the links from the database (see [the slides on the mongoose API](../slides/14/mongoose.html)), and for every Link object:
 
-* display the title of the image-post as a header and a link
-* the link should go to /image-posts/&lt;slug&gt; (where do you think you get the image-post slug from?)
-* display all of the images in the image-post
-    * show each image's caption
-    * ...and use the url to add an <code>img</code> tag underneath the caption (to display the image, of course!)
-* if you were to place a list of <code>ImagePost</code>s into your template context, you could access every individual <code>ImagePost</code> in an <code>#each</code> loop
+* create a link (an `a` tag) to display the title of the Link object and _link_ out to its url
+* create an additional link (`a` tag) that will _link_ out to this Link object's comments page - do this by using the Link object's `slug` (as that will be the path to the comments page)
+* if you were to place a list of <code>Link</code>s into your template context (via `res.render`), you could access every individual <code>Link</code> object in an <code>#each</code> loop
 * __within that loop, you can use__:
-    * <code>&#123;&#123;fieldName&#125;&#125;</code> to access a property named <code>fieldName</code> (note that there's no need to use dot, <code>.</code>, or square brackets, <code>[]</code>'s)
-        * you can also __nest__ <code>#each</code> loops to go over all of the embedded <code>Image</code> documents in an <code>ImagePost</code>
+    * you can name your loop variable using the `#each arrayOfObjects as |newName|` syntax and then use the dot operator to access each field: `newName.field`
+    * alternatively, you can just use <code>&#123;&#123;fieldName&#125;&#125;</code> directly to access a property named <code>fieldName</code> (note that there's no need to use dot, <code>.</code>, or square brackets, <code>[]</code>'s)
 
-### Testing That ImagePosts Can be Read from the Database
+### Testing That Links Can be Read from the Database
 
-* try going to <code>/image-posts</code> in your browser
-* see that the image post that you created earlier is displayed below the form
-* try adding a new image-post with three images
-* verify that you're redirected back to <code>image-posts</code> with your new post added to the bottom of the page.
+* try going to <code>/</code> in your browser
+* see that the `Link` that you created earlier is displayed above the form
+* try adding a new link 
+* verify that you're redirected back to <code>/</code> with your new link added to the page.
 * see the example below:
 
-![add post with multiple images](../resources/img/hw06-02-add-multi-pizza-party.gif)
+![add again](![form](../resources/img/hw05-news-01-add.gif) 
 
 
-## Part 4 - Single ImagePost Detail Page, Adding New Images to ImagePost, Deleting Iamges from ImagePost
 
-### (6 points) Single ImagePost Detail Page
+## Part 4 - Single Link Comments Page, Adding Comments
+
+### (6 points) Single Link Comments Page
 
 
-In this route handler, <code>GET /image-post/[slug-name]</code>: 
+In this route handler, <code>GET /[slug-name]</code>: 
 
-* you'll use the slug in the url to render an __image-post details__ page
-* find __exactly one image-post__ that matches the slug in the url
-	* remember to use [route parameters](../slides/15/params.html) 
+* you'll use the slug in the url to render an __link's comments__ page
+* find __exactly one link__ that matches the slug in the url
+	* remember to use [route parameters](../slides/14/params.html) 
 	* use <code>:slug</code> in your path to specify a part of the path as a parameter
 	* you can find this part of the path in your request object (<code>req.params.slug</code>)
-* display the title of the <code>ImagePost</code>
-* place all of the images below the title
-* in the next two parts, add a couple of forms this page to add more images and delete images
+* display the title of the <code>Link</code> as well as it's corresponding url
+* in the next part, add a form to add a comment
 
 <div markdown="block" class="img">
-![go to detail page](../resources/img/hw06-03-detail-slug.gif) 
+![add a comment](../resources/img/hw05-news-02-comments.gif) 
 </div>
 
-### (10 points) Adding Images
+### (10 points) Adding Comments
 
-Instead of creating a separate page for adding items to your list, embed your form directly underneath your image-post in your image-post details page
+Instead of creating a separate page for adding items to your list, embed your form directly underneath your link's title and url in the link comments page
 
-The flow of the __image create form__ should be:
+The flow of the __comment creation form__ should be:
 
-* <code>GET /image-post/[slug-name]</code>
+* <code>GET /[slug-name]</code>
 * <code>POST /path/of/your/choosing</code>
-* <code>redirect to GET /image-post/[slug-name]</code> (go back to page that you came from)
+* <code>redirect to GET /[slug-name]</code> (go back to page that you came from)
 
-__First, add a form to create a new image in your image-post:__
+__Add a form to create a new comment to the Link object :__
 
 * create a form that posts to <code>/path/of/your/choosing</code>
 * your form will have the following fields
-	* url
-	* caption
-* __you'll have to let the server know which image-post you're adding this new image to__ ... and you can do this by:
+	* text
+	* user
+* __you'll have to let the server know which Link object  you're adding this new comment to__ ... and you can do this by:
     * having the slug in the url that you're posting to
     * or by having a hidden input field that contains the slug [(check out the slides on revisiting forms)](../slides/11/forms-revisited.html#/16)
 
 __you'll have to handle this post, so...__
 
 * create a route handler to accept a <code>POST /path/of/your/choosing</code>... 
-* (depending on how you've structured your application this may need to go into a different router file than the one you used for list creation)
-* use one of these methods to add an image (assuming that you've embedded images into image-list in your schema):
+* (if you're using express generator, depending on how you've structured your application this may need to go into a different router file than the one you used for list creation)
+* use one of these methods to add a comment:
 	* [findOneAndUpdate](../slides/15/mongoose.html#/18)
 	* [lots of callbacks](../slides/15/mongoose.html#/17)
-* in your last callback, redirect back to the original __image-post detail__ page
+* in your last callback, redirect back to the original __link comments__ page (that is the /[slug-name])
 * here's the example interaction:
 
-![add image to existing](../resources/img/hw06-04-add-image.gif) 
+![add a comment](../resources/img/hw05-news-02-comments.gif) 
 
-## Part 5 - Deleting Images
+## Part 5 - Remembering Your Last Comment
 
-### (10 points) Deleting Images
+### (10 points) Using Sessions
 
-Create another form for deleting images from an image-post. The flow of the __image delete form__ should be:
-
-* <code>GET /image-posts/[slug-name]</code>
-* <code>POST /path/of/your/choosing</code>
-* <code>redirect to GET /image-posts/[slug-name]</code>
-
-__You'll have to modify your template a bit to integrate this additional form__:
-
-* in addition to your add image form, you'll have another separate form on the same page
-* the item check form will start above all of your image
-* and end after the last image
-* populate your form with some form elements:
-	* a checkbox before each image
-        * the <code>name</code> of all of your checkboxes should be the same
-        * however, the value of each should be <code>_id</code>
-        * (<code>_id</code> is automatically generated for you by mongodb, so every document you create has this field)
-	* a submit button
-* decide whether you'll use a hidden input or url parameter (if using a hidden input, add the slug of the image-post as a hidden input form element... if you're using a url parameter, make sure your form posts to the appropriate url)
-
-__Finally, in your route handler, you'll have to remove all of the images that were checked__:
-
-* once again, get the image-post that these images belong to
-    * based on the slug, which comes through as:
-    * a url param
-    * ... or a hidden input
-* checkbox inputs come in as an Array or a string
-    * ([see checkbox behavior in these slides](../slides/11/forms-revisited.html))
-    * if there's only one image checked, the id comes in as a single string
-    * otherwise, if you have more than one image checked, you'll have an array
-    * __you can see this by logging out the contents of req.body.[name of your checkbox fields]__ 
-    * you can use <code>Array.isArray</code> to check what you have ([see the docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray))
-* go through all of the ids and remove the images with the incoming ids:
-    * [see the docs on using .remove()](http://mongoosejs.com/docs/subdocs.html)
-    * for example, if you have a <code>Factory</code> schema
-    * ...that has an array of <code>Widget</code> objects called <code>widgets</code>
-    * removing a single widget would be:
-    * <code>factoryObj.widgets.id(varWithId).remove()</code>
-* here's what the interaction should look like:
-
-![remove images](../resources/img/hw06-05-remove.gif) 
 
 ## Extra Credit
 
@@ -407,22 +366,24 @@ __If you're doing extra credit, add a REAMDE.md file that specifies which extra 
 
 1. Validation and Error Messages (25 points)
 2. Referenced Documents (30 points)
-3. Authentication (30 points)
+3. Upvoting (30 points)
+4. Writing Your Own Session Management (30 points)
 
 ### Validation and Error Messages
 
-1. make all fields in every schema required except for caption
+1. make all fields in every schema required (see the slides on [validation](../slides/14/validation.html))
 2. if a required field is blank, send back an error message to the user
     * check the <code>err</code> object in the callback to your mongoose related functions like <code>save</code>
     * if it exists, and it has to do with a required field...
     * populate a template variable so that the error message can be displayed in red above your form
+    * in this case (that is, the case where there's an error), you can allow your `app.post` calls to render the original page instead of redirecting so that you can propagate the error to the frontend
+    * ...or you can stash the error in the session and have the route handler that deals with the redirect check the session for error messages and remove the message from the session and display it in the frontend
 
 ### Referenced Documents
 
-Instead of embedding <code>Image</code>s in <code>ImagePost</code>s, make them separate documents linked together by some id field. Check out [the mongoose docs](http://mongoosejs.com/docs/populate.html).
+Instead of embedding <code>Comment</code>s in <code>Link</code>s, make them separate documents linked together by some id field. Check out [the mongoose docs](http://mongoosejs.com/docs/populate.html).
 
 This is more difficult than just changing the schema, as you'll have to change all of your route handlers that modify or add data.
-{% endcomment %}
 
 {% comment %}
 ### Authentication
