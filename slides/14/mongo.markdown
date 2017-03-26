@@ -338,11 +338,32 @@ This drops you into the MongoDB shell (yay... more shell). You can issue command
 <section markdown="block">
 ## Some Commands
 
-* help
-* use db
-* show db \| collections
-* db.dropDatabase()
-* db.createCollection()
+__The following commands can be used to navigate, create and remove databases and collections__ &rarr;
+
+* `show databases` - show available databases (remember, there can be more than one database)
+* `use db` - work with a specific database (if unspecified, the default database connected to is test)
+* `show collections` - once a db is selected, show the collections within the database
+* `db.dropDatabase()` - drop (remove) the database that you're currently in
+* `db.collectionName.drop()` - drop (remove) the collection named `collectionName`
+
+To get some inline help:
+
+* `help` - get help on available commands
+
+</section>
+
+<section markdown="block">
+## Starting Out
+
+__To begin using the commandline client to inspect your data:__ &rarr;
+
+1. make sure that `mongod` is running in a different window (or running _in the background_ or as a daemon)
+2. start up the commandline client with `mongo`
+3. type in `use databaseName` to switch to the database that you're looking through
+
+From there, you can start querying for data, inserting documents, etc. These basic create, read, update, and delete operations are called __CRUD__ operations...
+
+
 </section>
 <section markdown="block">
 ## CRUD!?

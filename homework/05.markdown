@@ -271,8 +271,7 @@ Testing Process
         * <code>POST /path/of/your/choosing</code> - <code>302</code> or <code>303</code>
         * <code>GET /</code> - <code>200</code> again
 5. verify that a new <code>Link</code> object is created in your database
-    * run <code>mongo</code> to start a commandline database client
-    * use <code>.find</code> to search for any created documents:
+    * [see the slides on how to do this with the commandline database client](../slides/14/mongo.html#/21)
     * (the collection name should be all lowercase, plural: <code>db.links.find()</code>)
 
 Troubleshooting if No Documents Are Found
