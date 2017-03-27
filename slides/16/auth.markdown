@@ -85,7 +85,7 @@ Security and encryption is beyond the scope of this class. However, you should k
 
 <pre><code data-trim contenteditable>
 // require http, https, express, etc.
-var options = {
+const options = {
 	key: fs.readFileSync(__dirname + '/ssl/server.pem'), 
 	cert: fs.readFileSync(__dirname + '/ssl/server.crt'),
 };
@@ -123,7 +123,7 @@ Simple enough... just two fields, username to store username and password to sto
 {:.fragment}
 
 <pre><code data-trim contenteditable>
-var userSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({
 {
 	username: String,
 	password: String,
@@ -503,10 +503,10 @@ The user schema can be totally blank. __Passport local mongoose will add propert
 * authenticate, serialize, deserialize, etc.
 
 <pre><code data-trim contenteditable>
-var mongoose = require('mongoose');
-var passportLocalMongoose = require('passport-local-mongoose');
+const mongoose = require('mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
 
-var UserSchema = new mongoose.Schema({ });
+const UserSchema = new mongoose.Schema({ });
 
 UserSchema.plugin(passportLocalMongoose);
 
@@ -522,7 +522,7 @@ mongoose.connect('mongodb://localhost/class16db');
 In a file called <code>auth.js</code> in the root of your project, let passport know what strategy you want to use as well as how to serialize and deserialize a user:
 
 <pre><code data-trim contenteditable>
-var mongoose = require('mongoose'),
+const mongoose = require('mongoose'),
 	passport = require('passport'),
 	LocalStrategy = require('passport-local').Strategy,
 	User = mongoose.model('User');
@@ -547,7 +547,7 @@ At the top of app.js, bring in the two files that we created, <code>db.js</code>
 require('./db');
 require('./auth');
 
-var passport = require('passport');
+const passport = require('passport');
 
 </code></pre>
 </section>
@@ -558,8 +558,8 @@ var passport = require('passport');
 We've done this before (put this after you've created your app object):
 
 <pre><code data-trim contenteditable>
-var session = require('express-session');
-var sessionOptions = {
+const session = require('express-session');
+const sessionOptions = {
 	secret: 'secret cookie thang (store this elsewhere!)',
 	resave: true,
 	saveUninitialized: true
@@ -608,7 +608,7 @@ app.use(function(req, res, next){
 In a file in the routes directory, let's setup our usual set of requires for creating routers. Additionally, add dependencies for passport and mongoose so that we can actually login and register. (Don't forget to export your router too)
 
 <pre><code data-trim contenteditable>
-var express = require('express'), 
+const express = require('express'), 
     router = express.Router(),
     passport = require('passport'),
     mongoose = require('mongoose'),

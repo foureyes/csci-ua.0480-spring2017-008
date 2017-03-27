@@ -92,15 +92,15 @@ In db.js....
 {:.fragment}
 
 <pre><code data-trim contenteditable>
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 // back to cats!
-var CatSchema = new mongoose.Schema({
+const CatSchema = new mongoose.Schema({
   name: {type:String},
   age: Number
 });
 
-var Cat = mongoose.model('Cat', CatSchema);
+const Cat = mongoose.model('Cat', CatSchema);
 mongoose.connect('mongodb://localhost/catdb'); 
 </code></pre>
 {:.fragment}
@@ -121,8 +121,8 @@ __Set up your route and handlers in index.js__:
 {:.fragment}
 
 <pre><code data-trim contenteditable>
-var mongoose = require('mongoose');
-var Cat = mongoose.model('Cat');
+const mongoose = require('mongoose');
+const Cat = mongoose.model('Cat');
 </code></pre>
 {:.fragment}
 
@@ -140,7 +140,7 @@ router.get('/', function(req, res) {
 <pre><code data-trim contenteditable>
 router.post('/', function(req, res) {
   console.log(req.body);
-  var cat = new Cat({
+  const cat = new Cat({
     name: req.body.name, 
     age: req.body.age,
   });
@@ -254,7 +254,7 @@ For strings, we have enum and match:
 temperament: { type: String, required: true, enum: ['annoying', 'playful'] }
 
 //enum with message
-var enumOptions = {values:['annoying', 'playful'], message:'{VALUE} is not a valid temperament'} ;
+const enumOptions = {values:['annoying', 'playful'], message:'{VALUE} is not a valid temperament'} ;
 
 temperament: { type: String, required: true, enum: enumOptions}
 
@@ -290,7 +290,7 @@ function validator (val) {
 new Schema({ name: { type: String, validate: validator }});
 
 // with a custom error message
-var custom = [validator, 'Uh oh, {PATH} does not equal "something".']
+const custom = [validator, 'Uh oh, {PATH} does not equal "something".']
 new Schema({ name: { type: String, validate: custom }});
 </code></pre>
 
@@ -346,7 +346,7 @@ How do you think we can show errors on the frontend?
 Do we have an error? Check the __err__ object in our callback. If we do, render form again with errors passed in.
 
 <pre><code data-trim contenteditable>
-  var cat = new Cat({
+  const cat = new Cat({
     name: req.body.name, 
     temperament: req.body.temperament, 
     age: req.body.age
@@ -455,7 +455,7 @@ npm install --save express-validator
 
 In your app.js:
 <pre><code data-trim contenteditable>
-var validator = require('express-validator');
+const validator = require('express-validator');
 
 // after app.use(bodyParser...)
 app.use(validator());

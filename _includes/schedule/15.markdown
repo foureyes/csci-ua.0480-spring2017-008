@@ -3,7 +3,7 @@
 
 * [Mongoose](slides/14/mongoose.html)
 * [Routers, Project/Directory Layout, nodemon](slides/14/layout.html)
-* [Validation](slides/14/validation.html)
+* [Validation](slides/15/validation.html)
 
 </td>
 	<td markdown="block">
