@@ -280,9 +280,7 @@ __EXAM #1 (Midterm Exam)__
 * HTML Primer, JavaScript and the Browser
 * The Document Object Model
 </td>
-<td></td><td></td><td markdown="block"></td>{% comment %}
 {% include schedule/17.markdown %}
-{% endcomment %}
 </tr>
 
 

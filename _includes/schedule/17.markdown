@@ -21,10 +21,12 @@ Slides
 * [DOM Continued](slides/17/dom-continued.html)
 * [Attributes](slides/17/attributes.html)
 
+{% comment %}
 Midterm Exam - Solution Sets
  
 * [Midterm Solutions (Coffee)](resources/handouts/midterm/midterm_001_coffee_solutions.pdf)
 * [Midterm Solutions (Evergreen)](resources/handouts/midterm/midterm_001_evergreen_solutions.pdf )
+{% endcomment %}
 
 <!-- 
 * [](slides//.html)
@@ -34,6 +36,7 @@ Midterm Exam - Solution Sets
 </td>
 	<td markdown="block">
 
+{% comment %}
 * Midterm Exam Results
     * grading software
     * distribution / curve
@@ -42,6 +45,7 @@ Midterm Exam - Solution Sets
     * late penalty counts for entire score
     * can exceed 100 for a single homework
     * but points only applied to total homework grade
+{% endcomment %}
 
 * {{site.book_js}} - Chapter 12 - JavaScript and the Browser
 * {{site.book_js}} - Chapter 13 - The Document Object Model
@@ -50,9 +54,11 @@ Midterm Exam - Solution Sets
 	<td markdown="block">
 
 
+{% comment %}
 In class activity
 
 * [Form to submit talksAbout function](https://docs.google.com/a/nyu.edu/forms/d/e/1FAIpQLSdco44OeatQZ8JcA6ozTavVWQLT4oQHGQ3KKNMbgAr42ji20w/viewform)
 * [Instructions / slides](slides/17/dom.html#/14)
+{% endcomment %}
 
 </td>
