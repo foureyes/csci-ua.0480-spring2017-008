@@ -30,8 +30,7 @@ __How do websites verify that a user is who they claim to be? How do websites im
 * traditionally through __username__ and __password__
 * __...what are some other ways?__ &rarr;
 	* {:.fragment} requiring more than just a username and password (maybe both something you know and something you _have_) ... __any examples of this _two-factor auth_ thing?__ &rarr;
-	* {:.fragment} (a code that's texted to your phone - think gmail
-	s 2-factor auth, or a dedicated device, like yubikey)
+	* {:.fragment} (a code that's texted to your phone - think gmail's 2-factor auth, or a dedicated device, like yubikey)
 
 	* {:.fragment} some sort of integration with with a social media site that can vouch for your credentials!
 		* {:.fragment} like Facebook Connect
@@ -44,13 +43,14 @@ __How do websites verify that a user is who they claim to be? How do websites im
 
 If our site collects any _sensitive_ information from a user, __the communication between our server and the client should be encrypted__.  To do this, you'll need to use TLS/SSL (that's when you see the padlock icon and https in the schema part of the url):
 
-* TLS/SSL are cryptographic protocols
-* a method to encrypt traffic between the server and client 
-* a typical exchange involves the following steps:
-	* the client and server agree on which protocol and version to use
-	* the server sends back a cryptographically signed certificate supplied from a trusted third party 
-	* this certificate is used by the browser to verify the identity of the server that the browser is connecting to
-	* keys for encryption (a parameter to an encryption algorithm) are exchanged, and are subsequently used to communicate through symmetric encryption
+__TLS/SSL__ are cryptographic protocols
+
+1. a method to encrypt traffic between the server and client 
+2. a typical exchange involves the following steps:
+    * the client and server agree on which protocol and version to use
+    * the server sends back a cryptographically signed certificate supplied from a trusted third party 
+    * this certificate is used by the browser to verify the identity of the server that the browser is connecting to
+    * keys for encryption (a parameter to an encryption algorithm) are exchanged, and are subsequently used to communicate through symmetric encryption
 
 </section>
 
@@ -65,7 +65,7 @@ __You'll have to__: &rarr;
 <br>
 __Let's Encrypt__ is a free certificate authority backed by a non-profit.  Check out:
 
-* [letsencrypt-express](https://github.com/Daplie/letsencrypt-express), a node module for installing and renewing Let's Encrypt certs
+* [greenlock-express](https://git.daplie.com/Daplie/greenlock-express), a node module for installing and renewing Let's Encrypt certs
 * ...and this [blog article](https://justinmccandless.com/post/setting-up-https-on-node-for-free-with-lets-encrypt/) for how to set everything up.
 
 
@@ -74,14 +74,11 @@ __Let's Encrypt__ is a free certificate authority backed by a non-profit.  Check
 <section markdown="block">
 ## Using SSL/TLS
 
-Security and encryption is beyond the scope of this class. However, you should know there's support for TLS/SSL in Node.js and Express. 
+A fully detailed lecture on security and encryption is beyond the scope of this class (we'll talk a _little_ more about tls/ssl). __However, you should know there's support for TLS/SSL in Node.js and Express.__ &rarr; 
 
-* check out chapter 18 on security in our book
-* basically, you have to obtain a certificate 
-	* create a _self-signed_ one (not suitable for production)
-	* buy / get from a certificate issuer, such as DigiCert, Comodo, Let's Encrypt etc. 
-* ...and configure express to use it (notice that you have to explicitly call createServer, and that the options may vary depending on how you've obtained your cert - 
-[see relevant docs](http://expressjs.com/api.html#app.listen))
+* you'll have to obtain a certificate from a certificate issuer, such as DigiCert, Comodo, Let's Encrypt etc. 
+* (you can also create a _self-signed_ one (not suitable for production)
+* ...and configure express to use it (notice that you have to explicitly call createServer, and that the options may vary depending on how you've obtained your cert - [see relevant docs](http://expressjs.com/api.html#app.listen))
 
 <pre><code data-trim contenteditable>
 // require http, https, express, etc.
@@ -99,7 +96,12 @@ https.createServer(options, app).listen(app.get('port'), function(){
 <section markdown="block">
 ## Use TLS/SSL!
 
-If you're curious about how it works under the hood, check out this [StackExchange Information Security article on TLS/SSL](http://security.stackexchange.com/questions/20803/how-does-ssl-tls-work)
+__If you're curious about how it works under the hood:__ &rarr; 
+
+1. we'll cover a little bit more about tls/ssl in the next set of slides
+2. check out this [StackExchange Information Security article on TLS/SSL](http://security.stackexchange.com/questions/20803/how-does-ssl-tls-work)
+
+<br>
 
 __Also, we can actually check out certs in our browser.__ &rarr;
 
@@ -177,7 +179,7 @@ __Ok... so, how do I find or create an adequate hashing algorithm? What are some
 
 * kind of a trick question
 	* we don't want to create or choose an algorithm ourselves! 
-	* we should let [expert cryptographers and/or standards bodies do this for us](http://csrc.nist.gov/publications/nistpubs/800-132/nist-sp800-132.pdf)
+	* we should let [expert cryptographers and/or standards bodies do this for us](http://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-132.pdf)
 * but, maybe some characteristics are:
 	* collision resistant
 	* computationally difficult to generate (__why? ... we'll see in the next couple of slides__ &rarr;) 
@@ -187,13 +189,13 @@ __Ok... so, how do I find or create an adequate hashing algorithm? What are some
 <section markdown="block">
 ## Hashing Algorithms
 
-It turns out that these are the ones that are recommended:
+__It turns out that these are the ones that are recommended:__ &rarr;
 
-* bcrypt
-* PBKDF2
+1. `bcrypt`
+2. `PBKDF2`
 
 <br>
-But only for now... as the landscape continues to change:
+__But only for _now_ ... as the landscape continues to change:__ &rarr;
 
 * computational power increases
 * flaws found in existing algorithms
@@ -284,20 +286,20 @@ We'll use the following node modules for authentication and session management:
 <section markdown="block">
 ## Passport Usage
 
-So... what does it actually do?
+__So... what does it actually do?__ &rarr;
 
-* handles authentication
-* persists that authentication
-* supplies a req.user object 
+* __handles authentication__ (ask for user and password)
+* __persists that authentication__ (session management)
+* __supplies__ a `req.user` object 
 	* enabled when user is authenticated
 	* you can use to access username, determine if authenticated, etc. 
 
 <br>
-To setup passport... you'll need to
+__To setup passport... you'll need to__ &rarr;
 
-1. Specify authentication strategies (how we want someone to be able to login)
-2. Enable the middleware
-3. Enable sessions 
+1. {:.fragment} Specify authentication strategies (how we want someone to be able to login)
+2. {:.fragment} Enable the middleware
+3. {:.fragment} Enable sessions 
 </section>
 
 <section markdown="block">
@@ -320,11 +322,11 @@ We'll be using __local authentication__... authentication with a  username and p
 <section markdown="block">
 ## Passport Strategies Continued
 
-When we create a strategy, we define a callback function that:
+__When we create a strategy, we define a callback function that:__ &rarr;
 
-* finds and returns the user that possesses a set of credentials
-* for our local strategy, that means we have to retrieve a user from our database using their username and (hashed) password
-* soooo... we could write this function ourselves, or use a module that does this for us (we'll take the easier route: use passport-local-mongoose)
+1. {:.fragment} finds and returns the user that possesses a set of credentials
+2. {:.fragment} for our local strategy, that means we have to retrieve a user from our database using their username and (hashed) password
+3. {:.fragment} soooo... we could write this function ourselves, or use a module that does this for us (we'll take the easier route: use passport-local-mongoose)
 
 </section>
 <section markdown="block">
@@ -346,7 +348,7 @@ app.use(passport.session());
 ## Sessions
 
 
-Username and password (credentials) are usually only transmitted once during the initial login request.
+__Username and password (credentials) are usually only transmitted once during the initial login request.__ &rarr;
 
 * once a user is authenticated... 
 * a session is created and maintained...

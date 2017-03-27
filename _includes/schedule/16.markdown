@@ -2,7 +2,7 @@
 
 * Potentially Review [Mongoose](slides/14/mongoose.html) 
 * [Validation](slides/15/validation.html) from previous class
-* [Routers](slides/15/layout.html) from previous class
+* [Routers](slides/14/layout.html) from previous classes
 * [Authentication](slides/16/auth.html)
 * [High-Level Description of SSL/TLS](slides/16/ssl.html)
 

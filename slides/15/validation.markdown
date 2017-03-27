@@ -37,7 +37,6 @@ __Does mongo impose any constraints on the documents that you create? Does it ca
 * mongo doesn't care at all!
 * you can insert whatever document you want, with whatever key/value pairs
 * it doesn't even matter if there's no database yet or no collection yet, it'll create those for you (__remember?__ &rarr;)
-
 {:.fragment}
 
 <br>
@@ -74,6 +73,7 @@ Ok, so we know that we need to validate on the server side. __Where in our appli
 
 <br>
 We'll be looking at numbers 1 and 2. A good candidate to start with is our Schema...
+{:.fragment}
 
 </section>
 
@@ -333,7 +333,7 @@ How do you think we can show errors on the frontend?
 {:.fragment}
 
 * check if there's an error in the router
-* send the error object over as context to our view
+* use the error object to send error messages to our view through the context 
 * display the errors
 	* look at everything in errors
 	* use specific errors.propertyname
@@ -398,7 +398,7 @@ Or we can go field by field. Above each form element, check if there's an error 
 <section markdown="block">
 ## Form Fields
 
-__If you're sending errors back, should the form elements should be prefilled?__ &rarr;
+__If you're sending errors back, should the form elements be prefilled?__ &rarr;
 
 It'd be courteous to fill them in with what the user had originally submitted:
 {:.fragment}
