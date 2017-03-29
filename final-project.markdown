@@ -189,17 +189,15 @@ Choose at least __8 points__ worth of these following topics (research and imple
 
 ### 04/06 - Milestone 2 - Initial Deployment and First Form (20 points)
 
-{% comment %}
-1. attempt to deploy your code to i6 by following [instructions](homework/deploy.html)
-2. use [this form to submit urls to your deployed site](https://docs.google.com/a/nyu.edu/forms/d/e/1FAIpQLSfgOqmYrFq_XE1P9On8RCrCzVBBlcISpEk7iTdDmkTOBOE5zQ/viewform)
+1. attempt to deploy your code to Courants _compute_ and assignment servers by following [instructions](homework/deploy.html)
+2. use a form (to be linked to) to submit your deployed site
 3. your deployed site should contain the following progress:
     * __one working form (that is not login or registration)__ 
         * ...that should allow data to be modified or deleted
         * the results of submitting this form should be apparent/viewable
     * show progress on at least 1 of your research topics; the url that shows you've implemented what you've researched can be:
-        * a page on your site that's deployed to i6
+        * a page on your site that's deployed to the server
         * a link to the github repository / line no
-{% endcomment %}
 
 <a name="milestone3">
 

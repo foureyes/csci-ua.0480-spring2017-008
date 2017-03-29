@@ -28,26 +28,32 @@ section {
 	<div class="panel-heading">Final Project</div>
 	<div class="panel-body" markdown="block">
 
+# DRAFT
+
 ## Final Project Deployment
 
-These instructions detail deployment to i6. __If you'd like to deploy elsewhere (your own server, Heroku, AWS, etc.), please let me know by email / message via NYU Classes.__ Heroku has been an option that students have used in the past because of the good [introductory documentation](https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction), and [deployment tutorial](https://devcenter.heroku.com/articles/deploying-nodejs).
+These instructions detail deployment to Courant's compute and assignment servers. __If you'd like to deploy elsewhere (your own server, Heroku, AWS, etc.), please let me know by email / message via NYU Classes.__ Heroku has been an option that students have used in the past because of the good [introductory documentation](https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction), and [deployment tutorial](https://devcenter.heroku.com/articles/deploying-nodejs).
 
-Deployment __to i6__ involves the following steps:
+Deployment __to Courant's compute and assignment servers__ involves the following steps:
 
-1. Finding your assigned port numbers in NYU Classes
-2. Logging in to i6 and prepping your home directory
+1. Finding your assigned server and port number in NYU Classes
+2. Logging in to the server and prepping your home directory
 3. Creating a database for your project
-4. Getting your project onto i6
+4. Getting your project onto the server
 5. Installing your project's dependencies
 6. Configuring your project
 7. Running your project as a daemon
 8. Reinstalling and/or redeploying
 
 
-### Part 1: Finding your assigned port numbers in NYU Classes
+### Part 1: Finding your assigned server and port number in NYU Classes
 
 <section markdown="block">
-i6 is a shared server, so other students will be running their projects on it. Consequently, to run your node web application, you'll have run it on a port number that's been assigned to you.
+Courant's compute / assignment servers are shared, so other students will be running their projects on it. Consequently, to run your node web application, you'll have run it on a port number and server that's been assigned to you.
+
+There are multiple potential servers that can host assignments. See the [documentation](https://cims.nyu.edu/webapps/content/systems/resources/computeservers) on compute servers. These can only be accessed via ssh by going through another host, cims.nyu.edu. 
+
+To determine which port number and server you'll use:
 
 1. Log in to NYU Classes
 2. Go to <code>Assignments</code>
@@ -55,24 +61,27 @@ i6 is a shared server, so other students will be running their projects on it. C
 4. Find your NetID in the table
 	* The port number listed is for your express application
 	* Write this number down... you'll use this in a later step
+    * Your server's domain will be listed
+    * Write this down; you'll need it to connect via ssh!
 
 </section>
 
 
-### Part 2: Logging in to i6 and prepping your home directory
+### Part 2: Logging in to cims and prepping your home directory
 
 <section markdown="block">
 
-We'll be using ssh, a commandline tool that allows you to login to and run commands on a remote server, to access i6. Of course, you'll need an i6 account first before you can login, soooo...
+We'll be using ssh, a commandline tool that allows you to login to and run commands on a remote server, to access your server. You'll need an "cims" account to log in to any of these compute/assignment servers. You _should_ have one already created for you.
 
-1. If you've never logged in to i6 before or if you don't remember your i6 password...
-	1. Retrieve the new password you'll use to log in to i6 by going to [https://cims.nyu.edu/webapps/password](https://cims.nyu.edu/webapps/password) ...and entering your netid and password
-	2. If you receive an error saying that your account does not exist, email helpdesk@cims.nyu.edu ... and cc me on your correspondence so that I'm aware that you're having account issues
-	3. Otherwise, use the i6 password that you received to for the next step
-2. Attempt to login to i6 by using ssh (replace <code>your_net_id</code> with your _actual_ net id, all lowercase): 
-	
-	<pre><code>ssh your_net_id@i6.cims.nyu.edu</code></pre>
 
+1. You can retrieve your credentials by going to [https://cims.nyu.edu/webapps/password](https://cims.nyu.edu/webapps/password) first
+    * use your netid to log in
+    * save the credentials that you receive
+    * if you need to reset your password, you can go to [https://cims.nyu.edu/webapps/password/reset](https://cims.nyu.edu/webapps/password/reset)
+	* if you receive an error saying that your account does not exist, email helpdesk@cims.nyu.edu ... and cc me on your correspondence so that I'm aware that you're having account issues
+2. To access your assigned server, you must first ssh to `access.cims.nyu.edu`... and then from there, ssh to your _actual_ server:
+    * `ssh your_username@access.cims.nyu.edu`
+    * `ssh your_username@your_assigned_server` (
 3. Once you've logged in, create the following directories in your home directory: 
 	* <code>var/log</code> a directory to dump your application logs
 	* <code>usr/local/lib</code> to store all of your "global" node modules
@@ -91,17 +100,21 @@ mkdir ~/opt</code></pre>
 
 	<pre><code>opt  usr  var</code></pre>
 
+5. Install the most current version of node:
+    * `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash`
+    * `. ~/.nvm/nvm.sh`
+    * `nvm install node`
 </section>
 
 ### Part 3: Creating a database for your project
 
 <section markdown="block">
 
-You'll have your own database on an instance of __mongod__ running on i6. You don't have to keep the database running like you do locally; that's already taken care of for you. 
+You'll have your own database on an instance of __mongod__ running on the server. You don't have to keep the database running like you do locally; that's already taken care of for you. 
 
-1. [Follow these instructions for initializing your mongoDB database on i6](https://cims.nyu.edu/webapps/content/systems/userservices/databases/class-mongodb)
+1. [Follow these instructions for initializing your mongoDB database on the server](https://cims.nyu.edu/webapps/content/systems/userservices/databases/class-mongodb)
 2. __Make sure you keep the password that's given to you after you follow the above instructions.__ (ideally, in a password safe)
-3. To test connectivity, you can try connecting to your database while your ssh'd in to i6:
+3. To test connectivity, you can try connecting to your database while your ssh'd in to the server:
 
 	<pre><code>module load mongodb-3.2.0
 mongo &lt;dbname&gt; --host class-mongodb.cims.nyu.edu -u &lt;username&gt; -p
@@ -114,14 +127,14 @@ mongo &lt;dbname&gt; --host class-mongodb.cims.nyu.edu -u &lt;username&gt; -p
 ### Part 4: Using an external configuration file for your database
 
 <section markdown="block">
-Because the mongodb server you'll connect to from i6 requires user authentication, the string you pass in to `mongoose.connect` (your __database connection string__) will have to include the username and password you were given from the previous section, Part 3. The new connection string will have the following format:
+Because the mongodb server you'll connect to from the server requires user authentication, the string you pass in to `mongoose.connect` (your __database connection string__) will have to include the username and password you were given from the previous section, Part 3. The new connection string will have the following format:
 
 <pre><code data-trim contenteditable>mongodb://USERNAME:PASSWORD@class-mongodb.cims.nyu.edu/USERNAME
 </code></pre>
 
 Where:
 
-* `USERNAME` - is the username you used for logging it to i6
+* `USERNAME` - is the username you used for logging it to the server
 * `PASSWORD` - is the password for __mongodb__ that you created from Part 3.
 
 However, you should not put these credentials directly into your `db.js` file, and they should not be in a file in version control (you may inadvertently disclose these credentials if your repository becomes public). One way to deal with this issue is to put your credential in an external file that is conditionally read:
@@ -132,7 +145,7 @@ However, you should not put these credentials directly into your `db.js` file, a
     * [read the excellent digital ocean summary regarding environment variables](https://www.digitalocean.com/community/tutorials/how-to-read-and-set-environmental-and-shell-variables-on-a-linux-vps)
     * use [process.env.NAME_OF_VARIABLE] to access environment variables through node
 3. if the above is true, then read a file synchronously (blocking) by using [fs.readFileSync](https://nodejs.org/api/fs.html#fs_fs_readfilesync_file_options)
-4. the file that is read in will be a `json` file that's not in version control... that contains the database connection string for your application when deployed on i6
+4. the file that is read in will be a `json` file that's not in version control... that contains the database connection string for your application when deployed on the server
 
 (Note that this is a simple way of managing configuration, so if you plan on _actually_ deploying your app outside of this class, consider using a configuration / configuration management library, like [node-convict](https://github.com/mozilla/node-convict))
 
@@ -171,26 +184,25 @@ if (process.env.NODE_ENV == 'PRODUCTION') {
         * `NODE_ENV=PRODUCTION ./bin/www`
     * the new database shouldn't have any data that you entered previously!
     * __DO NOT COMMIT__ `config.json` (in fact, it should be in your `.gitignore` as the previous instructions specify)
-    * (you'll create a `config.json` on i6)
+    * (you'll create a `config.json` on the server)
 5. commit and push your code
 
 
 </section>
 
-### Part 5: Getting your project onto i6
+### Part 5: Getting your project onto the server
 
 <section markdown="block">
 
-1. ssh to i6
+1. ssh to the server
 
-	<pre><code>ssh your_net_id@i6.cims.nyu.edu</code></pre>
 
 2. Clone your repository into your opt directory (you can find your full repository name on GitHub). Remember to substitute <code>REPOSITORY_NAME</code> with your actual repository name:
 
 	<pre><code>cd ~/opt
 git clone https://github.com/nyu-csci-ua-0480-010-spring-2016/REPOSITORY_NAME</code></pre>
 
-3. Alternatively, you can use <code>sftp</code> or <code>scp</code> to transfer files to i6
+3. Alternatively, you can use <code>sftp</code> or <code>scp</code> to transfer files to the server
 
 </section>
 
@@ -224,7 +236,7 @@ Create a <code>config.js</code> file on the server to add the `PRODUCTION` versi
         <pre><code>PORT=APP_PORT_NUMBER NODE_ENV=PRODUCTION bin/www</code></pre>
 	* If it starts up fine, try connecting to it from your browser: 
         <br>
-		<pre><code>http://i6.cims.nyu.edu:APP_PORT_NUMBER/</code></pre>
+		<pre><code>http://server_name:APP_PORT_NUMBER/</code></pre>
 6. Troubleshooting:
 	* If you see the following error 
         <br>
@@ -242,7 +254,7 @@ Error: connect ECONNREFUSED
 
 <section markdown="block">
 
-In order to have your project run even when you're not logged in to i6 through an interactive shell, you'll have to run it as a daemon. We'll use a node module called <code>forever</code> to do this. It will run your application in the background and give you tools to manage it (start and stop).
+In order to have your project run even when you're not logged in to the server through an interactive shell, you'll have to run it as a daemon. We'll use a node module called <code>forever</code> to do this. It will run your application in the background and give you tools to manage it (start and stop).
 
 1. Install <code>forever</code>:
 
