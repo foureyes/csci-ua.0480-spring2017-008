@@ -141,7 +141,7 @@ Choose at least __8 points__ worth of these following topics (research and imple
 
 <a name="proposal"></a>
 
-### __3/30__ - Milestone 1 - Requirements / Specifications, Draft Data Model, Skeleton Application (15 points)
+### __3/30 at 11PM__ - Milestone 1 - Requirements / Specifications, Draft Data Model, Skeleton Application (15 points)
 
 [Check out sample documentation](https://github.com/nyu-csci-ua-0480-008-spring-2017/final-project-example)
 
@@ -187,10 +187,10 @@ Choose at least __8 points__ worth of these following topics (research and imple
 <br>
 <br>
 
-### 04/06 - Milestone 2 - Initial Deployment and First Form (0 points)
+### 04/06 - Milestone 2 - Initial Deployment and First Form (20 points)
 
 {% comment %}
-1. attempt to deploy your code to i6 by following [these instructions](homework/deploy.html)
+1. attempt to deploy your code to i6 by following [instructions](homework/deploy.html)
 2. use [this form to submit urls to your deployed site](https://docs.google.com/a/nyu.edu/forms/d/e/1FAIpQLSfgOqmYrFq_XE1P9On8RCrCzVBBlcISpEk7iTdDmkTOBOE5zQ/viewform)
 3. your deployed site should contain the following progress:
     * __one working form (that is not login or registration)__ 
