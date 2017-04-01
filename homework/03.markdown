@@ -84,7 +84,7 @@ const app = new App();
     // set the status code and location of a redirect
     res.redirect(301, '/just/text');
 });
-
+</code></pre>
 * Bind your application / web server to port 8080 on localhost
     <pre><code data-trim contenteditable>app.listen(8080, '127.0.0.1');
 </code></pre>

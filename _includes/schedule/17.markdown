@@ -61,9 +61,9 @@ In class activity
 * [Instructions / slides](slides/17/dom.html#/14)
 {% endcomment %}
 
-Due Thursday, April 6th at 11PM
+Due Saturday, April 8th at 11PM
 
-* [Milestone #2 (Deployment)](final-project.html#milestone2)
-* Homework #06 - to be posted
+* [Homework #06](homework/06.html)
+* [Milestone #2 (Deployment)](final-project.html#milestone2) (still in draft form)
 
 </td>
