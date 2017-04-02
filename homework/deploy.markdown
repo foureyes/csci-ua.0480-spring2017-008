@@ -4,11 +4,11 @@ title: Final Project Deployment
 nav-state: "Final Project Deployment"
 ---
 <style>
-<style>
+
 .warning {
     background-color: #eecccc;
 }
-</style>
+
 pre {
 	display: inline-block;
 	padding: 9.5px;
