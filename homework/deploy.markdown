@@ -242,7 +242,7 @@ Again, <span class="warning">make sure you're logged in to you remote server (li
     <pre><code>nano config.json</code></pre>
 2. Then add your connection string so that it includes username and password (that you retrieved above):
 	<br>
-    <pre><code>{"dbconf":"mongodb://jversoza:my_password@class-mongodb.cims.nyu.edu/jversoza"};</code></pre>
+    <pre><code>{"dbconf":"mongodb://jversoza:my_password@class-mongodb.cims.nyu.edu/jversoza"}</code></pre>
 3. <span class="warning">Remember, the name of your database is the same as your username!</span>
 4. Save it by <code>CONTROL+O</code> to _write out_ the file. Press <code>RETURN/ENTER</code> to accept the file name.
 5. Quit <code>nano</code> by <code>CONTROL+X</code>
