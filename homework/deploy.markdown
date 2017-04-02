@@ -134,7 +134,7 @@ mongo &lt;dbname&gt; --host class-mongodb.cims.nyu.edu -u &lt;username&gt; -p
 
 </section>
 
-### Part 4: Using an external configuration file for your database
+### Part 4: Using an external configuration file for your database, configuring the port number
 
 <section markdown="block">
 Because the mongodb server you'll connect to from the server requires user authentication, the string you pass in to `mongoose.connect` (your __database connection string__) will have to include the username and password you were given from the previous section, Part 3. The new connection string will have the following format:
@@ -198,6 +198,10 @@ if (process.env.NODE_ENV === 'PRODUCTION') {
     * the new database shouldn't have any data that you entered previously!
     * __DO NOT COMMIT__ `config.json` (in fact, it should be in your `.gitignore` as the previous instructions specify)
     * (you'll create a `config.json` on the server)
+5. Finally, because you'll want to use a custom port number, <span class="warning">you'll have to modify your app.listen call so that it uses an environment variable</span>
+    * if you're using express generator, then this is already done for you
+    * otherwise, change your call to `app.listen` so that it checks for an environment variable, `PORT`, first... otherwise, default to 300
+    * `app.listen(process.env.PORT || 3000);`
 5. commit and push your code
 
 
@@ -279,7 +283,10 @@ In order to have your project run even when you're not logged in to the server t
 	<pre><code>cd ~/usr/local/lib/
 npm install forever</code></pre>
 
-2. Run your app with <code>forever start</code>. Substitute <code>APP_PORT_NUMBER</code> with your actual port number. Note the <code>-o</code> and <code>-e</code> options; they specify where your application's output (debug and error output) should go.
+2. Run your app with <code>forever start</code>. Substitute <code>APP_PORT_NUMBER</code> with your actual port number. Note the <code>-o</code> and <code>-e</code> options; they specify where your application's output (debug and error output) should go. The first version is with `app.js` (without express generator), and the second is with `bin/www`
+
+	<pre><code>cd ~/opt/final-project/
+export PORT=APP_PORT_NUMBER; export NODE_ENV=PRODUCTION; ~/usr/local/lib/node_modules/.bin/forever -o ~/var/log/app.log -e ~/var/log/app_error.log start app.js</code></pre>
 
 	<pre><code>cd ~/opt/final-project/
 export PORT=APP_PORT_NUMBER; export NODE_ENV=PRODUCTION; ~/usr/local/lib/node_modules/.bin/forever -o ~/var/log/app.log -e ~/var/log/app_error.log start bin/www</code></pre>
