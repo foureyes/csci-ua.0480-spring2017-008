@@ -4,6 +4,11 @@ title: Final Project
 nav-state: "Final Project"
 ---
 <style>
+
+.warning {
+    background-color: #eecccc;
+}
+
 pre {
 	display: inline-block;
 	padding: 9.5px;
@@ -187,10 +192,11 @@ Choose at least __8 points__ worth of these following topics (research and imple
 <br>
 <br>
 
-### 04/06 - Milestone 2 - Initial Deployment and First Form (20 points)
+### 04/08 at 11pm - Milestone 2 - Initial Deployment and First Form (20 points)
 
 1. attempt to deploy your code to Courants _compute_ and assignment servers by following [instructions](homework/deploy.html)
-2. use a form (to be linked to) to submit your deployed site
+2. <span class="warning">use [this form to submit your deployed site](https://docs.google.com/a/nyu.edu/forms/d/e/1FAIpQLSe2TvDeXusZAqmG8644BKK8ItTvOOx-ByTE-6dmM_bleHhJCA/viewform)</span>
+3. your submission won't be graded unless the form above is sent with urls to your deployed site
 3. your deployed site should contain the following progress:
     * __one working form (that is not login or registration)__ 
         * ...that should allow data to be modified or deleted
@@ -268,7 +274,7 @@ OLD
 
 {% comment %}
 1. attempt to deploy your code to i6 by following [these instructions](homework/deploy.html)
-2. use [this form to send me the urls]() of: 
+2. <span class="warning">use [this form to send me the urls](https://docs.google.com/a/nyu.edu/forms/d/e/1FAIpQLSe2TvDeXusZAqmG8644BKK8ItTvOOx-ByTE-6dmM_bleHhJCA/viewform)</span> of: 
     * two working forms in your __deployed__ application 
         * they should allow data to be modified or deleted
         * the results of these forms should be apparent/viewable

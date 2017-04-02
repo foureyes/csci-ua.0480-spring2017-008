@@ -226,10 +226,18 @@ git clone https://github.com/nyu-csci-ua-0480-010-spring-2016/REPOSITORY_NAME</c
 ### Part 6: Installing your project's dependencies
 
 <section markdown="block">
+<span class="warning">Before installing your project's dependencies, make sure you're using the right version of node.</span> and that <span class="warning">you're logged in to the right server - either linserv1 or linserv2</span>. 
+
+1. check your node version with `node -v`
+2. it should be grader than `6.x.x`
+3. if it isn't, make sure that you installed the latest node with `nvm` from the beginning of these instructions
+4. if you already installed, then try running your installed nvm: `. ~/.nvm/nvm.sh`
 
 Just like local development, you'll have to install your projects dependencies. Replace <code>REPOSITORY_NAME</code> with your project's actual repository name in the following command.
 
 <pre><code>cd ~/opt/REPOSITORY_NAME/ && npm install</code></pre>
+
+(basically... just go to the same directory that your `package.json` is in... and install from there.
 
 </section>
 
