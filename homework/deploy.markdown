@@ -165,7 +165,7 @@ __To add an external configuration file, follow these steps__ &rarr;
 1. add `config.json` to your `.gitignore` so that your credentials don't inadvertently get committed
 2. in `db.js` add the following code before `mongoose.connect`:
     <pre><code data-trim contenteditable>// is the environment variable, NODE_ENV, set to PRODUCTION? 
-if (process.env.NODE_ENV == 'PRODUCTION') {
+if (process.env.NODE_ENV === 'PRODUCTION') {
     // if we're in PRODUCTION mode, then read the configration from a file
     // use blocking file io to do this...
     var fs = require('fs');
@@ -242,7 +242,7 @@ Again, <span class="warning">make sure you're logged in to you remote server (li
     <pre><code>nano config.json</code></pre>
 2. Then add your connection string so that it includes username and password (that you retrieved above):
 	<br>
-    <pre><code>mongoose.connect('mongodb://jversoza:my_password@class-mongodb.cims.nyu.edu/jversoza');</code></pre>
+    <pre><code>{"dbconf":"mongodb://jversoza:my_password@class-mongodb.cims.nyu.edu/jversoza"};</code></pre>
 3. <span class="warning">Remember, the name of your database is the same as your username!</span>
 4. Save it by <code>CONTROL+O</code> to _write out_ the file. Press <code>RETURN/ENTER</code> to accept the file name.
 5. Quit <code>nano</code> by <code>CONTROL+X</code>
