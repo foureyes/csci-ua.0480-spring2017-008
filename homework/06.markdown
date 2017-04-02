@@ -148,6 +148,17 @@ $2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy
 
 ```
 
+There are some errors that you may encounter while installing `bcrypt`. Here's how to troubleshoot:
+
+1. If npm says `ERR! Tried to download(404)` - this means that it couldn't locate the binary for the module... but it'll fall back to trying to download the source and compiling, so it may still work!
+2. If the installation ends with the following, then `bcrypt` has successfully been installed despite the message from part #1
+    <pre><code data-trim contenteditable>netid-homework06@1.0.0 /Users/username/Desktop/AIT/homeworks/netid-homework06
+└── bcrypt@1.0.2 
+</code></pre>
+3. If you see `Error: Python executable ... is xxxx which is not supported by gyp`, that means that you may need to explicitly pass a version of python to `npm` to compile the source
+4. In this case, when running `npm install`  add the `--python=/path/to/python` flag with the path to a version of Python that's greater than 2.5.x, but not 3.x.x. The path to the right version of python may be `/usr/bin/python` or `/System/Library/Frameworks/Python.framework/Versions/2.7/bin/python2.7` (change the version numbers) if you're on OSX. If you're on windows, you could try installing python 2.x and python 3.x side-by-side... or for a quicker solution...
+5. Try using [an alternate module, such bcryptjs](https://www.npmjs.com/package/bcryptjs) which has a very similar api. Check out the docs to see what methods you'd use to salt and hash... as well as compare hashes.
+
 ### Database Setup
 
 * create a `db.js` file in the root of your project

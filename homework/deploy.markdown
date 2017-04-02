@@ -131,6 +131,7 @@ mongo &lt;dbname&gt; --host class-mongodb.cims.nyu.edu -u &lt;username&gt; -p
 </code></pre>
 
 4. You should see your MongoDB shell if you're able to successfully connect!
+5. If you see the following error `Failed global initialization: BadValue Invalid or no user locale set. Please ensure LANG and/or LC_* environment variables are set correctly.` ... try setting your locale (default language - like English) with `export LC_ALL=C` before running the `mongo` commandline client on the server
 
 </section>
 
