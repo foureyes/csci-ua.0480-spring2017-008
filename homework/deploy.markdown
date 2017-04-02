@@ -4,6 +4,11 @@ title: Final Project Deployment
 nav-state: "Final Project Deployment"
 ---
 <style>
+<style>
+.warning {
+    background-color: #eecccc;
+}
+</style>
 pre {
 	display: inline-block;
 	padding: 9.5px;
@@ -27,8 +32,6 @@ section {
 <div id="final" class="panel panel-default">
 	<div class="panel-heading">Final Project</div>
 	<div class="panel-body" markdown="block">
-
-# DRAFT
 
 ## Final Project Deployment
 
@@ -61,7 +64,7 @@ To determine which port number and server you'll use:
 4. Find your NetID in the table
 	* The port number listed is for your express application
 	* Write this number down... you'll use this in a later step
-    * Your server's domain will be listed
+    * The server domain listed will be the server that you deploy on
     * Write this down; you'll need it to connect via ssh!
 
 </section>
@@ -71,22 +74,25 @@ To determine which port number and server you'll use:
 
 <section markdown="block">
 
-We'll be using ssh, a commandline tool that allows you to login to and run commands on a remote server, to access your server. You'll need an "cims" account to log in to any of these compute/assignment servers. You _should_ have one already created for you.
+We'll be using ssh, a commandline tool that allows you to login to and run commands on a remote server, to access your server. If you're on windows, a popular ssh client is [putty](http://www.putty.org/). You'll need a "cims" account to log in to any of these compute/assignment servers. You _should_ have one already created for you.
 
 
 1. You can retrieve your credentials by going to [https://cims.nyu.edu/webapps/password](https://cims.nyu.edu/webapps/password) first
     * use your netid to log in
     * save the credentials that you receive
-    * if you need to reset your password, you can go to [https://cims.nyu.edu/webapps/password/reset](https://cims.nyu.edu/webapps/password/reset)
+    * if the above does not work or if you need to reset the password that was given to you from the above page, you can go to [https://cims.nyu.edu/webapps/password/reset](https://cims.nyu.edu/webapps/password/reset)
 	* if you receive an error saying that your account does not exist, email helpdesk@cims.nyu.edu ... and cc me on your correspondence so that I'm aware that you're having account issues
+        * make sure to specify that you've already tried your netid here: https://cims.nyu.edu/webapps/password
+        * and that you've tried resetting your password here: https://cims.nyu.edu/webapps/password
 2. To access your assigned server, you must first ssh to `access.cims.nyu.edu`... and then from there, ssh to your _actual_ server:
     * `ssh your_username@access.cims.nyu.edu`
-    * `ssh your_username@your_assigned_server` (
+    * once you've logged in... use ssh again
+    * `ssh your_username@your_assigned_server` 
 3. Once you've logged in, create the following directories in your home directory: 
 	* <code>var/log</code> a directory to dump your application logs
 	* <code>usr/local/lib</code> to store all of your "global" node modules
 	* <code>opt</code> ... as the directory where you'll install your web application
-	* run the following command to create the directories specified above:
+	* run the following command to create the directories specified above (note that `~` means your _home directory_):
         <br>
 		<pre><code>mkdir -p ~/var/log
 mkdir -p ~/usr/local/lib
@@ -100,17 +106,21 @@ mkdir ~/opt</code></pre>
 
 	<pre><code>opt  usr  var</code></pre>
 
-5. Install the most current version of node:
-    * `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash`
-    * `. ~/.nvm/nvm.sh`
-    * `nvm install node`
+5. <span class="warning">The version of node on the servers currently doesn't support ES6.</span>
+    * consequently, you'll have to install the most current version of node
+    * you can do this by installing and using a tool called [node version manager, or nvm](https://github.com/creationix/nvm)
+    * to install:
+        * `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash`
+    * to get the latest version of node
+        * `. ~/.nvm/nvm.sh`
+        * `nvm install node`
 </section>
 
 ### Part 3: Creating a database for your project
 
 <section markdown="block">
 
-You'll have your own database on an instance of __mongod__ running on the server. You don't have to keep the database running like you do locally; that's already taken care of for you. 
+You'll have your own database on an instance of __mongod__ running on one of Courant's server. You don't have to keep the database running like you do locally; that's already taken care of for you. 
 
 1. [Follow these instructions for initializing your mongoDB database on the server](https://cims.nyu.edu/webapps/content/systems/userservices/databases/class-mongodb)
 2. __Make sure you keep the password that's given to you after you follow the above instructions.__ (ideally, in a password safe)
@@ -137,8 +147,9 @@ Where:
 * `USERNAME` - is the username you used for logging it to the server
 * `PASSWORD` - is the password for __mongodb__ that you created from Part 3.
 
-However, you should not put these credentials directly into your `db.js` file, and they should not be in a file in version control (you may inadvertently disclose these credentials if your repository becomes public). One way to deal with this issue is to put your credential in an external file that is conditionally read:
+<span class="warning">The name of your database is the same as your username!</span>
 
+However, you should not put these credentials directly into your `db.js` file, and they should not be in a file in version control (you may inadvertently disclose these credentials if your repository becomes public). One way to deal with this issue is to put your credential in an external file that is conditionally read:
 
 1. add a conditional to your database configuration code that...
 2. checks if an environment variable named `NODE_ENV` is set to `PRODUCTION`
@@ -172,16 +183,18 @@ if (process.env.NODE_ENV == 'PRODUCTION') {
 }
 </code></pre>
 3. when you use `mongoose.connect`, pass in `dbconf` as the argument instead of a hardcoded string
+    * `mongoose.connect(dbconf);`
 4. you can test that everything works by:
-    * try running your application without any environment variables (just use `./bin/www`)
+    * try running your application __locally__ (on your own computer) without any environment variables (just use `node app.js` or `./bin/www`)
         * ... and inserting data
         * via your form
         * (make sure the data persists)
-    * create a `config.json` that contains a connection string with a different database name
+    * create a `config.json` that contains a connection string with a different database name (change the last part, after localhost, to a different database name, like `mongodb://localhost/finalprojectconfig`)
         * the key should be `"dbconf"` (remember that json keys are double quoted)
         * the value should be `"mongodb://localhost/SOME_OTHER_DATABASE_NAME"`
+        * `{"dbconf":"mongodb://localhost/SOME_OTHER_DATABASE_NAME"}
     * then, run your application again, this time forcing your app to use the config file
-        * `NODE_ENV=PRODUCTION ./bin/www`
+        * `NODE_ENV=PRODUCTION node app.js` or `NODE_ENV=PRODUCTION ./bin/www`
     * the new database shouldn't have any data that you entered previously!
     * __DO NOT COMMIT__ `config.json` (in fact, it should be in your `.gitignore` as the previous instructions specify)
     * (you'll create a `config.json` on the server)
@@ -194,7 +207,7 @@ if (process.env.NODE_ENV == 'PRODUCTION') {
 
 <section markdown="block">
 
-1. ssh to the server
+1. <span class="warning">make sure you're logged in to you remote server (linserv1 or linserv2)</span> via ssh (remember, you have to ssh to access.cims.nyu.edu first, then ssh to your server)
 
 
 2. Clone your repository into your opt directory (you can find your full repository name on GitHub). Remember to substitute <code>REPOSITORY_NAME</code> with your actual repository name:
@@ -222,15 +235,18 @@ Just like local development, you'll have to install your projects dependencies. 
 
 Create a <code>config.js</code> file on the server to add the `PRODUCTION` version of your mongodb connection string. You can use a commandline text editor, like <code>nano</code>, <code>vim</code> or <code>emacs</code>. We'll use <code>nano</code> in these examples (but you can use vim or emacs as well). 
 
+Again, <span class="warning">make sure you're logged in to you remote server (linserv1 or linserv2)</span> via ssh (remember, you have to ssh to access.cims.nyu.edu first, then ssh to your server). Do not run these commands if your are only logged in to cims.
+
 1. In your project directory, create and open your file by:
     <br>
     <pre><code>nano config.json</code></pre>
 2. Then add your connection string so that it includes username and password (that you retrieved above):
 	<br>
     <pre><code>mongoose.connect('mongodb://jversoza:my_password@class-mongodb.cims.nyu.edu/jversoza');</code></pre>
-3. Save it by <code>CONTROL+O</code> to _write out_ the file. Press <code>RETURN/ENTER</code> to accept the file name.
-4. Quit <code>nano</code> by <code>CONTROL+X</code>
-5. Test your application. Substitute <code>APP_PORT_NUMBER</code> with the port number you retrieved from Part 1 and add the environment variable, `NODE_ENV`.
+3. <span class="warning">Remember, the name of your database is the same as your username!</span>
+4. Save it by <code>CONTROL+O</code> to _write out_ the file. Press <code>RETURN/ENTER</code> to accept the file name.
+5. Quit <code>nano</code> by <code>CONTROL+X</code>
+6. Test your application. Substitute <code>APP_PORT_NUMBER</code> with the port number you retrieved from Part 1 and add the environment variable, `NODE_ENV`.
 	* Run <code>bin/www</code> or... if you didn't use express generator, use <code>node app.js</code>. __Don't use nodemon to run it.__
 		<br>
         <pre><code>PORT=APP_PORT_NUMBER NODE_ENV=PRODUCTION bin/www</code></pre>
@@ -251,6 +267,8 @@ Error: connect ECONNREFUSED
 </section>
 
 ### Part 8: Running your project as a daemon
+
+<span class="warning">Make sure you're logged in to you remote server (linserv1 or linserv2)</span> via ssh (remember, you have to ssh to access.cims.nyu.edu first, then ssh to your server) before proceeding.
 
 <section markdown="block">
 
