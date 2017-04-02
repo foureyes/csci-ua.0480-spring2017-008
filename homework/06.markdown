@@ -116,6 +116,20 @@ Start your project by creating the following files. This can be done directly in
     * but to easy the grading process, you can check in the secret for this homework
 * `mongoose` - for database access
 
+<span class="warning">Make sure to use dynamically generated paths for your views and static files by using `__dirname`</span>
+
+```
+// express static setup
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'public')));
+
+// hbs setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+```
+<span class="warning">Configure your app to listen on port 3000</span>
+
+
 ### Install bcrypt
 
 `npm install bcrypt`
@@ -354,6 +368,15 @@ Finally, create a page at the path, `/restricted`. This path should:
 Here's what the restricted page interaction should look like:
 
 <br> ![viewing a restricted page](../resources/img/hw06-auth-04-restricted.gif)
+
+## Extra Credit (15 points)
+
+### Logout
+
+1. create a route for logging out
+2. it should respond to `GET /logout`
+3. invalidate the authenticated session by calling [destroy](https://github.com/expressjs/session#sessiondestroycallback)
+4. if `destroy` is successful, redirect to home (`/`)
 
 
 </div>
