@@ -73,14 +73,14 @@ You will be given access to a private repository on GitHub. The final version of
 * __Push__ your changes to the homework repository on GitHub.
 * Add the URL of the repository to your assignment submission in NYU Classes.
 
-### (3 points) Make at Least 3 Commits
+### Make at Least 3 Commits
 
 * Commit multiple times throughout your development process.
 * Make at least 3 separate commits - (for example, one option may be to make one commit per part in the homework).
 
 ## Part 1 - Setup
 
-### (2 points) Installing Tools, Starting Project
+### Installing Tools, Starting Project
 
 Specifically, we'll be using the following tool to help with our development process:
 
@@ -142,7 +142,7 @@ Lastly, start your server in a different terminal window using __nodemon__ to au
 	* ....along with a prompt
 	* <code>CTRL-D</code> quits
 
-### (2 points) Connect to the Database
+### Connect to the Database
 
 Create a file called <code>db.js</code> within the root of your project directory. <code>db.js</code> will contain the following:
 
@@ -168,7 +168,7 @@ Here's the connection string... we'll connect to the local instance of MongoDB, 
 <pre><code data-trim contenteditable>mongoose.connect('mongodb://localhost/hw05');
 </code></pre>
 
-### (3 points) Schema 
+### Schema 
 
 For larger projects, there is usually one file per schema, all located in a separate folder called models. For now, however, define the following Schema within <code>db.js</code>. Check out the slides on:
 
@@ -227,7 +227,7 @@ The flow of the link creation form should follow the conventional POST, redirect
 * <code>POST /some/path/you/choose</code> (to actually process the submitted form)
 * <code>redirect to GET /</code> (to go back to the listing of all links)
 
-### (6 points) Form to Create a Link
+### Form to Create a Link
 
 
 In this route handler, <code>GET /</code>: 
@@ -240,7 +240,7 @@ In this route handler, <code>GET /</code>:
 3. have the form post to a path of your choosing (you'll define this route handler later in the next part)
 4. __test that your form renders by going to__ <code>/</code>
 
-### (10 points) Handling the Link Creation Form
+### Handling the Link Creation Form
 
 
 In this route handler, <code>POST /path/of/your/choosing</code>: 
@@ -306,7 +306,7 @@ The list of all <code>Links</code>s should appear above your form. Retrieve all 
 
 ## Part 4 - Single Link Comments Page, Adding Comments
 
-### (6 points) Single Link Comments Page
+### Single Link Comments Page
 
 
 In this route handler, <code>GET /[slug-name]</code>: 
@@ -323,7 +323,7 @@ In this route handler, <code>GET /[slug-name]</code>:
 ![add a comment](../resources/img/hw05-news-02-comments.gif) 
 </div>
 
-### (10 points) Adding Comments
+### Adding Comments
 
 Add your comment creation form directly underneath your link's title and url in the link comments page. The flow of the __comment creation form__ should be:
 
@@ -354,7 +354,7 @@ __you'll have to handle this post, so...__
 
 ## Part 5 - Remembering Your Last Comment
 
-### (10 points) Using Sessions
+### Using Sessions
 
 Use the `express-session` module to enable sessions. Store the last comment that was created in a visiting user's session. This means that if a user adds a comment, they will see their last comment entered (regardless of what link comments page they're on) underneath the form to add a comment. This last comment feature is per session, so if a user opens another browser, their last comment will not be present.
 

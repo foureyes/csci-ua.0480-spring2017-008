@@ -279,6 +279,7 @@ __EXAM #1 (Midterm Exam)__
 <td markdown="block">
 * HTML Primer, JavaScript and the Browser
 * The Document Object Model
+* Deployment
 </td>
 {% include schedule/17.markdown %}
 </tr>
@@ -289,16 +290,13 @@ __EXAM #1 (Midterm Exam)__
 <td markdown="block">
 
 * Manipulating Elements
-* Deployment
 
 {% comment %}
 * Events Revisited
 * CSS Revisited
 {% endcomment %}
 </td>
-<td></td><td></td><td markdown="block"></td>{% comment %}
 {% include schedule/18.markdown %}
-{% endcomment %}
 </tr>
 
 
@@ -309,9 +307,7 @@ __EXAM #1 (Midterm Exam)__
 * Events
 * CSS
 </td>
-<td></td><td></td><td markdown="block"></td>{% comment %}
 {% include schedule/19.markdown %}
-{% endcomment %}
 </tr>
 
 <!-- ------------ --><a name="20"></a>

@@ -28,12 +28,14 @@
 {% endcomment %}
 </td>
 	<td markdown="block">
+(readings same as previous class)
+
+{% comment %}
 * {{site.book_js}} - Chapter 12 - JavaScript and the Browser
 * {{site.book_js}} - Chapter 13 - The Document Object Model
 * [HTML and CSS from shayhowe.com](http://learn.shayhowe.com/html-css/getting-to-know-html/)
+{% endcomment %}
 </td>
 	<td markdown="block">
-
-See previous class for milestone and assignment
 
 </td>
