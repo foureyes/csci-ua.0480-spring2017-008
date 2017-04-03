@@ -11,6 +11,17 @@ title: "The Document Object Model"
 </section>
 
 <section markdown="block">
+## An HTML Document As Boxes
+
+One way to visualize an HTML document is as a set of nested boxes.
+
+* [see the sample markup](http://eloquentjavascript.net/13_dom.html) and [diagram in our book](http://eloquentjavascript.net/img/html-boxes.svg)
+* the outermost tag, <code>html</code>, encloses the <code>head</code> and the <code>body</code>, which in turn, encloses other inner elements, such as headers and paragraphs
+
+</section>
+
+
+<section markdown="block">
 ## Data Structures!
 
 __If you were tasked with writing a rendering engine for a browser, what kind of data structure would you use to represent an HTML document in your program?__ &rarr;
@@ -26,17 +37,8 @@ __If you were tasked with writing a rendering engine for a browser, what kind of
 
 <br>
 
-__Let's look at some ways of visualizing an HTML document__ &rarr;
+__Let's look at another way of visualizing an HTML document__ &rarr;
 {:.fragment}
-
-</section>
-<section markdown="block">
-## An HTML Document As Boxes
-
-One way to visualize an HTML document is as a set of nested boxes.
-
-* [see the sample markup](http://eloquentjavascript.net/13_dom.html) and [diagram in our book](http://eloquentjavascript.net/img/html-boxes.svg)
-* the outermost tag, <code>html</code>, encloses the <code>head</code> and the <code>body</code>, which in turn, encloses other inner elements, such as headers and paragraphs
 
 </section>
 
@@ -57,11 +59,11 @@ Another way to view an HTML document is as a tree:
 
 The __DOM__, or __Document Object Model__, is a standardized programming interface (an API) for representing and working / interacting with objects in HTML documents
 
-* it's __language independent__! (...it's not tied to JavaScript) and __cross platform__
-* the DOM is a __fully object-oriented__ representation of a web page
-* it provides a structured representation of the document and defines the way that the document can be accessed programmatically
-* this access allow the reading and modification of a document's content, structure and even visual presentation
-* it's essentially the _bridge_ between a web page and a programming language!
+* {:.fragment} it's __language independent__! (...it's not tied to JavaScript) and __cross platform__
+* {:.fragment} the DOM is a __fully object-oriented__ representation of a web page
+* {:.fragment} it provides a structured representation of the document and defines the way that the document can be accessed programmatically
+* {:.fragment} this access allow the reading and modification of a document's content, structure and even visual presentation
+* {:.fragment} it's essentially the _bridge_ between a web page and a programming language!
 </section>
 
 <section markdown="block">

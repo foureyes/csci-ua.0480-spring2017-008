@@ -276,7 +276,7 @@ Things can get convoluted quickly as many objects also implement multiple interf
 __Let's see what we can do with all of those.__
 
 <pre><code data-trim contenteditable>
-var p = content.getElementsByTagName('p')[0];
+var p = content.getElementsByTagName('p')[1];
 p.constructor.name;
 p instanceof HTMLParagraphElement
 p instanceof HTMLDivElement
