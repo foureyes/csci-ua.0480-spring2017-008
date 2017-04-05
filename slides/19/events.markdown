@@ -135,7 +135,7 @@ this.removeEventListener('click', sayHello);
 So... what happens if you have two elements nested within each other, and both have event listeners?
 
 * {:.fragment} the event handler of the more specific element (the innermost element) gets called first
-* {:.fragment} ...then the element bubbles up through the element's parent elements, triggering their event handlers as well
+* {:.fragment} ...then the event bubbles up through the element's parent elements, triggering their event handlers as well
 </section>
 
 <section markdown="block">
@@ -180,15 +180,17 @@ b.addEventListener('click', function(evt) {
 <section markdown="block">
 ## Preventing Default Event Actions
 
-Most events have default actions on them:
+Most events have default actions on them. That is, there are some elements that react to events already. __Can you think of any?__ &rarr;
 
-* clicking an input of type submit will GET or POST a form
-* clicking on a link will take you to that link
+* {:.fragment} clicking an __input of type submit__ will GET or POST a form
+* {:.fragment} clicking on a __link__ will take you to that link
 
 <br>
 But... __what if the default action was not your intention?__ &rarr;
+{:.fragment}
 
 Use the __preventDefault()__ method on the event object!
+{:.fragment}
 </section>
 
 <section markdown="block">

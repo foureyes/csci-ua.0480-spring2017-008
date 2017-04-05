@@ -47,8 +47,8 @@ Midterm Exam - Solution Sets
     * but points only applied to total homework grade
 {% endcomment %}
 
-* {{site.book_js}} - Chapter 12 - JavaScript and the Browser
-* {{site.book_js}} - Chapter 13 - The Document Object Model
+* {{site.book_js_5}} - Chapter 12 - JavaScript and the Browser
+* {{site.book_js_5}} - Chapter 13 - The Document Object Model
 * [HTML and CSS from shayhowe.com](http://learn.shayhowe.com/html-css/getting-to-know-html/)
 </td>
 	<td markdown="block">

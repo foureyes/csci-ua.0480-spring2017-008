@@ -101,7 +101,7 @@ The following example uses set interval to:
 
 <pre><code data-trim contenteditable>
 setInterval(function() {
-	var header = document.getElementById('headerContainer');
+	var header = document.getElementsByClassName('header')[0];
 	header.appendChild(document.createElement('h1')).innerText = Date();
 }, 2000);
 </code></pre>
