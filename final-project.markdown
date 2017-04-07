@@ -211,26 +211,23 @@ Choose at least __8 points__ worth of these following topics (research and imple
 <br>
 <br>
 
-### 4/13 - Milestone 3 - 2nd Form and More Progress on Research (20 points)
+### 4/15 at 11pm - Milestone 3 - 2nd Form and More Progress on Research (20 points)
 
-{% comment %}
 1. make at least 3 additional commits to add:
     * your 2nd form / ajax interaction
     * make more progress on your research topics
-2. redeploy your code to i6 by running git pull and restarting forever
-    1. `ssh` into i6
+2. redeploy your code to Courant's server by running git pull and restarting forever
+    1. `ssh` into linserv1 or linserv2 (remember, you have to go to access.cims.nyu.edu first)
     2. `cd` into your project directory (should be in `~/opt/NETID-final-project`)
     3. run `forever stopall` and `forever start bin/www` 
-        * __YOU MUST MAKE SURE THIS IS WORKING AFTER DECEMBER 1ST DUE TO SCHEDULED DOWNTIME FOR SERVERS__
         * you'll have to use the full path to forever, likely `~/usr/local/node_modules/bin/forever`
         * and perhaps the full bath to `bin/www`
-3. use [this form to submit urls for the following](https://docs.google.com/a/nyu.edu/forms/d/e/1FAIpQLSctfWL5TBDUBqB_NmMBrdZ6X0LabYyPXP3BQyQjoNfXPXNA4g/viewform)
+3. (form submission __to be posted__) 
     * __both working forms or ajax interactions (that are not login or registration)__ 
     * a link to show code changes since milestone #2:
         * start with the url to your repository: `https://github.com/nyu-csci-ua-0480-001-fall-2016/NETID-final-project/`
         * and append the following to the url: `compare/master@%7B11-18-16%7D...master`
         * for example: `https://github.com/nyu-csci-ua-0480-001-fall-2016/NETID-final-project/compare/master@%7B11-18-16%7D...master`
-{% endcomment %}
 
 
 {% comment %}

@@ -64,6 +64,6 @@ In class activity
 Due Saturday, April 8th at 11PM
 
 * [Homework #06](homework/06.html)
-* [Milestone #2 (Deployment)](final-project.html#milestone2) (still in draft form)
+* [Milestone #2 (Deployment)](final-project.html#milestone2)
 
 </td>

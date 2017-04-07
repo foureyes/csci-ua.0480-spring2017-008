@@ -44,10 +44,12 @@
 {% endcomment %}
 </td>
 	<td markdown="block">
-Due 4/15
 
-* milestone #3 (to be posted)
-* homework #7 (to be posted)
+Due Saturday, April 15th at 11PM
+
+* [Homework #07](homework/07.html)
+* [Milestone #3](final-project.html#milestone3)
+
 
 
 </td>
