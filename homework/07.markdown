@@ -13,6 +13,8 @@ title: CSCI-UA.0480 - Homework #7
 	<div class="panel-heading">Homework #7</div>
 	<div class="panel-body" markdown="block">
 
+# <span class="warning">Draft (Mostly Finished)</span>
+
 # One Hand of Blackjack (Client Side JavaScript) - __Due Saturday, April 15th, by 11PM__
 
 
