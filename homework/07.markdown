@@ -13,7 +13,6 @@ title: CSCI-UA.0480 - Homework #7
 	<div class="panel-heading">Homework #7</div>
 	<div class="panel-body" markdown="block">
 
-# <span class="warning">Draft (Mostly Finished)</span>
 
 # One Hand of Blackjack (Client Side JavaScript) - __Due Saturday, April 15th, by 11PM__
 
@@ -141,9 +140,13 @@ Start off by handling the submit button on the form and making the form disappea
 * see the [slides on `document.querySelector`](../slides/19/js-css.html#/6) or the [mdn documentation](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector)
 * check out the [slides on events](../slides/19/events.html#/)
 * ...along with mdn's documentation on [addEventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener), [click](https://developer.mozilla.org/en-US/docs/Web/Events/click), and [DOMContentLoaded](https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded)
+* because the button in the form is a submit button, it'll _actually_ make a GET or POST request when pressed; we don't want this to happen, so we'll use [preventDefault](../slides/19/events.html#/12) to stop the default action from occurring on a click event
+* and lastly, the [slides](../slides/19/css.html#/56) on [classList](../slides/19/css.html#/7) will show you how to add, remove and toggle css classes on elements
 *  Remember, you'll need to put all of your DOM dependant JavaScript in a <code>DOMContentLoaded</code> listener (which you already did above)
 * and, of course, you'll need to add a <code>click</code> event listener for your submit button 
-* create and apply the appropriate CSS classes to get rid of the _form_ (do this with styles, there's no need to remove the element) to make room for displaying cards
+* within the callback to your `click` event listener:
+    1. make sure to call `preventDefault` (see the [slides on events](slides/19/events.html#/12)) to stop the form from submitting
+    2. create and apply the appropriate CSS classes to get rid of the _form_ (do this with styles, there's no need to remove the element) to make room for displaying cards (in addition to the slides above, [here's the mdn docs on classList](https://developer.mozilla.org/en-US/docs/Web/API/Element/classList))
 * <span class="warning">Note that `this` within the callback passed to `addEventListener` will refer to the element that was clicked on, as long as the function you use is not an arrow function</span>
     * For example....
     * Using this markup: `<div id="clicker">Click Me</div>`
@@ -158,12 +161,13 @@ Once you've gotten rid of the form, generate a deck of cards and distribute a ha
 
 * Note that there was a text field in the original form - this can be used to set the cards at the top of the deck 
     * If the player enters a value in this field, then the cards on top of the deck are set to the sequence inputted
-    * The input should be a comma separated list of characters and/or numbers (for example `K,2,3,7`)
+    * The input should be a comma separated list of characters and/or numbers (for example `K,2,3,7`), the suit of the cards can be any suit (in the example below, all of the specified cards were given a default suit of diamonds)
     * No validation is required (assume that the user puts in valid input or no input)
     * You can retrieve the user input from the text field by using the `value` property on the form element that contains the user input - [see the mdn docs on value under HTML Input Element](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement)
-* Generate a deck of 52 shuffled cards
+* __The following should done programmatically via client side JavaScript__ (the graphical part will be specified in the next section)
+* Generate a deck of 52 shuffled cards (perhaps an Array of objects?)
 * If there were card faces that were entered in the form above...
-    * add those cards to the top of the deck
+    * add those cards to the top of the deck (again, you can just pick a suit; it's the faces that matter)
     * these cards will be dealt first, alternating between the computer and the user
     * for example, if the cards 2, 5, 2, 5, J, Q, K, then:
         * the computer would get a 2 and 2
@@ -171,7 +175,8 @@ Once you've gotten rid of the form, generate a deck of cards and distribute a ha
         * the next cards dealth (from pressing the "Hit" button) would be J, Q, and K
 * Deal the cards - alternate between the computer and player
     * the computer gets the first and third card
-    * the player gets the second card
+    * the player gets the second card and fourth card
+
 
 ### Display the Cards and User Interface
 
@@ -209,31 +214,58 @@ Based on the cards dealt, add elements to the user interface to represent both t
 
 ### Hit and Stand
 
-Add event listeners to the Hit and Stand buttons.
+Once user's hand and the computer's hand are displayed after the initial deal, the user can now decide whether they want more cards or stay with the cards that they have. The previous section added buttons (Hit and Stand), but now you'll have to add event listeners to those buttons. 
 
-1. pressing Hit should deal the next card from the deck
-    * if Hitting makes a user's total go over 21, then the user's turn ends immediately 
-    * ... and they lose the hand
-2. pressing Stand should end the user's turn and allow the computer to Hit or Stand
+1. pressing `Hit` should deal the next card from the deck
+    * the next card should be moved from the deck to the user's hand
+    * an element should be created to add the card to the user's hand in the user interface
+    * if hitting makes a user's total go over 21: 
+        * then the user's turn ends immediately 
+        * ... and they lose the hand
+        * (the computer does not even need to decided to hit or stand)
+2. pressing `Stand` should end the user's turn and allow the computer to Hit or Stand
+    * the computer's strategy is your discretion
+    * though the computer must hit in some situations or stand in others
+    * an easy strategy is to always hit if a hand total is underneath a threshold, but stand if it's eqaul to or above that threshold
+
+The following is an example of the user:
+
+1. hitting twice
+2. then going over 21 (busting)
+3. (and consequently, immediately losing the hand)
+
+![Play](../resources/img/hw07-blackjack-04-play.gif)
 
 ### Determine the winner
 
 Once the user and computer have both decided to "stand" or have a hand total over 21...
 
 1. Compare the computer's score with the user's score
-2. The player with the score closer to 21 wins
+2. The player with the score closer to or equal to 21 wins
 3. Add text to indicate of who won
+4. If the player went over 21, they lose automatically
+5. __A tie is possible__
 
+Below is an example of the user winning a hand:
+
+![Win](../resources/img/hw07-blackjack-05-win.gif)
 
 ### Optional Features (Extra Credit)
 
-Implement any of the following features
+Implement any of the following features for extra credit. 
+
+<span class="warning">If you are implementing extra credit:</span>
+
+1. add a README.md to the root of your project
+2. add notes specifying which extra credit you did
 
 (20 points) __Reset hand__
 
-* when a hand ends, add a restart button along the bottom row of buttons
-* the restart button resets the game so that:
+* when a hand ends, remove the `Hit` and `Stand` buttons and add a `Restart` button along the bottom row
+* when the `Restart` button is pressed, it resets the game so that:
     * the computer and player hands are cleared
+    * new cards are dealt
+    * the `Hit` and `Stand` button are added back
 
 (25 points) __Save results in database__
 
