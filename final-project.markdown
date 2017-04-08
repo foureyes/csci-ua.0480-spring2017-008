@@ -222,12 +222,13 @@ Choose at least __8 points__ worth of these following topics (research and imple
     3. run `forever stopall` and `forever start bin/www` 
         * you'll have to use the full path to forever, likely `~/usr/local/node_modules/bin/forever`
         * and perhaps the full bath to `bin/www`
-3. (form submission __to be posted__) 
+3. [submit this form for milestone #3 to indicate urls](https://docs.google.com/a/nyu.edu/forms/d/e/1FAIpQLScIKAMNIuUBakdzhwLUGpZ7v8zSHDzykPIdWyzsqm3IkiV6Pg/viewform)
     * __both working forms or ajax interactions (that are not login or registration)__ 
     * a link to show code changes since milestone #2:
-        * start with the url to your repository: `https://github.com/nyu-csci-ua-0480-001-fall-2016/NETID-final-project/`
-        * and append the following to the url: `compare/master@%7B11-18-16%7D...master`
-        * for example: `https://github.com/nyu-csci-ua-0480-001-fall-2016/NETID-final-project/compare/master@%7B11-18-16%7D...master`
+        * start with the url to your repository: `https://github.com/nyu-csci-ua-0480-008-spring-2017/NETID-final-project/`
+        * and append the following to the url: `compare/master@%7B04-09-17%7D...master`
+        * for example: `https://github.com/nyu-csci-ua-0480-008-spring-2017/NETID-final-project/compare/master@%7B04-09-17%7D...master`
+                     
 
 
 {% comment %}
