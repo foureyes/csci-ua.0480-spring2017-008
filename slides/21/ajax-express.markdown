@@ -171,9 +171,11 @@ req.send();
 </section>
 
 <section markdown="block">
-## Repository Viewer (Again / Take Two?)
+## Repository Viewer (Review)
 
-An amended version of a demo that we didn't get a chance to go over yet. __We can build a GitHub repository viewer__ &rarr;
+Another look at the demo that we _may_ have done.... __a GitHub repository viewer__ &rarr;
+
+It has:
 
 * has one text field where you can input a github username
 * will list all of that person's pubic repositories when you click on submit

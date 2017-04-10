@@ -1,6 +1,8 @@
 	<td markdown="block">
 
-* Back to [CSS](slides/19/css.html)
+* Re: Milestone #2
+    * Don't break your deploy until you get your grades for milestone #2
+    * Don't making changes on "production"
 * Back to [events](slides/19/events.html)
 * [Ajax Part 1](slides/20/ajax.html)
 

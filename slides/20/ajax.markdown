@@ -44,14 +44,15 @@ Let's make a quick diagram of how that all worked. __A run-of-the-mill database 
 
 __We've made _traditional_ web applications.__ 
 
-* the application itself is __mostly server-side__; the client side is usually just presentation
-* __it's typical for most interactions to result in another page being loaded entirely (or in the same page being refreshed)__.
-* sometimes, you have to __wait a little bit__ for the next page (bummer)
-* this is kind of expected behavior, though. After all, the web _is just_ a bunch of interconnected documents, right?
+* {:.fragment} the application itself is __mostly server-side__; the client side is usually just presentation
+* {:.fragment} __it's typical for most interactions to result in another page being loaded entirely (or in the same page being refreshed)__.
+* {:.fragment} sometimes, you have to __wait a little bit__ for the next page (bummer)
+* {:.fragment} this is kind of expected behavior, though. After all, the web _is just_ a bunch of interconnected documents, right?
 
 <br>
 
 __How does this user experience differ from _native_ desktop and mobile apps?__ &rarr;
+{:.fragment}
 
 * generally speaking, desktop and mobile apps _seem more real time_
 * there's no waiting for a page to load; it _just_ happens
@@ -67,8 +68,9 @@ __Another way to deliver a web application is as a single page:__
 * appropriate data and resources are added to the page as necessary (usually in response to user interactions)
 	* __without the page reloading__
 	* __without transferring control to another page__
-* the majority of the application itself is on the client side, and have the server acts as a simple data store
+* the majority of the application itself is on the client side, and the server acts as a simple data store
 * which results in a faster and more responsive user experiences (again, similar to a desktop or mobile application)
+{:.fragment}
 </section>
 
 <section markdown="block">
@@ -194,7 +196,7 @@ __How does it work?__ &rarr;
 Create an XMLHttpRequest object using the constructor:
 
 <pre><code data-trim contenteditable>
-var req = new XMLHttpRequest();
+const req = new XMLHttpRequest();
 </code></pre>
 
 Use the <code>open</code> method to configure the object. It takes 3 arguments:
@@ -213,19 +215,22 @@ req.open('GET', url, true);
 
 __Specify what it should do on error vs onload.__ 
 
-This is typically done by setting the __<code>onerror</code>__ and __<code>onload</code>__ properties on the XMLHttpRequest object:
-
-<pre><code data-trim contenteditable>
-req.onload = function() { ... };
-req.onerror = function() { ... };
-</code></pre>
-
-You can also use the new-fangled __addEventListener__ interface.
+You can also use the __addEventListener__ interface that we just learned:
 
 <pre><code data-trim contenteditable>
 req.addEventListener('load') { ... };
 req.addEventListener('error') { ... };
 </code></pre>
+
+There's also the older style __<code>onerror</code>__ and __<code>onload</code>__ properties on the XMLHttpRequest object:
+{:.fragment}
+
+<pre><code data-trim contenteditable>
+req.onload = function() { ... };
+req.onerror = function() { ... };
+</code></pre>
+{:.fragment}
+
 </section>
 
 <section markdown="block">
@@ -269,14 +274,14 @@ Using [this json file](../../code/hello.json):
 * parse the JSON... and insert each object's message into document.body as a div
 
 <br>
-Some setup to serve this exercise, as well as a few others:
+__Some setup to serve this exercise, as well as a few others:__ &rarr;
 
-* setup a barebones express app
-* create the json file above in your public folder
-* create an html file called <code>hello.html</code> in your public folder
+1. {:.fragment} setup a barebones express app
+2. {:.fragment} create the json file above in your public folder
+3. {:.fragment} create an html file called <code>hello.html</code> in your public folder
 	* set up some boilerplate html
 	* just add script tags to include the following
-* create a JavaScript file called <code>hello.js</code> in your public/javascripts folder
+4. {:.fragment} create a JavaScript file called <code>hello.js</code> in your public/javascripts folder
 
 </section>
 
@@ -292,8 +297,8 @@ In your JavaScript file, <code>hello.js</code>:
 <br>
 
 <pre><code data-trim contenteditable>
-var url = 'http://localhost:3000/hello.json';
-var req = new XMLHttpRequest();
+const url = 'http://localhost:3000/hello.json';
+const req = new XMLHttpRequest();
 req.open('GET', url, true);
 </code></pre>
 {:.fragment}
@@ -307,7 +312,7 @@ Once we've successfully received data, __add each object's message as a div to t
 <pre><code data-trim contenteditable>
 req.addEventListener('load', function() {
 	if (req.status >= 200 && req.status < 400) {
-		var messages = JSON.parse(req.responseText);
+		const messages = JSON.parse(req.responseText);
 		messages.forEach(function(obj) {
 			document.body.appendChild(
 				document.createElement('div')).
@@ -399,7 +404,7 @@ __How would we change our JavaScript so that whenever you click the button above
 Just get the button and add a "click" event listener.
 
 <pre><code data-trim contenteditable>
-var button = document.getElementById('get-messages-button');
+const button = document.getElementById('get-messages-button');
 button.addEventListener('click', function() { 
 .
 .
@@ -424,6 +429,7 @@ Let's try a little experiment:
 <br>
 [http://foureyes.github.io/csci-ua.0480-fall2015-001/homework/02/2014-06-15-heat-spurs.json](http://foureyes.github.io/csci-ua.0480-fall2015-001/homework/02/2014-06-15-heat-spurs.json)
 {% endcomment %}
+<br>
 
 __What do you think will happen? (Ignore the fact that the documents don't match at all, and we're not getting back json; there's something else off)__ &rarr;
 
@@ -472,9 +478,12 @@ The two ideas that govern this are:
 
 The __same origin policy__ is a policy implemented by browsers that __restricts how a document, script or data from one _origin_ can interact with a document, script or data from _another origin_.__
 
-* it __permits scripts__ running on pages originating from the same site to access documents, scripts or data from each other 
-* but __prevents scripting__ access to these resources if they are on different sites
-* of course, because this is specification includes scripting access, it applies to XMLHttpRequests (we'll see an exception shortly)
+* {:.fragment} it __permits scripts__ running on pages originating from the same site to access documents, scripts or data from each other 
+* {:.fragment} but __prevents scripting__ access to these resources if they are on different sites
+    * note that __access__ depends on the kind of request being made
+    * (for regular GET requests, this usually means that the request can be made, but the response is not allowed to be read by the script)
+    * (for other requests, the request may be outright denied!)
+* {:.fragment} of course, because this is specification includes scripting access, it applies to XMLHttpRequests (we'll see an exception shortly)
 </section>
 
 <section markdown="block">
@@ -512,16 +521,17 @@ A hint from wikipedia: "This mechanism bears a particular significance for moder
 <section markdown="block">
 ## An Example of CSRF
 
-* imagine that you're logged into your bank account 
-* same origin policy is not implemented in your browser, and your bank has no additional csrf protection (_bad news_)
-* I send you a link to my page of animated gifs of dancing pizza
-* no one can resist animated gifs and pizza, so you click on the link
-* once on my page, behind the scenes, I can use XMLHttpRequest to...
-* get a page that's behind your bank's login (something like mybank/account) because you're already logged in
-* from there I can:
-	* steal data
-	* possibly take actions by issuing POSTs
-	* (^^^ slightly more complicated than this, but...)
+__Imagine that you're logged into your bank account:__ &rarr;
+
+* {:.fragment} same origin policy is __not implemented__ in your browser, and your bank has no additional csrf protection (_bad news_)
+* {:.fragment} I send you a link to my page of _animated gifs of dancing pizza_
+* {:.fragment} no one can resist animated gifs and pizza, so you click on the link
+* {:.fragment} once on my page, behind the scenes, I can use `XMLHttpRequest` to...
+* {:.fragment} get a page that's behind your bank's login (something like mybank/account) because you're already logged in
+* {:.fragment} from there I can:
+	* steal data - read information that I should not be allowed to read
+	* possibly take actions by issuing POST requests
+	* (^^^ slightly more complicated than this, but... you get the idea)
 	* YIKES!
 </section>
 
@@ -568,86 +578,261 @@ Let's try checking out what it says about one of my GitHub accounts by hitting t
 <section markdown="block">
 ## Let's Build a Repository Browser
 
-* we could probably build a quick form that takes in a username
+__We could probably build a quick form that takes in a username__ &rarr;
+
 * ...and lists off all of the repositories that the user has
 * __let's give it a try.__ &rarr;
 	* how about a wireframe?
 	* a use case?
 	* maybe some markup first (what form elements would we need? should we have some styles... sure!)
 	* then some JavaScript
-</section>
-<section markdown="block">
-## Some Markup
 
-Within the body...
+<br>
+
+__Some more docs regarding the GitHub API:__ &rarr;
+
+* [rate limit status](https://developer.github.com/v3/rate_limit/)
+* [list user repos](https://developer.github.com/v3/repos/#list-user-repositories)
+
+</section>
+
+<section markdown="block">
+## Repository Viewer Wireframe
+
+__Our repository viewer will have:__ &rarr;
+
+* one text field where you can input a github username
+* a list all of that person's pubic repositories when you click on submit
+* (optionally) a button to check for rate limit (of course!)
+
+<br>
+
+It might look like this:
+
+<div markdown="block" class="img">
+![github]({{ site.slides_img_prefix }}/github-repo-browser.jpg)
+</div>
+
+</section>
+
+<section markdown="block">
+## Reading API Documentation
+
+Typically, API documentation will specify:
+
+* {:.fragment} http request method to use
+* {:.fragment} the path to the resource
+* {:.fragment} the response format and status code
+* {:.fragment} the actual data contained within the response 
+
+<br>
+__Let's take a look at the two end points we'll be using.__ &rarr;
+{:.fragment}
+
+</section>
+
+<section markdown="block">
+## Show Rate Limit Status
+
+The endpoint / URL for retrieving info about the rate limit is:
+
+<pre><code data-trim contenteditable>
+GET /rate_limit
+</code></pre>
+
+Using this URL with my account: [https://api.github.com/rate_limit](https://api.github.com/rate_limit)
+
+We're interested in resources.core.limit... this is what we get back:
+
+<pre><code data-trim contenteditable>
+{
+  "resources": {
+    "core": {
+      "limit": 60,
+      "remaining": 58,
+      "reset": 1447761547
+    },
+    "search": {
+      "limit": 10,
+      "remaining": 10,
+      "reset": 1447759711
+    }
+  },
+  "rate": {
+    "limit": 60,
+    "remaining": 58,
+    "reset": 1447761547
+  }
+}
+
+</code></pre>
+
+</section>
+
+<section markdown="block">
+## List User Repos
+
+The endpoint / URL for retrieving repository info from GitHub is:
+
+<pre><code data-trim contenteditable>
+GET /:username/repos
+</code></pre>
+
+Using this URL with my account: [https://api.github.com/users/foureyes/repos](https://api.github.com/users/foureyes/repos)
+
+We get back...
+
+<pre><code data-trim contenteditable>
+[{
+"id": 26084780,
+"name": "bjorklund",
+"full_name": "foureyes/bjorklund",
+"owner": { 
+	"login": "foureyes",
+	"avatar_url": "https://avatars.githubusercontent.com/u/356512?v=3",
+	"url": "https://api.github.com/users/foureyes",
+	.
+	.
+},
+"private": false,
+.
+.
+}]
+</code></pre>
+</section>
+
+
+
+
+<section markdown="block">
+## Let's Start With Some Markup
+
+We'll need:
+
+* a text input for the username
+* a button to submit
+* a button to ask for the rate limit
+* a place to insert the repository names as a list
+* a place to insert the rate limit info
+
+</section>
+
+<section markdown="block">
+## Maybe Some Markup Like This?
+
+Here's our HTML:
 
 <pre><code data-trim contenteditable>
 &lt;h2&gt;Repository Viewer&lt;/h2&gt;
+&lt;input type="button" id="get-rate-limit" name="get-rate-limit" value="Get Rate Limit"&gt;
+&lt;pre id="rate-limit"&gt;
+&lt;/pre&gt;
 &lt;label for="username"&gt;GitHub Username&lt;/label&gt;
 &lt;input type="text" id="username" name="username"&gt;
 &lt;input type="button" id="get-repos" name="get-repos" value="Get Repositories"&gt;
 &lt;div id="container"&gt;
-	&lt;ul&gt;&lt;/ul&gt;
+			&lt;ul&gt;&lt;/ul&gt;
 &lt;/div&gt;
-&lt;script src="/javascripts/git.js"&gt;&lt;/script&gt;
 </code></pre>
 </section>
 
 <section markdown="block">
-## Aaand the JavaScript
+## Setting Up ... Getting Required Elements
 
-Get the click event working... along with some setup for XMLHTTPRequest
-
+__Let's gather the buttons and add event listeners to them.__ &rarr;
 <pre><code data-trim contenteditable>
 document.addEventListener('DOMContentLoaded', init);
 
 function init() {
-  console.log('init');
-  var button = document.getElementById('get-repos');
-  button.addEventListener('click', handleClick);
+	console.log('init');
+	var button = document.getElementById('get-repos'),
+		rateLimitButton = document.getElementById('get-rate-limit');
 
-  function handleClick(evt) {
-    console.log('clicked');
-    var req = new XMLHttpRequest();
-    var url = 'http://api.github.com/users/' + 
-        document.getElementById('username').value + 
-        '/repos';
-    console.log(url);
-    req.open('GET', url, true);
-
-	// add load and error event listeners
-
-    req.send();
-  }
+	button.addEventListener('click', handleClick);
+	rateLimitButton.addEventListener('click', handleRateLimitClick);
 }
-
-
 </code></pre>
 </section>
 
 <section markdown="block">
-## On Load and On Error
+## Handling a Click on the Rate Limit Button
+
+To get the rate limit, we can use the following url [http://api.github.com/rate_limit](http://api.github.com/rate_limit).  __Let's set up the request in our <code>handleRateLimitClick</code> function__ &rarr;
 
 <pre><code data-trim contenteditable>
-    req.addEventListener('load', function() {
-      if (req.status >= 200 && req.status < 400) {
-        var div = document.getElementById('container'); 
-        var oldList = document.querySelector('#container ul');
-        var ul = document.createElement('ul');
-        var repos = JSON.parse(req.responseText);
-        repos.forEach(function(obj) {
-          ul.appendChild(document.createElement('li')).textContent = obj.name;
-        });
-        div.replaceChild(ul, oldList);
-      }
-    });
+function handleRateLimitClick() {
+	var req = new XMLHttpRequest(),
+		url = 'http://api.github.com/rate_limit';
+
+	req.open('GET', url, true);
+	req.addEventListener('load', handleRateLimitResponse);
+	req.send();
+}
 </code></pre>
-<pre><code data-trim contenteditable>
-    req.addEventListener('error', function() {
-      console.log('uh oh');
-    });
-</code></pre>
+{:.fragment}
 </section>
+
+<section markdown="block">
+## Dealing with the Response
+
+__Let's define a function that populates an element, the pre tag, with the data from the API Limit call.__ &rarr;
+<pre><code data-trim contenteditable>
+function handleRateLimitResponse() {
+	var pre = document.getElementById('rate-limit'), 
+		response = JSON.parse(this.responseText);
+	if (this.status >= 200 && this.status < 400) {
+		pre.textContent = response.rate.limit + ' Limit, ' 
+				+ response.rate.remaining + ' Remaining, ' 
+				+ new Date(response.rate.reset * 1000);
+	}
+}
+</code></pre>
+{:.fragment}
+</section>
+
+<section markdown="block">
+## Now for the Actual Repo Browser...
+
+When clicking view repositories, we should retrieve the repositories for the user in the text field. __First, let's set up our click handler... and configure a request within it.__ &rarr;
+
+<pre><code data-trim contenteditable>
+function handleClick(evt) {
+	var req = new XMLHttpRequest(),
+		url = 'http://api.github.com/users/' + 
+			document.getElementById('username').value + '/repos';
+
+	req.open('GET', url, true);
+	req.addEventListener('load', handleResponse);
+	req.send();
+}
+</code></pre>
+{:.fragment}
+</section>
+
+
+<section markdown="block">
+## Lastly, Once we Have the Repository Data....
+
+We can use the response from the API to drop in the repositories. __Create a function that gets called when the data from the request has loaded.__ &rarr;
+
+<pre><code data-trim contenteditable>
+function handleResponse() {
+	if (this.status >= 200 && this.status < 400) {
+		var div = document.getElementById('container'), 
+			oldList = document.querySelector('#container ul'),
+			ul = document.createElement('ul'),
+			repos = JSON.parse(this.responseText);
+
+		repos.forEach(function(obj) {
+			ul.appendChild(document.createElement('li')).textContent = obj.name;
+		});
+		div.replaceChild(ul, oldList);
+	}
+}
+</code></pre>
+{:.fragment}
+</section>
+
 
 <section markdown="block">
 ## Take a Quick Look at the Domains
@@ -748,7 +933,7 @@ __Let's try one where we read message objects out of MongoDB__ &rarr;
 Just a run-of-the-mill message:
 
 <pre><code data-trim contenteditable>
-var Message = new mongoose.Schema({
+const Message = new mongoose.Schema({
 	message: String,
 	dateSent: Date
 });

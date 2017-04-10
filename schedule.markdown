@@ -331,9 +331,7 @@ __EXAM #1 (Midterm Exam)__
 * Maybe Fetch API
 
 </td>
-<td></td><td></td><td markdown="block"></td>{% comment %}
 {% include schedule/21.markdown %}
-{% endcomment %}
 </tr>
 
 
