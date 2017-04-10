@@ -173,9 +173,13 @@ There is a __tutor available__ for the course.
 * Location
     * __WWH 412__
 * Hours
+    * See pinned message on Piazza
+
+{% comment %}
     * __Wednesday__  - 5pm - 7pm
     * __Thursday__ - TBD {% comment %} 1pm - 3pm {% endcomment %}
     * __Friday__  - 1pm - 3pm
+{% end %}
 
 Additionally, the tutor will hold workshops based on student demand. Some workshops may include:
 
