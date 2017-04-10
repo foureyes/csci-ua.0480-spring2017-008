@@ -140,12 +140,12 @@ Start off by handling the submit button on the form and making the form disappea
 * see the [slides on `document.querySelector`](../slides/19/js-css.html#/6) or the [mdn documentation](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector)
 * check out the [slides on events](../slides/19/events.html#/)
 * ...along with mdn's documentation on [addEventListener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener), [click](https://developer.mozilla.org/en-US/docs/Web/Events/click), and [DOMContentLoaded](https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded)
-* because the button in the form is a submit button, it'll _actually_ make a GET or POST request when pressed; we don't want this to happen, so we'll use [preventDefault](../slides/19/events.html#/12) to stop the default action from occurring on a click event
+* because the button in the form is a submit button, it'll _actually_ make a GET or POST request when pressed; we don't want this to happen, so we'll use [preventDefault](../slides/19/events.html#/15) to stop the default action from occurring on a click event
 * and lastly, the [slides](../slides/19/css.html#/56) on [classList](../slides/19/css.html#/7) will show you how to add, remove and toggle css classes on elements
 *  Remember, you'll need to put all of your DOM dependant JavaScript in a <code>DOMContentLoaded</code> listener (which you already did above)
 * and, of course, you'll need to add a <code>click</code> event listener for your submit button 
 * within the callback to your `click` event listener:
-    1. make sure to call `preventDefault` (see the [slides on events](slides/19/events.html#/12)) to stop the form from submitting
+    1. make sure to call `preventDefault` (see the [slides on events](slides/19/events.html#/15)) to stop the form from submitting
     2. create and apply the appropriate CSS classes to get rid of the _form_ (do this with styles, there's no need to remove the element) to make room for displaying cards (in addition to the slides above, [here's the mdn docs on classList](https://developer.mozilla.org/en-US/docs/Web/API/Element/classList))
 * <span class="warning">Note that `this` within the callback passed to `addEventListener` will refer to the element that was clicked on, as long as the function you use is not an arrow function</span>
     * For example....
