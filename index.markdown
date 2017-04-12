@@ -177,9 +177,9 @@ There is a __tutor available__ for the course.
 
 {% comment %}
     * __Wednesday__  - 5pm - 7pm
-    * __Thursday__ - TBD {% comment %} 1pm - 3pm {% endcomment %}
+    * __Thursday__ -  1pm - 3pm 
     * __Friday__  - 1pm - 3pm
-{% end %}
+{% endcomment %}
 
 Additionally, the tutor will hold workshops based on student demand. Some workshops may include:
 

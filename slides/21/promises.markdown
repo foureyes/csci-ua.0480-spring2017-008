@@ -29,7 +29,7 @@ __If you have a task, and you don't know it will finish, how do you ensure that 
 Assuming we have a function called __get__ that retrieves a url... __we tend to want to do this__ &rarr;
 
 <pre><code data-trim contenteditable>
-var data = get(url);
+const data = get(url);
 parseResult(data);
 </code></pre>
 
@@ -84,9 +84,9 @@ We use a bunch of nested callbacks... (the pyramid is the white space to the lef
 
 <pre><code data-trim contenteditable>
 get(url, function(data) {
-  var urlTwo = parseResult(data);
+  const urlTwo = parseResult(data);
   get(urlTwo, function(data) {
-    var urlThree = parseResult(data);
+    const urlThree = parseResult(data);
     get(urlThree, function(data) {
       console.log("Aaaand we're done");
     });
@@ -117,14 +117,14 @@ __Create 3 json files that each have an object with a `url` property holding the
 Oh hello scrollbars. This won't even fit on this slide.
 
 <pre><code data-trim contenteditable>
-var url = 'http://localhost:3000/data/tango.json';
+const url = 'http://localhost:3000/data/tango.json';
 req1 = new XMLHttpRequest();
 req1.open('GET', url, true);
 req1.addEventListener('load', function() {
   console.log('loading req1');
   if(req1.status >= 200 && req1.status < 400) {
     console.log(req1.responseText);
-    var data1 = JSON.parse(req1.responseText) 
+    const data1 = JSON.parse(req1.responseText) 
     console.log(data1.url);
     req2 = new XMLHttpRequest();
     req2.open('GET', data1.url, true);
@@ -132,7 +132,7 @@ req1.addEventListener('load', function() {
       console.log('loading req2');
       if(req2.status >= 200 && req2.status < 400) {
         console.log(req2.responseText);
-        var data2 = JSON.parse(req2.responseText) 
+        const data2 = JSON.parse(req2.responseText) 
         console.log(data2.url);
         req3 = new XMLHttpRequest();
         req3.open('GET', data2.url, true);
@@ -160,7 +160,7 @@ req1.send();
 Oof. Apologies for making your eyes bleed. 
 
 * So much nesting. 
-* Such repetion! 
+* Such repetition! 
 * __What can we do to tame this a bit?__ &rarr;
 	* {:.fragment} hey... maybe stop using so many anonymous functions (start naming _those things_)
 	* {:.fragment} and/or wrap up URL retrieval and data extraction into separate functions
@@ -197,7 +197,7 @@ function get(url, cb) {
 This one's simple
 <pre><code data-trim contenteditable>
 function extractURL(json) {
-  var data = JSON.parse(json) 
+  const data = JSON.parse(json) 
   console.log(data.url);
   return data.url;
 }
@@ -210,12 +210,12 @@ function extractURL(json) {
 Ah. Much nicer. 
 
 <pre><code data-trim contenteditable>
-var url = 'http://localhost:3000/data/tango.json';
+const url = 'http://localhost:3000/data/tango.json';
 
 get(url, function(responseText) {
-  var url2 = extractURL(responseText); 
+  const url2 = extractURL(responseText); 
   get(url2, function(responseText) {
-    var url3 = extractURL(responseText); 
+    const url3 = extractURL(responseText); 
     get(url3, function(responseText) {
       console.log('done'); 
     });
@@ -239,7 +239,7 @@ Getting and extracting were repeated 3 times. Why don't we just __wrap this in a
 <pre><code data-trim contenteditable>
 function getAndExtract(url) {
   get(url, function(responseText) {
-    var url = extractURL(responseText); 
+    const url = extractURL(responseText); 
     if(url) {
       getAndExtract(url);
     } else {
@@ -297,7 +297,7 @@ __To create a <code>Promise</code> use the <code>Promise</code> constructor:__ &
 	* both of these functions have a single argument 
 
 <pre><code data-trim contenteditable>
-var p = new Promise(function(fulfill, reject) {
+const p = new Promise(function(fulfill, reject) {
   // do something async
   if(asyncTaskCompletedSuccessfully) {
 	fulfill('Success!');
@@ -344,7 +344,7 @@ Let's take a look at how `then` works:
 __What is the output of this code, if any?__ &rarr;
 
 <pre><code data-trim contenteditable>
-var p = new Promise(function(fulfill, reject) {
+const p = new Promise(function(fulfill, reject) {
   fulfill('Success!');
 });
 p.then(function(val) {
@@ -359,12 +359,12 @@ Success!
 </section>
 
 <section markdown="block">
-## An Immediately Fulfilled Promise Continued
+## Immediately Fulfilled Continued
 
 __Let's take a closer look at what's happening here:__ &rarr;
 
 <pre><code data-trim contenteditable>
-var p = new Promise(function(fulfill, reject) {
+const p = new Promise(function(fulfill, reject) {
   fulfill('Success!');
 });
 p.then(function(val) {
@@ -392,7 +392,7 @@ __The functions passed to `then` are guaranteed to be executed AFTER the Promise
 This is true even if it looks like `fulfill` is called immediately and before `then` is called!. __What's the output of this code?__ &rarr;
 
 <pre><code data-trim contenteditable>
-var p1 = new Promise(function(fulfill, reject) {
+const p1 = new Promise(function(fulfill, reject) {
     console.log('begin');
     fulfill('succeeded');
     console.log('end');
@@ -418,7 +418,7 @@ succeeded
 __To specify what happens when a Promise results in an error or if the async task fails, use `then`'s 2nd argument.__ &rarr;
 
 <pre><code data-trim contenteditable>
-var p = new Promise(function(fulfill, reject) {
+const p = new Promise(function(fulfill, reject) {
     reject('did not work!');
 });
 
@@ -440,7 +440,7 @@ ERROR did not work!
 __You can also use the method `catch` to specify the `reject` function.__ &rarr; 
 
 <pre><code data-trim contenteditable>
-var p = new Promise(function(fulfill, reject) {
+const p = new Promise(function(fulfill, reject) {
     reject('did not work!');
 });
 
@@ -454,7 +454,7 @@ p.catch(function(val) {
 <section markdown="block">
 ## Back to Then! 
 
-__`then` always returns a Promise__ &arr;
+__`then` always returns a Promise__ &rarr;
 
 * if the `fulfill` function returns a `Promise`, `then` will return that `Promise`
 * if the `fulfill` function returns a value, `then` will return a `Promise` that immediately fulfills with the return value
@@ -470,7 +470,7 @@ That sounds convoluted... __Let's see some examples.__ &rarr;
 Starting with a `Promise`...
 
 <pre><code data-trim contenteditable>
-var p1 = new Promise(function(fulfill, reject) {
+const p1 = new Promise(function(fulfill, reject) {
     fulfill(1);
 });
 </code></pre>
@@ -478,7 +478,7 @@ var p1 = new Promise(function(fulfill, reject) {
 The `fulfill` function passed to `then` returns a `Promise`, so `then` returns that same `Promise` object (which is assigned to `p2`)
 
 <pre><code data-trim contenteditable>
-var p2 = p1.then(function(val) {
+const p2 = p1.then(function(val) {
     console.log(val);
     return new Promise(function(fulfill, reject) {
         fulfill(val + 1);    
@@ -507,7 +507,7 @@ __So the resulting output is...__ &rarr;
 __Let's make a minor modification to the code in the previous slide. Again, start with a Promise...__ &rarr;
 
 <pre><code data-trim contenteditable>
-var p1 = new Promise(function(fulfill, reject) {
+const p1 = new Promise(function(fulfill, reject) {
     fulfill(1);
 });
 </code></pre>
@@ -515,7 +515,7 @@ var p1 = new Promise(function(fulfill, reject) {
 This time, though, instead of `fulfill` returning a `Promise`, it'll return a regular value.
 
 <pre><code data-trim contenteditable>
-var p2 = p1.then(function(val) {
+const p2 = p1.then(function(val) {
     console.log(val);
     return val + 1;    
 });
@@ -540,7 +540,7 @@ __If `fulfill` returns a non-Promise, `then` will return a `Promise` that immedi
 Consequently, the following two code samples return the same `Promise` for `p2`:
 
 <pre><code data-trim contenteditable>
-var p2 = p1.then(function(val) {
+const p2 = p1.then(function(val) {
     console.log(val);
     return new Promise(function(fulfill, reject) {
         fulfill(val + 1);    
@@ -549,7 +549,7 @@ var p2 = p1.then(function(val) {
 </code></pre>
 
 <pre><code data-trim contenteditable>
-var p2 = p1.then(function(val) {
+const p2 = p1.then(function(val) {
     console.log(val);
     return val + 1;    
 });
@@ -587,7 +587,7 @@ function get(url) {
 
 <pre><code data-trim contenteditable>
 function extractURL(json) {
-  var data = JSON.parse(json) 
+  const data = JSON.parse(json) 
   console.log(data.url);
   return data.url;
 }
@@ -598,7 +598,7 @@ function extractURL(json) {
 ## We Can Make Async Look Sequential
 
 <pre><code data-trim contenteditable>
-var url = 'http://localhost:3000/data/tango.json';
+const url = 'http://localhost:3000/data/tango.json';
 
 get(url)
   .then(extractURL)
