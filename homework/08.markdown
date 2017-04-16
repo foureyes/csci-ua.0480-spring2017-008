@@ -7,7 +7,7 @@ title: CSCI-UA.0480 - Homework #8
 	<div class="panel-heading">Homework #8</div>
 	<div class="panel-body" markdown="block">
 
-# Movies Ajax - __Due Tuesday, November 22nd, by 11PM__
+# Movies Ajax - __Due Friday, April 22nd, by 11PM__
 
 ## Overview
 
@@ -20,7 +20,7 @@ You'll be using the following concepts:
 
 ### Description
 
-Modify the solution to homework #05, movies (which will be provided to you in your homework repository) so that it's a single page application that allows you to add and filter movies from a list of movies.
+Take an existing express application that allows a user to add and filter movies from a list of movies, and modify it so that it uses AJAX POSTs and GETs instead of form submissions (essentially converting the original site into a "single page application").
 
 You will:
 
@@ -41,23 +41,40 @@ You will be given access to a private repository on GitHub.  The final version o
 * __Push__ your changes to the homework repository on GitHub.
 * Commits later than that date will be handled on a case-by-case basis.
 
-### (4 points) Make at Least 4 Commits
+### Make at Least 3 Commits
 
 * Commit multiple times throughout your development process.
-* Make at least 4 separate commits
+* Make at least 3 separate commits
+
+## About the Existing Code
+
+__The code in your repository was created with express generator__
+
+* consequently, it's in es5 syntax; feel free to convert to es6 (though it's not requried)
+* to run you can use any of these commands:
+
+```
+nodemon start
+node start
+./bin/www
+```
+
+The application will be served on port 3000.
+
+__Lastly, all of the code can be found in routes/index.js__
 
 ## Movies Ajax Requirements
 
 ### __Required Features__
 
-(5 points) __Modify templates and Routes, External JavaScript__
+__Modify templates and Routes, External JavaScript__
 
 1. move the form from <code>/movies/create</code> into <code>/movies</code> (the page with the list of movies)
 2. remove the route for <code>/movies/create</code> (you may want to preserve some of the logic, though!)
 3. remove the template for <code>/movies/create</code>
 4. modify the layout file so that it includes an external JavaScript file to be used later
 
-(15 points) __Filtering with AJAX__
+__Filtering with AJAX__
 
 1. create a route for the following API url: <code>GET /api/movies</code>
     * it should return a list of all movies in the database
@@ -91,7 +108,7 @@ You will be given access to a private repository on GitHub.  The final version o
     <br>
     ![ajax filter](../resources/img/hw08-02-movies-ajax-filter.gif)
 
-(20 points) __Adding with AJAX__
+__Adding with AJAX__
 
 1. create a route for the following API url: <code>POST /api/movies/create</code>
     * it should create a movie based on the data in the POST request's body

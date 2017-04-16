@@ -32,6 +32,11 @@
 	<td markdown="block">
 Due Saturday, April 22nd
 
-* Homework #8 (to be posted 4/15) - Last Homework!
-* Keep working on your final project!
+* [Homework #8](homework/08.html) - Last Homework!
+* Lowest homework score will be dropped 
+* (sooo, you could potentially skip this last one _if you want_)
+* (it'll still be material on the exam, though)
+* this is really short!
+
+__Of course, keep working on your final project!__
 </td>

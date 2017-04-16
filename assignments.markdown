@@ -15,6 +15,7 @@ Homework
 * [Homework #5](homework/05.html) 
 * [Homework #6](homework/06.html) 
 * [Homework #7](homework/07.html) 
+* [Homework #8](homework/08.html) 
 
 Final Project
 
