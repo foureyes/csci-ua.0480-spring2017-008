@@ -99,7 +99,7 @@ Expect about __one homework__ every __week or two__:
 * Turned in __electronically via git__ 
 * Late homework will not be accepted (graders will not consider commits beyond that point)
     * Exceptions:
-        1. illness, with documentation
+        1. illness or family/personal issue, with documentation
         2. religious observance
         3. technical issues (broken computer, github down, etc.), with documentation
 * Please read the [page on academic integrity](http://www.cs.nyu.edu/webapps/content/academic/undergrad/academic_integrity)
