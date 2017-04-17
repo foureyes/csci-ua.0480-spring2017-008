@@ -259,14 +259,10 @@ Note, however, __you can define any custom event name that you'd like__ - just s
 <section markdown="block">
 ## Installing on the Server
 
-First, create your Express project. We can generate a project as usual:
+First, create your Express project. We can generate a project as usual or build an express app from scratch.
 
-<pre><code data-trim contenteditable>
-express --hbs projectname
-cd projectname && npm install
-</code></pre>
 
-Then, install the Socket.IO Node module:
+__Then, install the Socket.IO Node module:__ &rarr;
 
 <pre><code data-trim contenteditable>
 npm install --save socket.io

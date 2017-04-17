@@ -339,22 +339,21 @@ __EXAM #1 (Midterm Exam)__
 <tr><td>22</td><td><strong>Apr 17</strong><br>Mon</td>
 <td markdown="block">
 * More Promises/AJAX
-* Maybe Flexbox
-* Maybe CSS Meta Languages
+* SocketIO
+
 {% comment %}
 concat and min? grunt and/or gulp?
 {% endcomment %}
 </td>
-<td></td><td></td><td markdown="block"></td>{% comment %}
 {% include schedule/22.markdown %}
-{% endcomment %}
 </tr>
 
 
 <!-- ------------ --><a name="23"></a>
 <tr><td>23</td><td><strong>Apr 19</strong><br>Wed</td>
 <td markdown="block">
-* SocketIO
+* SocketIO - Lab
+
 {% comment %}
 remove css refresher 
 flexbox, etc from old 24
@@ -370,7 +369,7 @@ show react basics
 <!-- ------------ --><a name="24"></a>
 <tr><td>24</td><td><strong>Apr 24</strong><br>Mon</td>
 <td markdown="block">
-* SocketIO - Lab
+* Frontend Framework
 {% comment %} consolidate React stuff here maybe from 26 and 27, including build tools {% endcomment %}
 </td>
 <td></td><td></td><td markdown="block"></td>{% comment %}
@@ -382,7 +381,7 @@ show react basics
 <!-- ------------ --><a name="25"></a>
 <tr><td>25</td><td><strong>Apr 26</strong><br>Wed</td>
 <td markdown="block">
-* Frontend Framework
+* Frontend Framework - Lab
  
 {% comment %}
 was 26
@@ -398,7 +397,8 @@ was 26
 <a name="26"></a>
 <tr><td>26</td><td><strong>May 01</strong><br>Mon</td>
 <td markdown="block">
-* Frontend Framework - Lab
+* Maybe Flexbox
+* Maybe CSS Meta Languages
 {% comment %}
 was 27
 {% endcomment %}
