@@ -360,9 +360,7 @@ flexbox, etc from old 24
 show react basics
 {% endcomment %}
 </td>
-<td></td><td></td><td markdown="block"></td>{% comment %}
 {% include schedule/23.markdown %}
-{% endcomment %}
 </tr>
 
 

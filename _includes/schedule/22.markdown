@@ -33,6 +33,9 @@
 * Chapter 
 * Chapter 
 -->
+
+* [Socket IO How-To](http://socket.io/docs/)
+
 </td>
 	<td markdown="block">
 <!--

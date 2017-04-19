@@ -4,10 +4,22 @@ title: CSCI-UA.0480 - Socket IO Lab
 ---
 
 <div class="panel panel-default">
-	<div class="panel-heading">Homework #8</div>
+	<div class="panel-heading">socket.io Lab</div>
 	<div class="panel-body" markdown="block">
 
 # Socket IO Lab - Emoji Racer (10 points)
+
+## Submission Process
+
+* work in groups of 2 or 3
+* __submit using [this form](https://docs.google.com/a/nyu.edu/forms/d/e/1FAIpQLSdgAevTOMytBZfSEGmmfLuENQgvek0B7g0WA7J-q-WFjl_07g/viewform)__
+* __each person on the team should submit their own individual form__
+
+## Scoring
+
+* __+7 points__ for showing up and submitting form 
+* __+2 points__ form submitted with a _reasonable_ amount of _valid looking_ code
+* __+1 point__ code deployed on glitch.com (kind of optional, since you basically get 90% for just submitting a form with some code!)
 
 ## Overview
 
@@ -25,25 +37,24 @@ Make a real time web app that:
 
 1. displays two emoji
 2. displays two buttons
-3. clicking on one button moves one emoji
-4. everyone connected to the game can click either button
-5. everyone connected to the game can see the emoji move in real time
+3. displays a finish line
+4. clicking on one button moves one emoji
+5. everyone connected to the game can click either button
+6. everyone connected to the game can see the emoji move in real time
+7. when someone new connects to the game, the should see the current position of both emoji
+8. (optional) end game and show message when one emoji crosses the finish line
+
 
 ![Emoji Racer](../resources/img/hw09-screen.gif)
-
-### Submission Process
-
-1. You can work as individuals or in groups
-2. Submit your code through [this google form](https://docs.google.com/a/nyu.edu/forms/d/e/1FAIpQLSdmF51oafE7ehLw56EPxg5nV5YxizkJef-W6Loh59qncR2xWg/viewform)
-    * if working in a group, you only need to submit one form
-    * add the net ids of the students in the group in the form
-
-
 
 
 ## Instructions
 
 ### Setup
+
+Use the _one-page_ version of the slides to guide you through socket.io:
+
+[https://foureyes.github.io/csci-ua.0480-spring2017-008/slides/23/socketio.html?print-pdf#/](https://foureyes.github.io/csci-ua.0480-spring2017-008/slides/23/socketio.html?print-pdf#/)
 
 1. create a directory to store your project
 2. create your `package.json` and install these packages:
@@ -59,11 +70,13 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 app.use(express.static('public'));
 // server code goes here!
+// NOTE THAT WE ARE LISTENING WITH server, NOT app!
 server.listen(3000);
 </code></pre>
 4. use this boilerplate code for the markup (in `public/index.html`):
 	<pre><code data-trim contenteditable>
 &lt;!DOCTYPE html&gt;
+&lt;html&gt;
 &lt;head&gt;
 &lt;title&gt;&lt;/title&gt;
 &lt;/head&gt;
@@ -81,19 +94,44 @@ server.listen(3000);
 </code></pre>
 5. use this boilerplate code for the client (in `public/racer.js`):
     <pre><code data-trim contenteditable>
-    let socket = io();
+    const socket = io();
 </code></pre>
 
-## Extra Credit (4 points)
+## Deployment
 
-### Determine How to Deploy on Hyper Dev!
+### Deploying to glitch.com
 
-1. [go to hyperdev.com](https://hyperdev.com/)
+1. [go to glitch.com/edit](https://glitch.com/edit/)
 2. fill out package.json with socket.io and express requirements
-3. add necessary files!
-4. instantly deployed app!
+3. add/modify necessary files!
+    * for example...
+    * modify `server.js` (make sure you're listetning with
+    * add `public/racer.html`
+    * change the name of `public/client.js` to `public/racer.js`
+    * etc.
+4. __change the port so that it looks in the env for the port number!__
+    * `server.listen(process.env.PORT);`
+5. click on the look link...  
+    * instantly deployed app!
+    * (click on logs link to see server output)
 
-## Major Hint
+<div class="hideInner" markdown="block">
+
+## Major Hints (Click to Reveal)
+
+<div class="hidden" markdown="block">
+
+### Wait, How Do I Even?
+
+Most real-time games work by having the server be the _single source of truth_ for game state (for example, the positions of the emoji). 
+
+An easy way to implement this game is by:
+
+1. storing the positions of both emoji on the server (global variables would be sufficient)
+2. pushing out the exact positions of each emoji to the connected clients
+    * rather than incrementing the position
+    * (because it reduces the possibility of the positions becoming out of sync)
+
 
 ### Don't feel like dealing with css? You can use this:
 
@@ -129,8 +167,27 @@ button {
 </code></pre>
 
 
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', main);
+function main() {
+    const divs = document.querySelectorAll('.hideInner');
 
+    function handleClick() {
+        this.querySelector('div').classList.toggle('hidden');
+    }
 
+    divs.forEach((d) => {
+        d.addEventListener('click', handleClick);
+    });
+}
+
+</script>
+<style>
+.hidden {
+    display: none;
+}
+</style>
 
 
 </div>
