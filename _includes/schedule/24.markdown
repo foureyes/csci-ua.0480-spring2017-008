@@ -12,6 +12,7 @@
 * [React Revisited](slides/26/react-state-parent.html)
 * (Optional) [React and Express / Using Webpack](slides/26/react-webpack-continued.html)
 
+
 {% comment %}
 * [Binary Calculator Example Code](https://github.com/nyu-csci-ua-0480-001-fall-2016/examples/blob/master/class27/binary-calculator/src/index.js)
 {% endcomment %}
@@ -23,6 +24,7 @@
 * [Build With React](http://buildwithreact.com/)
 * [React Events](https://facebook.github.io/react/docs/events.html#supported-events)
 * [Using create-react-app](https://github.com/facebookincubator/create-react-app/blob/master/README.md#getting-started)
+* __See the reminders__ &rarr;
 
 <!--
 * Chapter 
@@ -31,6 +33,10 @@
 </td>
 	<td markdown="block">
 
-__Reminder__: Final Project Due 4/27 at 11pm
+__Reminders__: 
+
+* React Lab on Wednesday, 4/26
+* __Final Project Due 4/27 at 11pm__
+* Final Exam 5/8
 
 </td>
