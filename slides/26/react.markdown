@@ -280,7 +280,7 @@ const Greeting = React.createClass({
   render: function() {
     const paragraphs = [];
     for(let i = 0; i < this.props.times; i++) {
-      paragraphs.push(<p>hello {i}</p>);
+      paragraphs.push(<p key={i} >hello {i}</p>);
     }
     return (
       <div> {paragraphs} </div>
@@ -294,6 +294,7 @@ const Greeting = React.createClass({
 * a render a div that contains all of those elements by dropping the Array in curly braces
 
 </section>
+
 
 
 
@@ -312,22 +313,54 @@ __It's also pretty common to use map to generate elements.__ &rarr;
 const Greeting = React.createClass({
   render: function() {
     const greetings = ['hi', 'hello', 'hola'];
+    const greetingElements = greetings.map((g, i) => {
+        <p key={i}>{g}</p>
+    });
     return (
       <div>
-        {greetings.map(function(s) {
-          return (<p>{s}</p>)    
-        })}
+        {greetingElements}
       </div>
     );
   }
 });
 </code></pre>
 
-And the more concise:
+</section>
+
+<section markdown="block">
+## Keys
+
+__Hey - did you notice that weird key attribute in both examples in the previous slides?__ &rarr;
 
 <pre><code data-trim contenteditable>
-{ greetings.map(greet => <p>{greet}</p> )}
+for(let i = 0; i < this.props.times; i++) {
+  paragraphs.push(<p key={i} >hello {i}</p>);
+}
 </code></pre>
+
+<pre><code data-trim contenteditable>
+const greetingElements = greetings.map((g, i) => {
+    <p key={i}>{g}</p>
+});
+</code></pre>
+
+When adding an Array of elements, __the `key` _attribute_ should be defined__ so that React can determine DOM changes more easily. Check out the [details on why to use keys] (https://facebook.github.io/react/docs/reconciliation.html#recursing-on-children), and an in-depth article on [Arrays and keys](https://facebook.github.io/react/docs/lists-and-keys.html).
+</section>
+
+<section markdown="block">
+## Arrays in React Elements 
+
+__When adding an Array of elements to a component, you must keep the following things in mind...__ &rarr; 
+
+1. {:.fragment} when defining render, only one react element can be returned, but you can have multiple elements nested within that initial element
+    <pre><code data-trim contenteditable>
+return (
+    <div>only one element<p>but you can nest!</p></div>
+);    
+</code></pre>
+2. {:.fragment} a common pattern add an Array of elements is to use map
+3. {:.fragment} ...but regardless of which method you use to generate an Array of elements, add a `key` attribute to each element!
+
 </section>
 
 <section markdown="block">
@@ -336,7 +369,7 @@ And the more concise:
 To add an event handler in JSX... add an inline attribute (wait, what!?). For example, click events would be represented by <code>onClick</code>:
 
 <pre><code data-trim contenteditable>
-var MyButton = React.createClass({
+const MyButton = React.createClass({
   onButtonClick: function(evt) {
     alert("OMG! OMG!");
   },
@@ -351,6 +384,31 @@ ReactDOM.render(
   document.body
 )
 </code></pre>
+</section>
+
+<section markdown="block">
+## Callbacks, ES6 Classes, and this (Again!)
+
+__If you're using ES6 classes and want to use `this` in your click handler, remember to bind to this (or use arrow functions)__ &rarr;
+
+Here's an alert that uses `this.props`:
+
+<pre><code data-trim contenteditable>
+onButtonClick: function(evt) {
+  alert(this.props.someProp);
+},
+</code></pre>
+
+To enable the above code access `this`, though, bind it when you assign the callback function for `onClick`. 
+
+<pre><code data-trim contenteditable>
+render: function() {
+    return <div onClick={this.onButtonClick.bind(this)}>Press This Button<&#47;div>;
+}
+</code></pre>
+
+We'll see more about this later on...
+
 </section>
 
 <section markdown="block">

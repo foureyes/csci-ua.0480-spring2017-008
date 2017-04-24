@@ -290,7 +290,7 @@ OLD
 {% endcomment %}
 
 
-<a name="final_submit">
+<a id="final_submit" name="final_submit">
 
 <br>
 <br>
@@ -299,19 +299,15 @@ OLD
 
 ### __4/27 11PM__ - Final Project Complete and Code is fully  _Deployed_ 
 
-{% comment %}
-* __all commits must be in by Monday, December 12th__
-* any late commits will result in point deductions: 10% off of grade
+* __all commits must be in by Thursday, April 27th__ (repositories will be closed early Friday morning)
 * __project must be deployed__ on i6 (or other platform, such as Heroku, gomix, zeit, etc.)
     * if your application needs to be restarted while being graded; I will contact you
     * you will not receive a penalty for restarting after the due date
-* __the [final project form submission](https://docs.google.com/a/nyu.edu/forms/d/e/1FAIpQLScLCi2BBlzIbrlIh31cQ02gBs8BWeWpmQxlRNAmD8eLWHc9Ww/viewform) must be filled out__ (if a form is not submitted, you will receive a 0 for your project)
-    * late project form submission will also result in a small point deduction
-{% endcomment %}
-
-
-
-
+* __the [final project form submission](https://docs.google.com/a/nyu.edu/forms/d/e/1FAIpQLSfUNe5P9bzNBA1Z03b6NDeZEXe2qRRYBeewNWN1VnbLSkwgQQ/viewform) must be filled out__ (if a form is not submitted, you will receive a 0 for your project)
+* late submissions:
+    * +2 days 
+    * 20% penalty
+    * a late submission form will be posted 
 
 <br>
 <br>

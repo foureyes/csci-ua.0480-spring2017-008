@@ -7,7 +7,7 @@ title: CSCI-UA.0480 - Socket IO Lab
 	<div class="panel-heading">socket.io Lab</div>
 	<div class="panel-body" markdown="block">
 
-# Socket IO Lab - Emoji Racer (10 points)
+# Socket IO Lab - Emoji Racer (10 points for In-Class Project/Quiz Grade)
 
 ## Submission Process
 

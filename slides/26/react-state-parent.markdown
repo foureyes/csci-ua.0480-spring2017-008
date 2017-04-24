@@ -159,7 +159,7 @@ They both produce a ReactElement!
 You can bundle elements together into a single component. __Here's an example.__ &rarr;
 
 <pre><code data-trim contenteditable>
-var MyComponent = React.createClass({
+const MyComponent = React.createClass({
   render: function() {
     return (
       &lt;div&gt; &lt;h1&gt;A Message&lt;&#47;h1&gt;{this.props.message}&lt;&#47;div&gt;
@@ -216,9 +216,9 @@ Changing <code>greet</code> to false would give us <code>bye</code> instead.
 ## Say Hi or Bye!
 
 <pre><code data-trim contenteditable>
-var MyComponent = React.createClass({
+const MyComponent = React.createClass({
   render: function() {
-    var msg = this.props.greet ? 'hi' : 'bye';
+    const msg = this.props.greet ? 'hi' : 'bye';
     return (
       &lt;h1&gt;{msg}&lt;&#47;h1&gt;
     )
@@ -241,7 +241,7 @@ ReactDOM.render(
 To add an event handler in JSX... add an inline attribute (wait, what!?). For example, click events would be represented by <code>onClick</code>:
 
 <pre><code data-trim contenteditable>
-var MyButton = React.createClass({
+const MyButton = React.createClass({
   onButtonClick: function(evt) {
     alert("Clicked!");
   },
@@ -259,12 +259,68 @@ ReactDOM.render(
 </section>
 
 <section markdown="block">
+## Events Continued
+
+__Conventions and notes when handling events__ &rarr;
+
+1. {:.fragment}  events are named by their __camelCase__ version; [see the whole list here](https://facebook.github.io/react/docs/events.html#supported-events)
+2. {:.fragment}  the __value of the event is the actual function__, not a string or a function call
+    * that means the value can be an arrow function
+3. {:.fragment}  you must __define an event on an element__, not on a component
+    * (react doesn't know which element in the component you want the click event to be attached to!)
+4. {:.fragment}  it's a common convention to __use a method defined in your component__ as the handler (but this gets tricky at times; we'll see why a little later!)
+    
+
+</section>
+
+<section markdown="block">
+## create-react-app
+
+__If the stuff we're starting to do is too complicated to debug with codepen, another _easy_ way of working with react is using [create-react-app](https://www.npmjs.com/package/create-react-app)__ &rarr;
+
+* it's an npm module that generates a frontend only react application
+* it'll serve the application on port 3000 (no express is involved)
+
+<br>
+
+__To use it:__ &rarr;
+
+* install globally by: `npm install -g create-react-app`
+* create a new project by: `create-react-app projectname`
+* edit `App.js` and `App.css` in `src`
+* to run app: `npm start`
+* browser _may_ open immediately and refresh on filesystem changes!
+</section>
+
+<section markdown="block">
+## Development Options So Far
+
+__Now we have 3 options for developing super simple react apps__ &rarr;
+
+1. create-react-app
+2. codepen
+3. jsbin
+
+<br>
+The above options are in-order of easiest to debug. However, note that:
+
+* if you want to integrate your create-react-app with express or some other framework
+* ...or actually deploy your app
+* you'll have to set up some build infrastructure (for example, webpack + babble... which we may go over in the last class)
+
+</section>
+
+<section markdown="block">
 ## State
 
 __state__ is internal data controlled by the component (contrast this with __props__, which are controlled by whatever renders the component).
 
-To initialize state properties when your component is created, __define a <code>getInitialState</code> within your component definition... and return the desired state properties as property value pairs within an object.__ &rarr;
+To initialize state properties when your component is created:
 
+1. {:.fragment} define a <code>getInitialState</code> within your component definition... 
+2. {:.fragment} and return the desired state properties as property value pairs within an object. &rarr;
+
+<br>
 <pre><code data-trim contenteditable>
 { // within a component definition
   getInitialState: function() {
@@ -276,21 +332,32 @@ To initialize state properties when your component is created, __define a <code>
 </code></pre>
 {:.fragment}
 
-__To read state....__ &rarr;
+__Note that we'll take a look at setting initial state with ES6 classes a little later!__ 
 {:.fragment}
 
-<pre><code data-trim contenteditable>
+</section>
+
+<section markdown="block">
+## Handling State
+
+__Once your application has state, you can manipulate it by reading or setting it__ &rarr;
+
+1. {:.fragment} To read state....
+    <pre><code data-trim contenteditable>
 this.state.propertyName
 </code></pre>
-{:.fragment}
-
-To set state:
-{:.fragment}
-
-<pre><code data-trim contenteditable>
+2. {:.fragment} To set state:
+    <pre><code data-trim contenteditable>
 this.setState({stateName: stateValue});
 </code></pre>
+
+<br>
+When setting state, __you must pass an object__.
 {:.fragment}
+
+__The object passed in specifies the new values of properties__.
+{:.fragment}
+
 </section>
 
 <section markdown="block">
@@ -299,7 +366,7 @@ this.setState({stateName: stateValue});
 __Let's define a couple of state variables, and put their values in a list when the component is rendered.__ &rarr;
 
 <pre><code data-trim contenteditable>
-var MyComponent = React.createClass({
+const MyComponent = React.createClass({
   render: function() {
     return (
       <ul>
@@ -363,7 +430,7 @@ constructor(props) { ... }
 Let's check out an event example with `createClass`. __There's something a little suspicious about the code - what's weird about it?__ &rarr;
 
 <pre><code data-trim contenteditable>
-var MyButton = React.createClass({
+const MyButton = React.createClass({
   getInitialState: function() {
     return { msg: 'Clicked!!!' };
   },
@@ -448,7 +515,7 @@ Using events and state, create a component that:
 Start off with some boiler plate...
 
 <pre><code data-trim contenteditable>
-var MyComponent = React.createClass({
+const MyComponent = React.createClass({
 	// render, getInitialState and event handler
 	// goes here...
 });
@@ -868,4 +935,20 @@ ReactDOM.render(
   document.body
 )
 </code></pre>
+</section>
+
+<section markdown="block">
+## A Challenge
+
+__Let's try building this component...__ &rarr;
+
+* it contains 3 boxes with numbers that increment on click
+* the last box clicked will be green, and its index will be displayed
+
+<br>
+
+<div markdown="block" style="text-align:center;">
+![last clicked](../../resources/img/react-last-clicked.gif)
+</div>
+
 </section>

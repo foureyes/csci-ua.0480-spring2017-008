@@ -1,5 +1,4 @@
 	<td markdown="block">
-* <strike>[Flexbox](slides/22/flexbox.html)</strike> (skipped)
 
 * [React Basics](slides/26/react.html)
 * [React Revisited](slides/26/react-webpack.html)
