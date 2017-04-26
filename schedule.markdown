@@ -383,9 +383,7 @@ show react basics
 was 26
 {% endcomment %}
 </td>
-<td></td><td></td><td markdown="block"></td>{% comment %}
 {% include schedule/25.markdown %}
-{% endcomment %}
 </tr>
 
 

@@ -42,6 +42,7 @@ We can use jsbin or codepen to learn the React API.
 * for __codepen__: 
 	* set __Babel__ as the JavaScript preprocessor
 	* add the __react library__ as external JavaScript
+	* add the __react DOM library__ as external JavaScript
 * for __jsbin__:
 	* use __Add Library__ to add react
 	* select __JSX (React)__ in the JavaScript drop down
