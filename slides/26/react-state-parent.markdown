@@ -1023,3 +1023,25 @@ render() {
 
 </section>
 
+<section markdown="block">
+## Functional Components
+
+__If a component only deals with props, you can use a function instead of an ES6 style class or createClass__ &rarr;
+
+<pre><code data-trim contenteditable>
+function MyComponent(props) {
+    return <h1>{props.message}</h1>
+}
+</code></pre>
+
+Instead of:
+
+<pre><code data-trim contenteditable>
+class MyComponent extends React.Component {
+    render() {
+        return <h1>{this.props.message}</h1>
+    }
+}
+</code></pre>
+</section>
+
