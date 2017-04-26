@@ -952,3 +952,74 @@ __Let's try building this component...__ &rarr;
 </div>
 
 </section>
+
+<section markdown="block">
+## Input Elements and onChange
+
+__Form input elements have their own state (for example, when you type into the text field, that element's state is what you typed__ &rarr;
+
+1. however, we may want one of React component's state to be the "single source of truth"
+2. so we can override an element's state with the React component's notion of state
+3. this allows us to use the component's state for working with form data rather than querying the form elements directly
+
+<br>
+In next few slides, the demo will will be using an input element with an __onChange__ attribute.
+
+* __onChange__ is an event that occurs whenever a change in an element is made
+* for example, typing in a text field
+
+</section>
+
+<section markdown="block">
+## Text Input Demo
+
+Let's create an h3 that has its content controlled from a text input field. The h3's text value __will change as data is typed in the text field__.
+
+__First, let's create our h3 as a component__ &rarr;
+
+<pre><code data-trim contenteditable>
+class Message extends React.Component {
+    render() {
+        let value = this.props.value;
+        if(value === '') {
+            value = "Type Something PLZ ^^^";
+        }
+        return <h3>{value}</h3> 
+    }
+}
+</code></pre>
+
+</section>
+
+<section markdown="block">
+## onChange, State
+
+__Then we'll deal with onChange and state. In a component called InputDemo...__ &rarr;
+
+<pre><code data-trim contenteditable>
+constructor() {
+    super();
+    this.state = {message: ''};
+    this.handleChange = this.handleChange.bind(this);
+}
+</code></pre>
+
+<pre><code data-trim contenteditable>
+handleChange(evt) {
+    this.setState({message: evt.target.value}); 
+}
+</code></pre>
+
+<pre><code data-trim contenteditable>
+render() {
+    return (
+        <div>
+        Message: <input value={this.state.message} onChange={this.handleChange} type="text" />
+        <Message value={this.state.message} />
+        </div>
+    );
+}
+</code></pre>
+
+</section>
+
