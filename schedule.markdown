@@ -397,9 +397,7 @@ was 26
 was 27
 {% endcomment %}
 </td>
-<td></td><td></td><td markdown="block"></td>{% comment %}
 {% include schedule/26.markdown %}
-{% endcomment %}
 </tr>
 
 

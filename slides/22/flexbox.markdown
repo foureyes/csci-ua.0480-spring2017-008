@@ -44,7 +44,7 @@ __To cope with varying screen dimensions:__ &rarr;
 So... working with the display properties of __inline__ and __block__ is a bit limiting, especially when it comes to accommodating different screen sizes.
 
 * {:.fragment} we don't have much control of how things flow/resize/are added or removed when a screen resolution changes
-* {:.fragment} for example, block level elements don't really reflow in anyway
+* {:.fragment} for example, block level elements don't really reflow in any way
 * {:.fragment} span elements just wrap, but don't have an explicitly _settable_ width and height
 * {:.fragment} block and inline are rigid in the direction that elements are laid out (either biased vertically or horizontally)
 
@@ -68,8 +68,7 @@ One way to deal with these issues is to use __flexbox__.
 
 The following slides will build off of this html, css and JavaScript:
 
-* check out the [examples repository for class 23](https://github.com/nyu-csci-ua-0480-002-fall-2015/examples/tree/master/class22) (you'll need to be logged in to github)
-* [or jsbin](https://jsbin.com/zapuhezowi/1/edit?css,output)
+* [jsbin](https://jsbin.com/zapuhezowi/1/edit?css,output)
 
 </section>
 
